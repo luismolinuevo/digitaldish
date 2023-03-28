@@ -22,6 +22,7 @@ model User {
   userRating Float  //avg out somewhere(maybe front end). Use toFixed(2) to keep decimal small
   post  Post[]
   follwer Followers[]
+  chatrooms Chatroom[]
 }
 
 model Followers {
@@ -45,7 +46,7 @@ model Post {
 
 model Comment {
   id     Int  @unique @default(autoincrement())
-
+  content String
 
   postId Int
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
@@ -53,6 +54,13 @@ model Comment {
   @@index([postId])
 }
 
-model Message {
+model Chatroom {
   id     Int  @unique @default(autoincrement())
+  otherUserId Int
+  
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
+
