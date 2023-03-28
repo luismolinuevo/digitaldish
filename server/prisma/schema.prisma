@@ -6,13 +6,53 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model User {
-  id Int @unique @default(autoincrement()) 
-  username String @db.VarChar(255)
-  password String @db.VarChar(255)
+  id         Int    @unique @default(autoincrement())
+  firstName  String @db.VarChar(255)
+  lastName   String @db.VarChar(255)
+  userName   String @db.VarChar(255)
+  email      String @unique @db.VarChar(255)
+  password   String @db.VarChar(255)
+  imageUrl String?
+  userRating Float  //avg out somewhere(maybe front end). Use toFixed(2) to keep decimal small
+  post  Post[]
+  follwer Followers[]
+}
+
+model Followers {
+  id  Int   @unique @default(autoincrement())
+  follwerId Int
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Post {
+  id     Int  @unique @default(autoincrement())
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment Comment[]
+
+  @@index([userId])
+}
+
+model Comment {
+  id     Int  @unique @default(autoincrement())
+
+
+  postId Int
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([postId])
+}
+
+model Message {
+  id     Int  @unique @default(autoincrement())
 }
