@@ -37,6 +37,11 @@ model Followers {
 
 model Post {
   id     Int  @unique @default(autoincrement())
+  userName String
+  description String
+  price Float
+  Category String
+
   userId Int
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   comment Comment[]
@@ -61,6 +66,18 @@ model Chatroom {
   userId Int
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  message Message[]
+
   @@index([userId])
 }
 
+model Message {
+  id     Int  @unique @default(autoincrement())
+  senderUserName String
+  createAt DateTime
+
+  chatId Int
+  chat   Chatroom @relation(fields: [chatId], references: [id], onDelete: Cascade)
+
+  @@index([chatId])
+}
