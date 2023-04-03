@@ -61,14 +61,12 @@ model Comment {
 
 model Chatroom {
   id     Int  @unique @default(autoincrement())
-  // otherUserId Int
   
   userId Int
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   messageId Int
   messages Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
-  // users     User[]  
-// 
+ 
   @@index([userId, messageId])
   @@id([userId, messageId])
 }
@@ -78,9 +76,8 @@ model Message {
   senderUserName String
   createAt DateTime
 
-  // chatId Int
+
   chat   Chatroom[] 
 
-  // @@index([chatId])
 }
 
