@@ -12,7 +12,7 @@ datasource db {
 }
 
 model User {
-  id         Int    @unique @default(autoincrement())
+  id         Int    @id @unique @default(autoincrement())
   firstName  String @db.VarChar(255)
   lastName   String @db.VarChar(255)
   userName   String @db.VarChar(255)
@@ -22,7 +22,7 @@ model User {
   userRating Float  //avg out somewhere(maybe front end). Use toFixed(2) to keep decimal small
   post  Post[]
   follwer Followers[]
-  chatrooms Chatroom[]
+  chatrooms Chatroom[] 
 }
 
 model Followers {
@@ -61,23 +61,26 @@ model Comment {
 
 model Chatroom {
   id     Int  @unique @default(autoincrement())
-  otherUserId Int
+  // otherUserId Int
   
   userId Int
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  message Message[]
-
-  @@index([userId])
+  messageId Int
+  messages Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  // users     User[]  
+// 
+  @@index([userId, messageId])
+  @@id([userId, messageId])
 }
 
 model Message {
-  id     Int  @unique @default(autoincrement())
+  id     Int  @id @unique @default(autoincrement())
   senderUserName String
   createAt DateTime
 
-  chatId Int
-  chat   Chatroom @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  // chatId Int
+  chat   Chatroom[] 
 
-  @@index([chatId])
+  // @@index([chatId])
 }
+
