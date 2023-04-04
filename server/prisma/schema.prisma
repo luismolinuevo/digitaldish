@@ -21,7 +21,7 @@ model User {
   imageUrl String?
   userRating Float  //avg out somewhere(maybe front end). Use toFixed(2) to keep decimal small
   post  Post[]
-  follwer Followers[]
+  follower Followers[]
   chatrooms Chatroom[]
 }
 
