@@ -128,7 +128,7 @@ router.delete("/deleteuser", async (req, res) => {
 
 // Edit | update user
 router.put("/edituser", async (req, res) => {});
-=======
+
 import { Strategy, ExtractJwt } from "passport-jwt";
 import * as dotenv from "dotenv";
 
