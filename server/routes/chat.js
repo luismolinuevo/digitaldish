@@ -50,7 +50,9 @@ export default function setupChatRouter() {
          
     });
 
-    router.get("/:userId", async (req,res) => {
+    //get all chats for a user
+    router.get("/userchats", async (req,res) => {
+
         try{
             const chatroom = await prisma.chatroom.findMany({
                 where: {
