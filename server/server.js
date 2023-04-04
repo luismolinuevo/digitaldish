@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import chatRouter from "./routes/chat";
+import chatRouter from "./routes/chat.js";
 // import setupJWTStrategy from "./middlewares/auth.js";
 // import passport from "passport";
 
@@ -13,7 +13,7 @@ export default function createServer() {
     app.use(morgan("tiny"));
 
     // setupJWTStrategy(passport);
-    
+
     app.use("/chat",chatRouter);
 
     return app;

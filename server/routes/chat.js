@@ -54,7 +54,7 @@ export default function setupChatRouter() {
         try{
             const chatroom = await prisma.chatroom.findMany({
                 where: {
-                    users: {
+                    user: {  //was users
                         some: {
                             id: parseInt(req.user.id)
                         },
