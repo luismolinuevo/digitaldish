@@ -1,4 +1,6 @@
 import express from "express";
+import http from "http";
+import { Server } from "socket.io"
 import morgan from "morgan";
 import cors from "cors";
 import chatRouter from "./routes/chat.js";
@@ -15,6 +17,32 @@ export default function createServer() {
     // setupJWTStrategy(passport);
 
     app.use("/chat",chatRouter);
+
+
+    //set up socket server
+    const server = http.createServer(app);
+    const io = new Server(server);
+
+    io.on("connection", (socket) => {
+        socket.on("joinRoom", (roomId) => {
+            socket.join(roomId)
+        })
+
+        socket.on("sendMessage", async (message, roomId) => {
+            const newMessage = await prisma.message.create({
+                data: {
+                    content: message.content,
+                    senderUserName: message.senderUserName,
+                    createAt: new Date(),
+                    chat: {
+                        connect: {id: roomId},
+                    },
+                }
+            });
+
+            io.to(roomId).emit("newMessage");
+        });
+    })
 
     return app;
 }

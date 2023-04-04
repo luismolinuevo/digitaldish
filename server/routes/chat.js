@@ -5,7 +5,7 @@ export default function setupChatRouter() {
     const router = express.Router();
 
     //create a chatroom
-    router.post("/chatroom", async (req, res) => {
+    router.post("/", async (req, res) => {
         const {userId, userTwoId} = req.body;
 
         try {
