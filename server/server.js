@@ -1,10 +1,11 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import AuthRouter from "./routes/auth.js";
 import chatRouter from "./routes/chat.js";
 import postRouter from "./routes/items.js"
-// import setupJWTStrategy from "./middlewares/auth.js";
-// import passport from "passport";
+import setupJWTStrategy from "./auth/index.js";
+import passport from "passport";
 
 export default function createServer() {
     const app = express();
@@ -13,9 +14,10 @@ export default function createServer() {
 
     app.use(morgan("tiny"));
 
-    // setupJWTStrategy(passport);
+    setupJWTStrategy(passport);
     app.use("/post", postRouter)
     app.use("/chat",chatRouter);
+    app.use("/auth", AuthRouter);
 
     return app;
 }
