@@ -4,6 +4,7 @@ import { Server } from "socket.io"
 import morgan from "morgan";
 import cors from "cors";
 import chatRouter from "./routes/chat.js";
+import prisma from "./db/index.js";
 // import setupJWTStrategy from "./middlewares/auth.js";
 // import passport from "passport";
 
@@ -25,7 +26,7 @@ export default function createServer() {
 
     io.on("connection", (socket) => {
         socket.on("joinRoom", (roomId) => {
-            socket.join(roomId)
+            socket.join(roomId);
         })
 
         socket.on("sendMessage", async (message, roomId) => {
