@@ -77,25 +77,23 @@ export default function setupChatRouter() {
             console.error(error);
             res.status(500).json({error: "Server Error"})
         }
-    })
+    });
 
     return router;
 }
 
 //get chatroom by chatroom id
 router.get("/:chatroomId", async (req, res) => {
-    const chatId = req.params.chatId;
+    const chatId = req.params.chatroomId;
 
     const getChat = await prisma.chatroom.findFirst({
         where: {
-            id: Number(chatId)
+            id: Number(chatroomId)
         }
     });
 
     res.status(200).json({
         success: true,
         getChat
-    })
-})
-
-//get chat by id: messages
+    });
+});
