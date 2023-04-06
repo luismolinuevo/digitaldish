@@ -79,10 +79,7 @@ export default function setupChatRouter() {
         }
     });
 
-    return router;
-}
-
-//get chatroom by chatroom id
+    //get chatroom by chatroom id
 router.get("/:chatroomId", async (req, res) => {
     const chatId = req.params.chatroomId;
 
@@ -97,3 +94,8 @@ router.get("/:chatroomId", async (req, res) => {
         getChat
     });
 });
+
+    return router;
+}
+
+

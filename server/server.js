@@ -3,7 +3,7 @@ import http from "http";
 import { Server } from "socket.io"
 import morgan from "morgan";
 import cors from "cors";
-import AuthRouter from "./routes/auth.js";
+// import AuthRouter from "./routes/auth.js";
 import chatRouter from "./routes/chat.js";
 import prisma from "./db/index.js";
 // import setupJWTStrategy from "./middlewares/auth.js";
@@ -16,10 +16,10 @@ export default function createServer() {
 
     app.use(morgan("tiny"));
 
-    setupJWTStrategy(passport);
-    app.use("/post", postRouter)
+    // setupJWTStrategy(passport);
+    // app.use("/post", postRouter)
     app.use("/chat",chatRouter);
-    app.use("/auth", AuthRouter);
+    // app.use("/auth", AuthRouter);
 
 
     //set up socket server
@@ -27,6 +27,7 @@ export default function createServer() {
     const io = new Server(server);
 
     io.on("connection", (socket) => {
+        
         socket.on("joinRoom", (roomId) => {
             socket.join(roomId);
         })
