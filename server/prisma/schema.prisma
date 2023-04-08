@@ -64,7 +64,7 @@ model Chatroom {
 
   userId    Int
   user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  messageId Int
+  messageId Int     @unique
   messages  Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
 
   @@id([userId, messageId])

@@ -135,11 +135,14 @@ router.get(
   }
 );
 
+
+
+// Post | create logout route
+
+    
 export default router;
 
 
-// // Post | create logout route
-// router.post("/logout", async (req, res) => {});
 
 // // Delete | delete user
 // router.delete("/deleteuser", async (req, res) => {
