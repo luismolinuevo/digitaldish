@@ -117,15 +117,15 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Post | create logout route
-router.post("/logout", async (req, res) => {});
+// // Post | create logout route
+// router.post("/logout", async (req, res) => {});
 
-// Delete | delete user
-router.delete("/deleteuser", async (req, res) => {
-  try {
-  } catch (error) {}
-});
+// // Delete | delete user
+// router.delete("/deleteuser", async (req, res) => {
+//   try {
+//   } catch (error) {}
+// });
 
-// Edit | update user
-router.put("/edituser", async (req, res) => {});
+// // Edit | update user
+// router.put("/edituser", async (req, res) => {});
 
