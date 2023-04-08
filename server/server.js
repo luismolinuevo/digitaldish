@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import AuthRouter from "./routes/auth.js";
+import authRouter from "./routes/auth.js";
 import chatRouter from "./routes/chat.js";
 import postRouter from "./routes/items.js"
 import setupJWTStrategy from "./auth/index.js";
@@ -16,8 +16,8 @@ export default function createServer() {
 
     setupJWTStrategy(passport);
     app.use("/post", postRouter)
-    app.use("/chat",chatRouter);
-    app.use("/auth", AuthRouter);
+    app.use("/chat", chatRouter);
+    app.use("/auth", authRouter);
 
     return app;
 }

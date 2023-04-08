@@ -114,7 +114,7 @@ router.get("/:postId", async (request, response) => {
 //       });
   
 //       response.status(200).json({
-//         sucess: true,
+//         success: true,
 //         getPost,
 //       });
 //     } catch (error) {
