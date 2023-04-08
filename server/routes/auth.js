@@ -59,6 +59,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+
 // Post | create login route
 router.post("/login", async (req, res) => {
   try {
@@ -80,7 +81,7 @@ router.post("/login", async (req, res) => {
             {
               id: foundUser.id,
               username: foundUser.username,
-              email: founderUser.email,
+              email: foundUser.email,
             },
             process.env.SECRET_KEY
           );
@@ -116,6 +117,22 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+
+
+// Get | Authenticating all routes
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.status(200).json({
+      success: true,
+      data: req.user,
+    });    
+  }
+);
+
+export default router;
+
 
 // // Post | create logout route
 // router.post("/logout", async (req, res) => {});
