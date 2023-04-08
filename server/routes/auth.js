@@ -7,6 +7,7 @@ import passport from "passport";
 
 const router = express.Router();
 
+
 // Post | create sign up route
 router.post("/signup", async (req, res) => {
   try {
@@ -58,6 +59,7 @@ router.post("/signup", async (req, res) => {
     });
   }
 });
+
 
 
 // Post | create login route
@@ -117,6 +119,7 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+
 
 
 // Get | Authenticating all routes
