@@ -5,7 +5,7 @@ export default function setupChatRouter() {
     const router = express.Router();
 
     //create a chatroom
-    router.post("/chatroom", async (req, res) => {
+    router.post("/", async (req, res) => {
         const {userId, userTwoId} = req.body;
 
         try {
@@ -77,7 +77,25 @@ export default function setupChatRouter() {
             console.error(error);
             res.status(500).json({error: "Server Error"})
         }
-    })
+    });
+
+    //get chatroom by chatroom id
+router.get("/:chatroomId", async (req, res) => {
+    const chatId = req.params.chatroomId;
+
+    const getChat = await prisma.chatroom.findFirst({
+        where: {
+            id: Number(chatroomId)
+        }
+    });
+
+    res.status(200).json({
+        success: true,
+        getChat
+    });
+});
 
     return router;
 }
+
+
