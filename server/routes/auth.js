@@ -48,7 +48,7 @@ router.post("/signup", async (req, res) => {
           });
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
         res.status(500).json({
           success: false,
           message: "User was not created. Something happened",
@@ -87,7 +87,7 @@ router.post("/login", async (req, res) => {
             {
               id: foundUser.id,
               userName: foundUser.userName,
-              email: foundUser.email,
+              email: founderUser.email,
             },
             process.env.JSON_KEY
           );
@@ -151,17 +151,9 @@ router.post("/logout", async (req, res) => {
     res.status(500).send("Internal server error")
   }
 });
-    
+
+// Edit | update user
+router.put("/edituser", async (req, res) => {});
+
 export default router;
-
-
-
-// // Delete | delete user
-// router.delete("/deleteuser", async (req, res) => {
-//   try {
-//   } catch (error) {}
-// });
-
-// // Edit | update user
-// router.put("/edituser", async (req, res) => {});
 

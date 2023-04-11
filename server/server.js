@@ -18,6 +18,8 @@ export default function createServer() {
     app.use("/post", postRouter)
     app.use("/chat", chatRouter);
     app.use("/auth", authRouter);
+    app.use("/chat", chatRouter);
+    app.use("/auth", AuthRouter);
 
     return app;
 }
