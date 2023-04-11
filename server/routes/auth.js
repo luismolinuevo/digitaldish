@@ -14,7 +14,7 @@ router.post("/signup", async (req, res) => {
   try {
     const foundUser = await prisma.user.findFirst({
       where: {
-        username: req.body.userName,
+        userName: req.body.userName,
       },
     });
     if (foundUser) {
@@ -28,7 +28,9 @@ router.post("/signup", async (req, res) => {
         const hashPassword = await argon2.hash(req.body.password);
         const newUser = await prisma.user.create({
           data: {
-            username: req.body.userName,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            userName: req.body.userName,
             email: req.body.email,
             password: hashPassword,
           },
@@ -46,6 +48,7 @@ router.post("/signup", async (req, res) => {
           });
         }
       } catch (error) {
+        console.log(error)
         res.status(500).json({
           success: false,
           message: "User was not created. Something happened",
@@ -68,7 +71,7 @@ router.post("/login", async (req, res) => {
   try {
     const foundUser = await prisma.user.findFirst({
       where: {
-        username: req.body.userName,
+        userName: req.body.userName,
       },
     });
 
@@ -83,7 +86,7 @@ router.post("/login", async (req, res) => {
           const token = jwt.sign(
             {
               id: foundUser.id,
-              username: foundUser.userName,
+              userName: foundUser.userName,
               email: foundUser.email,
             },
             process.env.JSON_KEY
@@ -137,8 +140,17 @@ router.get(
 
 
 
-// Post | create logout route
-
+// Post | create logout route | LOGOUT MAY NOT BE NEEDED
+router.post("/logout", async (req, res) => {
+  try {
+    req.logout();
+    req.session.destroy();
+    res.status(200).send("You have logged out successfully");
+  } catch (error){
+    console.log(error);
+    res.status(500).send("Internal server error")
+  }
+});
     
 export default router;
 
