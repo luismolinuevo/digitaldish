@@ -1,18 +1,20 @@
 import express from "express";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
-import { prisma } from "../db/index.js";
+import prisma from "../db/index.js";
 import dotenv from "dotenv";
 import passport from "passport";
+dotenv.config()
 
 const router = express.Router();
+
 
 // Post | create sign up route
 router.post("/signup", async (req, res) => {
   try {
-    const foundUser = await prisma.user.FindFirst({
+    const foundUser = await prisma.user.findFirst({
       where: {
-        username: req.body.username,
+        userName: req.body.userName,
       },
     });
     if (foundUser) {
@@ -26,6 +28,8 @@ router.post("/signup", async (req, res) => {
         const hashPassword = await argon2.hash(req.body.password);
         const newUser = await prisma.user.create({
           data: {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             userName: req.body.userName,
             email: req.body.email,
             password: hashPassword,
@@ -44,6 +48,7 @@ router.post("/signup", async (req, res) => {
           });
         }
       } catch (error) {
+        console.log(error)
         res.status(500).json({
           success: false,
           message: "User was not created. Something happened",
@@ -59,12 +64,14 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+
+
 // Post | create login route
 router.post("/login", async (req, res) => {
   try {
-    const foundUser = await prisma.user.FindFirst({
+    const foundUser = await prisma.user.findFirst({
       where: {
-        username: req.body.username,
+        userName: req.body.userName,
       },
     });
 
@@ -79,10 +86,10 @@ router.post("/login", async (req, res) => {
           const token = jwt.sign(
             {
               id: foundUser.id,
-              username: foundUser.username,
-              email: founderUser.email,
+              userName: foundUser.userName,
+              email: foundUser.email,
             },
-            process.env.SECRET_KEY
+            process.env.JSON_KEY
           );
 
           res.status(200).json({
@@ -92,7 +99,7 @@ router.post("/login", async (req, res) => {
         } else {
           res.status(401).json({
             success: false,
-            message: "Incorrect username or password",
+            message: "Incorrect userName or password",
           });
         }
       } catch (error) {
@@ -117,15 +124,44 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Post | create logout route
-router.post("/logout", async (req, res) => {});
 
-// Delete | delete user
-router.delete("/deleteuser", async (req, res) => {
+
+// Get | Authenticating all routes
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.status(200).json({
+      success: true,
+      data: req.user,
+    });    
+  }
+);
+
+
+
+// Post | create logout route | LOGOUT MAY NOT BE NEEDED
+router.post("/logout", async (req, res) => {
   try {
-  } catch (error) {}
+    req.logout();
+    req.session.destroy();
+    res.status(200).send("You have logged out successfully");
+  } catch (error){
+    console.log(error);
+    res.status(500).send("Internal server error")
+  }
 });
+    
+export default router;
 
-// Edit | update user
-router.put("/edituser", async (req, res) => {});
+
+
+// // Delete | delete user
+// router.delete("/deleteuser", async (req, res) => {
+//   try {
+//   } catch (error) {}
+// });
+
+// // Edit | update user
+// router.put("/edituser", async (req, res) => {});
 

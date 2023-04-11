@@ -7,7 +7,7 @@ export default function jwtStrategy(passport) {
     passport.use(
         new Strategy({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: process.env.JSONKEY
+            secretOrKey: process.env.JSON_KEY
         }, function (payload, done) {
             try {
                 return done(null, { 
