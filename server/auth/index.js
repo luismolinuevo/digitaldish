@@ -14,7 +14,6 @@ export default function jwtStrategy(passport) {
                     username: payload.username, 
                     id: payload.id,
                     email: payload.email,
-                    post: payload.post,
                  })
             } catch (e) {
                
