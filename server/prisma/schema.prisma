@@ -38,10 +38,17 @@ model Followers {
 
 model Post {
   id          Int    @unique @default(autoincrement())
+
   userName    String
+  title       String
+  imageURL    String?       
   description String
   price       Float
   Category    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  startTime   DateTime? @default(now())
+  endTime     DateTime?
 
   userId  Int
   user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)

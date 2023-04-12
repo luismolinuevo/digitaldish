@@ -11,10 +11,9 @@ export default function jwtStrategy(passport) {
         }, function (payload, done) {
             try {
                 return done(null, { 
-                    username: payload.username, 
+                    userName: payload.userName, 
                     id: payload.id,
                     email: payload.email,
-                    post: payload.post,
                  })
             } catch (e) {
                
