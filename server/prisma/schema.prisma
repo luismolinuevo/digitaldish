@@ -45,8 +45,10 @@ model Post {
   description String
   price       Float
   Category    String
-  // startTime   Int @default()
-  // endTime     Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  startTime   DateTime? @default(now())
+  endTime     DateTime?
 
   userId  Int
   user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
