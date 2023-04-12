@@ -38,6 +38,7 @@ model Followers {
 
 model Post {
   id          Int    @unique @default(autoincrement())
+
   userName    String
   title       String
   imageURL    String?       
