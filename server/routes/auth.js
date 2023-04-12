@@ -28,8 +28,6 @@ router.post("/signup", async (req, res) => {
         const hashPassword = await argon2.hash(req.body.password);
         const newUser = await prisma.user.create({
           data: {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
             userName: req.body.userName,
             email: req.body.email,
             password: hashPassword,
@@ -126,7 +124,7 @@ router.post("/login", async (req, res) => {
 
 
 
-// Get | Authenticating all routes
+// Get | Shows current logged in 
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
@@ -140,17 +138,18 @@ router.get(
 
 
 
-// Post | create logout route | LOGOUT MAY NOT BE NEEDED
-router.post("/logout", async (req, res) => {
-  try {
-    req.logout();
-    req.session.destroy();
-    res.status(200).send("You have logged out successfully");
-  } catch (error){
-    console.log(error);
-    res.status(500).send("Internal server error")
-  }
-});
+// // Post | create logout route | LOGOUT MAY NOT BE NEEDED
+// router.post("/logout", async (req, res) => {
+//   try {
+//     req.logout();
+//     req.session.destroy();
+//     res.redirect('/login');
+//     res.status(200).send("You have logged out successfully");
+//   } catch (error){
+//     console.log(error);
+//     res.status(500).send("Internal server error")
+//   }
+// });
     
 export default router;
 
