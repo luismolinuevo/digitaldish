@@ -5,39 +5,42 @@ import passport from "passport"
 const router = express.Router()
 
 // Create a post at /
-router.post("/", passport.authenticate("jwt", { session: false, }), async (request, response) => {
+router.post("/", passport.authenticate("jwt", { session: false, }), async (req, res) => {
     try {
+      console.log(req.user);
         const newPost = await prisma.post.create({
+
             data: {
-                username: request.user.username,
-                description: request.body.description,
-                price: request.body.price,
-                category: request.body.category,
-                userId: request.user.id,
+                userName: req.user.userName,
+                description: req.body.description,
+                price: req.body.price,
+                category: req.body.category,
+                userId: req.user.id,
+                title: req.body.title
             }
         })
 
         if (newPost) {
             const postList = await prisma.post.findMany({
               where: {
-                userId: request.user.id,
+                userId: req.user.id,
               }
             })
-            response.status(201).json({
+            res.status(201).json({
               success: true,
               message: "Post created",
               post: newPost,
               postList
             })
           } else {
-            response.status(400).json({
+            res.status(400).json({
               success: false,
               message: "Post was not created"
             })
           }
         } catch (e) {
           console.log(e)
-          response.status(400).json({
+          res.status(400).json({
             success: false,
             message: "Something went wrong"
           })
@@ -45,26 +48,26 @@ router.post("/", passport.authenticate("jwt", { session: false, }), async (reque
 })
 
 // Get all post
-router.get("/", async (request, response) => {
+router.get("/", async (req, res) => {
     try {
       const allPost = await prisma.post.findMany({
       })
   
       if (allPost) {
-        response.status(200).json({
+        res.status(200).json({
           success: true,
           message: "all post fetch!",
           post: allPost
         })
       } else {
-        response.status(400).json({
+        res.status(400).json({
           success: false,
           message: "Something went wrong!"
         })
       }
     } catch (error) {
       console.log(error)
-      response.status(400).json({
+      res.status(400).json({
         success: false,
         message: "could not get any post!"
       })
@@ -72,30 +75,30 @@ router.get("/", async (request, response) => {
   })
 
 //   Get post by id
-router.get("/:postId", async (request, response) => {
-    console.log(request.params.postId);
+router.get("/:postId", async (req, res) => {
+    console.log(req.params.postId);
     try {
       const getPostbyId = await prisma.post.findFirst({
         where: {
-          id: parseInt(request.params.postId)
+          id: parseInt(req.params.postId)
         }
       })
   
       if (getPostbyId) {
-        response.status(200).json({
+        res.status(200).json({
           success: true,
           message: "successfully fetched post by id!",
           post: getPostbyId
         })
       } else {
-        response.status(400).json({
+        res.status(400).json({
           success: false,
           message: "something went wrong, could not fetch data"
         })
       }
     } catch (error) {
       console.log(error)
-      response.status(400).json({
+      res.status(400).json({
         success: false,
         message: "Something went wrong, sorry!"
       })
@@ -103,8 +106,8 @@ router.get("/:postId", async (request, response) => {
   })
 
 //   Get post by an user
-// router.get("/user/:userId", async function (request, response) {
-//     const userId = parseInt(request.params.userId);
+// router.get("/user/:userId", async function (req, res) {
+//     const userId = parseInt(req.params.userId);
 //     try {
   
 //       const getPost = await prisma.post.findMany({
@@ -113,7 +116,7 @@ router.get("/:postId", async (request, response) => {
 //         },
 //       });
   
-//       response.status(200).json({
+//       res.status(200).json({
 //         success: true,
 //         getPost,
 //       });
@@ -124,33 +127,33 @@ router.get("/:postId", async (request, response) => {
 
 
 // Delete a post
-router.delete("/:postId", passport.authenticate("jwt", { session: false }), async (request, response) => {
+router.delete("/:postId", passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
       const deletePost = await prisma.post.deleteMany({
         where: {
-          userId: request.user.id,
-          id: parseInt(request.params.postId),
+          userId: req.user.id,
+          id: parseInt(req.params.postId),
         },
       })
       if (deletePost) {
         const newPost = await prisma.post.findMany({
           where: {
-            userId: request.user.id,
+            userId: req.user.id,
           },
         })
-        response.status(200).json({
+        res.status(200).json({
           success: true,
           message: "Post was successfully deleted!",
           postList: newPost
         })
       } else {
-        response.status(400), json({
+        res.status(400), json({
           message: "Something went wrong, post could not be deleted!"
         })
       }
     } catch (error) {
       console.log(error)
-      response.status(400).json({
+      res.status(400).json({
         success: false,
         message: "Something went wrong!"
       })
@@ -159,41 +162,41 @@ router.delete("/:postId", passport.authenticate("jwt", { session: false }), asyn
 
 
 // User can edit their post
-router.put("/:postId", passport.authenticate("jwt", { session: false, }), async (request, response) => {
-    // console.log(request.params.id, typeof request.params.id, request.user.id, typeof request.user.id)
+router.put("/:postId", passport.authenticate("jwt", { session: false, }), async (req, res) => {
+    // console.log(req.params.id, typeof request.params.id, request.user.id, typeof request.user.id)
     try {
       const updatePost = await prisma.post.updateMany({
         where: {
-          userId: request.user.id,
-          id: parseInt(request.params.postId)
+          userId: req.user.id,
+          id: parseInt(req.params.postId)
         },
         data: {
-            description: request.body.description,
-            price: request.body.price,
-            category: request.body.category,
+            description: req.body.description,
+            price: req.body.price,
+            category: req.body.category,
         },
       })
   
       if (updatePost) {
         const postList = await prisma.post.findMany({
           where: {
-            userId: request.user.id,
+            userId: req.user.id,
           }
         })
-        response.status(200).json({
+        res.status(200).json({
           success: true,
           message: "Post information was updated",
           postList
         })
       } else {
-        response.status(400).json({
+        res.status(400).json({
           success: false,
           message: "Post not updated. Something failed."
         })
       }
     } catch (err) {
       console.log(err)
-      response.status(400).json({
+      res.status(400).json({
         success: false,
         message: "Something went wrong"
       })
