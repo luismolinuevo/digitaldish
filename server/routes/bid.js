@@ -68,7 +68,7 @@ router.delete("/:bidId", async (req, res) => {
     });
 });
 
-//get bid by id
+//edit bid by id
 router.put("/:bidId", async (req, res) => {
     const bidId = req.params.bidId;
 
