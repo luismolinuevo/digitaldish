@@ -10,7 +10,8 @@ router.post("/:postId", async (req, res) => {
     const createBid = await prisma.bid.create({
         data: {
             price: req.body.price,
-            postId: Number(postId)
+            postId: Number(postId),
+            userId: req.user.id
         },
         
     });
@@ -28,6 +29,7 @@ router.get("/:bidId", async (req, res) => {
         where: {
             id: Number(bidId)
         },
+        include: { user: true },
     });
 
     res.status(200).json({
