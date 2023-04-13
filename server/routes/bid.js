@@ -58,7 +58,8 @@ router.delete("/:bidId", async (req, res) => {
 
     const deleteBid = await prisma.bid.deleteMany({
         where: {
-            id: Number(bidId)
+            id: Number(bidId),
+            userId: req.user.id
         },
     });
 
@@ -67,5 +68,24 @@ router.delete("/:bidId", async (req, res) => {
     });
 });
 
+//get bid by id
+router.put("/:bidId", async (req, res) => {
+    const bidId = req.params.bidId;
+
+    const editBid = await prisma.bid.updateMany({
+        where: {
+            id: Number(bidId),
+            userId: req.user.id
+        },
+        data: {
+            price: req.body.price
+        }
+    });
+
+    res.status(200).json({
+        success: true,
+        editBid
+    });
+});
 
 export default router;
