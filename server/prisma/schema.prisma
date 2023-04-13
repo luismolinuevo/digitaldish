@@ -53,6 +53,7 @@ model Post {
   userId  Int
   user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   comment Comment[]
+  bids Bid[]
 
   @@index([userId])
 }
@@ -92,4 +93,15 @@ model Message {
   chat Chatroom  @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
   @@index([chatId])
+}
+
+model Bid {
+    id             Int      @id @unique @default(autoincrement())
+    
+    price Float
+
+    postId Int
+    post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+    @@index([postId])
 }
