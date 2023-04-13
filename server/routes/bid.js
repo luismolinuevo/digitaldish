@@ -49,7 +49,23 @@ router.get("/:bidId", async (req, res) => {
     res.status(200).json({
         success: true,
         getBid
-    })
-})
+    });
+});
+
+//delete bid by id
+router.delete("/:bidId", async (req, res) => {
+    const bidId = req.params.bidId;
+
+    const deleteBid = await prisma.bid.deleteMany({
+        where: {
+            id: Number(bidId)
+        },
+    });
+
+    res.status(200).json({
+        success: true,
+    });
+});
+
 
 export default router;
