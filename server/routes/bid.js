@@ -3,6 +3,20 @@ import prisma from "../db/index.js";
 
 const router = express.Router();
 
+//get all bids for a user
+router.get("/", async (req, res) => {
+    const getBids = await prisma.bid.findMany({
+        where: {
+            userId: req.user.id
+        }
+    });
+
+    res.status(200).json({
+        success: true,
+        getBids
+    });
+});
+
 //create a bid
 router.post("/:postId", async (req, res) => {
     const postId = req.params.postId;
