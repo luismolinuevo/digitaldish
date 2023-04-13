@@ -7,16 +7,33 @@ const router = express.Router();
 router.post("/:postId", async (req, res) => {
     const postId = req.params.postId;
 
-    const createBid = prisma.bid.create({
+    const createBid = await prisma.bid.create({
         data: {
             price: req.body.price,
             postId: Number(postId)
-        }
+        },
+        
     });
 
     res.status(201).json({
         success: true,
     });
 });
+
+//get bid by id
+router.get("/:bidId", async (req, res) => {
+    const bidId = req.params.bidId;
+
+    const getBid = await prisma.bid.findFirst({
+        where: {
+            id: Number(bidId)
+        },
+    });
+
+    res.status(200).json({
+        success: true,
+        getBid
+    })
+})
 
 export default router;
