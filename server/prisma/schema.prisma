@@ -28,24 +28,22 @@ model User {
 }
 
 model Followers {
-  id        Int @unique @default(autoincrement())
-  follwerId Int
-
-  userId Int
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         Int  @unique @default(autoincrement())
+  followerId Int
+  userId     Int
+  user       User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
 model Post {
-  id Int @unique @default(autoincrement())
-
+  id          Int       @unique @default(autoincrement())
   userName    String
   title       String
   imageURL    String?
   description String
-  price       Float
-  Category    String
+  price       String
+  category    String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   startTime   DateTime? @default(now())
@@ -54,7 +52,7 @@ model Post {
   userId  Int
   user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   comment Comment[]
-  bid     Bid[]
+  bid Bid[]
 
   @@index([userId])
 }
@@ -62,9 +60,8 @@ model Post {
 model Comment {
   id      Int    @unique @default(autoincrement())
   content String
-
-  postId Int
-  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId  Int
+  post    Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@index([postId])
 }
@@ -88,10 +85,8 @@ model Message {
   id             Int      @id @unique @default(autoincrement())
   senderUserName String
   createAt       DateTime
-
-  chatId Int
-
-  chat Chatroom @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId         Int
+  chat           Chatroom @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
   @@index([chatId])
 }
