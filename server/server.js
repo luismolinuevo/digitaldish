@@ -9,6 +9,7 @@ import postRouter from "./routes/items.js"
 import prisma from "./db/index.js";
 import setupJWTStrategy from "./auth/index.js";
 import passport from "passport";
+import followersRouter from "./routes/follow.js"
 
 export default function createServer() {
     const app = express();
@@ -21,6 +22,7 @@ export default function createServer() {
     app.use("/post", postRouter)
     app.use("/chat",chatRouter);
     app.use("/auth", authRouter);
+    app.use("/followers", followersRouter)
 
 
     //set up socket server
