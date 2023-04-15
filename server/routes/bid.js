@@ -1,10 +1,11 @@
 import express from "express";
 import prisma from "../db/index.js";
+import passport from "passport";
 
 const router = express.Router();
 
 //get all bids for a post
-router.get("/:postId", async (req, res) => {
+router.get("/:postId", passport.authenticate("jwt", { session: false, }),async (req, res) => {
     const postId = req.params.postId;
 
     const getBids = await prisma.bid.findMany({
@@ -20,7 +21,7 @@ router.get("/:postId", async (req, res) => {
 });
 
 //get all bids for a user
-router.get("/", async (req, res) => {
+router.get("/", passport.authenticate("jwt", { session: false, }), async (req, res) => {
     const getBids = await prisma.bid.findMany({
         where: {
             userId: req.user.id
@@ -34,14 +35,16 @@ router.get("/", async (req, res) => {
 });
 
 //create a bid
-router.post("/:postId", async (req, res) => {
+router.post("/:postId", passport.authenticate("jwt", { session: false, }),async (req, res) => {
     const postId = req.params.postId;
-
+    console.log(req.user);
     const createBid = await prisma.bid.create({
         data: {
             price: req.body.price,
             postId: Number(postId),
             userId: req.user.id
+            // user: { connect: { id: req.user.id } },
+            // post: { connect: { id: Number(postId) } },
         },
         
     });
@@ -52,7 +55,7 @@ router.post("/:postId", async (req, res) => {
 });
 
 //get bid by id
-router.get("/:bidId", async (req, res) => {
+router.get("/specBid/:bidId", passport.authenticate("jwt", { session: false, }),async (req, res) => {
     const bidId = req.params.bidId;
 
     const getBid = await prisma.bid.findFirst({
@@ -69,7 +72,7 @@ router.get("/:bidId", async (req, res) => {
 });
 
 //delete bid by id
-router.delete("/:bidId", async (req, res) => {
+router.delete("/:bidId", passport.authenticate("jwt", { session: false, }),async (req, res) => {
     const bidId = req.params.bidId;
 
     const deleteBid = await prisma.bid.deleteMany({
@@ -85,7 +88,7 @@ router.delete("/:bidId", async (req, res) => {
 });
 
 //edit bid by id
-router.put("/:bidId", async (req, res) => {
+router.put("/:bidId", passport.authenticate("jwt", { session: false, }), async (req, res) => {
     const bidId = req.params.bidId;
 
     const editBid = await prisma.bid.updateMany({
