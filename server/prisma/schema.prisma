@@ -24,6 +24,7 @@ model User {
   post       Post[]
   follower   Followers[]
   chatrooms  Chatroom[]
+  bid        Bid[]
 }
 
 model Followers {
@@ -47,9 +48,11 @@ model Post {
   updatedAt   DateTime  @updatedAt
   startTime   DateTime? @default(now())
   endTime     DateTime?
-  userId      Int
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  comment     Comment[]
+
+  userId  Int
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment Comment[]
+  bid Bid[]
 
   @@index([userId])
 }
@@ -86,4 +89,19 @@ model Message {
   chat           Chatroom @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
   @@index([chatId])
+}
+
+model Bid {
+  id Int @id @unique @default(autoincrement())
+
+  price Float
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  postId Int
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([postId])
 }

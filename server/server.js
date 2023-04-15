@@ -5,7 +5,8 @@ import morgan from "morgan";
 import cors from "cors";
 import authRouter from "./routes/auth.js";
 import chatRouter from "./routes/chat.js";
-import postRouter from "./routes/items.js"
+import postRouter from "./routes/items.js";
+import bidRouter from "./routes/bid.js"
 import prisma from "./db/index.js";
 import setupJWTStrategy from "./auth/index.js";
 import passport from "passport";
@@ -23,6 +24,7 @@ export default function createServer() {
     app.use("/chat",chatRouter);
     app.use("/auth", authRouter);
     app.use("/followers", followersRouter)
+    app.use("/bid", bidRouter)
 
 
     //set up socket server
