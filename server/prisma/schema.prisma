@@ -11,73 +11,97 @@ datasource db {
   relationMode = "prisma"
 }
 
+// firstName & lastName being optional "?" | userRating with a default of 0.0
 model User {
-  id         Int    @unique @default(autoincrement())
-  firstName  String @db.VarChar(255)
-  lastName   String @db.VarChar(255)
-  userName   String @db.VarChar(255)
-  email      String @unique @db.VarChar(255)
-  password   String @db.VarChar(255)
-  imageUrl String?
-  userRating Float  //avg out somewhere(maybe front end). Use toFixed(2) to keep decimal small
-  post  Post[]
-  follower Followers[]
-  chatrooms Chatroom[]
+  id         Int         @id @unique @default(autoincrement())
+  firstName  String?     @db.VarChar(255)
+  lastName   String?     @db.VarChar(255)
+  userName   String      @db.VarChar(255)
+  email      String      @unique @db.VarChar(255)
+  password   String      @db.VarChar(255)
+  imageUrl   String?
+  userRating Float       @default(0.0) //avg out somewhere(maybe front end). Use toFixed(2) to keep decimal small
+  post       Post[]
+  follower   Followers[]
+  chatrooms  Chatroom[]
+  bid        Bid[]
 }
 
 model Followers {
-  id  Int   @unique @default(autoincrement())
-  follwerId Int
-
-  userId Int
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         Int  @unique @default(autoincrement())
+  followerId Int
+  userId     Int
+  user       User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
 model Post {
-  id     Int  @unique @default(autoincrement())
-  userName String
+  id          Int       @unique @default(autoincrement())
+  userName    String
+  title       String
+  imageURL    String?
   description String
-  price Float
-  Category String
+  price       String
+  category    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  startTime   DateTime? @default(now())
+  endTime     DateTime?
 
-  userId Int
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  Int
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   comment Comment[]
+  bid Bid[]
 
   @@index([userId])
 }
 
 model Comment {
-  id     Int  @unique @default(autoincrement())
+  id      Int    @unique @default(autoincrement())
   content String
-
-  postId Int
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId  Int
+  post    Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@index([postId])
 }
 
 model Chatroom {
-  id     Int  @unique @default(autoincrement())
-  otherUserId Int
-  
-  userId Int
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id Int @id @unique @default(autoincrement())
 
-  message Message[]
+  // user1Id    Int
+  users User[]
+  // user1      User    @relation("User1",fields: [user1Id], references: [id], onDelete: Cascade)
 
-  @@index([userId])
+  // user2Id    Int
+  // user2      User    @relation("User2",fields: [user2Id], references: [id], onDelete: Cascade)
+
+  messages Message[]
+
+  // @@index([user1Id, user2Id])
 }
 
 model Message {
-  id     Int  @unique @default(autoincrement())
+  id             Int      @id @unique @default(autoincrement())
   senderUserName String
-  createAt DateTime
-
-  chatId Int
-  chat   Chatroom @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  createAt       DateTime
+  chatId         Int
+  chat           Chatroom @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
   @@index([chatId])
+}
+
+model Bid {
+  id Int @id @unique @default(autoincrement())
+
+  price Float
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  postId Int
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([postId])
 }
