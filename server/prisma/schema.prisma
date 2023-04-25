@@ -114,6 +114,7 @@ model Offer {
 
 model OfferMessage {
   id             Int      @id @unique @default(autoincrement())
+  content String
   createAt       DateTime
   offerId         Int
   offer           Offer @relation(fields: [offerId], references: [id], onDelete: Cascade)
