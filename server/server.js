@@ -53,6 +53,27 @@ export default function createServer() {
 
             io.to(roomId).emit("newMessage");
         });
+
+        socket.on("joinOfferRoom", (roomId) => {
+            socket.join(roomId);
+        })
+
+        socket.on("sendMessage", async (message, roomId) => {
+            const newMessage = await prisma.offerMessage.create({
+                data: {
+                    content: message.content,
+                    userId: message.userId,
+                    createAt: new Date(),
+                    offer: {
+                        connect: {id: roomId},
+                    },
+                }
+            });
+
+            io.to(roomId).emit("newMessage");
+        });
+
+
     })
 
     return app;
