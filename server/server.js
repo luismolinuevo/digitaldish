@@ -11,6 +11,7 @@ import prisma from "./db/index.js";
 import setupJWTStrategy from "./auth/index.js";
 import passport from "passport";
 import followersRouter from "./routes/follow.js"
+import offerRouter from "./routes/offer.js";
 
 export default function createServer() {
     const app = express();
@@ -25,6 +26,7 @@ export default function createServer() {
     app.use("/auth", authRouter);
     app.use("/followers", followersRouter)
     app.use("/bid", bidRouter)
+    app.use("/offer",offerRouter);
 
 
     //set up socket server

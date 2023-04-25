@@ -98,15 +98,16 @@ model Message {
 model Offer {
   id Int @id @unique @default(autoincrement())
   
-  userId Int
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // userId Int
+  // user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  users User[]
 
   postId Int
   post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   messages OfferMessage[]
 
-  @@index([userId])
+  // @@index([userId])
   @@index([postId])
   
 }
