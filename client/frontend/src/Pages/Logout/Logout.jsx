@@ -1,10 +1,10 @@
 import {  } from "react";
 import {  } from "react-dom";
 
-export default function Listing() {
+export default function Logout() {
     return(
         <div>
-            <h1>Listing Page</h1>
+            <h1>Logout Function</h1>
         </div>
     )
 }

@@ -4,7 +4,7 @@ import {  } from "react-dom";
 export default function Home() {
     return(
         <div>
-            <h1>Home Page</h1>
+            <h1>Home Page (kwame)</h1>
         </div>
     )
 }
