@@ -1,9 +1,9 @@
 import {  } from "react";
 import {  } from "react-dom";
 
-export default function Profile(){
+
+export default function Following() {
     return(
-        <div>Profile Page</div>
+        <div>Following Page</div>
     )
-    
 }

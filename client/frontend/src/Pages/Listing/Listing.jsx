@@ -1,10 +1,10 @@
 import {  } from "react";
 import {  } from "react-dom";
 
-export default function Home() {
+export default function Listing() {
     return(
         <div>
-            <h1>Home Page (kwame)</h1>
+            <h1>Listing Page</h1>
         </div>
     )
 }
