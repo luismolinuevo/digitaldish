@@ -33,30 +33,30 @@ const Navbar = () => {
     <ul className="hidden md:flex">
       <li>
         <Link to="/Seach">
-          <img src={Search} alt="" className="mr-4"/>
+          <img src={Search} alt="" className="mr-5"/>
         </Link>
       </li>
   
       <li>
         <Link to="/Community">
-          <img src={Community} alt="" style={{ width: "30px" }} className="mr-4" />
+          <img src={Community} alt="" style={{ width: "30px" }} className="mr-5" />
         </Link>
       </li>
   
       <li>
         <Link to="/Cart">
-          <img src={Cart} alt="" className="mr-4"/>
+          <img src={Cart} alt="" className="mr-5"/>
         </Link>
       </li>
   
       <li>
         <Link to="/Notification">
-          <img src={Notification} alt="" className="mr-4" />
+          <img src={Notification} alt="" className="mr-5" />
         </Link>
       </li>
   
       <li>
-        <Link to="Login" className="text-base md:text-lg">
+        <Link to="Login" className="text-base md:text-lg mr-5">
           Login
         </Link>
       </li>
