@@ -105,7 +105,7 @@ model Offer {
   postId Int
   post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 
-  messages OfferMessage[]
+  offermessages OfferMessage[]
 
   // @@index([userId])
   @@index([postId])

@@ -1,5 +1,7 @@
 import express from "express";
 import prisma from "../db/index.js";
+import passport from "passport";
+
 
 // export default function setupChatRouter() {
     const router = express.Router();
@@ -39,32 +41,40 @@ import prisma from "../db/index.js";
     });
 
     //get all chats for a user
-    router.get("/userchats", async (req, res) => {
+    router.get("/useroffers", passport.authenticate("jwt", { session: false, }),async (req, res) => {
 
         try {
-            const chatroom = await prisma.offer.findMany({
+            const offers = await prisma.offer.findMany({
                 where: {
-                    user: {  //was users
+                    users: {  //was users
                         some: {
                             id: parseInt(req.user.id)
                         },
                     },
+                
                 },
                 include: {
-                    messages: {
+                    offermessages: {
                         orderBy: {
-                            createdAt: "asc",
+                            createAt: "asc",
                         },
+                        // post: true
                     },
+                    users: true,
                 },
-                users: true,
+                
+            })
 
-
+            res.status(200).json({
+                success: true,
+                offers
             })
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: "Server Error" })
         }
+
+
     });
 
     //get chatroom by chatroom id
@@ -76,7 +86,8 @@ import prisma from "../db/index.js";
                 id: Number(id)
             },
             include: {
-                messages: true
+                messages: true,
+                post: true
             }
         });
 
