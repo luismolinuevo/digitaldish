@@ -20,7 +20,7 @@ export default function Activity() {
         </div>
         <div>
             <div className='px-20'>
-                <div className='flex'>
+                <div className='flex'>  {/*may have to but this in each page */}
                     <p>Messages</p>
                     <p>Sort by: choice</p>
                     <p>Status</p>

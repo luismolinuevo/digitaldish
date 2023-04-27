@@ -61,6 +61,7 @@ import passport from "passport";
                         // post: true
                     },
                     users: true,
+                    post: true
                 },
                 
             })
@@ -79,14 +80,14 @@ import passport from "passport";
 
     //get chatroom by chatroom id
     router.get("/:id", async (req, res) => {
-        const chatId = req.params.id;
+        const offerId = req.params.id;
 
         const getChat = await prisma.offer.findFirst({
             where: {
-                id: Number(id)
+                id: Number(offerId)
             },
             include: {
-                messages: true,
+                offermessages: true,
                 post: true
             }
         });
