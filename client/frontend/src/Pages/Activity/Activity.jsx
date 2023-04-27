@@ -4,13 +4,13 @@ import OffersRecieved from './OffersRecieved';
 import Chat from './chat';
 
 export default function Activity() {
-    const [activeButton, setActiveButton] = useState(null);
+    const [activeButton, setActiveButton] = useState(0);
 
     const handleClick = (buttonIndex) => {
       setActiveButton(buttonIndex);
     }
   return (
-    <div className='flex px-20'>
+    <div className='flex px-20 pt-[100px] justify-between'>
         <div className='flex flex-col cursor-pointer'>
             <h1 className={'text-left text-[44px]'}>Activity</h1>
             <button className={`text-left text-[27px] ${activeButton === 0 ? 'border-b-2 border-black' : ''}`} onClick={() => handleClick(0)}>Offers Recieved</button>

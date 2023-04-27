@@ -25,7 +25,7 @@ export default function OffersRecieved() {
     }, []);
 
     return (
-        <div className='w-[687px] pb-10'>
+        <div className='w-[687px] pb-10 border-2 border-black'>
             <div className='flex '>
                 <img src="https://placehold.jp/180x118.png"></img>
                 <div className='w-full flex justify-between'>
