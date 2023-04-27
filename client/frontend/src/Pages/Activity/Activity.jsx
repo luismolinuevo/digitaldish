@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import axios from "axios";
 import OffersRecieved from './OffersRecieved';
 import Chat from './chat';
+import OffersSent from './OffersSent';
 
 export default function Activity() {
     const [activeButton, setActiveButton] = useState(0);
@@ -27,7 +28,7 @@ export default function Activity() {
                 </div>
                 <div>
                     {activeButton === 0 ? <OffersRecieved/> : ""}
-                    
+                    {activeButton === 1 ? <OffersSent/> : ""}
                 </div>
             </div>
         </div>

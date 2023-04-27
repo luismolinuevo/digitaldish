@@ -6,8 +6,8 @@ export default function Chat() {
       <div className='w-[520px] h-[820px] border-black border-[2px] relative' >
         <div className='h-[84px] border-black border-b-2 flex justify-between items-center p-4'>
           <div>
-            <p>Product Name</p>
-            <p>Username</p>
+            <p className='text-[22px]'>Product Name</p>
+            <p className='text-[12px]'>Username</p>
           </div>
           <div className='flex'>
             <img className='w-[52px] h-[52px] pr-1' src="https://placehold.jp/52x52.png"></img>
