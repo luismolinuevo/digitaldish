@@ -16,8 +16,8 @@ export default function Chat() {
             </button>
           </div>
         </div>
-        <div className=''>
-          <div>
+        <div className='h-full'>
+          <div className='h-[60%] overflow-y-scroll'>
 
           </div>
           <div className='absolute bottom-0 w-full'>
