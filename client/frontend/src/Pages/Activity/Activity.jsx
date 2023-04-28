@@ -3,6 +3,7 @@ import axios from "axios";
 import OffersRecieved from './OffersRecieved';
 import Chat from './chat';
 import OffersSent from './OffersSent';
+import Auctions from './Auctions';
 
 export default function Activity() {
     const [activeButton, setActiveButton] = useState(0);
@@ -24,43 +25,37 @@ export default function Activity() {
                     <div className='flex'>  {/*may have to but this in each page */}
                         {
 
-                            activeButton === 0 || 1
-
-                                ?
+                            activeButton === 0 || activeButton === 1 ?
                                 <div>
                                     <p>Messages</p>
                                     <p>Sort by: choice</p>
                                     <p>Status</p>
                                 </div>
-                                :
 
-                                activeButton === 2 
-                                
-                                ? 
-                                <div>
-                                    <p>Product</p>
-                                    <p>Sort by: choice</p>
-                                    <p>Price</p>
-                                </div>
-
-                                :
-
-                                <div>
-                                    <p>Product</p>
-                                    <p>Status</p>
-                                    <p>Price</p>
-                                </div>
+                                : activeButton === 2 ?
+                                    <div className='pl-[188px] flex'>
+                                        <p>Product</p>
+                                        <p>Sort by: choice</p>
+                                        <p>Price</p>
+                                    </div>
+                                    :
+                                    <div>
+                                        <p>Product</p>
+                                        <p>Status</p>
+                                        <p>Price</p>
+                                    </div>
                         }
 
                     </div>
                     <div>
                         {activeButton === 0 ? <OffersRecieved /> : ""}
                         {activeButton === 1 ? <OffersSent /> : ""}
+                        {activeButton == 2 ? <Auctions /> : ""}
                     </div>
                 </div>
             </div>
             <div>
-                <Chat />
+                {activeButton === 2 || activeButton === 3 ? "" : <Chat />}
             </div>
         </div>
     )
