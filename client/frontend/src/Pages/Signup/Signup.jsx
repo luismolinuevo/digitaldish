@@ -1,10 +1,24 @@
-import {  } from "react";
-import {  } from "react-dom";
+import React from 'react';
+import ReactDOM from "react-dom";
+import "./Signup.css"
+import { useContext } from 'react';
+import { AuthContext } from '../../Utils/AuthContext';
 
-export default function Signup() {
+ export default function Signup() {
+    const { isLoggedIn, login } = useContext(AuthContext);
+
+    const handleLogin = () => {
+        // calls the authentication API
+        login();
+    };
+
     return(
-        <div>
-            <h1>Sign Up</h1>
-        </div>
-    )
-}
+        <>
+            {isLoggedIn ? (
+                <p>Welcome Back!</p>
+            ) : (
+                <button onClick={handleLogin}>Log in</button>
+            )}
+        </>        
+    );
+ };
