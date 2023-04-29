@@ -8,9 +8,9 @@ function App() {
 
 
   return (
-    <AuthProvider>
+    // <AuthProvider>
       <LoginPage />
-    </AuthProvider>
+    // </AuthProvider>
   )
 }
 
