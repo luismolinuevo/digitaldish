@@ -13,7 +13,7 @@ import './index.css'
 import Layout from './Components/Layout'
 
 import { Provider } from 'react-redux'
-import store from "./redux/store"
+import store from "./Utils/store"
 
 
 

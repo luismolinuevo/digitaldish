@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import "./Signup.css"
-import { useContext } from 'react';
-import { AuthContext } from '../../Utils/AuthContext';
+// import { useContext } from 'react';
+// import { AuthContext } from '../../Utils/AuthContext';
 
  export default function Signup() {
-    const { isLoggedIn, login } = useContext(AuthContext);
+    // const { isLoggedIn, login } = useContext(AuthContext);
 
     const handleLogin = () => {
         // calls the authentication API
