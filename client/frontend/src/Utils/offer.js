@@ -9,7 +9,7 @@ export const slice = createSlice({
     reducers: {
         updateCurrentOffer: (state, action) => {
             state.currentOffer = action.payload
-        }
+        },
     },
 });
 
