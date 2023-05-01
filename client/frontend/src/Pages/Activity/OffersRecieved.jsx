@@ -8,11 +8,16 @@ export default function OffersRecieved() {
     useEffect(() => {
         const fetchOffers = async () => {
             try {
-                const allOffers = await axios.get("http://localhost:8080/offer/useroffers");
+                const token = localStorage.getItem('token');
+                const allOffers = await axios.get("http://localhost:8080/offer/useroffers", {
+                    headers: {
+                      Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+                    },
+                  });
                 console.log(allOffers);
 
                 if (allOffers.status === 200) {
-                    setOffers(allBooks.data.books);
+                    setOffers(allOffers.data.offers);
                 } else {
                     return null;
                 }

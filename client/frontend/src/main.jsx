@@ -19,13 +19,6 @@ import OffersRecieved from './Pages/Activity/OffersRecieved'
 import Activity from './Pages/Activity/Activity'
 
 
-import { Provider } from 'react-redux'
-import store from "./Utils/store"
-
-import OffersRecieved from './Pages/Activity/OffersRecieved'
-import Activity from './Pages/Activity/Activity'
-import Layout from './Components/Layout'
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -58,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/logout",
         element: <Logout />
+      },
+      {
+        path: "/activity",
+        element: <Activity/>
       }
     ]
   },
