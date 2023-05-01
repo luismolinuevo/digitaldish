@@ -2,48 +2,62 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-
+import Home from './Pages/Home/Home'
+import Profile from './Pages/Profile/Profile'
+import Following from './Pages/Following/Following'
+import Listing from './Pages/Listing/Listing'
+import Signup from './Pages/Signup/Signup'
+import Login from "../src/Pages/Login/Login"
+import Logout from './Pages/Logout/Logout'
 import './index.css'
+import Layout from './Components/Layout'
+
+import { Provider } from 'react-redux'
+import store from "./Utils/store"
+
 import OffersRecieved from './Pages/Activity/OffersRecieved'
 import Activity from './Pages/Activity/Activity'
 
 
+import { Provider } from 'react-redux'
+import store from "./Utils/store"
+
+import OffersRecieved from './Pages/Activity/OffersRecieved'
+import Activity from './Pages/Activity/Activity'
+import Layout from './Components/Layout'
+
 const router = createBrowserRouter([
   {
     path: "/",
-    // element: <div>Hello World!</div>,
+    element: <Layout />,
     children: [
-      // {
-      //   path: "/",
-      //   element: <Home />,
-      // },
-      // {
-      //   path: "/profile",
-      //   element: <Profile />
-      // },
-      // {
-      //   path: "/following",
-      //   element: <Following />
-      // },
-      // {
-      //   path: "/listing",
-      //   element: <Listing />,
-      // },
-      // {
-      //   path: "/signup",
-      //   element: <Signup />
-      // },
-      // {
-      //   path: "login",
-      //   element: <Login />
-      // },
-      // {
-      //   path: "logout",
-      //   element: <Logout />
-      // },
       {
-        path: "/activity",
-        element: <Activity/>
+        path: "/",
+        element: <App />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />
+      },
+      {
+        path: "/following",
+        element: <Following />
+      },
+      {
+        path: "/listing",
+        element: <Listing />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />
+      },
+      {
+        path: "/login",
+        element: <Login />
+      },
+      {
+        path: "/logout",
+        element: <Logout />
       }
     ]
   },
@@ -52,6 +66,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 );
