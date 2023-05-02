@@ -3,12 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 export const slice = createSlice({
     name: "offers",
     initialState: {
-        currentOffer: null
+        currentOffer: 1
     },
     
     reducers: {
         updateCurrentOffer: (state, action) => {
-            state.currentOffer = action.payload
+            const newId = action.payload;
+            state.currentOffer = newId
+            console.log(state.currentOffer);
         },
     },
 });

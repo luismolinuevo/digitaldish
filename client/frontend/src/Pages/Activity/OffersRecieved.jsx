@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Chat from "./chat";
+import { useDispatch } from "react-redux";
+import { updateCurrentOffer } from "../../Utils/offer"
 
 export default function OffersRecieved() {
+    const dispatch = useDispatch();
   const [offers, setOffers] = useState([]);
+  const [active, setActive] = useState(1);
 
   useEffect(() => {
     const fetchOffers = async () => {
@@ -32,11 +36,17 @@ export default function OffersRecieved() {
     fetchOffers();
   }, []);
 
+  const handleClick = (id) => {
+    setActive(id);
+    dispatch(updateCurrentOffer(id));
+    console.log(active);
+  };
+
   return (
     <div>
       {offers && offers.length != 0 ? 
         offers.map((item) => (
-          <div className="w-[687px] pb-10 border-2 border-black mb-4">
+          <div key={item.id} onClick={() => handleClick(item.id)} className={`w-[687px] pb-10 border-2 border-black mb-4 cursor-pointer ${active === item.id ?  "bg-[#D9D9D9]" : ""}`} >
             <div className="flex ">
               <img src="https://placehold.jp/180x118.png"></img>
               <div className="w-full flex justify-between">

@@ -11,6 +11,7 @@ export default function Activity() {
   const handleClick = (buttonIndex) => {
     setActiveButton(buttonIndex);
   };
+  
   return (
     <div className="flex px-20 pt-[100px] justify-between">
       <div className="flex flex-col cursor-pointer">
