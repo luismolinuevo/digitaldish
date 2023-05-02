@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
 
 const socket = io(":8080", {
   reconnectionDelay: 1000,
@@ -13,7 +14,8 @@ const socket = io(":8080", {
 });
 
 export default function Chat() {
-  const [offerId, setOfferId] = useState(1);
+  const offerId = useSelector(state => state.offers.currentOffer);
+  // console.log(offerId)
 
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
@@ -39,8 +41,7 @@ export default function Chat() {
       // Clean up event listeners
       socket.off("newMessage");
     };
-    // }, [offerId]);
-  }, []);
+  }, [offerId]);  //putting offerId here made it so that this runs whenever offerId has changed
 
   const fetchMessages = async () => {
     try {
