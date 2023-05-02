@@ -98,4 +98,27 @@ import passport from "passport";
         });
     });
 
+    // router.post("/offermessage", async (req, res) => {
+    //     try {
+    //       const { content, userId, roomId } = req.body;
+      
+    //       const newMessage = await prisma.offerMessage.create({
+    //         data: {
+    //           content,
+    //           userId: req.user.id,
+    //           createAt: new Date(),
+    //           offer: {
+    //             connect: { id: roomId },
+    //           },
+    //         },
+    //       });
+      
+    //       res.sendStatus(200);
+    //     } catch (error) {
+    //       console.log("Error sending message:", error);
+    //       res.sendStatus(500);
+    //     }
+    //   });
+      
+
     export default router;

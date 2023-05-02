@@ -1,6 +1,6 @@
 import express from "express";
 import http from "http";
-import { Server } from "socket.io"
+import {Server}  from "socket.io"
 import morgan from "morgan";
 import cors from "cors";
 import authRouter from "./routes/auth.js";
@@ -12,10 +12,14 @@ import setupJWTStrategy from "./auth/index.js";
 import passport from "passport";
 import followersRouter from "./routes/follow.js"
 import offerRouter from "./routes/offer.js";
+import axios from "axios";
 
-export default function createServer() {
+// export default function createServer() {
     const app = express();
-    app.use(cors())
+    
+    // app.use(cors())
+    app.use(cors({ origin: "*"}));
+;
     app.use(express.json());
 
     app.use(morgan("tiny"));
@@ -31,8 +35,19 @@ export default function createServer() {
 
     //set up socket server
     const server = http.createServer(app);
-    const io = new Server(server);
 
+    
+    // const io = new Server(server);
+    const io = new Server(server, {
+        cors: {
+          origin: "*",
+          methods: ["GET", "POST", "PUT", "DELETE"],
+          credentials: true,
+        },
+      });
+
+
+    
     io.on("connection", (socket) => {
         
         socket.on("joinRoom", (roomId) => {
@@ -40,6 +55,7 @@ export default function createServer() {
         })
 
         socket.on("sendMessage", async (message, roomId) => {
+            console.log("in")
             const newMessage = await prisma.message.create({
                 data: {
                     content: message.content,
@@ -56,17 +72,24 @@ export default function createServer() {
 
         socket.on("joinOfferRoom", (roomId) => {
             socket.join(roomId);
+            console.log("A user has joined this room")
         })
 
-        socket.on("sendMessage", async (message, roomId) => {
+        socket.on("sendOfferMessage", async (message, roomId) => {
+            console.log("in")
             const newMessage = await prisma.offerMessage.create({
                 data: {
                     content: message.content,
-                    userId: message.userId,
+                    user: {
+                        connect: { id: Number(message.userId) }
+                    },
                     createAt: new Date(),
                     offer: {
                         connect: {id: roomId},
                     },
+                    // user: {
+                    //     connect: {id: Number(message.userId)}
+                    // }
                 }
             });
 
@@ -74,7 +97,11 @@ export default function createServer() {
         });
 
 
+
+
     })
 
-    return app;
-}
+    server.listen(8080)
+
+//     return app;
+// }
