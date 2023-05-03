@@ -14,7 +14,7 @@ import followersRouter from "./routes/follow.js"
 import offerRouter from "./routes/offer.js";
 import axios from "axios";
 
-// export default function createServer() {
+export default function createServer() {
     const app = express();
     
     // app.use(cors())
@@ -101,7 +101,7 @@ import axios from "axios";
 
     })
 
-    server.listen(8080)
+    // server.listen(8080)
 
-//     return app;
-// }
+    return server;
+}
