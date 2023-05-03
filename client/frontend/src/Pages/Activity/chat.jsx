@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { checkLoginStatus } from "../../Utils/auth";
 
 const socket = io(":8080", {
   reconnectionDelay: 1000,
@@ -14,7 +15,10 @@ const socket = io(":8080", {
 });
 
 export default function Chat() {
-  const offerId = useSelector(state => state.offers.currentOffer);
+  const dispatch = useDispatch();
+  const offerId = useSelector((state) => state.offers.currentOffer);
+  const user = useSelector((state) => state.auth.userInfo);
+  console.log(user)
   // console.log(offerId)
 
   const [messages, setMessages] = useState([]);
@@ -23,6 +27,7 @@ export default function Chat() {
   // const socket = io();
 
   useEffect(() => {
+    dispatch(checkLoginStatus())
     // const socket = io.connect("http://localhost:8080/");
     // Join the offer room
     socket.emit("connection", "Hi there");
@@ -41,15 +46,17 @@ export default function Chat() {
       // Clean up event listeners
       socket.off("newMessage");
     };
-  }, [offerId]);  //putting offerId here made it so that this runs whenever offerId has changed
+  }, [offerId]); //putting offerId here made it so that this runs whenever offerId has changed
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/offer/${offerId}`);
+      const response = await axios.get(
+        `http://localhost:8080/offer/${offerId}`
+      );
       const { success, getChat } = response.data;
 
       if (success) {
-        console.log(getChat)
+        console.log(getChat);
         setMessages(getChat.offermessages);
       }
     } catch (error) {
@@ -61,9 +68,8 @@ export default function Chat() {
     try {
       const message = {
         content: inputMessage,
-        userId: 1, // Replace with the actual user ID
+        userId: user, // Replace with the actual user ID
       };
-
       // Send the message to the server
       socket.emit("sendOfferMessage", message, offerId);
 
@@ -91,12 +97,15 @@ export default function Chat() {
         </div>
         <div className="h-full">
           <div className="h-[60%] overflow-y-scroll">
-            {
-              messages.length != 0 ? messages.map((items) => (
-
-              <p>{items.content}</p>)) : <p></p>
-              
-            }
+            {messages.length != 0 ? (
+              messages.map((items) => 
+              <div className={items.userId === user ? "flex justify-end" : "flex  justify-start"}>
+              <p className={`flex w-[350px] h-[32px] rounded-[50px] bg-[#D9D9D9] mx-[25px] mb-[16px]`}>{items.content}</p>
+              </div>
+            )
+            ) : (
+              <p></p>
+            )}
           </div>
           <div className="absolute bottom-0 w-full">
             <div className="mb-4 mt-6 flex justify-center">

@@ -21,7 +21,7 @@ export default function OffersRecieved() {
             },
           }
         );
-        console.log(allOffers.data.offers);
+        // console.log(allOffers.data.offers);
 
         if (allOffers.status === 200) {
           setOffers(allOffers.data.offers);
