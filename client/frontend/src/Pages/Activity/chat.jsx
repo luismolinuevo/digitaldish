@@ -113,7 +113,7 @@ export default function Chat() {
                   key={items.id}
                 >
                   <p
-                    className={`w-[350px] h-[32px] rounded-[50px] bg-[#D9D9D9] text-[12px] p-1`}
+                    className={`break-all w-[350px] p-[10px] rounded-[50px] bg-[#D9D9D9] text-[12px] ${items.userId === user? "text-right" : "text-left"}`}
                   >
                     {items.content}
                   </p>
