@@ -14,6 +14,7 @@ import Layout from './Components/Layout'
 
 import { Provider } from 'react-redux'
 import store from "./Utils/store"
+import SpecificNegotiate from './Pages/Listing/SpecificNegotiate'
 
 
 
@@ -49,6 +50,18 @@ const router = createBrowserRouter([
       {
         path: "/logout",
         element: <Logout />
+      },
+
+
+
+
+
+
+
+
+      {
+        path: "/specnegotiatelisting",
+        element: <SpecificNegotiate/>
       }
     ]
   },
