@@ -60,7 +60,7 @@ const router = createBrowserRouter([
 
 
       {
-        path: "/specnegotiatelisting",
+        path: "/specneglisting/:id",
         element: <SpecificNegotiate/>
       }
     ]
