@@ -1,8 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function SpecificNegotiate() {
   //TODO make api call and use useParams to get specfic listing. Update post model to support type of transaction
   //TODO replace mock data will data from api call
+  //TODO make the make offer button work
+  //TODO make the buy now button work
+  const [post, setPost] = useState("");
+  const params = useParams();
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const post = await axios.get(`http://localhost:8080/post/${params}`);
+
+        if (post.status == 200) {
+          setPost(post.data);
+        } else {
+          console.log("Error");
+        }
+
+        console.log(post.data);
+      } catch (error) {
+        console.log("Error");
+      }
+    };
+
+    fetchPost();
+    return () => {};
+  // }, []);
+}, [params]);
+
   return (
     <div className="pt-20 px-20">
       <div className="flex flex-col">
@@ -103,15 +132,12 @@ export default function SpecificNegotiate() {
             </div>
           </div>
         </div>
-        <div className="w-[800px] h-[221px] bg-[#D9D9D9]">
-            Description
-        </div>
+        <div className="w-[800px] h-[221px] bg-[#D9D9D9]">Description</div>
       </div>
 
       <div>
         <h1 className="text-[37px]">You might also like</h1>
       </div>
     </div>
-    
   );
 }
