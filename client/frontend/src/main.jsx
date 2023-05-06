@@ -62,7 +62,7 @@ const router = createBrowserRouter([
       {
         path: "/specneglisting/:id",
         element: <SpecificNegotiate/>
-      }
+      }   
     ]
   },
 ]);

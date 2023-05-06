@@ -46,7 +46,7 @@ model Post {
   category    String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  startTime   DateTime? @default(now())
+  startTime   DateTime? 
   endTime     DateTime?
 
   userId  Int
