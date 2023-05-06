@@ -3,7 +3,7 @@ import React, { Children } from "react";
 export default function MakeOfferModal({ isVisable, onClose, children }) {
   if (!isVisable) return null;
 
-  const handleClose = (e) => {
+  const handleClose = (e) => {   //if you click out side the box is will close because the wrapper is in a div that is the background. And the div below contains the modal
     if (e.target.id === "wrapper") {
       onClose();
     }
