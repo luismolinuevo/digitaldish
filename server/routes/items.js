@@ -16,7 +16,16 @@ router.post("/", passport.authenticate("jwt", { session: false, }), async (req, 
                 price: req.body.price,
                 category: req.body.category,
                 userId: req.user.id,
-                title: req.body.title
+                title: req.body.title,
+                color: req.body.color,
+                subcategory: req.body.subcategory,
+                size: req.body.size,
+                location: req.body.location,
+                shippingFees: req.body.shippingFees,
+                carrier: req.body.carrier,
+                condition: req.body.condition,
+                endTime: req.body.endTime,
+                startTime: req.body.startTime
             }
         })
 
@@ -174,6 +183,15 @@ router.put("/:postId", passport.authenticate("jwt", { session: false, }), async 
             description: req.body.description,
             price: req.body.price,
             category: req.body.category,
+            color: req.body.color,
+            subcategory: req.body.subcategory,
+            size: req.body.size,
+            location: req.body.location,
+            shippingFees: req.body.shippingFees,
+            carrier: req.body.carrier,
+            condition: req.body.condition,
+            endTime: req.body.endTime,
+            startTime: req.body.startTime
         },
       })
   
