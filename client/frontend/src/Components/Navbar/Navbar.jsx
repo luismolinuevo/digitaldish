@@ -12,7 +12,7 @@ const Navbar = () => {
   const handleClick = () => setNav(!nav);
 
   return (
-    <div className="fixed w-full h-[80px] flex justify-between items-center px-4">
+    <div className="fixed w-full h-[80px] bg-[#F1F0EB] flex justify-between items-center px-4 border z-10 border-black">
     <div className="flex items-center">
       <img className="w-50 mr-4" src={Logo} alt="test" style={{ width: "70px" }} />
       <ul className=" md:flex ">
