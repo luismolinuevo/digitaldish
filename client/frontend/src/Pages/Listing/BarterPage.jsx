@@ -57,8 +57,8 @@ export default function BidForm() {
         >
           <div className="flex font-bold ">
             <h2 className="text-[25px]">List an Item</h2>
-            <div class="w-7 h-7 bg-[#faf8f8] sqaure-full flex items-center justify-center ml-2">
-              <span class="text-black text-[10px]">Barter</span>
+            <div className="w-7 h-7 bg-[#faf8f8] sqaure-full flex items-center justify-center ml-2">
+              <span className="text-black text-[10px]">Barter</span>
             </div>
           </div>
 
@@ -92,7 +92,7 @@ export default function BidForm() {
             />
           </div>
 
-          <div class="flex flex-col mb-4">
+          <div className="flex flex-col mb-4">
             <label>Category:</label>
             <select
               className="block h-10 focus:bg-white focus:border-gray-500"

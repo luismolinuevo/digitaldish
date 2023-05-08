@@ -57,8 +57,8 @@ export default function BidForm() {
         >
           <div className="flex font-bold ">
             <h2 className="text-[25px]">List an Item</h2>
-            <div class="w-7 h-7 bg-[#faf8f8] sqaure-full flex items-center justify-center ml-2">
-              <span class="text-black text-[10px]">Bid</span>
+            <div className="w-7 h-7 bg-[#faf8f8] sqaure-full flex items-center justify-center ml-2">
+              <span className="text-black text-[10px]">Bid</span>
             </div>
           </div>
 
@@ -84,7 +84,7 @@ export default function BidForm() {
 
           <div className="flex flex-col mb-4">
             <label className="relative">
-              Price:
+              Starting Bid:
               <div className="bg-[#faf8f8] text-xs absolute top-0 right-20 w-20 h-20 square-full flex items-center">
                 <span className="text-black">
                   To attract more buyers, we suggest starting with a low bid
@@ -206,12 +206,10 @@ export default function BidForm() {
 
         {/* parent container */}
         <div className=" border border-blue-500 bg-[#C2B8A3] flex mt-20 ml-10 mr-20 w-full h-[800px]">
-        
+        {/* <div className=" border h-[30px] w-[70px] font-bold text-lg">Preview</div> */}
 
           {/* Preview window container */}
           <div className="border border-black mt-20 ml-10 mr-10 w-full h-[550px] px-20">
-          
-          <div className=" border h-[30px] w-[70px] font-bold text-lg">Preview</div>
           
             {/* Your preview window code here */}
           </div>
