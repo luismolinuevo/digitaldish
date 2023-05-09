@@ -16,6 +16,7 @@ import { Provider } from 'react-redux'
 import store from "./Utils/store"
 import SpecificNegotiate from './Pages/Listing/SpecificNegotiate'
 import SpecificBarter from './Pages/Listing/SpecificBarter'
+import SpecificBid from './Pages/Listing/SpecificBid'
 
 
 
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
         path: "/specbarterlisting/:id",
         element: <SpecificBarter/>
       },  
+      {
+        path: "/specbidlisting/:id",
+        element: <SpecificBid/>
+      }
     ]
   },
 ]);
