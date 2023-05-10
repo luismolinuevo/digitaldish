@@ -14,6 +14,10 @@ import Layout from './Components/Layout'
 
 import { Provider } from 'react-redux'
 import store from "./Utils/store"
+import SpecificNegotiate from './Pages/Listing/SpecificNegotiate'
+import SpecificBarter from './Pages/Listing/SpecificBarter'
+import SpecificBid from './Pages/Listing/SpecificBid'
+import OrderConformation from './Pages/Order/OrderConformation'
 
 import OffersRecieved from './Pages/Activity/OffersRecieved'
 import Activity from './Pages/Activity/Activity'
@@ -55,6 +59,30 @@ const router = createBrowserRouter([
       {
         path: "/activity",
         element: <Activity/>
+      },
+
+
+
+
+
+
+
+
+      {
+        path: "/specneglisting/:id",
+        element: <SpecificNegotiate/>
+      },
+      {
+        path: "/specbarterlisting/:id",
+        element: <SpecificBarter/>
+      },  
+      {
+        path: "/specbidlisting/:id",
+        element: <SpecificBid/>
+      },
+      {
+        path: "orderconformation/:id",
+        element: <OrderConformation/>
       }
     ]
   },

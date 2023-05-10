@@ -48,8 +48,15 @@ model Post {
   category    String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  startTime   DateTime? @default(now())
+  startTime   DateTime? 
   endTime     DateTime?
+  location  String?
+  shippingFees String?
+  carrier String?
+  color String?
+  condition String?
+  size String?
+  subcategory String?
 
   userId  Int
   user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
