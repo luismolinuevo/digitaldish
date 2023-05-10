@@ -1,4 +1,9 @@
 import React from "react";
+import ae from "../../assets/payment/ae.png"
+import visa from "../../assets/payment/visa-Icon.png"
+import mastercard from "../../assets/payment/mastercard-Icon.png"
+import paypal from "../../assets/payment/paypal-Icon.png"
+import apple from "../../assets/payment/apple-pay-Icon.png"
 
 export default function OrderConformation() {
   return (
@@ -114,32 +119,32 @@ export default function OrderConformation() {
             </div>
             <div className="flex flex-col">
               <label className="text-[17px] mb-2">Card Number</label>
-              <input type="text" />
+              <input type="text" className="border-[#A8A8A8] border-[1px] w-full" />
             </div>
             <div className="flex flex-col">
               <label className="text-[17px] mb-2">Name on Card</label>
-              <input type="text" />
+              <input type="text" className="border-[#A8A8A8] border-[1px] w-full"/>
             </div>
 
             <div className="flex">
               <div className="flex flex-col mr-[45px]">
                 <label className="text-[17px] mb-2">Expiration</label>
-                <input type="text" />
+                <input type="text"className="border-[#A8A8A8] border-[1px] w-[180px] h-7" />
               </div>
               <div className="flex flex-col">
                 <label className="text-[17px] mb-2">Security Code</label>
-                <input type="text" />
+                <input type="text"className="border-[#A8A8A8] border-[1px] w-[180px] h-7" />
               </div>
             </div>
-            <div className="flex justify-center">
-                <img src="" className="w-[44px] h-[44px]" />
-                <img src="" className="w-[44px] h-[44px]"/>
-                <img src="" className="w-[44px] h-[44px]"/>
-                <img src="" className="w-[44px] h-[44px]"/>
-                <img src="" className="w-[44px] h-[44px]"/>
+            <div className="flex justify-center gap-[30px] mt-[30px]">
+                <img src={ae} className="w-[44px] h-[44px]" />
+                <img src={visa} className="w-[44px] h-[44px]"/>
+                <img src={mastercard} className="w-[44px] h-[44px]"/>
+                <img src={paypal} className="w-[44px] h-[44px]"/>
+                <img src={apple} className="w-[44px] h-[44px]"/>
             </div>
             <div className="flex justify-center">
-                <button>confirm</button>
+                <button className="py-[10px] px-4 w-[265px] h-[47px] rounded-[57px] bg-[#EDEBEB] mt-6">confirm</button>
             </div>
           </div>
         </div>
