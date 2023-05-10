@@ -19,6 +19,8 @@ import SpecificBarter from './Pages/Listing/SpecificBarter'
 import SpecificBid from './Pages/Listing/SpecificBid'
 import OrderConformation from './Pages/Order/OrderConformation'
 
+import OffersRecieved from './Pages/Activity/OffersRecieved'
+import Activity from './Pages/Activity/Activity'
 
 
 const router = createBrowserRouter([
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/logout",
         element: <Logout />
+      },
+      {
+        path: "/activity",
+        element: <Activity/>
       },
 
 

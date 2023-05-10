@@ -15,7 +15,7 @@ export default function SpecificNegotiate() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const post = await axios.get(`http://localhost:8080/post/${params}`);
+        const post = await axios.get(`http://localhost:8080/post/${params.id}`);
 
         if (post.status == 200) {
           setPost(post.data);
