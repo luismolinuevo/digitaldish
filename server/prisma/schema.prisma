@@ -48,8 +48,8 @@ model Post {
   category    String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  startTime   DateTime? 
-  endTime     DateTime?
+  startTime   String? 
+  endTime     String?
   location  String?
   shippingFees String?
   carrier String?

@@ -11,6 +11,8 @@ import Login from "../src/Pages/Login/Login"
 import Logout from './Pages/Logout/Logout'
 import './index.css'
 import Layout from './Components/Layout'
+import BidPage from "./Pages/Listing/BidPage"
+import BarterPage from './Pages/Listing/BarterPage'
 
 import { Provider } from 'react-redux'
 import store from "./Utils/store"
@@ -76,6 +78,10 @@ const router = createBrowserRouter([
         path: "/specbarterlisting/:id",
         element: <SpecificBarter/>
       },  
+
+      
+     
+
       {
         path: "/specbidlisting/:id",
         element: <SpecificBid/>
@@ -83,7 +89,28 @@ const router = createBrowserRouter([
       {
         path: "orderconformation/:id",
         element: <OrderConformation/>
+
       }
+  
+   {
+        path: "/listing",
+        element: <Listing />,
+        // children: [
+        //   {
+        //     path:"/listing/bidpage",
+        //     element: <BidPage />
+        //   }
+        // ]
+      },
+
+      {
+        path:"/listing/bidpage",
+        element: <BidPage />
+      },
+
+      {
+        path:"/listing/barterpage",
+        element:<BarterPage />
     ]
   },
 ]);
