@@ -25,6 +25,8 @@ model User {
   follower   Followers[]
   chatrooms  Chatroom[]
   bid        Bid[]
+  offer Offer[]
+  offerMessage OfferMessage[]
 }
 
 model Followers {
@@ -60,6 +62,8 @@ model Post {
   user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   comment Comment[]
   bid Bid[]
+  offer Offer[]
+  
 
   @@index([userId])
 }
@@ -96,6 +100,38 @@ model Message {
   chat           Chatroom @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
   @@index([chatId])
+}
+
+model Offer {
+  id Int @id @unique @default(autoincrement())
+  
+  // userId Int
+  // user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  users User[]
+
+  postId Int
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  offermessages OfferMessage[]
+
+  // @@index([userId])
+  @@index([postId])
+  
+}
+
+model OfferMessage {
+  id             Int      @id @unique @default(autoincrement())
+  content String
+  createAt       DateTime
+  offerId         Int
+  offer           Offer @relation(fields: [offerId], references: [id], onDelete: Cascade)
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+
+  @@index([offerId])
+  @@index([userId])
 }
 
 model Bid {

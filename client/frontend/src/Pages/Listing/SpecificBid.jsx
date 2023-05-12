@@ -3,36 +3,33 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Modal from "../../Components/Modal";
 
-export default function SpecificNegotiate() {
-  //TODO make api call and use useParams to get specfic listing. Update post model to support type of transaction
-  //TODO replace mock data will data from api call
-  //TODO make the make offer button work
-  //TODO make the buy now button work
+export default function SpecificBid() {
   const [post, setPost] = useState("");
   const [showModal, setShowModal] = useState(false);
   const params = useParams();
 
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const post = await axios.get(`http://localhost:8080/post/${params.id}`);
+      const fetchPost = async () => {
+        try {
+          const post = await axios.get(`http://localhost:8080/post/${params.id}`);
+          console.log(post.data)
+          if (post.status == 200) {
+            
+            setPost(post.data);
+          } else {
+            console.log("Error");
+          }
 
-        if (post.status == 200) {
-          setPost(post.data);
-        } else {
+          console.log(post.data);
+        } catch (error) {
           console.log("Error");
         }
+      };
 
-        console.log(post.data);
-      } catch (error) {
-        console.log("Error");
-      }
-    };
-
-    fetchPost();
+      fetchPost();
     return () => {};
     // }, []);
-  }, [params]);
+  }, [params.id]);
 
   return (
     <div>
@@ -60,23 +57,39 @@ export default function SpecificNegotiate() {
               <div className="flex justify-between pt-[20px]">
                 <div>
                   <h1 className="text-[37px] mb-[18px]">Product Title</h1>
-                  <p className="text-[20px] mb-2">Listed Price:</p>
-                  <p className="text[28px] mb-[18px]">$00.00</p>
+                  <div className="flex">
+                    <div>
+                      <p>2 bids:</p>
+                      <p>$43.00</p>
+                    </div>
+                    <div>
+                      <p>Time left: 12:00</p>
+                      <p>Ends: 5/2/2023 4:00pm</p>
+                    </div>
+                  </div>
                 </div>
                 <div className="">
                   <p>add to favourites</p>
-                  <p>Send (user) a message</p>
                 </div>
               </div>
               <div className="flex mb-[18px]">
+                <div>
+                  $0.00
+                </div>
+                {/* <button
+                      className="p-4 w-[210px] h-[66px] bg-[#D9D9D9] mr-[35px] text-[25px]"
+                      onClick={() => setShowModal(true)}
+                    >
+                      Make an Offer
+                    </button>
+                    <button className="p-4 w-[210px] h-[66px] bg-[#D9D9D9] text-[25px]">
+                      Buy Now
+                    </button> */}
                 <button
-                  className="p-4 w-[210px] h-[66px] bg-[#D9D9D9] mr-[35px] text-[25px]"
+                  className="text-center px-[44px] py-[10px] rounded-[57px] border-[4px] border-[#C7A695] text-[32px]"
                   onClick={() => setShowModal(true)}
                 >
-                  Make an Offer
-                </button>
-                <button className="p-4 w-[210px] h-[66px] bg-[#D9D9D9] text-[25px]">
-                  Buy Now
+                  PLACE BID
                 </button>
               </div>
               <div className="flex pb-[36px]">
@@ -122,25 +135,30 @@ export default function SpecificNegotiate() {
         </div>
 
         <div className="flex mt-10 mb-[137px]">
-          <div className="w-[704px] flex justify-center flex-col mr-[92px]">
+          <div className="w-[704px] flex justify-center mr-[92px]">
             <div className="w-[564px] h-[102px] flex">
               <p className="text-[35px]">&lt;</p>
               {/*TODO map through other images here */}
               <p className="text-[35px]">&gt;</p>
             </div>
             <div className="flex">
-              <p className="w-[83px] h-[83px]">image</p>
-              <div className="text-4">
-                <p>(username)</p>
-                <p>Seller rating</p>
-              </div>
-              <div className="text-4">
-                <p>00 succesful sales</p>
-                <p>(username)'s other items</p>
+            </div>
+          </div>
+          <div>
+            <div className="w-[800px] h-[221px] bg-[#D9D9D9]">Description</div>
+            <div className="flex justify-center">
+              <div className="flex flex-col">
+                <h1>About the seller</h1>
+                <div className="flex">
+                  <div>
+                    <p>Username</p>
+                    <p>* * * * * (00 sales)</p>
+                  </div>
+                  <p>image</p>
+                </div>
               </div>
             </div>
           </div>
-          <div className="w-[800px] h-[221px] bg-[#D9D9D9]">Description</div>
         </div>
 
         <div>
@@ -148,7 +166,7 @@ export default function SpecificNegotiate() {
         </div>
       </div>
       <Modal isVisable={showModal} onClose={() => setShowModal(false)}>
-        <h1>Make an Offer</h1>
+        <h1>Start bartering</h1>
         <div className="flex">
           <div>
             <p>Title</p>
@@ -159,13 +177,13 @@ export default function SpecificNegotiate() {
             <img></img>
           </div>
         </div>
-        <div>
-          <h3>Sugguested Offers:</h3>
-          <div>
-            <button></button>
-            <button></button>
-            <button></button>
-          </div>
+        <div className="mt-[25px]">
+          <p>Start a message thread with (username):</p>
+          <input
+            className="w-[471px] h-[115px] bg-[#F1F0EB] flex items-start"
+            placeholder="Type message here"
+          ></input>
+          <button type="submit"></button>
         </div>
       </Modal>
     </div>
