@@ -90,7 +90,7 @@ const router = createBrowserRouter([
         path: "orderconformation/:id",
         element: <OrderConformation/>
 
-      }
+      },
   
    {
         path: "/listing",
@@ -111,6 +111,7 @@ const router = createBrowserRouter([
       {
         path:"/listing/barterpage",
         element:<BarterPage />
+      }
     ]
   },
 ]);
