@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
 import ChatAction from "../../assets/chataction.png"
+import ChatSend from "../../assets/chatsend.png"
 
 const socket = io(":8080", {
   reconnectionDelay: 1000,
@@ -92,7 +93,7 @@ export default function Chat() {
   return (
     <div>
       <div className="w-[520px] h-[820px] border-[#C2B8A3] border-[2px] relative rounded-[8px]">
-        <div className="h-[84px] border-black border-b-2 flex justify-between items-center p-4">
+        <div className="h-[84px] border-[#C7A695] border-b-2 flex justify-between items-center p-4">
           <div>
             <p className="text-[22px]">Product Name</p>
             <p className="text-[12px]">Username</p>
@@ -126,28 +127,31 @@ export default function Chat() {
             <div ref={messagesEndRef} />
           </div>
           <div className="absolute bottom-0 w-full">
-            <div className="mb-4 mt-6 flex justify-center">
+            <div className="flex justify-center">
+            <div className="mb-4 mt-6 flex justify-center items-center w-[386px] h-[32px] border-[#C7A695] border-2 rounded-[50px]">
               <input
-                className="w-[386px] h-[32px] rounded-[50px] bg-[#D9D9D9] text-[12px]"
+                className="h-[32px] w-[90%] text-[12px] outline-none bg-transparent"
+                placeholder="text box for user messages"
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
               />
               <button
-                className="w-20 h-[39px] mr-[29px] text-base border-black border-[1px]"
+                className=""
                 onClick={sendMessage}
               >
-                Send
+                <img src={ChatSend}/>
               </button>
             </div>
+            </div>
             <div className="flex justify-center">
-              <button className="w-20 h-[39px] mr-[29px] text-base border-black border-[1px]">
-                Counter
+              <button className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695] border-4">
+                OFFER
               </button>
-              <button className="w-20 h-[39px] mr-[29px] text-base border-black border-[1px]">
-                Accept
+              <button className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695]  border-4">
+                ACCEPT
               </button>
-              <button className="w-20 h-[39px] text-base border-black border-[1px]">
-                Decline
+              <button className="w-[95px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4">
+                DECLINE
               </button>
             </div>
             <div className="flex justify-center mb-5 mt-6">
