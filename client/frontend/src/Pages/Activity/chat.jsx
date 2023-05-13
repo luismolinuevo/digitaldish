@@ -26,6 +26,7 @@ export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const messagesEndRef = useRef(null);
+  const [negoiteorbarter, setNegoiateorbarter] = useState(0)
 
   // const socket = io();
 
@@ -90,6 +91,10 @@ export default function Chat() {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleClick = (buttonIndex) => {
+    setNegoiateorbarter(buttonIndex);
+  };
+
   return (
     <div>
       <div className="w-[520px] h-[820px] border-[#C2B8A3] border-[2px] relative rounded-[8px]">
@@ -115,7 +120,7 @@ export default function Chat() {
                   key={items.id}
                 >
                   <p
-                    className={`break-all w-[350px] p-[10px] rounded-[50px] bg-[#D9D9D9] text-[12px] ${items.userId === user? "text-right" : "text-left"}`}
+                    className={`break-all w-[350px] p-[5px] px-2 rounded-[50px] bg-white border-2 text-[12px] ${items.userId === user ? "text-right border-[#C7A695]" : "text-left border-[#94B9FF]"}`}
                   >
                     {items.content}
                   </p>
@@ -130,7 +135,7 @@ export default function Chat() {
             <div className="flex justify-center">
             <div className="mb-4 mt-6 flex justify-center items-center w-[386px] h-[32px] border-[#C7A695] border-2 rounded-[50px]">
               <input
-                className="h-[32px] w-[90%] text-[12px] outline-none bg-transparent"
+                className="h-[32px] w-[85%] text-[12px] outline-none bg-transparent"
                 placeholder="text box for user messages"
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
@@ -155,11 +160,11 @@ export default function Chat() {
               </button>
             </div>
             <div className="flex justify-center mb-5 mt-6">
-              <button className="w-[192px] h-[44px] text-xl border-black border-[1px]">
-                Negotiate
+              <button className={`mr-[34px] w-[176px] h-[50px] px-4 text-[22px] rounded-[44px] border-[#DAB24E] border-4 ${negoiteorbarter === 0 ? "bg-[#DAB24E]" : ""}`} onClick={() => handleClick(0)}>
+                NEGOTIATION
               </button>
-              <button className="w-[192px] h-[44px] text-xl border-black border-[1px]">
-                Barter
+              <button className={`w-[176px] h-[50px] px-4 text-[22px] rounded-[44px] border-[#DAB24E] border-4 ${negoiteorbarter === 1 ? "bg-[#DAB24E]" : ""}`} onClick={() => handleClick(1)}>
+                BARTER
               </button>
             </div>
           </div>
