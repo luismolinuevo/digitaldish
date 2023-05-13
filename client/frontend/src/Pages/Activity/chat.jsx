@@ -3,6 +3,7 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
+import ChatAction from "../../assets/chataction.png"
 
 const socket = io(":8080", {
   reconnectionDelay: 1000,
@@ -90,7 +91,7 @@ export default function Chat() {
 
   return (
     <div>
-      <div className="w-[520px] h-[820px] border-black border-[2px] relative">
+      <div className="w-[520px] h-[820px] border-[#C2B8A3] border-[2px] relative rounded-[8px]">
         <div className="h-[84px] border-black border-b-2 flex justify-between items-center p-4">
           <div>
             <p className="text-[22px]">Product Name</p>
@@ -101,15 +102,15 @@ export default function Chat() {
               className="w-[52px] h-[52px] pr-1"
               src="https://placehold.jp/52x52.png"
             ></img>
-            <button className="">|</button>
+            <button className=""><img src={ChatAction}/></button>
           </div>
         </div>
         <div className="h-full">
-          <div className="h-[60%] overflow-y-scroll">
+          <div className="h-[65%] overflow-y-scroll bg-[#F5F5F5] border-b-[2px] border-[#C2B8A3]">
             {messages.length != 0 ? (
               messages.map((items) => (
                 <div
-                  className={`mx-[25px] mb-[16px] ${items.userId === user? "flex justify-end": "flex justify-start"}`}
+                  className={`px-[20px] mb-[16px] ${items.userId === user? "flex justify-end": "flex justify-start"}`}
                   key={items.id}
                 >
                   <p

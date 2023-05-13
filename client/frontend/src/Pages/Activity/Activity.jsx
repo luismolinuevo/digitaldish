@@ -11,13 +11,13 @@ export default function Activity() {
   const handleClick = (buttonIndex) => {
     setActiveButton(buttonIndex);
   };
-  
+
   return (
     <div className="flex px-20 pt-[100px] justify-between">
       <div className="flex flex-col cursor-pointer">
         <h1 className={"text-left text-[44px]"}>Activity</h1>
         <button
-          className={`text-left text-[27px] ${
+          className={`text-left text-[27px] mt-[60px] mb-[108px] ${
             activeButton === 0 ? "border-b-2 border-black" : ""
           }`}
           onClick={() => handleClick(0)}
@@ -25,7 +25,7 @@ export default function Activity() {
           Offers Recieved
         </button>
         <button
-          className={`text-left text-[27px] ${
+          className={`text-left text-[27px] mb-[108px] ${
             activeButton === 1 ? "border-b-2 border-black" : ""
           }`}
           onClick={() => handleClick(1)}
@@ -33,7 +33,7 @@ export default function Activity() {
           Offers Sent
         </button>
         <button
-          className={`text-left text-[27px] ${
+          className={`text-left text-[27px] mb-[108px] ${
             activeButton === 2 ? "border-b-2 border-black" : ""
           }`}
           onClick={() => handleClick(2)}
@@ -41,7 +41,7 @@ export default function Activity() {
           Auctions
         </button>
         <button
-          className={`text-left text-[27px] ${
+          className={`text-left text-[27px] mb-[108px] ${
             activeButton === 3 ? "border-b-2 border-black" : ""
           }`}
           onClick={() => handleClick(3)}
@@ -55,8 +55,8 @@ export default function Activity() {
             {" "}
             {/*may have to but this in each page */}
             {activeButton === 0 || activeButton === 1 ? (
-              <div>
-                <p>Messages</p>
+              <div className="flex">
+                <p className="text-[27px] mr-[50px]">Messages</p>
                 <p>Sort by: choice</p>
                 <p>Status</p>
               </div>
@@ -81,7 +81,10 @@ export default function Activity() {
           </div>
         </div>
       </div>
-      <div>{activeButton === 2 || activeButton === 3 ? "" : <Chat />}</div>
+      <div>
+        <h1 className="text-center text-[27px]">Chat</h1>
+        {activeButton === 2 || activeButton === 3 ? "" : <Chat />}
+      </div>
     </div>
   );
 }
