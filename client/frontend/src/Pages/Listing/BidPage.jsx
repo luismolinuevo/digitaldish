@@ -21,7 +21,8 @@ export default function BidForm() {
   const [size, setSize] = useState("");
   const [carrier, setCarrier] = useState("");
   const [shippingFees, setShippingFees] = useState("");
-  const [userName, setUserName] = useState("")
+  const [userName, setUserName] = useState("");
+  const [userRating, setUserRating] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +42,7 @@ export default function BidForm() {
       carrier: carrier,
       shippingFees: shippingFees,
       userName: userName,
+      userRating: userRating,
     };
 
     const newPost = await axios.post(`http://localhost:8080/post`, postData, {
@@ -52,9 +54,9 @@ export default function BidForm() {
 
   return (
     <div className="border border-black ">
-      <div className="border border-red-500 flixed mt-[85px] mb-[85px] flex mx-10 ">
+      <div className="border border-red-500 mt-[85px] mb-[85px] flex mx-10 ">
         <button
-          className="bg-[#DAB24E] hover:bg-[#eed083] font-bold py-2 px-10 absolute mt-[20px] right-[120px]"
+          className="bg-[#DAB24E] hover:bg-[#eed083] ml-[900px] absolute mt-[20px] right-[120px] font-bold py-2 px-10  "
           type="submit"
           onClick={handleSubmit}
         >
@@ -263,7 +265,11 @@ export default function BidForm() {
             </div>
 
             <div className="flex flex-col relative">
-              <label className={`absolute top-4 ${shippingFees && "mt-[-15px]"}`}>Fee</label>
+              <label
+                className={`absolute top-4 ${shippingFees && "mt-[-15px]"}`}
+              >
+                Fee
+              </label>
               <input
                 className="h-[56px] rounded-md"
                 type="text"
@@ -272,95 +278,112 @@ export default function BidForm() {
               />
             </div>
           </div>
-
         </form>
 
         {/* parent container */}
-        <div className=" border border-blue-500 bg-[#C2B8A3] flex mt-20 ml-10 mr-20 w-full h-[800px]">
-          {/* <div className=" border h-[30px] w-[70px] font-bold text-lg ml-5">Preview</div> */}
-
-          {/* Photo & description Preview window container */}
-          <div className="border border-black mt-20 mb-30 ml-10 mr-10 w-full h-[400px] px-20 "></div>
-
-          <div className="border border-black absolute top-[650px] ml-10 mr-[600px] w-[430px] h-[150px]">
-            <h1 className="text-[25px] flex ">
-              {description ? description : "Description"}
-            </h1>
+        <div className=" border border-blue-500 bg-[#C2B8A3] mt-20 ml-10 mr-20 w-full h-[800px]">
+          <div className=" border h-[30px] w-[70px]  text-lg ml-10 mt-4">
+            Preview
           </div>
 
-          {/* form preview container */}
-          <form className="border mt-20 mr-10 ml-70 w-full h-[540px]">
-            <div>
-              <h1 className="text-[35px] font-bold font- ">
-                {title ? title : "Title"}
-              </h1>
-            </div>
-
-            <div>
-              <h1 className="text-[20px]">{price ? price : "Starting Bid"}</h1>
-            </div>
-
-            <div>
-              <h1 className="text-[16px]">
-                {" "}
-                {startTime && endTime
-                  ? `${startTime} - ${endTime}`
-                  : "Time Left"}
-              </h1>
-            </div>
-
-            <div>
-              <h1 className="mt-3 font-bold">Category</h1>
-              <span>{category ? category : "text"}</span>
-            </div>
-
-            <div>
-              <h1 className="mt-4 font-bold">Condition</h1>
-              <span>{condition ? condition : "Text"}</span>
-            </div>
-
-            <div>
-              <h1 className="mt-4 font-bold">Color</h1>
-              <span>{color ? color : "Text"}</span>
-            </div>
-
-            <div>
-              <h1 className="mt-4 font-bold">Size</h1>
-              <span>{size ? size : "Text"}</span>
-            </div>
-
-            <div>
-              <h1 className="mt-4 font-bold">Shipping</h1>
-              <span>
-                {carrier && shippingFees
-                  ? `${carrier} - ${shippingFees}`
-                  : "Shipping info goes here, rate, etc."}
-              </span>
-            </div>
-
-            <div className=" border absolute top-[710px]">
-              <h1>Payment Accepted</h1>
-              <div className="flex">
-                <img src={Americanexpress} className="h-[40px] w-[40px] mr-5" />
-                <img src={Visa} className="h-[40px] w-[40px] mr-5 " />
-                <img src={Mastercard} className="h-[40px] w-[40px] mr-5 " />
-                <img src={Paypal} className="h-[40px] w-[40px] mr-5" />
-                <img src={Applepay} className="h-[40px] w-[40px] mr-5" />
+          {/* Photo & Description Preview window container */}
+          <div className="flex ">
+            <div className="border border-black mt-4 ml-10  w-full h-[555px]  ">
+              <div className="border border-black bg-[#F1F0EB] mt-[403px] w-full h-[150px] flex">
+                <h1 className="text-[20px]">
+                  {description ? description : "Description"}
+                </h1>
               </div>
             </div>
-          </form>
+
+            <form className="border mt-4 mr-10 ml-10 w-full h-[510px] ">
+              <div>
+                <h1 className="text-[35px] font-bold ">
+                  {title ? title : "Title"}
+                </h1>
+              </div>
+
+              <div>
+                <h1 className="text-[20px]">
+                  {price ? price : "Starting Bid"}
+                </h1>
+              </div>
+
+              <div>
+                <h1 className="text-[16px]">
+                  {" "}
+                  {startTime && endTime
+                    ? `${startTime} - ${endTime}`
+                    : "Time Left"}
+                </h1>
+              </div>
+
+              <div>
+                <h1 className="mt-3 font-bold">Category</h1>
+                <span>{category ? category : "text"}</span>
+              </div>
+
+              <div>
+                <h1 className="mt-4 font-bold">Condition</h1>
+                <span>{condition ? condition : "Text"}</span>
+              </div>
+
+              <div>
+                <h1 className="mt-4 font-bold">Color</h1>
+                <span>{color ? color : "Text"}</span>
+              </div>
+
+              <div>
+                <h1 className="mt-4 font-bold">Size</h1>
+                <span>{size ? size : "Text"}</span>
+              </div>
+
+              <div>
+                <h1 className="mt-4 font-bold">Shipping</h1>
+                <span>
+                  {carrier && shippingFees
+                    ? `${carrier} - ${shippingFees}`
+                    : "Shipping info goes here, rate, etc."}
+                </span>
+              </div>
+
+              <div className=" border w-full mt-5">
+                <h1>Payment Accepted</h1>
+                <div className="flex">
+                  <img
+                    src={Americanexpress}
+                    className="h-[40px] w-[40px] mr-5"
+                  />
+                  <img src={Visa} className="h-[40px] w-[40px] mr-5 " />
+                  <img src={Mastercard} className="h-[40px] w-[40px] mr-5 " />
+                  <img src={Paypal} className="h-[40px] w-[40px] mr-5" />
+                  <img src={Applepay} className="h-[40px] w-[40px] mr-5" />
+                </div>
+              </div>
+            </form>
+          </div>
 
           {/* About Seller info Conatainer */}
-          <div className="border border-green-600 absolute mt-[650px] ml-10 w-[430px] h-[110px]">
-            <h1>About the seller</h1>
-            {/* <h1 className=" ">Username: {userName}</h1> */}
-            <img
-              src={Sellerplaceholder}
-              alt=""
-              className="rounded-full h-[70px] w-[60px] my-2"
-              
-            />
-            
+          <div className="flex">
+            <div className="border border-green-600 mt-[30px] mr-[420px] ml-10 w-[495px] h-[110px]">
+              <h1>About the seller</h1>
+              <div className="flex items-center">
+                <img
+                  src={Sellerplaceholder}
+                  alt=""
+                  className="rounded-full h-[70px] w-[60px] my-2"
+                />
+
+                <h1 className="ml-10 -mt-10">{userName}Username</h1>
+                <h1 className="ml-12 -mt-10">Successful Sales</h1>
+                <h1 className="-ml-[245px] mt-[30px]">
+                  {userRating}Seller Rating
+                </h1>
+                <h1 className="ml-[30px] mt-[30px]">
+                  {userName}Username's other listings
+                </h1>
+              </div>
+            </div>
           </div>
         </div>
       </div>
