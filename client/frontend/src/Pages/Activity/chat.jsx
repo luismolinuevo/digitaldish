@@ -3,8 +3,8 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
-import ChatAction from "../../assets/chataction.png"
-import ChatSend from "../../assets/chatsend.png"
+import ChatAction from "../../assets/chataction.png";
+import ChatSend from "../../assets/chatsend.png";
 
 const socket = io(":8080", {
   reconnectionDelay: 1000,
@@ -24,9 +24,10 @@ export default function Chat() {
   // console.log(offerId)
 
   const [messages, setMessages] = useState([]);
+  const [offerInfo, setOfferInfo] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const messagesEndRef = useRef(null);
-  const [negoiteorbarter, setNegoiateorbarter] = useState(0)
+  const [negoiteorbarter, setNegoiateorbarter] = useState(0);
 
   // const socket = io();
 
@@ -65,6 +66,7 @@ export default function Chat() {
 
       if (success) {
         console.log(getChat);
+        setOfferInfo(getChat)
         setMessages(getChat.offermessages);
       }
     } catch (error) {
@@ -100,7 +102,7 @@ export default function Chat() {
       <div className="w-[520px] h-[820px] border-[#C2B8A3] border-[2px] relative rounded-[8px]">
         <div className="h-[84px] border-[#C7A695] border-b-2 flex justify-between items-center p-4">
           <div>
-            <p className="text-[22px]">Product Name</p>
+            <p className="text-[22px]">{offerInfo.post.title}</p>
             <p className="text-[12px]">Username</p>
           </div>
           <div className="flex">
@@ -108,19 +110,29 @@ export default function Chat() {
               className="w-[52px] h-[52px] pr-1"
               src="https://placehold.jp/52x52.png"
             ></img>
-            <button className=""><img src={ChatAction}/></button>
+            <button className="">
+              <img src={ChatAction} />
+            </button>
           </div>
         </div>
         <div className="h-full">
-          <div className="h-[65%] overflow-y-scroll bg-[#F5F5F5] border-b-[2px] border-[#C2B8A3]">
+          <div className={`h-[65%] overflow-y-scroll bg-[#F5F5F5] border-b-[2px] border-[#C2B8A3] ${negoiteorbarter === 1 ? "h-[68%]" : ""}`}>
             {messages.length != 0 ? (
               messages.map((items) => (
                 <div
-                  className={`px-[20px] mb-[16px] ${items.userId === user? "flex justify-end": "flex justify-start"}`}
+                  className={`px-[20px] mb-[16px] ${
+                    items.userId === user
+                      ? "flex justify-end"
+                      : "flex justify-start"
+                  }`}
                   key={items.id}
                 >
                   <p
-                    className={`break-all w-[350px] p-[5px] px-2 rounded-[50px] bg-white border-2 text-[12px] ${items.userId === user ? "text-right border-[#C7A695]" : "text-left border-[#94B9FF]"}`}
+                    className={`break-all w-[350px] p-[5px] px-2 rounded-[50px] bg-white border-2 text-[12px] ${
+                      items.userId === user
+                        ? "text-right border-[#C7A695]"
+                        : "text-left border-[#94B9FF]"
+                    }`}
                   >
                     {items.content}
                   </p>
@@ -133,37 +145,49 @@ export default function Chat() {
           </div>
           <div className="absolute bottom-0 w-full">
             <div className="flex justify-center">
-            <div className="mb-4 mt-6 flex justify-center items-center w-[386px] h-[32px] border-[#C7A695] border-2 rounded-[50px]">
-              <input
-                className="h-[32px] w-[85%] text-[12px] outline-none bg-transparent"
-                placeholder="text box for user messages"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-              />
-              <button
-                className=""
-                onClick={sendMessage}
-              >
-                <img src={ChatSend}/>
-              </button>
+              <div className="mb-4 mt-6 flex justify-center items-center w-[386px] h-[32px] border-[#C7A695] border-2 rounded-[50px]">
+                <input
+                  className="h-[32px] w-[85%] text-[12px] outline-none bg-transparent"
+                  placeholder="text box for user messages"
+                  value={inputMessage}
+                  onChange={(e) => setInputMessage(e.target.value)}
+                />
+                <button className="" onClick={sendMessage}>
+                  <img src={ChatSend} />
+                </button>
+              </div>
             </div>
-            </div>
-            <div className="flex justify-center">
-              <button className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695] border-4">
-                OFFER
-              </button>
-              <button className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695]  border-4">
-                ACCEPT
-              </button>
-              <button className="w-[95px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4">
-                DECLINE
-              </button>
-            </div>
+            {
+              negoiteorbarter === 0 ? 
+              <div className="flex justify-center">
+                <button className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695] border-4">
+                  OFFER
+                </button>
+                <button className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695]  border-4">
+                  ACCEPT
+                </button>
+                <button className="w-[95px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4">
+                  DECLINE
+                </button>
+              </div>
+              : <p></p>
+            }
+
             <div className="flex justify-center mb-5 mt-6">
-              <button className={`mr-[34px] w-[176px] h-[50px] px-4 text-[22px] rounded-[44px] border-[#DAB24E] border-4 ${negoiteorbarter === 0 ? "bg-[#DAB24E]" : ""}`} onClick={() => handleClick(0)}>
+              <button
+                className={`mr-[34px] w-[176px] h-[50px] px-4 text-[22px] rounded-[44px] border-[#DAB24E] border-4 ${
+                  negoiteorbarter === 0 ? "bg-[#DAB24E]" : ""
+                }`}
+                onClick={() => handleClick(0)}
+              >
                 NEGOTIATION
               </button>
-              <button className={`w-[176px] h-[50px] px-4 text-[22px] rounded-[44px] border-[#DAB24E] border-4 ${negoiteorbarter === 1 ? "bg-[#DAB24E]" : ""}`} onClick={() => handleClick(1)}>
+              <button
+                className={`w-[176px] h-[50px] px-4 text-[22px] rounded-[44px] border-[#DAB24E] border-4 ${
+                  negoiteorbarter === 1 ? "bg-[#DAB24E]" : ""
+                }`}
+                onClick={() => handleClick(1)}
+              >
                 BARTER
               </button>
             </div>

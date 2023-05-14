@@ -17,6 +17,7 @@ import passport from "passport";
             const chatroom = await prisma.offer.create({
                 data: {
                     postId: Number(postId), 
+                    currentOffer: req.body.currentOffer,
                     users: {   //this will link user one     
                         connect: [
                             { id: Number(userId) }, 
@@ -95,6 +96,24 @@ import passport from "passport";
         res.status(200).json({
             success: true,
             getChat
+        });
+    });
+
+    router.put("/editoffer/:offerId", async (req, res) => {
+        const offerId = req.params.offerId;
+
+        const editOffer = await prisma.offer.updateMany({
+            where: {
+                id: Number(offerId)
+            },
+            data: {
+                currentOffer: req.body.currentOffer
+            }
+        });
+
+        res.status(200).json({
+            success: true,
+            editOffer
         });
     });
 
