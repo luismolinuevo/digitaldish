@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
 import ChatAction from "../../assets/chataction.png";
 import ChatSend from "../../assets/chatsend.png";
+import Modal from "../../Components/Modal";
 
 const socket = io(":8080", {
   reconnectionDelay: 1000,
@@ -24,10 +25,12 @@ export default function Chat() {
   // console.log(offerId)
 
   const [messages, setMessages] = useState([]);
-  const [offerInfo, setOfferInfo] = useState([]);
+  const [postInfo, setPostInfo] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const messagesEndRef = useRef(null);
   const [negoiteorbarter, setNegoiateorbarter] = useState(0);
+  const [currentOffer, setCurrentOffer] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   // const socket = io();
 
@@ -66,7 +69,7 @@ export default function Chat() {
 
       if (success) {
         console.log(getChat);
-        setOfferInfo(getChat)
+        setPostInfo(getChat.post);
         setMessages(getChat.offermessages);
       }
     } catch (error) {
@@ -102,7 +105,7 @@ export default function Chat() {
       <div className="w-[520px] h-[820px] border-[#C2B8A3] border-[2px] relative rounded-[8px]">
         <div className="h-[84px] border-[#C7A695] border-b-2 flex justify-between items-center p-4">
           <div>
-            <p className="text-[22px]">{offerInfo.post.title}</p>
+            <p className="text-[22px]">{postInfo.title}</p>
             <p className="text-[12px]">Username</p>
           </div>
           <div className="flex">
@@ -116,7 +119,11 @@ export default function Chat() {
           </div>
         </div>
         <div className="h-full">
-          <div className={`h-[65%] overflow-y-scroll bg-[#F5F5F5] border-b-[2px] border-[#C2B8A3] ${negoiteorbarter === 1 ? "h-[68%]" : ""}`}>
+          <div
+            className={`h-[65%] overflow-y-scroll bg-[#F5F5F5] border-b-[2px] border-[#C2B8A3] ${
+              negoiteorbarter === 1 ? "h-[68%]" : ""
+            }`}
+          >
             {messages.length != 0 ? (
               messages.map((items) => (
                 <div
@@ -157,10 +164,12 @@ export default function Chat() {
                 </button>
               </div>
             </div>
-            {
-              negoiteorbarter === 0 ? 
+            {negoiteorbarter === 0 ? (
               <div className="flex justify-center">
-                <button className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695] border-4">
+                <button
+                  className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695] border-4"
+                  onClick={() => setShowModal(true)}
+                >
                   OFFER
                 </button>
                 <button className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695]  border-4">
@@ -170,8 +179,9 @@ export default function Chat() {
                   DECLINE
                 </button>
               </div>
-              : <p></p>
-            }
+            ) : (
+              <p></p>
+            )}
 
             <div className="flex justify-center mb-5 mt-6">
               <button
@@ -194,6 +204,36 @@ export default function Chat() {
           </div>
         </div>
       </div>
+
+      <Modal isVisable={showModal} onClose={() => setShowModal(false)}>
+        <div>
+          <h1 className="text-[34px] text-center mb-[47px]">Make an Offer</h1>
+          <div>
+            <h3 className="text-5 text-center">Suggested Offers:</h3>
+            <div className="flex gap-[40px] justify-center mb-[30px]">
+              <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
+                <p>0000</p>
+                <p>5% off</p>
+              </div>
+              <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
+                <p>0000</p>
+                <p>10% off</p>
+              </div>
+              <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
+                <p>0000</p>
+                <p>15% off</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center mb-[35px]">
+            <p className="text-5 mr-6">Create a custom offer: </p>
+            <input type="text" className="bg-[#F0EEEE] w-[90px] h-[34px] text-5" />
+          </div>
+          <div className="flex justify-center">
+            <button className="w-[274px] h-[59px] bg-[#F0EEEE] rounded-[57px] text-[32px]">SUBMIT</button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
