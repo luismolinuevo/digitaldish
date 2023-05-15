@@ -3,6 +3,9 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
+import ChatAction from "../../assets/chataction.png";
+import ChatSend from "../../assets/chatsend.png";
+import Modal from "../../Components/Modal";
 
 const socket = io(":8080", {
   reconnectionDelay: 1000,
@@ -22,8 +25,12 @@ export default function Chat() {
   // console.log(offerId)
 
   const [messages, setMessages] = useState([]);
+  const [postInfo, setPostInfo] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const messagesEndRef = useRef(null);
+  const [negoiteorbarter, setNegoiateorbarter] = useState(0);
+  const [currentOffer, setCurrentOffer] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   // const socket = io();
 
@@ -62,6 +69,7 @@ export default function Chat() {
 
       if (success) {
         console.log(getChat);
+        setPostInfo(getChat.post);
         setMessages(getChat.offermessages);
       }
     } catch (error) {
@@ -88,12 +96,34 @@ export default function Chat() {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleClick = (buttonIndex) => {
+    setNegoiateorbarter(buttonIndex);
+  };
+
+  const handleOffer = async () => {
+    try {
+      setShowModal(false)
+      const message = {
+        content: `The current offer is ${currentOffer}`,
+        userId: user, // Replace with the actual user ID
+      };
+      // Send the message to the server
+      socket.emit("sendOfferMessage", message, offerId);
+
+      const editOffer = await axios.put(`http://localhost:8080/offer/editoffer/${parseFloat(offerId)}`, {
+        currentOffer: currentOffer
+      });
+    } catch (error) {
+      console.log("Error sending message:", error);
+    }
+  };
+
   return (
     <div>
-      <div className="w-[520px] h-[820px] border-black border-[2px] relative">
-        <div className="h-[84px] border-black border-b-2 flex justify-between items-center p-4">
+      <div className="w-[520px] h-[820px] border-[#C2B8A3] border-[2px] relative rounded-[8px]">
+        <div className="h-[84px] border-[#C7A695] border-b-2 flex justify-between items-center p-4">
           <div>
-            <p className="text-[22px]">Product Name</p>
+            <p className="text-[22px]">{postInfo.title}</p>
             <p className="text-[12px]">Username</p>
           </div>
           <div className="flex">
@@ -101,19 +131,33 @@ export default function Chat() {
               className="w-[52px] h-[52px] pr-1"
               src="https://placehold.jp/52x52.png"
             ></img>
-            <button className="">|</button>
+            <button className="">
+              <img src={ChatAction} />
+            </button>
           </div>
         </div>
         <div className="h-full">
-          <div className="h-[60%] overflow-y-scroll">
+          <div
+            className={`h-[65%] overflow-y-scroll bg-[#F5F5F5] border-b-[2px] border-[#C2B8A3] ${
+              negoiteorbarter === 1 ? "h-[68%]" : ""
+            }`}
+          >
             {messages.length != 0 ? (
               messages.map((items) => (
                 <div
-                  className={`mx-[25px] mb-[16px] ${items.userId === user? "flex justify-end": "flex justify-start"}`}
+                  className={`px-[20px] mb-[16px] ${
+                    items.userId === user
+                      ? "flex justify-end"
+                      : "flex justify-start"
+                  }`}
                   key={items.id}
                 >
                   <p
-                    className={`break-all w-[350px] p-[10px] rounded-[50px] bg-[#D9D9D9] text-[12px] ${items.userId === user? "text-right" : "text-left"}`}
+                    className={`break-all w-[350px] p-[5px] px-2 rounded-[50px] bg-white border-2 text-[12px] ${
+                      items.userId === user
+                        ? "text-right border-[#C7A695]"
+                        : "text-left border-[#94B9FF]"
+                    }`}
                   >
                     {items.content}
                   </p>
@@ -125,41 +169,95 @@ export default function Chat() {
             <div ref={messagesEndRef} />
           </div>
           <div className="absolute bottom-0 w-full">
-            <div className="mb-4 mt-6 flex justify-center">
-              <input
-                className="w-[386px] h-[32px] rounded-[50px] bg-[#D9D9D9] text-[12px]"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-              />
-              <button
-                className="w-20 h-[39px] mr-[29px] text-base border-black border-[1px]"
-                onClick={sendMessage}
-              >
-                Send
-              </button>
-            </div>
             <div className="flex justify-center">
-              <button className="w-20 h-[39px] mr-[29px] text-base border-black border-[1px]">
-                Counter
-              </button>
-              <button className="w-20 h-[39px] mr-[29px] text-base border-black border-[1px]">
-                Accept
-              </button>
-              <button className="w-20 h-[39px] text-base border-black border-[1px]">
-                Decline
-              </button>
+              <div className="mb-4 mt-6 flex justify-center items-center w-[386px] h-[32px] border-[#C7A695] border-2 rounded-[50px]">
+                <input
+                  className="h-[32px] w-[85%] text-[12px] outline-none bg-transparent"
+                  placeholder="text box for user messages"
+                  value={inputMessage}
+                  onChange={(e) => setInputMessage(e.target.value)}
+                />
+                <button className="" onClick={sendMessage}>
+                  <img src={ChatSend} />
+                </button>
+              </div>
             </div>
+            {negoiteorbarter === 0 ? (
+              <div className="flex justify-center">
+                <button
+                  className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695] border-4"
+                  onClick={() => setShowModal(true)}
+                >
+                  OFFER
+                </button>
+                <button className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695]  border-4">
+                  ACCEPT
+                </button>
+                <button className="w-[95px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4">
+                  DECLINE
+                </button>
+              </div>
+            ) : (
+              <p></p>
+            )}
+
             <div className="flex justify-center mb-5 mt-6">
-              <button className="w-[192px] h-[44px] text-xl border-black border-[1px]">
-                Negotiate
+              <button
+                className={`mr-[34px] w-[176px] h-[50px] px-4 text-[22px] rounded-[44px] border-[#DAB24E] border-4 ${
+                  negoiteorbarter === 0 ? "bg-[#DAB24E]" : ""
+                }`}
+                onClick={() => handleClick(0)}
+              >
+                NEGOTIATION
               </button>
-              <button className="w-[192px] h-[44px] text-xl border-black border-[1px]">
-                Barter
+              <button
+                className={`w-[176px] h-[50px] px-4 text-[22px] rounded-[44px] border-[#DAB24E] border-4 ${
+                  negoiteorbarter === 1 ? "bg-[#DAB24E]" : ""
+                }`}
+                onClick={() => handleClick(1)}
+              >
+                BARTER
               </button>
             </div>
           </div>
         </div>
       </div>
+
+      <Modal isVisable={showModal} onClose={() => setShowModal(false)}>
+        <div>
+          <h1 className="text-[34px] text-center mb-[47px]">Make an Offer</h1>
+          <div>
+            <h3 className="text-[20px] text-center mb-4">Suggested Offers:</h3>
+            <div className="flex gap-[40px] justify-center mb-[30px]">
+              <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
+                <p>0000</p>
+                <p>5% off</p>
+              </div>
+              <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
+                <p>0000</p>
+                <p>10% off</p>
+              </div>
+              <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
+                <p>0000</p>
+                <p>15% off</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center mb-[35px]">
+            <p className="text-5 mr-6">Create a custom offer: </p>
+            <input
+              type="text"
+              className="bg-[#F0EEEE] w-[90px] h-[34px] text-5"
+              onChange={(e) => setCurrentOffer(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-center">
+            <button className="w-[274px] h-[59px] bg-[#F0EEEE] rounded-[57px] text-[32px]" onClick={handleOffer} >
+              SUBMIT
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

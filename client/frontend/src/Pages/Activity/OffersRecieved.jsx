@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Chat from "./chat";
-import { useDispatch } from "react-redux";
-import { updateCurrentOffer } from "../../Utils/offer"
+import { useDispatch, useSelector } from "react-redux";
+import { updateCurrentOffer } from "../../Utils/offer";
+import { checkLoginStatus } from "../../Utils/auth";
 
 export default function OffersRecieved() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [offers, setOffers] = useState([]);
   const [active, setActive] = useState(1);
+  const user = useSelector((state) => state.auth.userInfo);
+  console.log("user id" + user)
 
   useEffect(() => {
+    checkLoginStatus();
     const fetchOffers = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -44,27 +48,36 @@ export default function OffersRecieved() {
 
   return (
     <div>
-      {offers && offers.length != 0 ? 
-        offers.map((item) => (
-          <div key={item.id} onClick={() => handleClick(item.id)} className={`w-[687px] pb-10 border-2 border-black mb-4 cursor-pointer ${active === item.id ?  "bg-[#D9D9D9]" : ""}`} >
-            <div className="flex ">
-              <img src="https://placehold.jp/180x118.png"></img>
-              <div className="w-full flex justify-between">
-                <div className="pl-2">
-                  <p className="text-[32px]">{item.post.title}</p>
-                  <p className="text-[22px]">Mode</p>
-                </div>
-                <div className="flex items-center">
+      {offers && offers.length != 0 ? (
+        offers.map((item) =>
+          item.post.userId === user ? (
+            <div
+              key={item.id}
+              onClick={() => handleClick(item.id)}
+              className={`w-[687px] pb-10 mb-4 cursor-pointer ${
+                active === item.id ? "bg-[#D9D9D9]" : ""
+              }`}
+            >
+              <div className="flex ">
+                <img src="https://placehold.jp/180x118.png"></img>
+                <div className="w-full flex justify-between">
+                  <div className="pl-2">
+                    <p className="text-[32px]">{item.post.title}</p>
+                    <p className="text-[22px]">Mode</p>
+                  </div>
+                  <div className="flex items-center">
                     <p className="pr-4 text-[27px]">Status</p>
+                  </div>
                 </div>
-                
               </div>
             </div>
-          </div>
-        ))
-       : 
+          ) : (
+            <p>No Offers Recieved</p>
+          )
+        )
+      ) : (
         <p></p>
-      }
+      )}
     </div>
   );
 }

@@ -108,7 +108,7 @@ model Offer {
   // userId Int
   // user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   users User[]
-
+  currentOffer Decimal?
   postId Int
   post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 
