@@ -100,6 +100,23 @@ export default function Chat() {
     setNegoiateorbarter(buttonIndex);
   };
 
+  const handleOffer = async () => {
+    try {
+      const message = {
+        content: `The current offer is ${currentOffer}`,
+        userId: user, // Replace with the actual user ID
+      };
+      // Send the message to the server
+      socket.emit("sendOfferMessage", message, offerId);
+
+      const editOffer = await axios.put(`http://localhost:8080/offer/editoffer/${parseFloat(offerId)}`, {
+        currentOffer: currentOffer
+      });
+    } catch (error) {
+      console.log("Error sending message:", error);
+    }
+  };
+
   return (
     <div>
       <div className="w-[520px] h-[820px] border-[#C2B8A3] border-[2px] relative rounded-[8px]">
@@ -209,7 +226,7 @@ export default function Chat() {
         <div>
           <h1 className="text-[34px] text-center mb-[47px]">Make an Offer</h1>
           <div>
-            <h3 className="text-5 text-center">Suggested Offers:</h3>
+            <h3 className="text-[20px] text-center mb-4">Suggested Offers:</h3>
             <div className="flex gap-[40px] justify-center mb-[30px]">
               <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
                 <p>0000</p>
@@ -227,10 +244,16 @@ export default function Chat() {
           </div>
           <div className="flex justify-center mb-[35px]">
             <p className="text-5 mr-6">Create a custom offer: </p>
-            <input type="text" className="bg-[#F0EEEE] w-[90px] h-[34px] text-5" />
+            <input
+              type="text"
+              className="bg-[#F0EEEE] w-[90px] h-[34px] text-5"
+              onChange={(e) => setCurrentOffer(e.target.value)}
+            />
           </div>
           <div className="flex justify-center">
-            <button className="w-[274px] h-[59px] bg-[#F0EEEE] rounded-[57px] text-[32px]">SUBMIT</button>
+            <button className="w-[274px] h-[59px] bg-[#F0EEEE] rounded-[57px] text-[32px]" onClick={handleOffer}>
+              SUBMIT
+            </button>
           </div>
         </div>
       </Modal>
