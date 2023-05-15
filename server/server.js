@@ -12,6 +12,7 @@ import setupJWTStrategy from "./auth/index.js";
 import passport from "passport";
 import followersRouter from "./routes/follow.js"
 import offerRouter from "./routes/offer.js";
+import prevorderRouter from "./routes/prevorders.js"
 import axios from "axios";
 
 export default function createServer() {
@@ -31,7 +32,7 @@ export default function createServer() {
     app.use("/followers", followersRouter)
     app.use("/bid", bidRouter)
     app.use("/offer",offerRouter);
-
+    app.user("/prevorder", prevorderRouter)
 
     //set up socket server
     const server = http.createServer(app);
