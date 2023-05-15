@@ -20,7 +20,21 @@ export default function Signup() {
 
   return (
     <section className="text-gray-600 body-font self-center">
-      <div className="container w-full right-[35%] py-24 mx-100 flex fixed">
+      {/*Toggle Button */}
+      <div className="border border-black w-10 mt-0 flex justify-center"></div>
+
+      <div className="toggle-button flex justify-center items-center mt-28">
+        <div className="">
+          <div className="flex justify-between mb-4">
+            <button className="px-4 py-2 text-md font-bold text-gray-600 bg-white rounded-sm focus:outline-none w-20">Log in</button>
+            <button className="px-2 py-2 text-md font-bold text-gray-600 bg-[#C7A695] focus:outline-none border border-gray-300 w-20">Sign up</button>
+          </div>
+        </div>
+      </div>
+
+
+      {/*Sign up Form */}
+      <div className="container w-full right-[35%] py-2 flex fixed">
         <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
         </div>
         <div className="box lg:w-2/6 md:w-1/2 bg-gray-100 p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
