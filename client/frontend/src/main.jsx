@@ -26,6 +26,8 @@ import OfferOrderConformation from "./Pages/Order/OfferOrderConformation"
 import OffersRecieved from './Pages/Activity/OffersRecieved'
 import Activity from './Pages/Activity/Activity'
 
+import CommunityNew from './Pages/Community/CommunityNew'
+
 
 
 const router = createBrowserRouter([
@@ -103,10 +105,16 @@ const router = createBrowserRouter([
         path:"/listing/barterpage",
         element:<BarterPage />
       },
+
+
+      {
+        path:"/communitynew",
+        element: <CommunityNew />
+      },
       {
         path: "/offerorderconform/:id",
         element: <OfferOrderConformation/>
-      }
+      },
     ],
   },
   {
