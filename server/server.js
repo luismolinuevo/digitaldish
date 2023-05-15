@@ -32,7 +32,7 @@ export default function createServer() {
     app.use("/followers", followersRouter)
     app.use("/bid", bidRouter)
     app.use("/offer",offerRouter);
-    app.user("/prevorder", prevorderRouter)
+    app.use("/prevorder", prevorderRouter)
 
     //set up socket server
     const server = http.createServer(app);
