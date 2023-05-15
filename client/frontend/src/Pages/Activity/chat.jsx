@@ -102,6 +102,7 @@ export default function Chat() {
 
   const handleOffer = async () => {
     try {
+      setShowModal(false)
       const message = {
         content: `The current offer is ${currentOffer}`,
         userId: user, // Replace with the actual user ID
@@ -251,7 +252,7 @@ export default function Chat() {
             />
           </div>
           <div className="flex justify-center">
-            <button className="w-[274px] h-[59px] bg-[#F0EEEE] rounded-[57px] text-[32px]" onClick={handleOffer}>
+            <button className="w-[274px] h-[59px] bg-[#F0EEEE] rounded-[57px] text-[32px]" onClick={handleOffer} >
               SUBMIT
             </button>
           </div>
