@@ -150,7 +150,8 @@ model Bid {
 
 model PrevOrder {
   id Int @id @unique @default(autoincrement())
-
+  finalPrice String? 
+  status String?
   userId Int
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

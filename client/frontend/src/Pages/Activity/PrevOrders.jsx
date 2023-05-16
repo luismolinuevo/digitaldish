@@ -38,12 +38,12 @@ export default function PrevOrders() {
           <div className="flex w-[1171px] h-[120px] border-[1px] border-black justify-between" key={item.id}>
             <div className="flex">
               <div className="py-3">
-                <h1 className="text-[27px]">{}</h1>
-                <p className="text-[27px]">Username</p>
+                <h1 className="text-[27px]">{item.post.title}</h1>
+                <p className="text-[27px]">{item.post.userName}</p>
               </div>
               <img></img>
               <div className=" flex items-center px-5 w-[375px] ">
-                <h1 className="text-[27px]">Product Description</h1>
+                <h1 className="text-[27px]">status</h1>
               </div>
             </div>
             <div className="flex items-center">

@@ -21,6 +21,8 @@ router.get("/", passport.authenticate("jwt", { session: false, }), async (req, r
 router.post("/", passport.authenticate("jwt", { session: false, }), async (req, res) => {
     const createPrevOrder = await prisma.prevOrder.create({
         data: {
+            finalPrice: req.body.finalPrice,
+            status: req.body.status,
             postId: req.body.postId,
             userId: req.user.id,
         }
