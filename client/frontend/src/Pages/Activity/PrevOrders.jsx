@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function PrevOrders() {
-    const [prevOrder, setPrevOrder] = useState([]);
+  const [prevOrder, setPrevOrder] = useState([]);
   useEffect(() => {
     fetchPrevOrders();
   }, []);
@@ -10,21 +10,18 @@ export default function PrevOrders() {
   const fetchPrevOrders = async () => {
     try {
       const token = localStorage.getItem("token");
-      const fetchData = await axios.get(
-        `http://localhost:8080/prevorder`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-          },
-        }
-      );
+      const fetchData = await axios.get(`http://localhost:8080/prevorder`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+        },
+      });
 
-      if(fetchData.status === 200) {
+      if (fetchData.status === 200) {
         setPrevOrder(fetchData.data);
-        console.log(fetchData.data)
+        console.log(fetchData.data);
       }
     } catch (error) {
-        console.log("Error fetching prev orders")
+      console.log("Error fetching prev orders");
     }
   };
 
