@@ -8,7 +8,8 @@ router.get("/", passport.authenticate("jwt", { session: false, }), async (req, r
     const getPrevOrders = await prisma.prevOrder.findMany({
         where: {
             userId: req.user.id
-        }
+        },
+        include: { post: true },
     });
 
     res.status(200).json({
