@@ -26,8 +26,8 @@ export default function PrevOrders() {
   };
 
   return (
-    <div className="ml-[90px]">
-      <div className="flex w-[1171px]  ">
+    <div className="ml-[90px] pt-[40px]">
+      <div className="flex w-[1025px]  ">
         <h1>Product</h1>
         <h1>Status</h1>
         <h1>Price</h1>
@@ -35,18 +35,18 @@ export default function PrevOrders() {
       {prevOrder && prevOrder.length != 0 ? (
         prevOrder.map((item) => (
           <div
-            className="flex w-[1171px] h-[120px] border-[1px] border-black justify-between"
+            className="flex w-[1025px] h-[120px] border-[1px] border-black justify-between"
             key={item.id}
           >
             <div className="flex">
               <img></img>
-              <div className="py-3">
+              <div className="py-3 mr-20">
                 <h1 className="text-[27px]">{item.post.title}</h1>
                 <p className="text-[27px]">{item.post.userName}</p>
               </div>
 
-              <div className=" flex items-center px-5 w-[375px] ">
-                <h1 className="text-[27px]">status</h1>
+              <div className=" flex items-center px-5 w-[375px] mr-[120px] ">
+                <h1 className="text-[22px]">status</h1>
               </div>
             </div>
             <div className="flex items-center">
