@@ -61,4 +61,17 @@ export const checkLoginStatus = () => async dispatch => {
   }
 };
 
+
+export const signupUser = (email, username, password) => async (dispatch) => {
+  try {
+    const response = await axios.post('http://localhost:8080/auth/signup', {
+        email: email,
+        userName: username,
+        password: password
+    });
+    console.log(response.data)
+  } catch (error) {
+    console.log(error)
+  }
+};
 export default slice.reducer;
