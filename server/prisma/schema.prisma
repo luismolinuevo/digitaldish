@@ -137,6 +137,7 @@ model Bid {
   id Int @id @unique @default(autoincrement())
 
   price Float
+  status String?
 
   userId Int
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
