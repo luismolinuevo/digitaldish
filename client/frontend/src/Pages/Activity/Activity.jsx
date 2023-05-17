@@ -4,6 +4,7 @@ import OffersRecieved from "./OffersRecieved";
 import Chat from "./chat";
 import OffersSent from "./OffersSent";
 import Auctions from "./Auctions";
+import PrevOrder from "./PrevOrders";
 
 export default function Activity() {
   const [activeButton, setActiveButton] = useState(0);
@@ -67,22 +68,23 @@ export default function Activity() {
                 <p>Price</p>
               </div>
             ) : (
-              <div>
-                <p>Product</p>
-                <p>Status</p>
-                <p>Price</p>
-              </div>
+              <div></div>
             )}
           </div>
           <div>
             {activeButton === 0 ? <OffersRecieved /> : ""}
             {activeButton === 1 ? <OffersSent /> : ""}
             {activeButton == 2 ? <Auctions /> : ""}
+            {activeButton == 3 ? <PrevOrder /> : ""}
           </div>
         </div>
       </div>
       <div>
-        <h1 className="text-center text-[27px]">Chat</h1>
+        {activeButton === 2 || activeButton === 3 ? (
+          ""
+        ) : (
+          <h1 className="text-center text-[27px]">Chat</h1>
+        )}
         {activeButton === 2 || activeButton === 3 ? "" : <Chat />}
       </div>
     </div>
