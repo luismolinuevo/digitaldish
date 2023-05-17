@@ -11,7 +11,8 @@ router.get("/:postId", passport.authenticate("jwt", { session: false, }),async (
     const getBids = await prisma.bid.findMany({
         where: {
             postId: Number(postId)
-        }
+        },
+        include: {post: true}
     });
 
     res.status(200).json({
@@ -25,7 +26,8 @@ router.get("/", passport.authenticate("jwt", { session: false, }), async (req, r
     const getBids = await prisma.bid.findMany({
         where: {
             userId: req.user.id
-        }
+        },
+        include: {post: true}
     });
 
     res.status(200).json({

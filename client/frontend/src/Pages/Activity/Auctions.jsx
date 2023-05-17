@@ -14,7 +14,7 @@ export default function Auctions() {
       const token = localStorage.getItem("token");
       const allAuctions = await axios.get("http://localhost:8080/bid", {
         headers: {
-          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          Authorization: `Bearer ${token}`, // Include the token in the Authorization header 
         },
       });
       // console.log(allOffers.data.offers);
