@@ -42,14 +42,16 @@ export default function Auctions() {
             </div>
 
             <div className="py-3">
-              <h1 className="text-[27px]">Product Title</h1>
-              <p className="text-[27px]">Username</p>
+              <h1 className="text-[27px]">{item.post.title}</h1>
+              <p className="text-[22px]">{item.post.userName}</p>
             </div>
-            <div className=" flex items-center flex-col">
-              <h1 className="text-[22px]">Active</h1>
-              <p className="text-[18px]">
-                <Countdown startDate={"2023-05-16"} endDate={"2023-005-17"} />
-              </p>
+            <div className="flex items-center text-center">
+              <div>
+                <h1 className="text-[22px]">Active</h1>
+                <div className="text-[18px]">
+                  <Countdown startDate={"2023-05-16"} endDate={"2023-005-17"} />
+                </div>
+              </div>
             </div>
 
             <div className="flex items-center">
