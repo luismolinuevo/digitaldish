@@ -38,18 +38,23 @@ export default function Auctions() {
             key={item.id}
           >
             <div className="flex">
-              <div className="py-3">
-                <h1 className="text-[27px]">Product Title</h1>
-                <p className="text-[27px]">Username</p>
-              </div>
-              <img></img>
-              <div className=" flex items-center px-5 w-[375px] ">
-                <h1 className="text-[27px]">Product Description</h1>
-              </div>
+              <img className="w-[148px] h-[96px]" />
             </div>
+
+            <div className="py-3">
+              <h1 className="text-[27px]">Product Title</h1>
+              <p className="text-[27px]">Username</p>
+            </div>
+            <div className=" flex items-center flex-col">
+              <h1 className="text-[22px]">Active</h1>
+              <p className="text-[18px]">
+                <Countdown startDate={"2023-05-16"} endDate={"2023-005-17"} />
+              </p>
+            </div>
+
             <div className="flex items-center">
               <h1 className="text-[27px]">{}</h1>
-              <Countdown startDate={"2023-06-01"} endDate={"2023-06-07"} />
+              <p className="text-[27px]"></p>
               <h1 className="text-[27px] pl-[65px] px-[10px]">Sold: $00.00</h1>
             </div>
           </div>
