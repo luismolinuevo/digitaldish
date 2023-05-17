@@ -43,6 +43,7 @@ router.post("/:postId", passport.authenticate("jwt", { session: false, }),async 
     const createBid = await prisma.bid.create({
         data: {
             price: req.body.price,
+            status: req.body.status,
             postId: Number(postId),
             userId: req.user.id
             // user: { connect: { id: req.user.id } },
@@ -99,7 +100,8 @@ router.put("/:bidId", passport.authenticate("jwt", { session: false, }), async (
             userId: req.user.id
         },
         data: {
-            price: req.body.price
+            price: req.body.price,
+            status: req.body.status
         }
     });
 
