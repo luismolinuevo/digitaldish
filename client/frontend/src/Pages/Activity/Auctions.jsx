@@ -5,12 +5,14 @@ import axios from "axios";
 export default function Auctions() {
   const [auctions, setAuctions] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchAuctions();
+  }, []);
 
   const fetchAuctions = async () => {
     try {
       const token = localStorage.getItem("token");
-      const allOffers = await axios.get(
+      const allAuctions = await axios.get(
         "http://localhost:8080/bid",
         {
           headers: {
@@ -20,8 +22,8 @@ export default function Auctions() {
       );
       // console.log(allOffers.data.offers);
 
-      if (allOffers.status === 200) {
-        setOffers(allOffers.data.offers);
+      if (allAuctions.status === 200) {
+        setAuctions(allOffers.data);
       } else {
         return null;
       }
