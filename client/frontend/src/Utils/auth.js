@@ -37,7 +37,7 @@ export const loginUser = (username, password) => async (dispatch) => {
     });
     dispatch(loginSuccess(response.data));
   } catch (error) {
-    console.log("logged")
+    dispatch(error(error));
   }
 };
 
@@ -60,7 +60,6 @@ export const checkLoginStatus = () => async dispatch => {
     console.log(error);
   }
 };
-
 
 export const signupUser = (email, username, password) => async (dispatch) => {
   try {
