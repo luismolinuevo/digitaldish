@@ -11,10 +11,8 @@ import apple from "../../assets/payment/apple-pay-Icon.png";
 
 export default function SpecificBid() {
   const [post, setPost] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [bidInput, setBidInput] = useState("$00.00");
+  const [bidInput, setBidInput] = useState(0);
   const params = useParams();
-  
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -38,9 +36,34 @@ export default function SpecificBid() {
     // }, []);
   }, [params.id]);
 
+  const handleBid = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const createBid = await axios.post(
+          `http://localhost:8080/bid/${params.id}`,
+          {
+            price: parseFloat(bidInput),
+            status: "Active",
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+            },
+          }
+        );
+
+        console.log(createBid.status)
+
+
+      } catch (error) {
+        console.log(error);
+      }
+    
+  };
+
   return (
     <div>
-      <div className="pt-20 px-20">
+      <div className="pt-[100px] px-20">
         <div className="flex flex-col">
           <div className="flex pb-[27px]">
             <p>negotiation</p>
@@ -52,7 +75,6 @@ export default function SpecificBid() {
           <div className="flex">
             <div className=" flex-shrink-0 pr-[92px]">
               {" "}
-              .
               {/*adding this flex-shink stoped the image from shrinking when justify-between was used below */}
               <img
                 src="https://placehold.jp/704x700.png"
@@ -61,7 +83,7 @@ export default function SpecificBid() {
               />
             </div>
             <div className="w-full">
-              <div className="flex justify-between pt-[20px]">
+              <div className="flex justify-between ">
                 <div className="mb-[22px]">
                   <h1 className="text-[37px] mb-[18px]">{post.title}</h1>
                   <div className="flex">
@@ -83,21 +105,14 @@ export default function SpecificBid() {
                 <div className=" mr-11 text-center">
                   <input
                     type="text"
-                    className="bg-[#F1F0EB] w-[80px] h-[50px] text-7"
+                    className="bg-[#F1F0EB] w-[80px] h-[50px] text-7 outline-none"
+                    placeholder="$00.00"
+                    onChange={(e) => setBidInput(e.target.value)}
                   />
                 </div>
-                {/* <button
-                      className="p-4 w-[210px] h-[66px] bg-[#D9D9D9] mr-[35px] text-[25px]"
-                      onClick={() => setShowModal(true)}
-                    >
-                      Make an Offer
-                    </button>
-                    <button className="p-4 w-[210px] h-[66px] bg-[#D9D9D9] text-[25px]">
-                      Buy Now
-                    </button> */}
                 <button
-                  className="text-center px-[44px] py-[10px] rounded-[57px] border-[4px] border-[#C7A695] text-[32px]"
-                  onClick={() => setShowModal(true)}
+                  className="text-center px-[40px] py-[10px] rounded-[57px] border-[4px] border-[#C7A695] text-[30px]"
+                  onClick={handleBid}
                 >
                   PLACE BID
                 </button>
