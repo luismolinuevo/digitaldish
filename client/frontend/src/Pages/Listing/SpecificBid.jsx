@@ -3,30 +3,37 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Modal from "../../Components/Modal";
 
+import ae from "../../assets/payment/ae.png";
+import visa from "../../assets/payment/visa-Icon.png";
+import mastercard from "../../assets/payment/mastercard-Icon.png";
+import paypal from "../../assets/payment/paypal-Icon.png";
+import apple from "../../assets/payment/apple-pay-Icon.png";
+
 export default function SpecificBid() {
   const [post, setPost] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [bidInput, setBidInput] = useState("$00.00");
   const params = useParams();
+  
 
   useEffect(() => {
-      const fetchPost = async () => {
-        try {
-          const post = await axios.get(`http://localhost:8080/post/${params.id}`);
-          console.log(post.data)
-          if (post.status == 200) {
-            
-            setPost(post.data);
-          } else {
-            console.log("Error");
-          }
-
-          console.log(post.data);
-        } catch (error) {
+    const fetchPost = async () => {
+      try {
+        const post = await axios.get(`http://localhost:8080/post/${params.id}`);
+        console.log(post.data);
+        if (post.status == 200) {
+          setPost(post.data.post);
+        } else {
           console.log("Error");
         }
-      };
 
-      fetchPost();
+        console.log(post.data);
+      } catch (error) {
+        console.log("Error");
+      }
+    };
+
+    fetchPost();
     return () => {};
     // }, []);
   }, [params.id]);
@@ -55,16 +62,16 @@ export default function SpecificBid() {
             </div>
             <div className="w-full">
               <div className="flex justify-between pt-[20px]">
-                <div>
-                  <h1 className="text-[37px] mb-[18px]">Product Title</h1>
+                <div className="mb-[22px]">
+                  <h1 className="text-[37px] mb-[18px]">{post.title}</h1>
                   <div className="flex">
-                    <div>
-                      <p>2 bids:</p>
-                      <p>$43.00</p>
+                    <div className="mr-10">
+                      <p className="text-5">2 bids:</p>
+                      <p className="text-[27px]">$43.00</p>
                     </div>
                     <div>
-                      <p>Time left: 12:00</p>
-                      <p>Ends: 5/2/2023 4:00pm</p>
+                      <p className="text-[27px]">Time left: 12:00</p>
+                      <p className="text-[22px]">Ends: 5/2/2023 4:00pm</p>
                     </div>
                   </div>
                 </div>
@@ -72,9 +79,12 @@ export default function SpecificBid() {
                   <p>add to favourites</p>
                 </div>
               </div>
-              <div className="flex mb-[18px]">
-                <div>
-                  $0.00
+              <div className="flex mb-[18px] items-center">
+                <div className=" mr-11 text-center">
+                  <input
+                    type="text"
+                    className="bg-[#F1F0EB] w-[80px] h-[50px] text-7"
+                  />
                 </div>
                 {/* <button
                       className="p-4 w-[210px] h-[66px] bg-[#D9D9D9] mr-[35px] text-[25px]"
@@ -102,14 +112,16 @@ export default function SpecificBid() {
                   <p className="text-[15px]">Colors</p>
                 </div>
               </div>
-              <div className="flex pb-[36px]">
+              <div className="flex pb-[16px]">
                 <div className=" w-[300px]">
-                  <p className="text-[20px]">Quantity Available</p>
-                  <p className="text-[15px]">00</p>
+                  <p className="text-[20px]">Shipping/Pick-up Info</p>
+                  <p className="text-[15px]">
+                    Shiping info goes here. Rate, etc.
+                  </p>
                 </div>
                 <div>
                   <p className="text-[20px]">Materials</p>
-                  <ul className="text-[15px]">
+                  <ul className="text-[15px] list-disc ml-6">
                     <li>list of materials</li>
                     <li>list of materials</li>
                     <li>list of materials</li>
@@ -117,18 +129,18 @@ export default function SpecificBid() {
                 </div>
               </div>
               <div className="pb-[36px]">
-                <p className="text-[20px]">Shipping/Pick-up Info</p>
-                <p className="text-[15px]">
-                  Shiping info goes here. Rate, etc.
-                </p>
-              </div>
-              <div className="pb-[36px]">
                 <p className="text-[20px]">Returns</p>
                 <p className="text-[15px]">Sellers return policy goes here</p>
               </div>
               <div>
                 <p className="text-[20px]">Payment Accepted</p>
-                <p className="text-[15px]">Payment icons go here</p>
+                <div className="flex gap-[30px] mt-[30px]">
+                  <img src={ae} className="w-[44px] h-[44px]" />
+                  <img src={visa} className="w-[44px] h-[44px]" />
+                  <img src={mastercard} className="w-[44px] h-[44px]" />
+                  <img src={paypal} className="w-[44px] h-[44px]" />
+                  <img src={apple} className="w-[44px] h-[44px]" />
+                </div>
               </div>
             </div>
           </div>
@@ -141,11 +153,10 @@ export default function SpecificBid() {
               {/*TODO map through other images here */}
               <p className="text-[35px]">&gt;</p>
             </div>
-            <div className="flex">
-            </div>
+            <div className="flex"></div>
           </div>
-          <div>
-            <div className="w-[800px] h-[221px] bg-[#D9D9D9]">Description</div>
+          <div className="">
+            <div className=" h-[221px] bg-[#D9D9D9]">Description</div>
             <div className="flex justify-center">
               <div className="flex flex-col">
                 <h1>About the seller</h1>
@@ -165,27 +176,6 @@ export default function SpecificBid() {
           <h1 className="text-[37px]">You might also like</h1>
         </div>
       </div>
-      <Modal isVisable={showModal} onClose={() => setShowModal(false)}>
-        <h1>Start bartering</h1>
-        <div className="flex">
-          <div>
-            <p>Title</p>
-            <p>Listing Price: $60.00</p>
-            <p>Username</p>
-          </div>
-          <div>
-            <img></img>
-          </div>
-        </div>
-        <div className="mt-[25px]">
-          <p>Start a message thread with (username):</p>
-          <input
-            className="w-[471px] h-[115px] bg-[#F1F0EB] flex items-start"
-            placeholder="Type message here"
-          ></input>
-          <button type="submit"></button>
-        </div>
-      </Modal>
     </div>
   );
 }
