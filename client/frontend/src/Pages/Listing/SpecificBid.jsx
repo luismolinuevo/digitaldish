@@ -189,6 +189,13 @@ export default function SpecificBid() {
 
         <div>
           <h1 className="text-[37px]">You might also like</h1>
+          <div>
+            <img className="w-[300px] h-[160px]"></img>
+            <div>
+              <p></p>
+              <p></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
