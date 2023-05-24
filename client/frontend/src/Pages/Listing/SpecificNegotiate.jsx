@@ -26,7 +26,7 @@ export default function SpecificNegotiate() {
         if (post.status == 200) {
           setPost(post.data.post);
 
-          console.log(post.data.post)
+          console.log(post.data.post);
         } else {
           console.log("Error");
         }
@@ -143,9 +143,9 @@ export default function SpecificNegotiate() {
               <p className="text-[35px]">&gt;</p>
             </div>
           </div>
-          <div className="">
+          <div className="ml-[92px]">
             {/* <div className="w-[800px] h-[221px] bg-[#D9D9D9]">Description</div> */}
-            <div className="w-[800px] h-[221px] bg-[#D9D9D9] mb-[30px]">
+            <div className="w-[600px] h-[221px] bg-[#D9D9D9] mb-[30px]">
               <p>des</p>
             </div>
             <div className="flex justify-center">
@@ -168,24 +168,44 @@ export default function SpecificNegotiate() {
         </div>
       </div>
       <Modal isVisable={showModal} onClose={() => setShowModal(false)}>
-        <h1 className="text-center text-bold text-[30px]">Make an Offer</h1>
+        <h1 className="text-center text-bold text-[30px] mb-[30px]">Make an Offer</h1>
         <div className="flex">
-          <div className="h-[180px] w-[190px]">
+          <div className="h-[150px] w-[190px]">
             <p className="text-[22px] break-words">{post.title}</p>
-            <p className="text-[22px]">Listing Price: ${post.price}</p> 
-            <p className="text-4">{post.userName}</p> 
+            <p className="text-[22px]">Listing Price: ${post.price}</p>
+            <p className="text-4">{post.userName}</p>
           </div>
-          <div className="h-[180px] w-[190px]">
+          <div className="h-[150px] w-[190px]">
             <img></img>
           </div>
         </div>
-        <div>
-          <h3 className="text-[25px] text-center ">Sugguested Offers:</h3>
-          <div className="flex gap-[40px]">
-            <button className="bg-[#F1F0EB] w-[86px] h-[75px]"></button>
-            <button className="bg-[#F1F0EB] w-[86px] h-[75px]"></button>
-            <button className="bg-[#F1F0EB] w-[86px] h-[75px]"></button>
+        <div className="mb-8">
+          <h3 className="text-[22px] text-center mb-4">Sugguested Offers:</h3>
+          <div className="flex gap-[40px] justify-center">
+            <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
+              <p>${post.price * 0.05.toFixed(4)}</p>
+              <p>5% off</p>
+            </button>
+            <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
+              <p>${post.price * 0.10.toFixed(4)}</p>
+              <p>10% off</p>
+            </button>
+            <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
+              <p>${post.price * 0.15.toFixed(4)}</p>
+              <p>15% off</p>
+            </button>
           </div>
+        </div>
+        <div className="flex items-center justify-center mb-[35px]">
+          <p className="text-4 mr-6">Create a custom offer: </p>
+          <input type="text" className="w-[90px] h-11 bg-[#F1F0EB]"/>
+        </div>
+        <div>
+          <p className="text-4">add a message to {post.userName}:</p>
+          <textarea name="offermessage" className="w-full h-[140px] p-1 bg-[#F1F0EB]"></textarea>
+        </div>
+        <div className="flex justify-center mt-[25px]">
+          <button className="p-3 border-2 w-[200px] h-[55px] border-[#C7A695] rounded-[57px]">SUBMIT</button>
         </div>
       </Modal>
     </div>
