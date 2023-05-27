@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Modal from "../../Components/Modal";
-
+import { useSelector, useDispatch } from "react-redux";
+import { checkLoginStatus } from "../../Utils/auth";
 import ae from "../../assets/payment/ae.png";
 import visa from "../../assets/payment/visa-Icon.png";
 import mastercard from "../../assets/payment/mastercard-Icon.png";
@@ -10,15 +11,22 @@ import paypal from "../../assets/payment/paypal-Icon.png";
 import apple from "../../assets/payment/apple-pay-Icon.png";
 
 export default function SpecificNegotiate() {
-  //TODO make api call and use useParams to get specfic listing. Update post model to support type of transaction
-  //TODO replace mock data will data from api call
+
+  //TODO may have to make a post route to create message or just import the socket here and use the offerId from the offer I created
+  //TODO may have to edit post route to check if offer already exist
   //TODO make the make offer button work
   //TODO make the buy now button work
+  const params = useParams();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.userInfo);
+
   const [post, setPost] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const params = useParams();
+  const [offer, setOffer] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
+    dispatch(checkLoginStatus());
     const fetchPost = async () => {
       try {
         const post = await axios.get(`http://localhost:8080/post/${params.id}`);
@@ -41,6 +49,28 @@ export default function SpecificNegotiate() {
     return () => {};
     // }, []);
   }, [params]);
+
+  const createOffer = async () => {
+    try {
+      const create = await axios.post(`http://localhost:8080/offer/createoffer/${params.id}`, {
+        userTwoId: post.userId,
+        userId: user
+      })
+      if(create.status(201)) {
+        console.log(offercreated)
+      }
+    } catch(err) {
+        console.log("There is a error" + err)
+    }
+  }
+
+  const sendOffer = () => {
+
+  }
+
+  const sendMessage = () => {
+
+  }
 
   return (
     <div className="pt-[100px]">
@@ -198,14 +228,14 @@ export default function SpecificNegotiate() {
         </div>
         <div className="flex items-center justify-center mb-[35px]">
           <p className="text-4 mr-6">Create a custom offer: </p>
-          <input type="text" className="w-[90px] h-11 bg-[#F1F0EB]"/>
+          <input type="text" className="w-[90px] h-11 bg-[#F1F0EB]" onChange={(e) => setOffer(e.target.value)}/>
         </div>
         <div>
           <p className="text-4">add a message to {post.userName}:</p>
-          <textarea name="offermessage" className="w-full h-[140px] p-1 bg-[#F1F0EB]"></textarea>
+          <textarea name="offermessage" className="w-full h-[140px] p-1 bg-[#F1F0EB]" onChange={(e) => setMessage(e.target.value)}></textarea>
         </div>
         <div className="flex justify-center mt-[25px]">
-          <button className="p-3 border-2 w-[200px] h-[55px] border-[#C7A695] rounded-[57px]">SUBMIT</button>
+          <button className="p-3 border-2 w-[200px] h-[55px] border-[#C7A695] rounded-[57px]" onClick={createOffer}>SUBMIT</button>
         </div>
       </Modal>
     </div>
