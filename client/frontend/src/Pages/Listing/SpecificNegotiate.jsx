@@ -11,7 +11,7 @@ import paypal from "../../assets/payment/paypal-Icon.png";
 import apple from "../../assets/payment/apple-pay-Icon.png";
 
 export default function SpecificNegotiate() {
-  //TODO may have to make a post route to create message or just import the socket here and use the offerId from the offer I created
+  //TODO test the create message route
   //Probaly better to just make the post route for the message
   //TODO may have to edit post route to check if offer already exist, also check to make sure the post isnt yours
   //TODO make the make offer button work
@@ -59,6 +59,7 @@ export default function SpecificNegotiate() {
         {
           userTwoId: post.userId,
           userId: user,
+          currentOffer: offer
         }
       );
       if (create.status(201)) {
@@ -73,7 +74,16 @@ export default function SpecificNegotiate() {
 
   const sendOffer = () => {};
 
-  const sendMessage = () => {};
+  const sendMessage = async () => {
+    try {
+      const createMessage = await axios.post(`http://localhost:8080/offer/createmessage/${params.id}`, {
+        content: message,
+        userId: user
+      });
+    } catch(err) {
+      console.log(err)
+    }
+  };
 
   return (
     <div className="pt-[100px]">
