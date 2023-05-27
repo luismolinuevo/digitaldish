@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Modal from "../../Components/Modal";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,19 +11,21 @@ import paypal from "../../assets/payment/paypal-Icon.png";
 import apple from "../../assets/payment/apple-pay-Icon.png";
 
 export default function SpecificNegotiate() {
-
   //TODO may have to make a post route to create message or just import the socket here and use the offerId from the offer I created
-  //TODO may have to edit post route to check if offer already exist
+  //Probaly better to just make the post route for the message
+  //TODO may have to edit post route to check if offer already exist, also check to make sure the post isnt yours
   //TODO make the make offer button work
   //TODO make the buy now button work
   const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.userInfo);
 
   const [post, setPost] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [offer, setOffer] = useState("");
   const [message, setMessage] = useState("");
+  const [offerSent, setOfferSent] = useState(false);
 
   useEffect(() => {
     dispatch(checkLoginStatus());
@@ -52,25 +54,26 @@ export default function SpecificNegotiate() {
 
   const createOffer = async () => {
     try {
-      const create = await axios.post(`http://localhost:8080/offer/createoffer/${params.id}`, {
-        userTwoId: post.userId,
-        userId: user
-      })
-      if(create.status(201)) {
-        console.log(offercreated)
+      const create = await axios.post(
+        `http://localhost:8080/offer/createoffer/${params.id}`,
+        {
+          userTwoId: post.userId,
+          userId: user,
+        }
+      );
+      if (create.status(201)) {
+        console.log(offercreated);
       }
-    } catch(err) {
-        console.log("There is a error" + err)
+
+      setOfferSent(!offerSent);
+    } catch (err) {
+      console.log("There is a error" + err);
     }
-  }
+  };
 
-  const sendOffer = () => {
+  const sendOffer = () => {};
 
-  }
-
-  const sendMessage = () => {
-
-  }
+  const sendMessage = () => {};
 
   return (
     <div className="pt-[100px]">
@@ -198,45 +201,102 @@ export default function SpecificNegotiate() {
         </div>
       </div>
       <Modal isVisable={showModal} onClose={() => setShowModal(false)}>
-        <h1 className="text-center text-bold text-[30px] mb-[30px]">Make an Offer</h1>
-        <div className="flex">
-          <div className="h-[150px] w-[190px]">
-            <p className="text-[22px] break-words">{post.title}</p>
-            <p className="text-[22px]">Listing Price: ${post.price}</p>
-            <p className="text-4">{post.userName}</p>
+        {!offerSent ? (
+          <div>
+            <h1 className="text-center text-bold text-[30px] mb-[30px]">
+              Make an Offer
+            </h1>
+            <div className="flex">
+              <div className="h-[150px] w-[190px]">
+                <p className="text-[22px] break-words">{post.title}</p>
+                <p className="text-[22px]">Listing Price: ${post.price}</p>
+                <p className="text-4">{post.userName}</p>
+              </div>
+              <div className="h-[150px] w-[190px]">
+                <img></img>
+              </div>
+            </div>
+            <div className="mb-8">
+              <h3 className="text-[22px] text-center mb-4">
+                Sugguested Offers:
+              </h3>
+              <div className="flex gap-[40px] justify-center">
+                <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
+                  <p>${post.price * (0.05).toFixed(4)}</p>
+                  <p>5% off</p>
+                </button>
+                <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
+                  <p>${post.price * (0.1).toFixed(4)}</p>
+                  <p>10% off</p>
+                </button>
+                <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
+                  <p>${post.price * (0.15).toFixed(4)}</p>
+                  <p>15% off</p>
+                </button>
+              </div>
+            </div>
+            <div className="flex items-center justify-center mb-[35px]">
+              <p className="text-4 mr-6">Create a custom offer: </p>
+              <input
+                type="text"
+                className="w-[90px] h-11 bg-[#F1F0EB]"
+                onChange={(e) => setOffer(e.target.value)}
+              />
+            </div>
+            <div>
+              <p className="text-4">add a message to {post.userName}:</p>
+              <textarea
+                name="offermessage"
+                className="w-full h-[140px] p-1 bg-[#F1F0EB]"
+                onChange={(e) => setMessage(e.target.value)}
+              ></textarea>
+            </div>
+            <div className="flex justify-center mt-[25px]">
+              <button
+                className="p-3 border-2 w-[200px] h-[55px] border-[#C7A695] rounded-[57px]"
+                onClick={createOffer}
+              >
+                SUBMIT
+              </button>
+            </div>
           </div>
-          <div className="h-[150px] w-[190px]">
-            <img></img>
+        ) : (
+          <div>
+            <h1 className="text-center text-bold text-[30px] mb-[30px]">
+              Offer Submitted
+            </h1>
+            <div className="flex">
+              <div className="h-[150px] w-[190px]">
+                <p className="text-[22px] break-words">{post.title}</p>
+                <p className="text-[22px]">Listing Price: ${post.price}</p>
+                <p className="text-4">{post.userName}</p>
+              </div>
+              <div className="h-[150px] w-[190px]">
+                <img></img>
+              </div>
+            </div>
+            <div className="flex justify-center items-center">
+              <p className="text-[20px] mr-[34px]">Offer: </p>
+              <p className="w-[90px] h-11 bg-[#F1F0EB] text-[20px]">${offer}</p>
+            </div>
+            <div>
+            <div className="flex justify-center mt-[25px]">
+              <button
+                className="p-3 border-2 w-[200px] h-[55px] border-[#C7A695] rounded-[57px] mr-[25px]"
+                onClick={() => navigate("/activity")}
+              >
+                GO TO ACTIVE OFFERS
+              </button>
+              <button
+                className="p-3 border-2 w-[200px] h-[55px] border-[#C7A695] rounded-[57px]"
+                onClick={() => setShowModal(false)}
+              >
+                RETURN TO LISTING
+              </button>
+            </div>
+            </div>
           </div>
-        </div>
-        <div className="mb-8">
-          <h3 className="text-[22px] text-center mb-4">Sugguested Offers:</h3>
-          <div className="flex gap-[40px] justify-center">
-            <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
-              <p>${post.price * 0.05.toFixed(4)}</p>
-              <p>5% off</p>
-            </button>
-            <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
-              <p>${post.price * 0.10.toFixed(4)}</p>
-              <p>10% off</p>
-            </button>
-            <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
-              <p>${post.price * 0.15.toFixed(4)}</p>
-              <p>15% off</p>
-            </button>
-          </div>
-        </div>
-        <div className="flex items-center justify-center mb-[35px]">
-          <p className="text-4 mr-6">Create a custom offer: </p>
-          <input type="text" className="w-[90px] h-11 bg-[#F1F0EB]" onChange={(e) => setOffer(e.target.value)}/>
-        </div>
-        <div>
-          <p className="text-4">add a message to {post.userName}:</p>
-          <textarea name="offermessage" className="w-full h-[140px] p-1 bg-[#F1F0EB]" onChange={(e) => setMessage(e.target.value)}></textarea>
-        </div>
-        <div className="flex justify-center mt-[25px]">
-          <button className="p-3 border-2 w-[200px] h-[55px] border-[#C7A695] rounded-[57px]" onClick={createOffer}>SUBMIT</button>
-        </div>
+        )}
       </Modal>
     </div>
   );
