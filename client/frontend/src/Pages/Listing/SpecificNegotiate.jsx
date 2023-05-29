@@ -12,10 +12,9 @@ import apple from "../../assets/payment/apple-pay-Icon.png";
 
 export default function SpecificNegotiate() {
   //TODO test the create message route
-  //Probaly better to just make the post route for the message
   //TODO may have to edit post route to check if offer already exist, also check to make sure the post isnt yours
-  //TODO make the make offer button work
-  //TODO make the buy now button work
+  //TODO test offer button button
+  //TODO make the buy now button work(figure out if I need two pages)
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,16 +54,17 @@ export default function SpecificNegotiate() {
   const createOffer = async () => {
     try {
       const create = await axios.post(
-        `http://localhost:8080/offer/createoffer/${params.id}`,
+        `http://localhost:8080/offer/createroom/${params.id}`,
         {
           userTwoId: post.userId,
           userId: user,
-          currentOffer: offer
+          currentOffer: offer,
         }
       );
-      if (create.status(201)) {
-        console.log(offercreated);
-      }
+      let offerId = create.data.chatroom.id;
+      sendMessage(offerId);
+      sendOffer(offerId);
+      console.log("offercreated");
 
       setOfferSent(!offerSent);
     } catch (err) {
@@ -72,16 +72,36 @@ export default function SpecificNegotiate() {
     }
   };
 
-  const sendOffer = () => {};
-
-  const sendMessage = async () => {
+  const sendOffer = async (offerId) => {
     try {
-      const createMessage = await axios.post(`http://localhost:8080/offer/createmessage/${params.id}`, {
-        content: message,
-        userId: user
-      });
-    } catch(err) {
-      console.log(err)
+      let offerMessage = user + "has created a offer of $" + offer
+      const createMessage = await axios.post(
+        `http://localhost:8080/offer/createmessage/${offerId}`,
+        {
+          content: offerMessage,
+          userId: user,
+        }
+      );
+
+      console.log("offer message created");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const sendMessage = async (offerId) => {
+    try {
+      const createMessage = await axios.post(
+        `http://localhost:8080/offer/createmessage/${offerId}`,
+        {
+          content: message,
+          userId: user,
+        }
+      );
+
+      console.log("offer message created");
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -290,20 +310,20 @@ export default function SpecificNegotiate() {
               <p className="w-[90px] h-11 bg-[#F1F0EB] text-[20px]">${offer}</p>
             </div>
             <div>
-            <div className="flex justify-center mt-[25px]">
-              <button
-                className="p-3 border-2 w-[200px] h-[55px] border-[#C7A695] rounded-[57px] mr-[25px]"
-                onClick={() => navigate("/activity")}
-              >
-                GO TO ACTIVE OFFERS
-              </button>
-              <button
-                className="p-3 border-2 w-[200px] h-[55px] border-[#C7A695] rounded-[57px]"
-                onClick={() => setShowModal(false)}
-              >
-                RETURN TO LISTING
-              </button>
-            </div>
+              <div className="flex justify-center mt-[25px]">
+                <button
+                  className="p-3 border-2 w-[200px] h-[55px] border-[#C7A695] rounded-[57px] mr-[25px]"
+                  onClick={() => navigate("/activity")}
+                >
+                  GO TO ACTIVE OFFERS
+                </button>
+                <button
+                  className="p-3 border-2 w-[200px] h-[55px] border-[#C7A695] rounded-[57px]"
+                  onClick={() => setShowModal(false)}
+                >
+                  RETURN TO LISTING
+                </button>
+              </div>
             </div>
           </div>
         )}
