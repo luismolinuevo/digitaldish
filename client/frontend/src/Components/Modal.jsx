@@ -14,7 +14,7 @@ export default function MakeOfferModal({ isVisable, onClose, children }) {
       id="wrapper"
       onClick={handleClose}
     >
-      <div className="w-[584px] bg-white py-9 px-14">
+      <div className="w-[584px] bg-white py-8 px-12">
         <div className="flex justify-end">
           <button className="" onClick={() => onClose()}>
             X

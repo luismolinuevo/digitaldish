@@ -37,28 +37,25 @@ export default function SpecificBid() {
   }, [params.id]);
 
   const handleBid = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const createBid = await axios.post(
-          `http://localhost:8080/bid/${params.id}`,
-          {
-            price: parseFloat(bidInput),
-            status: "Active",
+    try {
+      const token = localStorage.getItem("token");
+      const createBid = await axios.post(
+        `http://localhost:8080/bid/${params.id}`,
+        {
+          price: parseFloat(bidInput),
+          status: "Active",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
           },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-            },
-          }
-        );
+        }
+      );
 
-        console.log(createBid.status)
-
-
-      } catch (error) {
-        console.log(error);
-      }
-    
+      console.log(createBid.status);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

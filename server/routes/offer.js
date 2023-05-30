@@ -117,6 +117,28 @@ import passport from "passport";
         });
     });
 
+    router.post("/createmessage/:offerId" , async (req, res) => {
+        const offerId = req.params.offerId;
+
+        const createMessage = await prisma.offerMessage.create({
+            data: {
+                content: req.body.content,
+                user: {
+                    connect: { id: Number(req.body.userId) }
+                },
+                createAt: new Date(),
+                offer: {
+                    connect: {id: Number(offerId)},
+                },
+            }
+        });
+
+        res.status(201).json({
+            success: true,
+            createMessage
+        });
+    });
+
     // router.post("/offermessage", async (req, res) => {
     //     try {
     //       const { content, userId, roomId } = req.body;
