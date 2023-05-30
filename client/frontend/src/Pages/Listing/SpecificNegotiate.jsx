@@ -11,9 +11,8 @@ import paypal from "../../assets/payment/paypal-Icon.png";
 import apple from "../../assets/payment/apple-pay-Icon.png";
 
 export default function SpecificNegotiate() {
-  //TODO test the create message route
+  //TODO maybe start currnet price state at 
   //TODO may have to edit post route to check if offer already exist, also check to make sure the post isnt yours
-  //TODO test offer button button
   //TODO make the buy now button work(figure out if I need two pages)
   const params = useParams();
   const dispatch = useDispatch();
