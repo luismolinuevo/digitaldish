@@ -18,6 +18,7 @@ import passport from "passport";
                 data: {
                     postId: Number(postId), 
                     currentOffer: req.body.currentOffer,
+                    status: req.body.status,
                     users: {   //this will link user one     
                         connect: [
                             { id: Number(userId) }, 
@@ -107,7 +108,10 @@ import passport from "passport";
                 id: Number(offerId)
             },
             data: {
-                currentOffer: req.body.currentOffer
+                currentOffer: req.body.currentOffer,
+                user1Accept: req.body.user1Accept,
+                user2Accept: req.body.user2Accept,
+                status: req.body.status
             }
         });
 

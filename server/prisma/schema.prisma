@@ -110,6 +110,9 @@ model Offer {
   // user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   users        User[]
   currentOffer Decimal?
+  status       String?
+  user1Accept  Boolean? @default(false)
+  user2Accept  Boolean? @default(false)
   postId       Int
   post         Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
 
