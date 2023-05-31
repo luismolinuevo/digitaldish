@@ -119,7 +119,7 @@ export default function Chat() {
   };
 
   return (
-    <div>
+    <div >
       <div className="w-[520px] h-[820px] border-[#C2B8A3] border-[2px] relative rounded-[8px]">
         <div className="h-[84px] border-[#C7A695] border-b-2 flex justify-between items-center p-4">
           <div>

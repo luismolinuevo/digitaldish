@@ -45,36 +45,58 @@ export default function OffersRecieved() {
 
   return (
     <div>
-      {offers && offers.length != 0 ? (
-        offers.map((item) =>
-          item.post.userId !== user ? (
-            <div
-              key={item.id}
-              onClick={() => handleClick(item.id)}
-              className={`w-[687px] pb-10 mb-4 cursor-pointer ${
-                active === item.id ? "bg-[#D9D9D9]" : ""
-              }`}
-            >
-              <div className="flex ">
-                <img src="https://placehold.jp/180x118.png"></img>
-                <div className="w-full flex justify-between">
-                  <div className="pl-2">
-                    <p className="text-[32px]">{item.post.title}</p>
-                    <p className="text-[22px]">Mode</p>
+      <div className="w-[687px] px-3 flex">
+        <div className="w-[180px]">
+          <p className="text-[27px]">Messages</p>
+        </div>
+        <div className="flex w-full justify-between items-center">
+          <p className="text-4">Sort by: choice</p>
+          <div className=" w-[130px]">
+            <p className="text-[27px]">Status</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        {offers && offers.length != 0 ? (
+          offers.map((item) =>
+            item.post.userId !== user ? (
+              <div
+                key={item.id}
+                onClick={() => handleClick(item.id)}
+                className={`w-[687px] p-3 mb-4 cursor-pointer ${
+                  active === item.id ? "bg-[#D9D9D9]" : ""
+                }`}
+              >
+                <div className="flex ">
+                  <div className="w-[180x]">
+                    <img
+                      src="https://placehold.jp/180x118.png"
+                      className="w-[148px] h-[98px]"
+                    ></img>
                   </div>
-                  <div className="flex items-center">
-                    <p className="pr-4 text-[27px]">Status</p>
+
+                  <div className="w-full flex justify-between">
+                    <div className="pl-4">
+                      <p className="text-[32px]">{item.post.title}</p>
+                      <p className="text-[22px]">Mode</p>
+                    </div>
+                    <div className="flex items-center w-[130px]">
+                      <p className="text-[22px]">Status</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            <p>No offers sent</p>
+            ) : (
+              <p>No offers sent</p>
+            )
           )
-        )
-      ) : (
-        <p></p>
-      )}
+        ) : (
+          <p></p>
+        )}
+      </div>
     </div>
   );
 }
+
+//TODO add mode to post request.
+//TODO add status to offer

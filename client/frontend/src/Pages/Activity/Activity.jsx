@@ -52,9 +52,7 @@ export default function Activity() {
       </div>
       <div>
         <div className="px-20">
-          <div className="flex">
-            {" "}
-            {/*may have to but this in each page */}
+          {/* <div className="flex">
             {activeButton === 0 || activeButton === 1 ? (
               <div className="flex">
                 <p className="text-[27px] mr-[50px]">Messages</p>
@@ -70,7 +68,7 @@ export default function Activity() {
             ) : (
               <div></div>
             )}
-          </div>
+          </div> */}
           <div>
             {activeButton === 0 ? <OffersRecieved /> : ""}
             {activeButton === 1 ? <OffersSent /> : ""}
