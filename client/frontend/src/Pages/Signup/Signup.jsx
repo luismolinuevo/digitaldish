@@ -33,7 +33,7 @@ export default function Signup() {
   
   return (
     <>
-      <section className="text-gray-600 body-font self-center h-300">
+      <section className="text-gray-600 body-font self-center h-screen"> {/*h-300 */}
         {/*Toggle Button */}
         <div className="border border-black w-10 mt-0 flex justify-center"></div>
 
@@ -54,14 +54,13 @@ export default function Signup() {
 
 
         {/*Sign up Form */}
-        <div className="container w-full right-[35%] py-2 flex fixed">
-          <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
-          </div>
-          <div className="box lg:w-2/6 md:w-1/2 bg-gray-100 p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+        <div className="SignUp-Container py-2 flex justify-center">
+          <div className="box lg:w-[30rem] md:w-[30rem] sm:w-[30rem] xs:w-[30rem] bg-gray-100 p-8 flex flex-col w-full mt-10 md:mt-0">
             <h2 className="text-gray-900 text-lg font-medium title-font mb-20 text-center font-[Inter]">
               be a part of our community.
             </h2>
-            <form onSubmit={handleSignup}>
+            <form onSubmit={handleSignup}
+              className="flex flex-col">
             <div className="relative mb-4">
               <label for="email" className="leading-7 text-sm text-gray-600 pl-6">
               </label>
@@ -72,7 +71,7 @@ export default function Signup() {
                 name="email"
                 onChange={(e)=>setEmail(e.target.value)}
                 required
-                className="bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out w-[310px]"
+                className="bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out [min-width:35ch]"
               />
             </div>
             <div className="relative mb-4">
@@ -85,7 +84,7 @@ export default function Signup() {
                 name="username"
                 onChange={(e)=>setUsername(e.target.value)}
                 required
-                className="bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out w-[310px]"
+                className="bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out [min-width:35ch]"
               />
             </div>
             <div className="relative mb-4">
@@ -98,7 +97,7 @@ export default function Signup() {
                 name="password"
                 onChange={(e)=>setPassword(e.target.value)}
                 required
-                className="bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out w-[310px]"
+                className="bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out [min-width:35ch]"
               />
             </div>
             <div className="relative mb-4">
@@ -111,7 +110,7 @@ export default function Signup() {
                 name="confirm-password"
                 onChange={(e)=>setConfirmPassword(e.target.value)}
                 required
-                className="bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out mb-4 w-[310px]"
+                className="bg-white rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out mb-4 [min-width:35ch]"
               />
             </div>
             <button className="text-white bg-black border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-lg text-lg font-bold mb-12 mx-auto w-30 flex content-center"> 
