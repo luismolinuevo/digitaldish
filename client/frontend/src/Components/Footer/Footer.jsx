@@ -1,52 +1,68 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import InstagramIcon from "../../assets/Icon-InstagramLogo.png";
+import FacebookIcon from "../../assets/Icon-FacebookLogo.png";
+import TwitterIcon from "../../assets/Icon-TwitterLogo.png";
+import ArrowIcon from "../../assets/Icon-ArrowUp.png";
 
 export default function Footer() {
-    return (
-        <div>
-            <div className="container px-5 py-24">
-                <div className="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
-                    <a className="text-indigo-500">example@email.com</a>
-                    <p className="leading-normal my-5">49 Smith St.
-                        <br />Saint Cloud, MN 56301
-                    </p>
-                    <span className="inline-flex">
-                        <a className="text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-5 h-5" viewBox="0 0 24 24">
-                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                            </svg>
-                        </a>
-                        <a className="ml-4 text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-5 h-5" viewBox="0 0 24 24">
-                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-                            </svg>
-                        </a>
-                        <a className="ml-4 text-gray-500">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-5 h-5" viewBox="0 0 24 24">
-                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-                            </svg>
-                        </a>
-                        <a className="ml-4 text-gray-500">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-5 h-5" viewBox="0 0 24 24">
-                                <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                            </svg>
-                        </a>
-                    </span>
-                </div>
-            </div>
-
-            <div>
-                Bottom Footer
-            </div>
+  return (
+    <div>
+      <div className="Footer-container flex justify-center flex-col">
+        <div className="p-5 w-full mt-8 border border-gray-200 bg-[#7F92B5] text-center">
+          {" "}
+          <span className="inline-flex">
+            <a className="text-gray-500 px-5">
+              <img src={InstagramIcon} alt="Instagram Icon" />
+            </a>
+            <a className="ml-4 text-gray-500 px-5">
+              <img src={FacebookIcon} alt="Facebook Icon" />
+            </a>
+            <a className="ml-4 text-gray-500 px-5">
+              <img src={TwitterIcon} alt="Twitter Icon" />
+            </a>
+          </span>
         </div>
-
-    )
+        <div className="p-2 bg-[#C3D5F5] h-[20vw] flex justify-center flex-col mt-auto text-center">
+          <a className="text-black font-['Arial'] font-extrabold text-4xl py-10 ">
+            Stay in Touch
+          </a>
+          <form
+            method="POST"
+            action="https://mailchi.mp/[xxxxxx]/welcome-to-digital-dish"
+            className="leading-normal my-5 w-full flex flex-col justify-center"
+          >
+          <div className="flex flex-col justify-center self-center">
+            <div className="flex flex-row">
+              <div className="border-b border-[#7F92B5] w-[26rem] self-center text-left">
+                <input
+                  class="appearance-none bg-transparent border-none w-[24rem] text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-xl"
+                  type="text"
+                  placeholder="Enter your email"
+                  aria-label="Email address"
+                />
+              </div>
+              <input
+                type="image"
+                src={ArrowIcon}
+                alt="Arrow Icon"
+                width="30px"
+                className="flex flex-row justify-center item-center self-center"
+              />
+            </div>
+            </div>
+            <p className="text-xs">
+              By entering my email I accept the terms and conditions and the
+              privacy policy.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-
- // <div classNameName='border border-black fixed w-full h-[300px] flex justify-between items-center px-4'>
-        //     <div classNameName='flex items-center'></div>
-        //     <div classNameName='text-indigo-500'></div>
-        // </div>
+// <div classNameName='border border-black fixed w-full h-[300px] flex justify-between items-center px-4'>
+//     <div classNameName='flex items-center'></div>
+//     <div classNameName='text-indigo-500'></div>
+// </div>
