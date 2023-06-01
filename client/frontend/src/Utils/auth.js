@@ -73,5 +73,4 @@ export const signupUser = (email, username, password) => async (dispatch) => {
     console.log(error)
   }
 };
-
 export default slice.reducer;
