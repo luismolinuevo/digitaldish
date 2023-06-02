@@ -66,7 +66,7 @@ export default function OffersRecieved() {
               <div
                 key={item.id}
                 onClick={() => handleClick(item.id)}
-                className={`w-[687px] pb-10 mb-4 cursor-pointer ${
+                className={`w-[687px] p-3 mb-4 cursor-pointer ${
                   active === item.id ? "bg-[#D9D9D9]" : ""
                 }`}
               >

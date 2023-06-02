@@ -3,7 +3,7 @@ import Countdown from "../../Components/Countdown";
 import axios from "axios";
 
 export default function Auctions() {
-  const [active, setActive] = useState(1)
+  const [active, setActive] = useState(1);
   const [auctions, setAuctions] = useState([]);
 
   useEffect(() => {
@@ -14,7 +14,6 @@ export default function Auctions() {
     setActive(id);
     console.log(active);
   };
-
 
   const fetchAuctions = async () => {
     try {
@@ -38,46 +37,73 @@ export default function Auctions() {
   };
   return (
     <div className="ml-[90px] pt-[40px]">
-      {auctions && auctions.length != 0 ? (
-        auctions.map((item) => (
-          <div
-            className={`flex w-[1025px] h-[120px] px-2 border-[1px] border-black ${active === item.id ? "bg-[#D9D9D9]" : ""}`}
-            key={item.id}
-            onClick={() => handleClick(item.id)}
-          >
+      <div className="flex items-center w-[1025px] px-2 border-[1px]">
+        <div className="text-[27px] w-[148px] mr-[33px]">
+          <h1>Product</h1>
+        </div>
+        <div className="text-4 w-[180px]">
+          <p>Sort by: choice</p>
+        </div>
 
+        <div className="text-[27px] w-[180px] mx-20 text-center">
+          <h1 className="">Status</h1>
+        </div>
+        <div className="w-[180px] text-[27px] text-center border-2">
+          <h1>Price</h1>
+        </div>
+      </div>
+      <div>
+        {auctions && auctions.length != 0 ? (
+          auctions.map((item) => (
+            <div
+              className={`flex w-[1025px] h-[120px] px-2 border-[1px] border-black ${
+                active === item.id ? "bg-[#D9D9D9]" : ""
+              }`}
+              key={item.id}
+              onClick={() => handleClick(item.id)}
+            >
+              <div className="flex items-center mr-[33px] w-[148px]">
+                <img className="w-[148px] h-full border-2 border-black" />
+              </div>
+              <div className="w-[180px] flex items-center">
+                <div className="flex flex-col text-center">
+                  <h1 className="text-[27px]">{item.post.title}</h1>
+                  <p className="text-[22px]">{item.post.userName}</p>
+                </div>
+              </div>
+              {/* <div className="w-[200px] flex items-center break-words">
+                <p className="text-[27px]">{item.post.description}</p>
+              </div> */}
+              <div className="flex items-center text-center mx-20 w-[180px] justify-center">
+                <div>
+                  <h1 className="text-[22px]">{item.status}</h1>
+                  <div className="text-[18px]">
+                    <Countdown
+                      startDate={"2023-06-02"}
+                      endDate={"2023-06-03"}
+                    />
+                  </div>
+                </div>
+              </div>
 
-            <div className="py-3 text-center w-[180px]">
-              <h1 className="text-[27px]">{item.post.title}</h1>
-              <p className="text-[22px]">{item.post.userName}</p>
-            </div>
-            <div className="flex items-center mx-[33px] w-[148px]">
-              <img className="w-[148px] h-full border-2 border-black" />
-            </div>
-            <div className="w-[200px] flex items-center break-words">
-              <p className="text-[27px]">{item.post.description}</p>
-            </div>
-            <div className="flex items-center text-center ml-20 w-[180px]">
-              <div>
-                <h1 className="text-[22px]">{item.status}</h1>
-                <div className="text-[18px]">
-                  <Countdown startDate={"2023-05-16"} endDate={"2023-005-18"} />
+              <div className="flex items-center w-[180px] text-center border-2 justify-center">
+                <div className="">
+                  <h1 className="text-[27px]">{}</h1>
+                  <p className="text-[27px]"></p>
+                  <h1 className="text-[27px]">
+                    $00.00
+                  </h1>
                 </div>
               </div>
             </div>
-
-            <div className="flex items-center w-[180px] text-center">
-              <h1 className="text-[27px]">{}</h1>
-              <p className="text-[27px]"></p>
-              <h1 className="text-[27px] pl-[65px] px-[10px]">Sold: $00.00</h1>
-            </div>
-          </div>
-        ))
-      ) : (
-        <p>No auctions</p>
-      )}
+          ))
+        ) : (
+          <p>No auctions</p>
+        )}
+      </div>
     </div>
   );
 }
 
-//TODO setup logic to display the sold price or the other stuff
+//TODO get count of bids, get highest bid, highest price
+
