@@ -111,6 +111,8 @@ model Offer {
   users        User[]
   currentOffer Decimal?
   status       String?
+  buyerAccept  Boolean? @default(false)
+  sellerAccept Boolean? @default(false)
   user1Accept  Boolean? @default(false)
   user2Accept  Boolean? @default(false)
   postId       Int
