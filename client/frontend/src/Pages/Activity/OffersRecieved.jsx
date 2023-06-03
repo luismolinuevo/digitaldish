@@ -48,7 +48,7 @@ export default function OffersRecieved() {
 
   return (
     <div>
-      <div className="w-[687px] px-3 flex">
+      <div className="w-[687px] px-3 flex mb-[26px]">
         <div className="w-[180px]">
           <p className="text-[27px]">Messages</p>
         </div>

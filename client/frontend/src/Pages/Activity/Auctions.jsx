@@ -37,7 +37,7 @@ export default function Auctions() {
   };
   return (
     <div className="ml-[90px] pt-[40px]">
-      <div className="flex items-center w-[1025px] px-2 border-[1px]">
+      <div className="flex items-center w-[1025px] px-2 mb-[26px]">
         <div className="text-[27px] w-[148px] mr-[33px]">
           <h1>Product</h1>
         </div>
@@ -48,7 +48,7 @@ export default function Auctions() {
         <div className="text-[27px] w-[180px] mx-20 text-center">
           <h1 className="">Status</h1>
         </div>
-        <div className="w-[180px] text-[27px] text-center border-2">
+        <div className="w-[180px] text-[27px] text-center">
           <h1>Price</h1>
         </div>
       </div>
@@ -56,7 +56,7 @@ export default function Auctions() {
         {auctions && auctions.length != 0 ? (
           auctions.map((item) => (
             <div
-              className={`flex w-[1025px] h-[120px] px-2 border-[1px] border-black ${
+              className={`flex w-[1025px] h-[120px] cursor-pointer px-2 my-[30px]${
                 active === item.id ? "bg-[#D9D9D9]" : ""
               }`}
               key={item.id}
@@ -86,7 +86,7 @@ export default function Auctions() {
                 </div>
               </div>
 
-              <div className="flex items-center w-[180px] text-center border-2 justify-center">
+              <div className="flex items-center w-[180px] text-center justify-center">
                 <div className="">
                   <h1 className="text-[27px]">{}</h1>
                   <p className="text-[27px]"></p>
