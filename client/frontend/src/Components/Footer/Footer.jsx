@@ -66,3 +66,4 @@ export default function Footer() {
 //     <div classNameName='flex items-center'></div>
 //     <div classNameName='text-indigo-500'></div>
 // </div>
+
