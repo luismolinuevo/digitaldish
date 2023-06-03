@@ -20,6 +20,7 @@ import SpecificNegotiate from './Pages/Listing/SpecificNegotiate'
 import SpecificBarter from './Pages/Listing/SpecificBarter'
 import SpecificBid from './Pages/Listing/SpecificBid'
 import OrderConformation from './Pages/Order/OrderConformation'
+import OfferOrderConformation from "./Pages/Order/OfferOrderConformation"
 
 import OffersRecieved from './Pages/Activity/OffersRecieved'
 import Activity from './Pages/Activity/Activity'
@@ -87,7 +88,7 @@ const router = createBrowserRouter([
         element: <SpecificBid/>
       },
       {
-        path: "orderconformation/:id",
+        path: "/orderconformation/:id",
         element: <OrderConformation/>
 
       },
@@ -111,6 +112,10 @@ const router = createBrowserRouter([
       {
         path:"/listing/barterpage",
         element:<BarterPage />
+      },
+      {
+        path: "/offerorderconform/:id",
+        element: <OfferOrderConformation/>
       }
     ]
   },
