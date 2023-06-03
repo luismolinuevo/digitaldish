@@ -8,7 +8,7 @@ import ArrowIcon from "../../assets/Icon-ArrowUp.png";
 export default function Footer() {
   return (
     <div>
-      <div className="Footer-container flex justify-center flex-col">
+      <div className="Footer-container flex justify-center flex-col pt-60">
         <div className="p-5 w-full mt-8 border border-gray-200 bg-[#7F92B5] text-center">
           {" "}
           <span className="inline-flex">
