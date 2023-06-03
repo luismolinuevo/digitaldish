@@ -105,7 +105,7 @@ import passport from "passport";
     router.put("/editoffer/:offerId", async (req, res) => {
         const offerId = req.params.offerId;
 
-        const editOffer = await prisma.offer.updateMany({
+        const editOffer = await prisma.offer.update({
             where: {
                 id: Number(offerId)
             },

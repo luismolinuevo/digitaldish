@@ -163,7 +163,7 @@ export default function Chat() {
       console.log("Error declining offer", error);
     }
   };
-
+//I could make a button appear instead of nagivating, need to make separte confirmation page for offers, test
   const handleAccept = async () => {
     try {
       if (user === postInfo.userId) {
@@ -174,13 +174,13 @@ export default function Chat() {
           }
         );
 
-        if (offerInfo.sellerAccept == true && offerInfo.buyerAccept == true) {
-          console.log("hey");
+        console.log(accept)
+        if (accept.data.editOffer.sellerAccept == true && accept.data.editOffer.buyerAccept == true) {
           const sellerAcceptMessage = {
             content: "Thanks",
             userId: user, 
           };
-          socket.emit("sendOfferMessage", declineMessage, offerId);
+          socket.emit("sendOfferMessage", sellerAcceptMessage, offerId);
 
           //navgiate here
         }
@@ -192,18 +192,20 @@ export default function Chat() {
           }
         );
 
-        if (offerInfo.sellerAccept == true && offerInfo.buyerAccept == true) {
+        if (accept.data.editOffer.sellerAccept == true && accept.data.editOffer.buyerAccept == true) {
           console.log("hey");
           const sellerAcceptMessage = {
             content: "Thanks",
             userId: user, 
           };
-          socket.emit("sendOfferMessage", declineMessage, offerId);
+          socket.emit("sendOfferMessage", sellerAcceptMessage, offerId);
 
           //navgiate here
         }
       }
-    } catch (err) {}
+    } catch (err) {
+        console.log("There is a error", err)
+    }
   };
 
   return (
