@@ -58,6 +58,7 @@ export default function SpecificNegotiate() {
           userTwoId: post.userId,
           userId: user,
           currentOffer: offer,
+          buyerAccept: true
         }
       );
       let offerId = create.data.chatroom.id;

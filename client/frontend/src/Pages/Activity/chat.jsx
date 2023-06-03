@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,6 +19,7 @@ const socket = io(":8080", {
 });
 
 export default function Chat() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const offerId = useSelector((state) => state.offers.currentOffer);
   const user = useSelector((state) => state.auth.userInfo);
@@ -31,6 +33,7 @@ export default function Chat() {
   const [negoiteorbarter, setNegoiateorbarter] = useState(0);
   const [currentOffer, setCurrentOffer] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [offerInfo, setOfferInfo] = useState([]);
 
   // const socket = io();
 
@@ -71,6 +74,7 @@ export default function Chat() {
         console.log(getChat);
         setPostInfo(getChat.post);
         setMessages(getChat.offermessages);
+        setOfferInfo(getChat);
       }
     } catch (error) {
       console.log("Error fetching messages:", error);
@@ -102,17 +106,37 @@ export default function Chat() {
 
   const handleOffer = async () => {
     try {
-      setShowModal(false)
+      setShowModal(false);
       const message = {
-        content: `The current offer is ${currentOffer}`,
+        content: `The current offer is $${currentOffer}`,
         userId: user, // Replace with the actual user ID
       };
       // Send the message to the server
       socket.emit("sendOfferMessage", message, offerId);
 
-      const editOffer = await axios.put(`http://localhost:8080/offer/editoffer/${(offerId)}`, {
-        currentOffer: currentOffer
-      });
+      // const editOffer = await axios.put(`http://localhost:8080/offer/editoffer/${(offerId)}`, {
+      //   currentOffer: currentOffer,
+      // });
+
+      if (postInfo.userId === user) {
+        const editOffer = await axios.put(
+          `http://localhost:8080/offer/editoffer/${offerId}`,
+          {
+            buyerAccept: false,
+            sellerAccept: true,
+            currentOffer: currentOffer,
+          }
+        );
+      } else {
+        const editOffer = await axios.put(
+          `http://localhost:8080/offer/editoffer/${offerId}`,
+          {
+            sellerAccept: false,
+            buyerAccept: true,
+            currentOffer: currentOffer,
+          }
+        );
+      }
     } catch (error) {
       console.log("Error sending message:", error);
     }
@@ -120,10 +144,13 @@ export default function Chat() {
 
   const handleDecline = async () => {
     try {
-      const decline = await axios.put(`http://localhost:8080/offer/editoffer/${(offerId)}`, {
-        sellerAccept: false,
-        buyerAccept: false
-      });
+      const decline = await axios.put(
+        `http://localhost:8080/offer/editoffer/${offerId}`,
+        {
+          sellerAccept: false,
+          buyerAccept: false,
+        }
+      );
 
       const declineMessage = {
         content: "I decline that offer",
@@ -132,21 +159,55 @@ export default function Chat() {
       socket.emit("sendOfferMessage", declineMessage, offerId);
 
       console.log(decline);
-    } catch(error) {
-      console.log("Error declining offer", error)
+    } catch (error) {
+      console.log("Error declining offer", error);
     }
-  }
+  };
 
   const handleAccept = async () => {
     try {
+      if (user === postInfo.userId) {
+        const accept = await axios.put(
+          `http://localhost:8080/offer/editoffer/${offerId}`,
+          {
+            sellerAccept: true,
+          }
+        );
 
-    } catch(err) {
+        if (offerInfo.sellerAccept == true && offerInfo.buyerAccept == true) {
+          console.log("hey");
+          const sellerAcceptMessage = {
+            content: "Thanks",
+            userId: user, 
+          };
+          socket.emit("sendOfferMessage", declineMessage, offerId);
 
-    }
-  }
+          //navgiate here
+        }
+      } else {
+        const accept = await axios.put(
+          `http://localhost:8080/offer/editoffer/${offerId}`,
+          {
+            buyerAccept: true,
+          }
+        );
+
+        if (offerInfo.sellerAccept == true && offerInfo.buyerAccept == true) {
+          console.log("hey");
+          const sellerAcceptMessage = {
+            content: "Thanks",
+            userId: user, 
+          };
+          socket.emit("sendOfferMessage", declineMessage, offerId);
+
+          //navgiate here
+        }
+      }
+    } catch (err) {}
+  };
 
   return (
-    <div >
+    <div>
       <div className="w-[520px] h-[820px] border-[#C2B8A3] border-[2px] relative rounded-[8px]">
         <div className="h-[84px] border-[#C7A695] border-b-2 flex justify-between items-center p-4">
           <div>
@@ -217,10 +278,16 @@ export default function Chat() {
                 >
                   OFFER
                 </button>
-                <button className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695]  border-4">
+                <button
+                  className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695]  border-4"
+                  onClick={handleAccept}
+                >
                   ACCEPT
                 </button>
-                <button className="w-[95px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4" onClick={handleDecline}>
+                <button
+                  className="w-[95px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4"
+                  onClick={handleDecline}
+                >
                   DECLINE
                 </button>
               </div>
@@ -279,7 +346,10 @@ export default function Chat() {
             />
           </div>
           <div className="flex justify-center">
-            <button className="w-[274px] h-[59px] bg-[#F0EEEE] rounded-[57px] text-[32px]" onClick={handleOffer} >
+            <button
+              className="w-[274px] h-[59px] bg-[#F0EEEE] rounded-[57px] text-[32px]"
+              onClick={handleOffer}
+            >
               SUBMIT
             </button>
           </div>
