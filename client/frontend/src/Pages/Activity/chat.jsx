@@ -110,13 +110,40 @@ export default function Chat() {
       // Send the message to the server
       socket.emit("sendOfferMessage", message, offerId);
 
-      const editOffer = await axios.put(`http://localhost:8080/offer/editoffer/${parseFloat(offerId)}`, {
+      const editOffer = await axios.put(`http://localhost:8080/offer/editoffer/${(offerId)}`, {
         currentOffer: currentOffer
       });
     } catch (error) {
       console.log("Error sending message:", error);
     }
   };
+
+  const handleDecline = async () => {
+    try {
+      const decline = await axios.put(`http://localhost:8080/offer/editoffer/${(offerId)}`, {
+        sellerAccept: false,
+        buyerAccept: false
+      });
+
+      const declineMessage = {
+        content: "I decline that offer",
+        userId: user, // Replace with the actual user ID
+      };
+      socket.emit("sendOfferMessage", declineMessage, offerId);
+
+      console.log(decline);
+    } catch(error) {
+      console.log("Error declining offer", error)
+    }
+  }
+
+  const handleAccept = async () => {
+    try {
+
+    } catch(err) {
+
+    }
+  }
 
   return (
     <div >
@@ -193,7 +220,7 @@ export default function Chat() {
                 <button className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695]  border-4">
                   ACCEPT
                 </button>
-                <button className="w-[95px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4">
+                <button className="w-[95px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4" onClick={handleDecline}>
                   DECLINE
                 </button>
               </div>
