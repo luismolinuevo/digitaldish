@@ -1,11 +1,32 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import ae from "../../assets/payment/ae.png"
 import visa from "../../assets/payment/visa-Icon.png"
 import mastercard from "../../assets/payment/mastercard-Icon.png"
 import paypal from "../../assets/payment/paypal-Icon.png"
 import apple from "../../assets/payment/apple-pay-Icon.png"
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function OrderConformation() {
+  const params = useParams();
+  const id = params.id;
+
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+      const fetchOffer = async () => {
+          try {
+              const post = await axios.get(`http://localhost:8080/post/${id}`);
+              setPost(post.data.post)
+              console.log(post.data.post)
+          } catch(err) {
+              console.log("There was a error", err)
+          }
+      }
+
+      fetchOffer()
+  }, [])
+  
   return (
     <div className="pt-[100px] px-[92px]">
       <h1 className="text-[34px]">Check out</h1>
