@@ -37,11 +37,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />
+        element: <Profile />,
       },
       {
         path: "/following",
-        element: <Following />
+        element: <Following />,
       },
       {
         path: "/listing",
@@ -49,51 +49,39 @@ const router = createBrowserRouter([
       },
       {
         path: "/signup",
-        element: <Signup />
+        element: <Signup />,
       },
       {
         path: "/login",
-        element: <Login />
+        element: <Login />,
       },
       {
         path: "/logout",
-        element: <Logout />
+        element: <Logout />,
       },
       {
         path: "/activity",
-        element: <Activity/>
+        element: <Activity />,
       },
-
-
-
-
-
-
-
-
       {
         path: "/specneglisting/:id",
-        element: <SpecificNegotiate/>
+        element: <SpecificNegotiate />,
       },
       {
         path: "/specbarterlisting/:id",
-        element: <SpecificBarter/>
-      },  
-
-      
-     
-
+        element: <SpecificBarter />,
+      },
       {
         path: "/specbidlisting/:id",
-        element: <SpecificBid/>
+        element: <SpecificBid />,
       },
       {
         path: "/orderconformation/:id",
         element: <OrderConformation/>
 
       },
-  
-   {
+
+      {
         path: "/listing",
         element: <Listing />,
         // children: [
@@ -105,8 +93,8 @@ const router = createBrowserRouter([
       },
 
       {
-        path:"/listing/bidpage",
-        element: <BidPage />
+        path: "/listing/bidpage",
+        element: <BidPage />,
       },
 
       {
@@ -117,15 +105,18 @@ const router = createBrowserRouter([
         path: "/offerorderconform/:id",
         element: <OfferOrderConformation/>
       }
-    ]
+    ],
+  },
+  {
+    path: "/upload",
+    element: <UploadPage />,
   },
 ]);
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
