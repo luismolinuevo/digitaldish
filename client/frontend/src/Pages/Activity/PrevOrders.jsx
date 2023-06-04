@@ -112,7 +112,7 @@ export default function PrevOrders() {
               <div className="flex items-center w-[180px] text-center justify-center">
                 <div>
                   <h1 className="text-[27px]">
-                    {item.finalPrice}
+                    ${item.finalPrice}
                   </h1>
                 </div>
               </div>
