@@ -84,35 +84,89 @@ router.get("/", async (req, res) => {
   })
 
 //   Get post by id
-router.get("/:postId", async (req, res) => {
-    console.log(req.params.postId);
-    try {
-      const getPostbyId = await prisma.post.findFirst({
-        where: {
-          id: parseInt(req.params.postId)
-        }
-      })
+// router.get("/:postId", async (req, res) => {
+//     console.log(req.params.postId);
+//     try {
+//       const getPostbyId = await prisma.post.findFirst({
+//         where: {
+//           id: parseInt(req.params.postId)
+//         }
+//       })
   
-      if (getPostbyId) {
-        res.status(200).json({
-          success: true,
-          message: "successfully fetched post by id!",
-          post: getPostbyId
-        })
-      } else {
-        res.status(400).json({
-          success: false,
-          message: "something went wrong, could not fetch data"
-        })
-      }
-    } catch (error) {
-      console.log(error)
+//       if (getPostbyId) {
+//         res.status(200).json({
+//           success: true,
+//           message: "successfully fetched post by id!",
+//           post: getPostbyId
+//         })
+//       } else {
+//         res.status(400).json({
+//           success: false,
+//           message: "something went wrong, could not fetch data"
+//         })
+//       }
+//     } catch (error) {
+//       console.log(error)
+//       res.status(400).json({
+//         success: false,
+//         message: "Something went wrong, sorry!"
+//       })
+//     }
+//   })
+router.get("/:postId", async (req, res) => {
+  console.log(req.params.postId);
+  try {
+    const postId = parseInt(req.params.postId);
+
+    // Retrieve the post by ID
+    const getPostById = await prisma.post.findFirst({
+      where: {
+        id: postId,
+      },
+    });
+
+    if (getPostById) {
+      // Retrieve the highest bid for the post
+      const highestBid = await prisma.bid.findFirst({
+        where: {
+          postId,
+        },
+        orderBy: {
+          price: "desc",
+        },
+      });
+
+      // Retrieve the count of bids for the post
+      const bidCount = await prisma.bid.count({
+        where: {
+          postId,
+        },
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Successfully fetched post by ID!",
+        post: {
+          ...getPostById,
+          highestBid: highestBid ? highestBid.price : null,
+          bidCount,
+        },
+      });
+    } else {
       res.status(400).json({
         success: false,
-        message: "Something went wrong, sorry!"
-      })
+        message: "Something went wrong, could not fetch data.",
+      });
     }
-  })
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: "Something went wrong, sorry!",
+    });
+  }
+});
+
 
 //   Get post by an user
 // router.get("/user/:userId", async function (req, res) {
