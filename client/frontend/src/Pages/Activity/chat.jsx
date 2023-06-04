@@ -61,7 +61,7 @@ export default function Chat() {
   }, [offerId]); //putting offerId here made it so that this runs whenever offerId has changed
 
   useEffect(() => {
-    scrollToBottom();
+    scrollToBottom();  //this causes the bug that moves the page down when a new message is created
   }, [messages]);
 
   const fetchMessages = async () => {
@@ -80,6 +80,8 @@ export default function Chat() {
 
       if (getChat.buyerAccept === true && getChat.sellerAccept == true) {
         setBothAccept(true);
+      } else {
+        setBothAccept(false)
       }
     } catch (error) {
       console.log("Error fetching messages:", error);
