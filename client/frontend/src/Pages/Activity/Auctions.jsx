@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Countdown from "../../Components/Countdown";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { checkLoginStatus } from "../../Utils/auth";
 
 export default function Auctions() {
+  const dispatch = useDispatch();
   const [active, setActive] = useState(1);
   const [auctions, setAuctions] = useState([]);
 
+  const user = useSelector((state) => state.auth.userInfo);
+
   useEffect(() => {
+    dispatch(checkLoginStatus());
     fetchAuctions();
   }, []);
 
@@ -28,7 +34,7 @@ export default function Auctions() {
       if (allAuctions.status === 200) {
         setAuctions(allAuctions.data.mappedBids);
         // console.log(allAuctions.data.getBids);
-        console.log(allAuctions.data.mappedBids)
+        console.log(allAuctions.data.mappedBids);
       } else {
         return null;
       }
@@ -37,9 +43,7 @@ export default function Auctions() {
     }
   };
 
-  const fetchBidInfo = async () => {
-
-  }
+  const fetchBidInfo = async () => {};
 
   return (
     <div className="ml-[90px] pt-[40px]">
@@ -85,8 +89,10 @@ export default function Auctions() {
                   <h1 className="text-[22px]">{item.status}</h1>
                   <div className="text-[18px]">
                     <Countdown
-                      startDate={"2023-06-02"}
-                      endDate={"2023-06-03"}
+                      // startDate={"2023-06-02"}
+                      // endDate={"2023-06-03"}
+                      startDate={item.post.startTime}
+                      endDate={item.post.endTime}
                     />
                   </div>
                 </div>
@@ -94,11 +100,15 @@ export default function Auctions() {
 
               <div className="flex items-center w-[180px] text-center justify-center">
                 <div className="">
-                  <h1 className="text-[27px]">{}</h1>
-                  <p className="text-[27px]"></p>
-                  <h1 className="text-[27px]">
-                    $00.00
-                  </h1>
+                  <h1 className="text-[18px]">{item.post.bidCount}</h1>
+                  <h1 className="text-[27px]">${item.price}</h1>
+                  <div className="text-[18px]">
+                    {item.post.highestBidUserId === user ? (
+                      <p>Your bid</p>
+                    ) : (
+                      <p>Outbid</p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -111,5 +121,4 @@ export default function Auctions() {
   );
 }
 
-//TODO get count of bids, get highest bid, highest price
 
