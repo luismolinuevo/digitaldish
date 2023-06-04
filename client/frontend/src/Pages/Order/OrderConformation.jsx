@@ -26,7 +26,7 @@ export default function OrderConformation() {
 
       fetchOffer()
   }, [])
-  
+
   return (
     <div className="pt-[100px] px-[92px]">
       <h1 className="text-[34px]">Check out</h1>
@@ -47,16 +47,16 @@ export default function OrderConformation() {
               <div className="flex mb-[74px]">
                 <img className="w-[198px] h-[183px]" />
                 <div className="ml-[26px]">
-                  <p className="text[22px]">Title</p>
-                  <p className="text[18px]">Username</p>
-                  <p className="text-4">Price</p>
+                  <p className="text[22px]">{post.title}</p>
+                  <p className="text[18px]">{post.userName}</p>
+                  <p className="text-4">${post.price}</p>
                 </div>
               </div>
               <div className="border-black border-t-[1px] flex justify-center">
                 <div className="flex flex-col mt-5">
                   <div className="flex">
                     <p className="text[18px] w-[75px] mr-[72px]">Subtotal</p>
-                    <p className="text-4">$00.00</p>
+                    <p className="text-4">${post.price}</p>
                   </div>
                   <div className="flex">
                     <p className="text[18px] w-[75px] mr-[72px]">Shipping</p>
@@ -68,7 +68,7 @@ export default function OrderConformation() {
                   </div>
                   <div className="flex">
                     <p className="text[18px] w-[75px] mr-[72px]">Total</p>
-                    <p className="text-4">$00.00</p>
+                    <p className="text-4">${post.price}</p>
                   </div>
                 </div>
               </div>
