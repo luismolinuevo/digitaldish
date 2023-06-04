@@ -26,8 +26,9 @@ export default function Auctions() {
       // console.log(allOffers.data.offers);
 
       if (allAuctions.status === 200) {
-        setAuctions(allAuctions.data.getBids);
-        console.log(allAuctions.data.getBids);
+        setAuctions(allAuctions.data.mappedBids);
+        // console.log(allAuctions.data.getBids);
+        console.log(allAuctions.data.mappedBids)
       } else {
         return null;
       }
@@ -35,6 +36,11 @@ export default function Auctions() {
       console.log("Oh no, something went wrong", error);
     }
   };
+
+  const fetchBidInfo = async () => {
+
+  }
+
   return (
     <div className="ml-[90px] pt-[40px]">
       <div className="flex items-center w-[1025px] px-2 mb-[26px]">
