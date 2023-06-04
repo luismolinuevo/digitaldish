@@ -18,6 +18,9 @@ import passport from "passport";
                 data: {
                     postId: Number(postId), 
                     currentOffer: req.body.currentOffer,
+                    status: req.body.status,
+                    sellerAccept: req.body.status,
+                    buyerAccept: req.body.buyerAccept,
                     users: {   //this will link user one     
                         connect: [
                             { id: Number(userId) }, 
@@ -102,12 +105,17 @@ import passport from "passport";
     router.put("/editoffer/:offerId", async (req, res) => {
         const offerId = req.params.offerId;
 
-        const editOffer = await prisma.offer.updateMany({
+        const editOffer = await prisma.offer.update({
             where: {
                 id: Number(offerId)
             },
             data: {
-                currentOffer: req.body.currentOffer
+                currentOffer: req.body.currentOffer,
+                user1Accept: req.body.user1Accept,
+                user2Accept: req.body.user2Accept,
+                buyerAccept: req.body.buyerAccept,
+                sellerAccept: req.body.sellerAccept,
+                status: req.body.status
             }
         });
 
@@ -138,6 +146,7 @@ import passport from "passport";
             createMessage
         });
     });
+
 
     // router.post("/offermessage", async (req, res) => {
     //     try {

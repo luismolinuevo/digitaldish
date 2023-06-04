@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,6 +19,7 @@ const socket = io(":8080", {
 });
 
 export default function Chat() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const offerId = useSelector((state) => state.offers.currentOffer);
   const user = useSelector((state) => state.auth.userInfo);
@@ -31,6 +33,8 @@ export default function Chat() {
   const [negoiteorbarter, setNegoiateorbarter] = useState(0);
   const [currentOffer, setCurrentOffer] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [offerInfo, setOfferInfo] = useState([]);
+  const [bothAccept, setBothAccept] = useState(false);
 
   // const socket = io();
 
@@ -57,7 +61,7 @@ export default function Chat() {
   }, [offerId]); //putting offerId here made it so that this runs whenever offerId has changed
 
   useEffect(() => {
-    scrollToBottom();
+    scrollToBottom();  //this causes the bug that moves the page down when a new message is created
   }, [messages]);
 
   const fetchMessages = async () => {
@@ -71,6 +75,13 @@ export default function Chat() {
         console.log(getChat);
         setPostInfo(getChat.post);
         setMessages(getChat.offermessages);
+        setOfferInfo(getChat);
+      }
+
+      if (getChat.buyerAccept === true && getChat.sellerAccept == true) {
+        setBothAccept(true);
+      } else {
+        setBothAccept(false)
       }
     } catch (error) {
       console.log("Error fetching messages:", error);
@@ -102,20 +113,116 @@ export default function Chat() {
 
   const handleOffer = async () => {
     try {
-      setShowModal(false)
+      setShowModal(false);
       const message = {
-        content: `The current offer is ${currentOffer}`,
+        content: `The current offer is $${currentOffer}`,
         userId: user, // Replace with the actual user ID
       };
       // Send the message to the server
       socket.emit("sendOfferMessage", message, offerId);
 
-      const editOffer = await axios.put(`http://localhost:8080/offer/editoffer/${parseFloat(offerId)}`, {
-        currentOffer: currentOffer
-      });
+      // const editOffer = await axios.put(`http://localhost:8080/offer/editoffer/${(offerId)}`, {
+      //   currentOffer: currentOffer,
+      // });
+
+      if (postInfo.userId === user) {
+        const editOffer = await axios.put(
+          `http://localhost:8080/offer/editoffer/${offerId}`,
+          {
+            buyerAccept: false,
+            sellerAccept: true,
+            currentOffer: currentOffer,
+          }
+        );
+      } else {
+        const editOffer = await axios.put(
+          `http://localhost:8080/offer/editoffer/${offerId}`,
+          {
+            sellerAccept: false,
+            buyerAccept: true,
+            currentOffer: currentOffer,
+          }
+        );
+      }
     } catch (error) {
       console.log("Error sending message:", error);
     }
+  };
+
+  const handleDecline = async () => {
+    try {
+      const decline = await axios.put(
+        `http://localhost:8080/offer/editoffer/${offerId}`,
+        {
+          sellerAccept: false,
+          buyerAccept: false,
+        }
+      );
+
+      const declineMessage = {
+        content: "I decline that offer",
+        userId: user, // Replace with the actual user ID
+      };
+      socket.emit("sendOfferMessage", declineMessage, offerId);
+
+      console.log(decline);
+    } catch (error) {
+      console.log("Error declining offer", error);
+    }
+  };
+  //I could make a button appear instead of nagivating, need to make separte confirmation page for offers, test
+  const handleAccept = async () => {
+    try {
+      if (user === postInfo.userId) {
+        const accept = await axios.put(
+          `http://localhost:8080/offer/editoffer/${offerId}`,
+          {
+            sellerAccept: true,
+          }
+        );
+
+        console.log(accept);
+        if (
+          accept.data.editOffer.sellerAccept == true &&
+          accept.data.editOffer.buyerAccept == true
+        ) {
+          const sellerAcceptMessage = {
+            content: "Thanks",
+            userId: user,
+          };
+          socket.emit("sendOfferMessage", sellerAcceptMessage, offerId);
+
+          setBothAccept(true);
+        }
+      } else {
+        const accept = await axios.put(
+          `http://localhost:8080/offer/editoffer/${offerId}`,
+          {
+            buyerAccept: true,
+          }
+        );
+
+        if (
+          accept.data.editOffer.sellerAccept == true &&
+          accept.data.editOffer.buyerAccept == true
+        ) {
+          console.log("hey");
+          const sellerAcceptMessage = {
+            content: "Thanks",
+            userId: user,
+          };
+          socket.emit("sendOfferMessage", sellerAcceptMessage, offerId);
+
+          setBothAccept(true);
+        }
+      }
+    } catch (err) {
+      console.log("There is a error", err);
+    }
+  };
+
+  const handleCheckout = () => {
+    navigate(`/offerorderconform/${offerInfo.id}`);
   };
 
   return (
@@ -184,18 +291,43 @@ export default function Chat() {
             </div>
             {negoiteorbarter === 0 ? (
               <div className="flex justify-center">
-                <button
-                  className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695] border-4"
-                  onClick={() => setShowModal(true)}
-                >
-                  OFFER
-                </button>
-                <button className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695]  border-4">
-                  ACCEPT
-                </button>
-                <button className="w-[95px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4">
-                  DECLINE
-                </button>
+                {bothAccept ? (
+                  <div>
+                    {user === postInfo.userId ? (
+                      <div className="w-[195px] h-[44px] rounded-[60px] px-4 text-base border-[#C7A695] border-4 text-center">
+                        <p>Thank you</p>
+                      </div>
+                    ) : (
+                      <button
+                        className="w-[195px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4"
+                        onClick={handleCheckout}
+                      >
+                        Checkout
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695] border-4"
+                      onClick={() => setShowModal(true)}
+                    >
+                      OFFER
+                    </button>
+                    <button
+                      className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695]  border-4"
+                      onClick={handleAccept}
+                    >
+                      ACCEPT
+                    </button>
+                    <button
+                      className="w-[95px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4"
+                      onClick={handleDecline}
+                    >
+                      DECLINE
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <p></p>
@@ -252,7 +384,10 @@ export default function Chat() {
             />
           </div>
           <div className="flex justify-center">
-            <button className="w-[274px] h-[59px] bg-[#F0EEEE] rounded-[57px] text-[32px]" onClick={handleOffer} >
+            <button
+              className="w-[274px] h-[59px] bg-[#F0EEEE] rounded-[57px] text-[32px]"
+              onClick={handleOffer}
+            >
               SUBMIT
             </button>
           </div>
