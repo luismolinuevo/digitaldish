@@ -34,6 +34,7 @@ export default function Chat() {
   const [currentOffer, setCurrentOffer] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [offerInfo, setOfferInfo] = useState([]);
+  const [bothAccept, setBothAccept] = useState(false);
 
   // const socket = io();
 
@@ -75,6 +76,10 @@ export default function Chat() {
         setPostInfo(getChat.post);
         setMessages(getChat.offermessages);
         setOfferInfo(getChat);
+      }
+
+      if (getChat.buyerAccept === true && getChat.sellerAccept == true) {
+        setBothAccept(true);
       }
     } catch (error) {
       console.log("Error fetching messages:", error);
@@ -163,7 +168,7 @@ export default function Chat() {
       console.log("Error declining offer", error);
     }
   };
-//I could make a button appear instead of nagivating, need to make separte confirmation page for offers, test
+  //I could make a button appear instead of nagivating, need to make separte confirmation page for offers, test
   const handleAccept = async () => {
     try {
       if (user === postInfo.userId) {
@@ -174,15 +179,18 @@ export default function Chat() {
           }
         );
 
-        console.log(accept)
-        if (accept.data.editOffer.sellerAccept == true && accept.data.editOffer.buyerAccept == true) {
+        console.log(accept);
+        if (
+          accept.data.editOffer.sellerAccept == true &&
+          accept.data.editOffer.buyerAccept == true
+        ) {
           const sellerAcceptMessage = {
             content: "Thanks",
-            userId: user, 
+            userId: user,
           };
           socket.emit("sendOfferMessage", sellerAcceptMessage, offerId);
 
-          //navgiate here
+          setBothAccept(true);
         }
       } else {
         const accept = await axios.put(
@@ -192,20 +200,27 @@ export default function Chat() {
           }
         );
 
-        if (accept.data.editOffer.sellerAccept == true && accept.data.editOffer.buyerAccept == true) {
+        if (
+          accept.data.editOffer.sellerAccept == true &&
+          accept.data.editOffer.buyerAccept == true
+        ) {
           console.log("hey");
           const sellerAcceptMessage = {
             content: "Thanks",
-            userId: user, 
+            userId: user,
           };
           socket.emit("sendOfferMessage", sellerAcceptMessage, offerId);
 
-          //navgiate here
+          setBothAccept(true);
         }
       }
     } catch (err) {
-        console.log("There is a error", err)
+      console.log("There is a error", err);
     }
+  };
+
+  const handleCheckout = () => {
+    navigate(`/offerorderconform/${offerInfo.id}`);
   };
 
   return (
@@ -274,24 +289,43 @@ export default function Chat() {
             </div>
             {negoiteorbarter === 0 ? (
               <div className="flex justify-center">
-                <button
-                  className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695] border-4"
-                  onClick={() => setShowModal(true)}
-                >
-                  OFFER
-                </button>
-                <button
-                  className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695]  border-4"
-                  onClick={handleAccept}
-                >
-                  ACCEPT
-                </button>
-                <button
-                  className="w-[95px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4"
-                  onClick={handleDecline}
-                >
-                  DECLINE
-                </button>
+                {bothAccept ? (
+                  <div>
+                    {user === postInfo.userId ? (
+                      <div className="w-[195px] h-[44px] rounded-[60px] px-4 text-base border-[#C7A695] border-4 text-center">
+                        <p>Thank you</p>
+                      </div>
+                    ) : (
+                      <button
+                        className="w-[195px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4"
+                        onClick={handleCheckout}
+                      >
+                        Checkout
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695] border-4"
+                      onClick={() => setShowModal(true)}
+                    >
+                      OFFER
+                    </button>
+                    <button
+                      className="w-[95px] h-[44px] rounded-[57px] px-4 mr-[29px] text-base border-[#C7A695]  border-4"
+                      onClick={handleAccept}
+                    >
+                      ACCEPT
+                    </button>
+                    <button
+                      className="w-[95px] h-[44px] rounded-[57px] px-4 text-base border-[#C7A695] border-4"
+                      onClick={handleDecline}
+                    >
+                      DECLINE
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <p></p>
