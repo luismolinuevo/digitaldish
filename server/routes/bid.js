@@ -111,4 +111,29 @@ router.put("/:bidId", passport.authenticate("jwt", { session: false, }), async (
     });
 });
 
+router.get('/:postId/bids', passport.authenticate("jwt", { session: false, }), async (req, res) => {
+    try {
+      const postId = parseInt(req.params.postId);
+  
+      // Retrieve the highest bid for the post
+      const highestBid = await prisma.bid.findFirst({
+        where: { postId },
+        orderBy: { price: 'desc' },
+        include: { user: true, post: true },
+      });
+  
+      // Retrieve the count of bids for the post
+      const bidCount = await prisma.bid.count({ where: { postId } });
+  
+      res.status(200).json({
+        success: true,
+        highestBid,
+        bidCount
+      })
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
 export default router;
