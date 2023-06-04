@@ -1,11 +1,32 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import ae from "../../assets/payment/ae.png"
 import visa from "../../assets/payment/visa-Icon.png"
 import mastercard from "../../assets/payment/mastercard-Icon.png"
 import paypal from "../../assets/payment/paypal-Icon.png"
 import apple from "../../assets/payment/apple-pay-Icon.png"
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function OrderConformation() {
+  const params = useParams();
+  const id = params.id;
+
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+      const fetchOffer = async () => {
+          try {
+              const post = await axios.get(`http://localhost:8080/post/${id}`);
+              setPost(post.data.post)
+              console.log(post.data.post)
+          } catch(err) {
+              console.log("There was a error", err)
+          }
+      }
+
+      fetchOffer()
+  }, [])
+
   return (
     <div className="pt-[100px] px-[92px]">
       <h1 className="text-[34px]">Check out</h1>
@@ -26,16 +47,16 @@ export default function OrderConformation() {
               <div className="flex mb-[74px]">
                 <img className="w-[198px] h-[183px]" />
                 <div className="ml-[26px]">
-                  <p className="text[22px]">Title</p>
-                  <p className="text[18px]">Username</p>
-                  <p className="text-4">Price</p>
+                  <p className="text[22px]">{post.title}</p>
+                  <p className="text[18px]">{post.userName}</p>
+                  <p className="text-4">${post.price}</p>
                 </div>
               </div>
               <div className="border-black border-t-[1px] flex justify-center">
                 <div className="flex flex-col mt-5">
                   <div className="flex">
                     <p className="text[18px] w-[75px] mr-[72px]">Subtotal</p>
-                    <p className="text-4">$00.00</p>
+                    <p className="text-4">${post.price}</p>
                   </div>
                   <div className="flex">
                     <p className="text[18px] w-[75px] mr-[72px]">Shipping</p>
@@ -47,7 +68,7 @@ export default function OrderConformation() {
                   </div>
                   <div className="flex">
                     <p className="text[18px] w-[75px] mr-[72px]">Total</p>
-                    <p className="text-4">$00.00</p>
+                    <p className="text-4">${post.price}</p>
                   </div>
                 </div>
               </div>
