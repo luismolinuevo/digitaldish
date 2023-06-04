@@ -13,6 +13,7 @@ import './index.css'
 import Layout from './Components/Layout'
 import BidPage from "./Pages/Listing/BidPage"
 import BarterPage from './Pages/Listing/BarterPage'
+import UploadPage from "./Pages/upload";
 
 import { Provider } from 'react-redux'
 import store from "./Utils/store"
