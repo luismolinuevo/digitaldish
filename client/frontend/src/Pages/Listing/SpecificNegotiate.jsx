@@ -21,7 +21,7 @@ export default function SpecificNegotiate() {
 
   const [post, setPost] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [offer, setOffer] = useState("");
+  const [offer, setOffer] = useState(post.price);
   const [message, setMessage] = useState("");
   const [offerSent, setOfferSent] = useState(false);
 
@@ -56,6 +56,7 @@ export default function SpecificNegotiate() {
         `http://localhost:8080/offer/createroom/${params.id}`,
         {
           userTwoId: post.userId,
+          status: "Active",
           userId: user,
           currentOffer: offer,
           buyerAccept: true
