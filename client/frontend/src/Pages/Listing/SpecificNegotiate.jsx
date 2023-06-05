@@ -253,15 +253,15 @@ export default function SpecificNegotiate() {
               </h3>
               <div className="flex gap-[40px] justify-center">
                 <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
-                  <p>${post.price * (0.05).toFixed(4)}</p>
+                  <p>${post.price - (post.price * 0.05).toFixed(2)}</p>
                   <p>5% off</p>
                 </button>
                 <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
-                  <p>${post.price * (0.1).toFixed(4)}</p>
+                  <p>${post.price - (post.price * (0.1).toFixed(2))}</p>
                   <p>10% off</p>
                 </button>
                 <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
-                  <p>${post.price * (0.15).toFixed(4)}</p>
+                  <p>${post.price - (post.price * (0.15).toFixed(2))}</p>
                   <p>15% off</p>
                 </button>
               </div>
