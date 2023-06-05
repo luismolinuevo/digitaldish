@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Card({ type, title, img, price }) {
     
     const shortTitle = title.slice(0, 16)+'...';
   return (
     <div>
-      <div className="w-[320px] h-[220px] p-[10px]">
+      <div className="w-[320px] h-[220px] p-[10px] mb-[20px]">
         <div
           className="w-[300px] h-[160px] bg-cover bg-no-repeat z-[-1] rounded-[4px]"
           style={{ backgroundImage: `url(${img})` }}
@@ -22,3 +23,5 @@ export default function Card({ type, title, img, price }) {
     </div>
   );
 }
+
+//TODO add link
