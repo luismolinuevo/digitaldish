@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
 import { useDispatch } from "react-redux";
 import { signupUser } from "../../Utils/auth";
-import Footer from "../../Components/Footer/Footer";
+// import Footer from "../../Components/Footer/Footer";
+import FooterNav from "../../Components/Footer/FooterNav";
 
 
 export default function Signup() {
@@ -121,7 +122,7 @@ export default function Signup() {
         </div>
       </section>
 
-      <Footer />
+      <FooterNav />
       
     </>
   );
