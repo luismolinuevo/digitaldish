@@ -27,6 +27,7 @@ import OffersRecieved from './Pages/Activity/OffersRecieved'
 import Activity from './Pages/Activity/Activity'
 
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <App />,
+        element: <Home />,
       },
       {
         path: "/profile",
