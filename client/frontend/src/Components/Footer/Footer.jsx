@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import InstagramIcon from "../../assets/Icon-InstagramLogo.png";
-import FacebookIcon from "../../assets/Icon-FacebookLogo.png";
-import TwitterIcon from "../../assets/Icon-TwitterLogo.png";
+import InstagramIcon from "../../assets/icons/Icon-InstagramLogo.png";
+import FacebookIcon from "../../assets/icons/Icon-FacebookLogo.png";
+import TwitterIcon from "../../assets/icons/Icon-TwitterLogo.png";
 import ArrowIcon from "../../assets/Icon-ArrowUp.png";
 
 export default function Footer() {
@@ -36,7 +36,7 @@ export default function Footer() {
             <div className="flex flex-row">
               <div className="border-b border-[#7F92B5] w-[26rem] self-center text-left">
                 <input
-                  class="appearance-none bg-transparent border-none w-[24rem] text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-xl"
+                  className="appearance-none bg-transparent border-none w-[24rem] text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-xl"
                   type="text"
                   placeholder="Enter your email"
                   aria-label="Email address"
