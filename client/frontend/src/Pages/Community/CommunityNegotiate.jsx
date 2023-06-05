@@ -1,15 +1,18 @@
 import React from "react";
-import CommunityComponent from "./CommunityComponent";
+import ButtonsComponent from "./ButtonsComponent";
+import { HeaderComponent, CardComponent} from "./ListingComponent";
 
 export default function communitynegotiate() {
   
-    const title= "Everything is a Negotiation"
-    const description= "Lets's Negotiate"
-    const showGoogleimg = false;
+    const greeting1= "Everything is a Negotiation"
+    const greeting2= "Lets's Negotiate"
+    
 
   return (
     <div>
-      <CommunityComponent title={title} description={description} showGoogleimg={showGoogleimg} />
+      <ButtonsComponent greeting1={greeting1} />
+      <HeaderComponent greeting2={greeting2}/>
+      <CardComponent />
       
     </div>
   );

@@ -1,16 +1,18 @@
 import React from "react";
-import CommunityComponent from "./CommunityComponent";
-import Googleimg from "../../assets/googleimg.png";
+import ButtonsComponent from "./ButtonsComponent";
+import { HeaderComponent, CardComponent} from "./ListingComponent";
 
 export default function communitynear() {
 
-  const title = "Welcome to the community";
-  const description = "What's new in the area";
+  const greeting1 = "Welcome to the community";
+  const greeting2 = "What's new in the area";
   const showGoogleimg = true;
 
   return (
     <div>
-      <CommunityComponent title={title} description={description} showGoogleimg={showGoogleimg}/>
+      <ButtonsComponent greeting1={greeting1}/>
+      <HeaderComponent  greeting2={greeting2} showGoogleimg={showGoogleimg} />
+      <CardComponent />
     </div>
 
   );

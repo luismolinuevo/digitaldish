@@ -3,9 +3,9 @@ import {} from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button, Select, Option } from "@material-tailwind/react";
-import Googleimg from "../../assets/googleimg.png";
 
-const CommunityComponent = ({ title, description, postings, showGoogleimg }) => {
+
+const ButtonsComponent = ({ greeting1, }) => {
   return (
     <div className="pt-[100px] flex flex-col">
       <div className=" w-[1400px] h-[500px] py-40 mx-auto">
@@ -37,7 +37,7 @@ const CommunityComponent = ({ title, description, postings, showGoogleimg }) => 
         </div>
 
         <div className="mt-10">
-          <h1 className="text-[48px] text-center font-bold ">{title}</h1>
+          <h1 className="text-[48px] text-center font-bold ">{greeting1}</h1>
 
           <p className="text-[20px] text-gray-500 text-center mt-3">
             Explore the world of custom tech, where anything you can think of
@@ -148,30 +148,9 @@ const CommunityComponent = ({ title, description, postings, showGoogleimg }) => 
         </div>
       </div>
 
-      <div className="h-screen w-full bg-[#F4EBDC]">
-        <div className="w-36 mt-2 ml-[1230px]">
-          <Select className="text-[#1b72f6]" label="Sort By:">
-            <Option className="hover:bg-[#DAB24E4D]">Relevance</Option>
-            <Option className="hover:bg-[#DAB24E4D]">Most recent</Option>
-            <Option className="hover:bg-[#DAB24E4D]">Lowest price</Option>
-            <Option className="hover:bg-[#DAB24E4D]">Highest price</Option>
-          </Select>
-        </div>
-
-        <div>
-          <p className="font-bold text-[45px] mt-5 ml-40">{description}</p>
-        </div>
-
-        
-        {showGoogleimg && (
-          <div className=" w-1/4 ml-40 mt-5 border border-black">
-            <img src={Googleimg} alt="Google Image" />
-          </div>
-        )}
-
-      </div>
+      
     </div>
   );
 };
 
-export default CommunityComponent;
+export default ButtonsComponent;
