@@ -1,10 +1,10 @@
 import React from "react";
 import CommunityComponent from "./CommunityComponent";
 
-export default function CommunityNew() {
+export default function communitynegotiate() {
   
-    const title= "Welcome to the Community"
-    const description= "Discover what's new"
+    const title= "Everything is a Negotiation"
+    const description= "Lets's Negotiate"
     const showGoogleimg = false;
 
   return (

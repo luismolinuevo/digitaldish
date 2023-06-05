@@ -1,10 +1,10 @@
 import React from "react";
 import CommunityComponent from "./CommunityComponent";
 
-export default function CommunityNew() {
+export default function CommunityAuction() {
   
-    const title= "Welcome to the Community"
-    const description= "Discover what's new"
+    const title= "Life's an Auction"
+    const description= "Lets's Auction"
     const showGoogleimg = false;
 
   return (
