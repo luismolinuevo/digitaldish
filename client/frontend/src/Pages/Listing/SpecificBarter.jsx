@@ -205,10 +205,10 @@ export default function SpecificBarter() {
             </div>
             <div className="flex justify-center">
               <div className="flex flex-col">
-                <h1>About the seller</h1>
+                <h1 className="text-center">About the seller</h1>
                 <div className="flex">
                   <div>
-                    <p>Username</p>
+                    <p>{post.userName}</p>
                     <p>* * * * * (00 sales)</p>
                   </div>
                   <p>image</p>

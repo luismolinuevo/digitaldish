@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Modal from "../../Components/Modal";
+import Countdown from "../../Components/Countdown"
 
 import ae from "../../assets/payment/ae.png";
 import visa from "../../assets/payment/visa-Icon.png";
@@ -85,12 +86,12 @@ export default function SpecificBid() {
                   <h1 className="text-[37px] mb-[18px]">{post.title}</h1>
                   <div className="flex">
                     <div className="mr-10">
-                      <p className="text-5">2 bids:</p>
-                      <p className="text-[27px]">$43.00</p>
+                      <p className="text-5">{post.bidCount} bids:</p>
+                      <p className="text-[27px]">${post.highestBid}</p>
                     </div>
                     <div>
-                      <p className="text-[27px]">Time left: 12:00</p>
-                      <p className="text-[22px]">Ends: 5/2/2023 4:00pm</p>
+                      <p className="text-[27px]">Time left: <Countdown startDate={post.startTime} endDate={post.endTime}/></p>
+                      <p className="text-[22px]">Ends: {post.endTime}</p>
                     </div>
                   </div>
                 </div>
@@ -168,13 +169,15 @@ export default function SpecificBid() {
             <div className="flex"></div>
           </div>
           <div className="">
-            <div className=" h-[221px] bg-[#D9D9D9]">Description</div>
+          <div className="w-[600px] h-[221px] bg-[#D9D9D9] mb-[30px]">
+              <p>des</p>
+            </div>
             <div className="flex justify-center">
               <div className="flex flex-col">
-                <h1>About the seller</h1>
+                <h1 className="text-center">About the seller</h1>
                 <div className="flex">
                   <div>
-                    <p>Username</p>
+                    <p>{post.userName}</p>
                     <p>* * * * * (00 sales)</p>
                   </div>
                   <p>image</p>

@@ -19,7 +19,7 @@ import passport from "passport";
                     postId: Number(postId), 
                     currentOffer: req.body.currentOffer,
                     status: req.body.status,
-                    sellerAccept: req.body.status,
+                    sellerAccept: req.body.sellerAccept,
                     buyerAccept: req.body.buyerAccept,
                     users: {   //this will link user one     
                         connect: [

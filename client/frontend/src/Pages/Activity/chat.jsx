@@ -362,16 +362,22 @@ export default function Chat() {
             <h3 className="text-[20px] text-center mb-4">Suggested Offers:</h3>
             <div className="flex gap-[40px] justify-center mb-[30px]">
               <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
-                <p>0000</p>
-                <p>5% off</p>
+              <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
+                  <p>${postInfo.price - (postInfo.price * 0.05).toFixed(2)}</p>
+                  <p>5% off</p>
+                </button>
               </div>
               <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
-                <p>0000</p>
-                <p>10% off</p>
+              <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
+                  <p>${postInfo.price - (postInfo.price * 0.1).toFixed(2)}</p>
+                  <p>10% off</p>
+                </button>
               </div>
               <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
-                <p>0000</p>
-                <p>15% off</p>
+              <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
+                  <p>${postInfo.price - (postInfo.price * 0.15).toFixed(2)}</p>
+                  <p>15% off</p>
+                </button>
               </div>
             </div>
           </div>

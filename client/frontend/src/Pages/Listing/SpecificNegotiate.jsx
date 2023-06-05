@@ -24,6 +24,9 @@ export default function SpecificNegotiate() {
   const [offer, setOffer] = useState(post.price);
   const [message, setMessage] = useState("");
   const [offerSent, setOfferSent] = useState(false);
+  const fivePercentOff = post.price - (post.price * (0.05).toFixed(2))
+  const tenPercentOff= post.price - (post.price * (0.10).toFixed(2))
+  const fifteenPercentOff = post.price - (post.price * (0.15).toFixed(2))
 
   useEffect(() => {
     dispatch(checkLoginStatus());
@@ -103,6 +106,30 @@ export default function SpecificNegotiate() {
       console.log("offer message created");
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const handleSuggestButton = async (price) => {
+    try {
+      console.log(price)
+      const create = await axios.post(
+        `http://localhost:8080/offer/createroom/${params.id}`,
+        {
+          userTwoId: post.userId,
+          status: "Active",
+          userId: user,
+          currentOffer: price,
+          buyerAccept: true
+        }
+      );
+      let offerId = create.data.chatroom.id;
+      sendMessage(offerId);
+      sendOffer(offerId);
+      console.log("offercreated");
+
+      setOfferSent(!offerSent);
+    } catch (err) {
+      console.log("There is a error" + err);
     }
   };
 
@@ -252,16 +279,16 @@ export default function SpecificNegotiate() {
                 Sugguested Offers:
               </h3>
               <div className="flex gap-[40px] justify-center">
-                <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
-                  <p>${post.price * (0.05).toFixed(4)}</p>
+                <button className="bg-[#F1F0EB] w-[86px] h-[70px]" onClick={() => handleSuggestButton(fivePercentOff)}>
+                  <p>${fivePercentOff}</p>
                   <p>5% off</p>
                 </button>
-                <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
-                  <p>${post.price * (0.1).toFixed(4)}</p>
+                <button className="bg-[#F1F0EB] w-[86px] h-[70px]" onClick={() => handleSuggestButton(tenPercentOff)}>
+                  <p>${tenPercentOff}</p>
                   <p>10% off</p>
                 </button>
-                <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
-                  <p>${post.price * (0.15).toFixed(4)}</p>
+                <button className="bg-[#F1F0EB] w-[86px] h-[70px]" onClick={() => handleSuggestButton(fifteenPercentOff)}>
+                  <p>${fifteenPercentOff}</p>
                   <p>15% off</p>
                 </button>
               </div>
