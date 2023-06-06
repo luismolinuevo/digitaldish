@@ -25,7 +25,8 @@ router.post("/", passport.authenticate("jwt", { session: false, }), async (req, 
                 carrier: req.body.carrier,
                 condition: req.body.condition,
                 endTime: req.body.endTime,
-                startTime: req.body.startTime
+                startTime: req.body.startTime,
+                type: req.body.type
             }
         })
 

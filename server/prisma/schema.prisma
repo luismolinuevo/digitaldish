@@ -44,7 +44,7 @@ model Post {
   userName     String
   title        String
   imageURL     String?
-  description  String
+  description  String   @db.VarChar(10000)
   price        String
   category     String
   createdAt    DateTime @default(now())
@@ -58,6 +58,7 @@ model Post {
   condition    String?
   size         String?
   subcategory  String?
+  type         String?
 
   userId    Int
   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
