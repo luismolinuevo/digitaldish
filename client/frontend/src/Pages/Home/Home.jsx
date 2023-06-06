@@ -8,10 +8,21 @@ import keyboard from "../../assets/HomePage/Keyboard.jpg";
 import keycaps from "../../assets/Homepage/Keycaps.jpg";
 import logo from "../../assets/HomePage/logo.png";
 import robotHand from "../../assets/HomePage/robotHand.png"
+import logoIcon from "../../assets/HomePage/logoIcon.png"
+import { useSelector, useDispatch } from "react-redux";
+import { checkLoginStatus } from "../../Utils/auth";
 import Card from "./Card";
 import BiggerCard from "./BiggerCard";
 
 export default function Home() {
+  const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
+  const userName = useSelector((state) => state.auth.userName);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkLoginStatus())
+  }, [])
+
   return (
     <div className="">
       <div className="bg-[#F1F0EB] pt-20 px-4">
@@ -48,6 +59,8 @@ export default function Home() {
           </div>
           <div>
             <div className="w-[320px] h-[430px] mb-[50px] bg-white">
+              {
+                !isAuthenticated ? 
               <div className="flex flex-col items-center justify-center h-full">
                 <h1 className="text-[27px] mb-[26px]">Welcome,</h1>
                 <button className="bg-black text-white px-[70px] py-4">
@@ -58,6 +71,11 @@ export default function Home() {
                   Signup
                 </button>
               </div>
+              :
+              <div className="flex flex-col justify-center p-4">
+                <h1 className="text-center text-[27px]">{userName}'s Activity</h1>
+              </div>
+              }
             </div>
             <div>
               <Card title={"title"} type={"bid"} img={robot} price={"00.00"} />
@@ -190,7 +208,7 @@ export default function Home() {
             <h1 className="text-[44px] text-white">Who we are</h1>
             <p className="text-white text-[28px] pb-[100px]"> 
               born to connect hobbyists within
-              <br /> technology, (logo) is a one of a kind
+              <br /> technology, Tech Niche is a one of a kind
               <br /> marketplace where products are sold
               <br /> through bartering, bidding, and
               <br /> negotiating. Learn more by signing up
