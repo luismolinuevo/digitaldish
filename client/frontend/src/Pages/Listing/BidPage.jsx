@@ -43,6 +43,7 @@ export default function BidForm() {
       shippingFees: shippingFees,
       userName: userName,
       userRating: userRating,
+      type: "bid"
     };
 
     const newPost = await axios.post(`http://localhost:8080/post`, postData, {

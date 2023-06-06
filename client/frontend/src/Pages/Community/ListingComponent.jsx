@@ -38,11 +38,14 @@ export const HeaderComponent = (props) => {
 };
 
 export const CardComponent = (props) => {
-  const { title, price, image } = props;
+  const { title, price, image, type } = props;
+  
+
+  // const shortTitle = title.slice(0, 16)+'...';
 
   return (
     <div className="w-screen bg-[#F4EBDC]">
-        <Card className="w-72 h-80 border border-blue-gray-500 flex ml-60" color="transparent">
+      <Card className="w-72 h-80" color="transparent">
           <CardHeader shadow={false} floated={false} className="h-96">
             <img
               src= ""
@@ -62,9 +65,8 @@ export const CardComponent = (props) => {
             </div>
           </CardBody>
         </Card>
+
       </div>
     
   );
 };
-
-
