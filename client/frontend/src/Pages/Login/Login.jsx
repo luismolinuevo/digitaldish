@@ -3,7 +3,7 @@ import "./Login.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../Utils/auth";
-import Footer from "../../Components/Footer/Footer";
+import FooterNav from "../../Components/Footer/FooterNav";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ export default function Login() {
         </div>
       </div>
 
-      <Footer />
+      <FooterNav />
     </div>
   );
 
