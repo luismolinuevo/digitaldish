@@ -13,6 +13,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
 import Card from "./Card";
 import BiggerCard from "./BiggerCard";
+import FooterNav from "../../Components/Footer/FooterNav"
+import Footer from "../../Components/Footer/Footer"
 
 export default function Home() {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -247,6 +249,8 @@ export default function Home() {
           <img src={robotHand} alt="" className="h-full " />
         </div>
       </div>
+      <FooterNav/>
+
     </div>
   );
 }
