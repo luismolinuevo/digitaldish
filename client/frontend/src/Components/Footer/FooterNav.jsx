@@ -12,7 +12,7 @@ import ApplePayIcon from "../../assets/payment/apple-pay-icon.png";
 
 export default function FooterNav() {
   return (
-    <div className="footer-nav mt-40 font-[Inter] bg-[#C3D5F5] pt-2">
+    <div className="footer-nav  font-[Inter] bg-[#C3D5F5] pt-2">
       <div className="flex justify-center flex-col pt-30 pt-5">
         <div className="flex flex-row px-20">
           <div className="flex-col">
