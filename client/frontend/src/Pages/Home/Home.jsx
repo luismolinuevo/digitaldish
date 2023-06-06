@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-dom";
+import { Link } from "react-router-dom";
 import robot from "../../assets/HomePage/robot2.jpg";
 import monitor from "../../assets/HomePage/Monitors.jpg";
 import headphones from "../../assets/HomePage/Headphones.jpg";
 import keyboard from "../../assets/HomePage/Keyboard.jpg";
 import keycaps from "../../assets/Homepage/Keycaps.jpg";
 import logo from "../../assets/HomePage/logo.png";
-import robotHand from "../../assets/HomePage/robotHand.png"
-import logoIcon from "../../assets/HomePage/logoIcon.png"
+import robotHand from "../../assets/HomePage/robotHand.png";
+import logoIcon from "../../assets/HomePage/logoIcon.png";
 import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
 import Card from "./Card";
@@ -20,8 +20,8 @@ export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(checkLoginStatus())
-  }, [])
+    dispatch(checkLoginStatus());
+  }, []);
 
   return (
     <div className="">
@@ -59,23 +59,42 @@ export default function Home() {
           </div>
           <div>
             <div className="w-[320px] h-[430px] mb-[50px] bg-white">
-              {
-                !isAuthenticated ? 
-              <div className="flex flex-col items-center justify-center h-full">
-                <h1 className="text-[27px] mb-[26px]">Welcome,</h1>
-                <button className="bg-black text-white px-[70px] py-4">
-                  Login
-                </button>
-                <h1 className="text-[27px] my-4">or</h1>
-                <button className="bg-black text-white px-[70px] py-4">
-                  Signup
-                </button>
-              </div>
-              :
-              <div className="flex flex-col justify-center p-4">
-                <h1 className="text-center text-[27px]">{userName}'s Activity</h1>
-              </div>
-              }
+              {!isAuthenticated ? (
+                <div className="flex flex-col items-center justify-center h-full">
+                  <h1 className="text-[27px] mb-[26px]">Welcome,</h1>
+                  <button className="bg-black text-white px-[70px] py-4 rounded-[4px]">
+                    Login
+                  </button>
+                  <h1 className="text-[27px] my-4">or</h1>
+                  <button className="bg-black text-white px-[70px] py-4 rounded-[4px]">
+                    Signup
+                  </button>
+                </div>
+              ) : (
+                <div className="flex flex-col justify-center p-4">
+                  <h1 className="text-center text-[27px] mb-[30px]">
+                    {userName}'s Activity
+                  </h1>
+                  <Link
+                    to={"/activity"}
+                    className="bg-black text-white px-[70px] py-4 rounded-[4px] m-4 text-center"
+                  >
+                    Offers Received
+                  </Link>
+                  <Link
+                    to={"/activity"}
+                    className="bg-black text-white px-[70px] py-4 rounded-[4px] m-4 text-center"
+                  >
+                    Offers Sent
+                  </Link>
+                  <Link
+                    to={"/activity"}
+                    className="bg-black text-white px-[70px] py-4 rounded-[4px] m-4 text-center"
+                  >
+                    Auctions
+                  </Link>
+                </div>
+              )}
             </div>
             <div>
               <Card title={"title"} type={"bid"} img={robot} price={"00.00"} />
@@ -206,7 +225,7 @@ export default function Home() {
           <div className="py-[55px] px-[49px] ">
             <img src={logo} alt="" className="w-[160px] h-[51px]" />
             <h1 className="text-[44px] text-white">Who we are</h1>
-            <p className="text-white text-[28px] pb-[100px]"> 
+            <p className="text-white text-[28px] pb-[100px]">
               born to connect hobbyists within
               <br /> technology, Tech Niche is a one of a kind
               <br /> marketplace where products are sold
@@ -215,12 +234,16 @@ export default function Home() {
               <br /> and becoming a part of the community
             </p>
             <div className="">
-              <button className="bg-white rounded-[57px] border-2 border-black text-[32px] px-4 py-2 w-[270px]">Contact</button>
-              <button className="bg-white rounded-[57px] border-2 border-black text-[32px] px-4 py-2 w-[270px]">About Us</button>
+              <button className="bg-white rounded-[57px] border-2 border-black text-[32px] px-4 py-2 w-[270px]">
+                Contact
+              </button>
+              <button className="bg-white rounded-[57px] border-2 border-black text-[32px] px-4 py-2 w-[270px]">
+                About Us
+              </button>
             </div>
           </div>
         </div>
-        <div >
+        <div>
           <img src={robotHand} alt="" className="h-full " />
         </div>
       </div>
