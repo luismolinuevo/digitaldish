@@ -4,7 +4,7 @@ import passport from "passport"
 
 const router = express.Router()
 
-router.get("/getTypes/:type", async (req, res) => {
+router.get("/getType/:type", async (req, res) => {
   const type = req.params.type
   const getPost = await prisma.post.findMany({
     where: {

@@ -3,30 +3,26 @@ import ButtonsComponent from "./ButtonsComponent";
 import { HeaderComponent, CardComponent } from "./ListingComponent";
 import Footer from "../../Components/Footer/Footer";
 import axios from "axios";
+import Card from "../Home/Card";
 
 export default function CommunityAuction(props) {
   const greeting1 = "Life's an Auction";
   const greeting2 = "Lets's Auction";
 
   const [post, setPost] = useState([]);
-  const { image, type } = props;
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get("http://localhost:8080/posts", {
-        params: {
-          type: bid,
-        },
-      });
-      console.log(response.data.post);
-      setPost(response.data.post);
+      const response = await axios.get(`http://localhost:8080/post/getType/bid`);
+      console.log(response.data.getPost);
+      setPost(response.data.getPost);
     }
     fetchData();
-  }, [type]);
+  }, []);
 
   return (
     <div>
-      <ButtonsComponent greeting1={greeting1} />
+      <ButtonsComponent greeting1={greeting1} auction={true}/>
       <HeaderComponent greeting2={greeting2} />
 
       <div className="w-screen bg-[#F4EBDC]">
@@ -35,10 +31,9 @@ export default function CommunityAuction(props) {
           {post && post.length !== 0 ? (
               post.map((item) => (
                 <div className="">
-                  <CardComponent
+                  <Card
                     title={item.title}
                     price={item.price}
-                    image={image}
                   />
                 </div>
               ))

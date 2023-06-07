@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Button, Select, Option } from "@material-tailwind/react";
 
 
-const ButtonsComponent = ({ greeting1, }) => {
+const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
   return (
     <div className="pt-[100px] flex flex-col">
       <div className=" w-[1400px] h-[500px] py-40 mx-auto">
@@ -61,7 +61,7 @@ const ButtonsComponent = ({ greeting1, }) => {
                 <Button
                   color="white"
                   size="lg"
-                  className=" border-4 rounded-2xl border-[#DAB24E] mr-12 w-44 text-lg"
+                  className={` border-4 rounded-2xl border-[#DAB24E] mr-12 w-44 text-lg ${auction ? "bg-[#DAB24E] text-white" : ""}`}
                 >
                   AUCTION
                 </Button>
@@ -71,7 +71,7 @@ const ButtonsComponent = ({ greeting1, }) => {
                 <Button
                   color="white"
                   size="lg"
-                  className="border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg"
+                  className={`border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg ${neg ? "bg-[#DAB24E] text-white" : ""}`}
                 >
                   NEGOTIATION
                 </Button>
