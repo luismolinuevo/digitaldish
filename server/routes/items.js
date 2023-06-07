@@ -4,6 +4,20 @@ import passport from "passport"
 
 const router = express.Router()
 
+router.get("/getTypes/:type", async (req, res) => {
+  const type = req.params.type
+  const getPost = await prisma.post.findMany({
+    where: {
+      type: type
+    }
+  });
+
+  res.status(200).json({
+    success: true,
+    getPost
+  })
+})
+
 // Create a post at /
 router.post("/", passport.authenticate("jwt", { session: false, }), async (req, res) => {
     try {
