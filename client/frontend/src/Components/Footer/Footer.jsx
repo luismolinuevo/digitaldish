@@ -29,8 +29,11 @@ export default function Footer() {
           </a>
           <form
             method="POST"
-            action="https://mailchi.mp/[xxxxxx]/welcome-to-digital-dish"
-            className="leading-normal my-5 w-full flex flex-col justify-center"
+            action="https://gmail.us11.list-manage.com/subscribe/post?u=116baf287fef2694aeb38d725&amp;id=402b0ba692&amp;f_id=00239fe0f0" 
+            id="mc-embedded-subscribe-form" 
+            name="mc-embedded-subscribe-form" 
+            target="_blank" 
+            className="validate leading-normal my-5 w-full flex flex-col justify-center"
           >
           <div className="flex flex-col justify-center self-center">
             <div className="flex flex-row">
