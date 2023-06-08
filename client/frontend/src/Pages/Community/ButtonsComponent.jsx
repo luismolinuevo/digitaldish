@@ -33,13 +33,13 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
   }
 
   const handleGame = () => {
-    setKeyboards(!game);
+    setGame(!game);
     if(!game) { dispatch(setCategory("game")) } 
     else { dispatch(deleteCategory("game")) }
   }
 
   const handlePhones = () => {
-    setKeyboards(!phones);
+    setPhones(!phones);
     if(!phones) { dispatch(setCategory("phone")) } 
     else { dispatch(deleteCategory("phone")) }
   }
@@ -90,30 +90,10 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
                 href="#"
                 color="white"
                 size="lg"
-                className=" border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg"
+                className=" border-4 rounded-2xl border-[#DAB24E] mr-7 w-44 text-lg"
               >
                 ACCESORIES
               </Button>
-
-              <Link to="/communityauction">
-                <Button
-                  color="white"
-                  size="lg"
-                  className={` border-4 rounded-2xl border-[#DAB24E] mr-12 w-44 text-lg ${auction ? "bg-[#DAB24E] text-white" : ""}`}
-                >
-                  AUCTION
-                </Button>
-              </Link>
-
-              <Link to="/communitynegotiate">
-                <Button
-                  color="white"
-                  size="lg"
-                  className={`border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg ${neg ? "bg-[#DAB24E] text-white" : ""}`}
-                >
-                  NEGOTIATION
-                </Button>
-              </Link>
 
               <Button
                 href="#"
@@ -123,6 +103,36 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
               >
                 DEVICES
               </Button>
+
+              <Link to="/communitybarter">
+                <Button
+                  color="white"
+                  size="lg"
+                  className={`border-4 rounded-2xl border-[#DAB24E] mx-[70px] w-44 text-lg ${barter ? "bg-[#DAB24E] text-white" : ""}`}
+                >
+                  Barter
+                </Button>
+              </Link>
+
+              <Link to="/communityauction">
+                <Button
+                  color="white"
+                  size="lg"
+                  className={` border-4 rounded-2xl border-[#DAB24E] mr-7 w-44 text-lg ${auction ? "bg-[#DAB24E] text-white" : ""}`}
+                >
+                  AUCTION
+                </Button>
+              </Link>
+
+              <Link to="/communitynegotiate">
+                <Button
+                  color="white"
+                  size="lg"
+                  className={`border-4 rounded-2xl border-[#DAB24E] mr-7 w-44 text-lg ${neg ? "bg-[#DAB24E] text-white" : ""}`}
+                >
+                  NEGOTIATION
+                </Button>
+              </Link>
             </div>
 
             <div className="mt-5 flex justify-center text-center">
@@ -130,7 +140,7 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
                 href="#"
                 color="white"
                 size="lg"
-                className={` border-4 rounded-2xl border-[#DAB24E] mr-8 ml-10 w-44 text-lg ${monitor ? "bg-[#DAB24E] text-white" : ""}`}
+                className={` border-4 rounded-2xl border-[#DAB24E] mr-7 ml-10 w-44 text-lg ${monitor ? "bg-[#DAB24E] text-white" : ""}`}
                 onClick={handleMonitor}
               >
                 MONITOR
@@ -140,7 +150,7 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
                 href="#"
                 color="white"
                 size="lg"
-                className={` border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg ${mice ? "bg-[#DAB24E] text-white" : ""}`}
+                className={` border-4 rounded-2xl border-[#DAB24E] mr-7 w-44 text-lg ${mice ? "bg-[#DAB24E] text-white" : ""}`}
                 onClick={handleMice}
               >
                 MICE
@@ -149,7 +159,7 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
                 href="#"
                 color="white"
                 size="lg"
-                className={` border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg ${keyboards ? "bg-[#DAB24E] text-white" : ""}`}
+                className={` border-4 rounded-2xl border-[#DAB24E] mr-7 w-44 text-lg ${keyboards ? "bg-[#DAB24E] text-white" : ""}`}
                 onClick={handleKeyboards}
               >
                 KEYBOARD
@@ -159,7 +169,7 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
                 href="#"
                 color="white"
                 size="lg"
-                className={` border-4 rounded-2xl border-[#DAB24E] mr-8 w-52 text-lg ${game ? "bg-[#DAB24E] text-white" : ""}`}
+                className={` border-4 rounded-2xl border-[#DAB24E] mr-7 w-52 text-lg ${game ? "bg-[#DAB24E] text-white" : ""}`}
                 onClick={handleGame}
               >
                 GAME SYSTEM
@@ -169,7 +179,7 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
                 href="#"
                 color="white"
                 size="lg"
-                className={` border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg ${phones ? "bg-[#DAB24E] text-white" : ""}`}
+                className={` border-4 rounded-2xl border-[#DAB24E] mr-7 w-44 text-lg ${phones ? "bg-[#DAB24E] text-white" : ""}`}
                 onClick={handlePhones}
               >
                 PHONES
@@ -181,7 +191,7 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
                 <Button
                   color="white"
                   size="lg"
-                  className="border-4 rounded-2xl border-[#DAB24E] mr-8 w-64 text-lg"
+                  className="border-4 rounded-2xl border-[#DAB24E] mr-7 w-64 text-lg"
                 >
                   WHAT'S NEAR ME?
                 </Button>

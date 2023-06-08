@@ -6,9 +6,9 @@ import Footer from "../../Components/Footer/Footer";
 import axios from "axios";
 import Card from "../Home/Card";
 
-export default function CommunityAuction(props) {
-  const greeting1 = "Life's an Auction";
-  const greeting2 = "Lets's Auction";
+export default function CommunityBarter(props) {
+  const greeting1 = "Better to Barter";
+  const greeting2 = "Discover Barters";
 
   const category = useSelector((state) => state.filter.category);
   const [post, setPost] = useState([]);
@@ -17,7 +17,7 @@ export default function CommunityAuction(props) {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`http://localhost:8080/post/getType/bid`);
+      const response = await axios.get(`http://localhost:8080/post/getType/barter`);
       console.log(response.data.getPost);
       setPost(response.data.getPost);
     }
@@ -37,7 +37,7 @@ export default function CommunityAuction(props) {
 
   return (
     <div>
-      <ButtonsComponent greeting1={greeting1} auction={true}/>
+      <ButtonsComponent greeting1={greeting1} barter={true}/>
       <HeaderComponent greeting2={greeting2} />
 
       <div className="w-screen bg-[#F4EBDC]">
