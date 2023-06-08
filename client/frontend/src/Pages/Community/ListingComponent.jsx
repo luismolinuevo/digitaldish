@@ -25,7 +25,7 @@ export const HeaderComponent = (props) => {
       </div>
 
       <div>
-        <p className="font-bold text-[45px] mt-5 ml-40">{greeting2}</p>
+        <p className="font-bold text-[45px] mt-5 ml-40 pb-[70px]">{greeting2}</p>
       </div>
 
       {showGoogleimg && (

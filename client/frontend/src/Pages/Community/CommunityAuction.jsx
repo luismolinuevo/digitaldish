@@ -10,6 +10,7 @@ export default function CommunityAuction(props) {
   const greeting2 = "Lets's Auction";
 
   const [post, setPost] = useState([]);
+  // const [filteredPost, setFilteredPost] = useState([])
 
   useEffect(() => {
     async function fetchData() {
@@ -19,6 +20,23 @@ export default function CommunityAuction(props) {
     }
     fetchData();
   }, []);
+
+  // const searchPost = () => {
+  //   // e.preventDefault();
+  //   const filteredPost = post.filter((post) =>
+   
+  //       // post.country.toLowerCase() === location && 
+  //       // post.livingSituation.toLowerCase() === livingSituation &&
+  //       // post.implementationDifficulty.toLowerCase() === difficulty
+
+  //       post.title === "test12"
+      
+  //   );
+  //   console.log(filteredPost);
+  //   setFilteredPost(filteredPost);
+  // };
+
+  // searchPost()
 
   return (
     <div>
