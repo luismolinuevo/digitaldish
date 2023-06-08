@@ -38,7 +38,7 @@ const Navbar = () => {
       </li>
   
       <li>
-        <Link to="/Community">
+        <Link to="/communitynew">
           <img src={Community} alt="" style={{ width: "30px" }} className="mr-5" />
         </Link>
       </li>
