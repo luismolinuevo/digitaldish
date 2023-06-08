@@ -1,11 +1,49 @@
-import React from "react";
-import {} from "react-dom";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setCategory, deleteCategory } from "../../Utils/filter";
 import { Button, Select, Option } from "@material-tailwind/react";
 
-
 const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
+  const dispatch = useDispatch();
+
+  const [monitor, setMonitor] = useState(false);
+  const [mice, setMice] = useState(false);
+  const [keyboards, setKeyboards] = useState(false);
+  const [game, setGame] = useState(false);
+  const [phones, setPhones] = useState(false)
+
+  const handleMonitor = () => {
+    setMonitor(!monitor);
+    if(!monitor) { dispatch(setCategory("monitor")) } 
+    else { dispatch(deleteCategory("monitor")) }
+  }
+
+  const handleMice = () => {
+    setMice(!mice);
+    if(!mice) { dispatch(setCategory("mice")) } 
+    else { dispatch(deleteCategory("mice")) }
+  }
+
+  const handleKeyboards = () => {
+    setKeyboards(!keyboards);
+    if(!keyboards) { dispatch(setCategory("keyboard")) } 
+    else { dispatch(deleteCategory("keyboard")) }
+  }
+
+  const handleGame = () => {
+    setKeyboards(!game);
+    if(!game) { dispatch(setCategory("game")) } 
+    else { dispatch(deleteCategory("game")) }
+  }
+
+  const handlePhones = () => {
+    setKeyboards(!phones);
+    if(!phones) { dispatch(setCategory("phone")) } 
+    else { dispatch(deleteCategory("phone")) }
+  }
+
   return (
     <div className="pt-[100px] flex flex-col">
       <div className=" w-[1400px] h-[500px] py-40 mx-auto">
@@ -92,7 +130,8 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
                 href="#"
                 color="white"
                 size="lg"
-                className=" border-4 rounded-2xl border-[#DAB24E] mr-8 ml-10 w-44 text-lg"
+                className={` border-4 rounded-2xl border-[#DAB24E] mr-8 ml-10 w-44 text-lg ${monitor ? "bg-[#DAB24E] text-white" : ""}`}
+                onClick={handleMonitor}
               >
                 MONITOR
               </Button>
@@ -101,7 +140,8 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
                 href="#"
                 color="white"
                 size="lg"
-                className=" border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg"
+                className={` border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg ${mice ? "bg-[#DAB24E] text-white" : ""}`}
+                onClick={handleMice}
               >
                 MICE
               </Button>
@@ -109,7 +149,8 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
                 href="#"
                 color="white"
                 size="lg"
-                className=" border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg"
+                className={` border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg ${keyboards ? "bg-[#DAB24E] text-white" : ""}`}
+                onClick={handleKeyboards}
               >
                 KEYBOARD
               </Button>
@@ -118,7 +159,8 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
                 href="#"
                 color="white"
                 size="lg"
-                className=" border-4 rounded-2xl border-[#DAB24E] mr-8 w-52 text-lg"
+                className={` border-4 rounded-2xl border-[#DAB24E] mr-8 w-52 text-lg ${game ? "bg-[#DAB24E] text-white" : ""}`}
+                onClick={handleGame}
               >
                 GAME SYSTEM
               </Button>
@@ -127,7 +169,8 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
                 href="#"
                 color="white"
                 size="lg"
-                className=" border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg"
+                className={` border-4 rounded-2xl border-[#DAB24E] mr-8 w-44 text-lg ${phones ? "bg-[#DAB24E] text-white" : ""}`}
+                onClick={handlePhones}
               >
                 PHONES
               </Button>
