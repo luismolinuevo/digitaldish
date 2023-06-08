@@ -4,6 +4,7 @@ import passport from "passport"
 
 const router = express.Router()
 
+//get by type of post
 router.get("/getType/:type", async (req, res) => {
   const type = req.params.type
   const getPost = await prisma.post.findMany({
@@ -17,6 +18,26 @@ router.get("/getType/:type", async (req, res) => {
     getPost
   })
 })
+
+//get post by most recently created
+router.get("/getNew", async (req, res) => {
+  try {
+    // Retrieve posts from the database using Prisma
+    const getPost = await prisma.post.findMany({
+      orderBy: {
+        createdAt: "desc", // Sort by createdAt field in descending order
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      getPost
+    })
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 // Create a post at /
 router.post("/", passport.authenticate("jwt", { session: false, }), async (req, res) => {
