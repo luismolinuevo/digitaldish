@@ -43,6 +43,7 @@ export default function BarterForm() {
       shippingFees: shippingFees,
       userName: userName,
       userRating: userRating,
+      type: "barter"
     };
 
     const newPost = await axios.post(`http://localhost:8080/post`, postData, {

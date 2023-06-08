@@ -38,7 +38,7 @@ const Navbar = () => {
       </li>
   
       <li>
-        <Link to="/Community">
+        <Link to="/communitynew">
           <img src={Community} alt="" style={{ width: "30px" }} className="mr-5" />
         </Link>
       </li>
@@ -62,6 +62,31 @@ const Navbar = () => {
       </li>
     </ul>
   </div>
+
+  // expanding search bar
+  // <div class="relative flex-col  p-6 ">
+  //       <div class="relative rounded-2xl ring-black sm:mx-auto sm:max-w-lg sm:px-10">
+  //         <form action="" class="relative">
+  //           <input
+  //             type="search"
+  //             class=" cursor-pointer relative z-10 h-12 w-12 rounded-full border bg-transparent pl-12 outline-none focus:w-full focus:cursor-text  focus:pl-16 focus:pr-4"
+  //           />
+  //           <svg
+  //             class="absolute inset-y-0 my-auto h-8 w-12 border-r border-transparent stroke-black px-3.5"
+  //             fill="none"
+  //             viewBox="0 0 24 24"
+  //             stroke="currentColor"
+  //             stroke-width="2"
+  //           >
+  //             <path
+  //               stroke-linecap="round"
+  //               stroke-linejoin="round"
+  //               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"
+  //             />
+  //           </svg>
+  //         </form>
+  //       </div>
+  //     </div>
   );
 };
 

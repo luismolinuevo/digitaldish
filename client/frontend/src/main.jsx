@@ -26,6 +26,15 @@ import OfferOrderConformation from "./Pages/Order/OfferOrderConformation"
 import OffersRecieved from './Pages/Activity/OffersRecieved'
 import Activity from './Pages/Activity/Activity'
 
+import CommunityNew from './Pages/Community/CommunityNew'
+import CommunityNear from './Pages/Community/CommunityNear'
+import CommunityNegotiate from './Pages/Community/CommunityNegotiate'
+import CommunityAuction from './Pages/Community/CommunityAuction'
+import CommunityBarter from './Pages/Community/CommunityBarter'
+
+
+import { ThemeProvider } from "@material-tailwind/react";
+
 
 
 const router = createBrowserRouter([
@@ -79,7 +88,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/orderconformation/:id",
-        element: <OrderConformation/>
+        element: <OrderConformation />
 
       },
 
@@ -100,18 +109,47 @@ const router = createBrowserRouter([
       },
 
       {
-        path:"/listing/barterpage",
-        element:<BarterPage />
+        path: "/listing/barterpage",
+        element: <BarterPage />
       },
+
+
+      {
+        path: "/communitynew",
+        element: <CommunityNew />
+
+      },
+
       {
         path: "/offerorderconform/:id",
-        element: <OfferOrderConformation/>
+        element: <OfferOrderConformation />
+      },
+
+      {
+        path: "/upload",
+        element: <UploadPage />,
+
+      },
+
+      {
+        path: "/communitynear",
+        element: <CommunityNear />
+      },
+
+      {
+        path: "/communitynegotiate",
+        element: <CommunityNegotiate />
+      },
+
+      {
+        path: "/communityauction",
+        element: <CommunityAuction />
+      },
+      {
+        path: "/communitybarter",
+        element: <CommunityBarter/>
       }
-    ],
-  },
-  {
-    path: "/upload",
-    element: <UploadPage />,
+    ]
   },
 ]);
 
@@ -120,5 +158,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode >,
+  
+  <ThemeProvider>
+
+  </ThemeProvider>
 );
