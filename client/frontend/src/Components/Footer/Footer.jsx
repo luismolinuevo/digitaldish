@@ -69,20 +69,6 @@ const Footer = ({ status, message, onValidated }) => {
   return (
     <div>
       <div className="Footer-container flex justify-center flex-col pt-60">
-        <div className="p-5 w-full mt-8 border border-gray-200 bg-[#7F92B5] text-center">
-          {" "}
-          <span className="inline-flex">
-            <a className="text-gray-500 px-5">
-              <img src={InstagramIcon} alt="Instagram Icon" />
-            </a>
-            <a className="ml-4 text-gray-500 px-5">
-              <img src={FacebookIcon} alt="Facebook Icon" />
-            </a>
-            <a className="ml-4 text-gray-500 px-5">
-              <img src={TwitterIcon} alt="Twitter Icon" />
-            </a>
-          </span>
-        </div>
         <div className="p-2 bg-[#C3D5F5] h-[20vw] flex justify-center flex-col mt-auto text-center">
           <a className="text-black font-['Arial'] font-extrabold text-4xl py-10 ">
             Stay in Touch
@@ -158,6 +144,20 @@ const Footer = ({ status, message, onValidated }) => {
           </form>
         </div>
       </div>
+      <div className="p-5 w-full bg-[#7F92B5] text-center">
+          {" "}
+          <span className="inline-flex">
+            <a className="text-gray-500 px-5">
+              <img src={InstagramIcon} alt="Instagram Icon" />
+            </a>
+            <a className="ml-4 text-gray-500 px-5">
+              <img src={FacebookIcon} alt="Facebook Icon" />
+            </a>
+            <a className="ml-4 text-gray-500 px-5">
+              <img src={TwitterIcon} alt="Twitter Icon" />
+            </a>
+          </span>
+        </div>
     </div>
   );
 };
