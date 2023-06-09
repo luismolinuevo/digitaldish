@@ -227,7 +227,7 @@ export default function Home() {
                     barterPost.map((item) => (
                       <Card
                         title={item.title}
-                        type={"negotiation"}
+                        type={"barter"}
                         img={robot}
                         price={item.price}
                       />
@@ -248,7 +248,7 @@ export default function Home() {
                     negoPost.map((item) => (
                       <Card
                         title={item.title}
-                        type={"barter"}
+                        type={"negotiation"}
                         img={robot}
                         price={item.price}
                       />

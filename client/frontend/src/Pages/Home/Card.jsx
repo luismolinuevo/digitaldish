@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Card({ type, title, img, price }) {
+export default function Card({ type, title, img, price , id}) {
     
     const shortTitle = title.slice(0, 16)+'...';
   return (
@@ -12,12 +12,17 @@ export default function Card({ type, title, img, price }) {
           style={{ backgroundImage: `url(${img})` }}
         >
           <div className="flex h-full items-end ">
-            <p className="text-[20px] bg-white m-[15px] p-1">Barter</p>
+            <p className="text-[20px] bg-white m-[15px] p-1">
+              {
+                
+                type == "barter" ? "Barter" : type == "bid" ? "Auction" : "Negotiation"
+              }
+            </p>
           </div>
         </div>
         <div className="flex justify-between text-[25px]"> 
           <p>{title.length > 16 ? shortTitle : title}</p>
-          {type !== "barter" ? <p>$00.00</p> : <p></p>}
+          {type !== "barter" ? <p>${price}</p> : <p></p>}
         </div>
       </div>
     </div>
