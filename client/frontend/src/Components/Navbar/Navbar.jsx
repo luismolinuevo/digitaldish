@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../assets/Logo3.png";
+import Logo from "../../assets/NavLogo.png";
 import Search from "../../assets/search.png"
 import Community from "../../assets/community.png"
 import Cart from "../../assets/cart.png"
@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <div className="fixed w-full h-[80px] bg-[#F1F0EB] flex justify-between items-center px-4 border z-10 border-black">
     <div className="flex items-center">
-      <img className="w-50 mr-4" src={Logo} alt="test" style={{ width: "70px" }} />
+      <img className="w-50 mr-4" src={Logo} alt="test" style={{ width: "250px" }} />
       <ul className=" md:flex ">
         <li>
           <Link to="Devices" className="text-base md:text-lg ">
