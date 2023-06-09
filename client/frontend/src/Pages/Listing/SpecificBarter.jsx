@@ -11,6 +11,7 @@ import mastercard from "../../assets/payment/mastercard-Icon.png";
 import paypal from "../../assets/payment/paypal-Icon.png";
 import apple from "../../assets/payment/apple-pay-Icon.png";
 
+
 export default function SpecificBarter() {
   const [post, setPost] = useState("");
   const [showModal, setShowModal] = useState(false);

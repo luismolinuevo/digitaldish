@@ -6,6 +6,10 @@ import monitor from "../../assets/HomePage/Monitors.jpg";
 import headphones from "../../assets/HomePage/Headphones.jpg";
 import keyboard from "../../assets/HomePage/Keyboard.jpg";
 import keycaps from "../../assets/Homepage/Keycaps.jpg";
+import computer from "../../assets/Homepage/Computer.png";
+import controller from "../../assets/Homepage/controller.png";
+import game from "../../assets/Homepage/Game.png";
+import phone from "../../assets/Homepage/Phone.png";
 import logo from "../../assets/HomePage/logo.png";
 import robotHand from "../../assets/HomePage/robotHand.png";
 import logoIcon from "../../assets/HomePage/logoIcon.png";
@@ -13,16 +17,60 @@ import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
 import Card from "./Card";
 import BiggerCard from "./BiggerCard";
-import FooterNav from "../../Components/Footer/FooterNav"
-import Footer from "../../Components/Footer/Footer"
+import FooterNav from "../../Components/Footer/FooterNav";
+import Footer from "../../Components/Footer/Footer";
 
 export default function Home() {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
   const userName = useSelector((state) => state.auth.userName);
   const dispatch = useDispatch();
 
+  const [barterPost, setBarterPost] = useState([]);
+  const [bidPost, setBidPost] = useState([]);
+  const [negoPost, setNegoPost] = useState([]);
+  const [firstBarter, setFirstBarter] = useState([]);
+  const [secondBarter, setSecondBarter] = useState([]);
+  const [firstNeg, setFirstNeg] = useState([]);
+  const [secondNeg, setSecondNeg] = useState([]);
+
   useEffect(() => {
     dispatch(checkLoginStatus());
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        `http://localhost:8080/post/getType/barter`
+      );
+      setFirstBarter(response.data.getPost[0]);
+      setSecondBarter(response.data.getPost[1]);
+      setBarterPost(response.data.getPost.splice(0, 6));
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        `http://localhost:8080/post/getType/bid`
+      );
+      console.log(response.data.getPost);
+      setBidPost(response.data.getPost.splice(0, 6));
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        `http://localhost:8080/post/getType/negotiation`
+      );
+      setFirstNeg(response.data.getPost[0]);
+      setSecondNeg(response.data.getPost[1]);
+      console.log(response.data.getPost);
+      setNegoPost(response.data.getPost.splice(0, 6));
+    }
+    fetchData();
   }, []);
 
   return (
@@ -45,18 +93,31 @@ export default function Home() {
           </div>
           <div>
             <div>
-              <Card title={"title"} type={"bid"} img={robot} price={"00.00"} />
-            </div>
-            <div>
               <Card
-                title={"titletestlengthoftitle"}
-                type={"bid"}
+                title={`${firstBarter.title}`}
+                type={"barter"}
                 img={robot}
-                price={"00.00"}
+                price={`${firstBarter.price}`}
+                id={firstBarter.id}
               />
             </div>
             <div>
-              <Card title={"title"} type={"bid"} img={robot} price={"00.00"} />
+              <Card
+                title={`${firstNeg.title}`}
+                type={"negotiation"}
+                img={robot}
+                price={`${firstNeg.price}`}
+                id={firstNeg.id}
+              />
+            </div>
+            <div>
+              <Card
+                title={`${secondBarter.title}`}
+                type={"barter"}
+                img={robot}
+                price={`${secondBarter.price}`}
+                id={secondBarter.id}
+              />
             </div>
           </div>
           <div>
@@ -99,7 +160,13 @@ export default function Home() {
               )}
             </div>
             <div>
-              <Card title={"title"} type={"bid"} img={robot} price={"00.00"} />
+              <Card
+                title={`${secondNeg.title}`}
+                type={"negotiation"}
+                img={robot}
+                price={`${secondNeg.price}`}
+                id={secondNeg.id}
+              />
             </div>
           </div>
         </div>
@@ -109,6 +176,44 @@ export default function Home() {
         <BiggerCard title={"Headphones"} img={headphones} />
         <BiggerCard title={"Monitor"} img={monitor} />
         <BiggerCard title={"Keycaps"} img={keycaps} />
+      </div>
+      <div className=" bg-[#F1F0EB]">
+        <div className="px-4 py-[150px]">
+          <div>
+            <h1 className="text-[38px] mb-2">Explore Active Auctions</h1>
+            <div className="flex">
+              <div className="">
+                <div className="flex gap-[60px] flex-wrap w-[1125px]">
+                  {bidPost.length != 0 ? (
+                    bidPost.map((item) => (
+                      <Card
+                        title={item.title}
+                        type={"bid"}
+                        img={robot}
+                        price={item.price}
+                        id={item.id}
+                      />
+                    ))
+                  ) : (
+                    <p>Error</p>
+                  )}
+                </div>
+              </div>
+              <p className="ml-[70px] text-[28px]">
+                purchase products
+                <br /> through an auction;
+                <br /> outbidding other buyers
+                <br /> until you win
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="h-[581px] flex items-center px-4 gap-[58px]">
+        <BiggerCard title={"Computers"} img={computer} />
+        <BiggerCard title={"Game Systems"} img={game} />
+        <BiggerCard title={"Controllers"} img={controller} />
+        <BiggerCard title={"Phones"} img={phone} />
       </div>
       <div className=" bg-[#F1F0EB]">
         <div className="px-4 py-[150px]">
@@ -122,92 +227,42 @@ export default function Home() {
                 <br /> use of money.
               </p>
               <div className="pl-[70px]">
-                <div className="flex gap-[60px]">
-                  <Card
-                    title={"title"}
-                    type={"barter"}
-                    img={robot}
-                    price={"00.00"}
-                  />
-                  <Card
-                    title={"title"}
-                    type={"barter"}
-                    img={robot}
-                    price={"00.00"}
-                  />
-                  <Card
-                    title={"title"}
-                    type={"barter"}
-                    img={robot}
-                    price={"00.00"}
-                  />
-                </div>
-                <div className="flex gap-[60px]">
-                  <Card
-                    title={"title"}
-                    type={"barter"}
-                    img={robot}
-                    price={"00.00"}
-                  />
-                  <Card
-                    title={"title"}
-                    type={"barter"}
-                    img={robot}
-                    price={"00.00"}
-                  />
-                  <Card
-                    title={"title"}
-                    type={"barter"}
-                    img={robot}
-                    price={"00.00"}
-                  />
+                <div className="flex gap-[60px] flex-wrap w-[1100px]">
+                  {barterPost.length != 0 ? (
+                    barterPost.map((item) => (
+                      <Card
+                        title={item.title}
+                        type={"barter"}
+                        img={robot}
+                        price={item.price}
+                        id={item.id}
+                      />
+                    ))
+                  ) : (
+                    <p>Error</p>
+                  )}
                 </div>
               </div>
             </div>
           </div>
           <div>
-            <h1 className="text-[38px] mb-2">Explore Active Barters</h1>
+            <h1 className="text-[38px] mb-2">Explore Active Negotiations</h1>
             <div className="flex">
               <div className="">
-                <div className="flex gap-[60px]">
-                  <Card
-                    title={"title"}
-                    type={"barter"}
-                    img={robot}
-                    price={"00.00"}
-                  />
-                  <Card
-                    title={"title"}
-                    type={"barter"}
-                    img={robot}
-                    price={"00.00"}
-                  />
-                  <Card
-                    title={"title"}
-                    type={"barter"}
-                    img={robot}
-                    price={"00.00"}
-                  />
-                </div>
-                <div className="flex gap-[60px]">
-                  <Card
-                    title={"title"}
-                    type={"barter"}
-                    img={robot}
-                    price={"00.00"}
-                  />
-                  <Card
-                    title={"title"}
-                    type={"barter"}
-                    img={robot}
-                    price={"00.00"}
-                  />
-                  <Card
-                    title={"title"}
-                    type={"barter"}
-                    img={robot}
-                    price={"00.00"}
-                  />
+                <div className="flex gap-[60px] flex-wrap w-[1125px]">
+                  {negoPost.length != 0 ? (
+                    negoPost.map((item) => (
+                      <Card
+                        title={item.title}
+                        type={"negotiation"}
+                        img={robot}
+                        price={item.price}
+                        id={item.id}
+                      />
+                    ))
+                  ) : (
+                    <p>Error</p>
+                  )}
                 </div>
               </div>
               <p className="ml-[70px] text-[28px]">
@@ -249,8 +304,7 @@ export default function Home() {
           <img src={robotHand} alt="" className="h-full " />
         </div>
       </div>
-      <FooterNav/>
-
+      <FooterNav />
     </div>
   );
 }

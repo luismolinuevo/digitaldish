@@ -47,6 +47,7 @@ export default function communitynegotiate() {
                     <Card
                       title={item.title}
                       price={item.price}
+                      id={item.id}
                     />
                   </div>
                 ))
