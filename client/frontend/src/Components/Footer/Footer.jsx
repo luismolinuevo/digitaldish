@@ -2,6 +2,7 @@ import { useState } from "react";
 // import { sanitize } from '';
 import Loading from './Loading';
 import { Spinner, IconButton } from '@material-tailwind/react';
+import { BsArrowRight } from 'react-icons/bs'
 import { Link } from "react-router-dom";
 import InstagramIcon from "../../assets/icons/Icon-InstagramLogo.png";
 import FacebookIcon from "../../assets/icons/Icon-FacebookLogo.png";
@@ -122,16 +123,18 @@ const Footer = ({ status, message, onValidated }) => {
 
               <div className="flex flex-row">
                 <div className="border-b border-[#7F92B5] w-[26rem] self-center text-left">
+                <div className="flex flex-row">
                   <input
-                    className="appearance-none bg-transparent border-none w-[24rem] text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-xl"
+                    className="appearance-none bg-transparent border-none w-[26rem] text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-xl"
                     onChange={(event) => setEmail(event?.target?.value ?? "")}
                     type="email"
                     onKeyUp={(event) => handleInputKeyEvent(event)}
                     placeholder="Enter your email"
                     aria-label="Email address"
+                    
                   />
-                </div>
-                <button
+                  <div className="flex justify-end">
+                  <button
                   className="cursor-pointer hover:bg-indigo-100 focus:outline-none z-50 object-left"
                   onClick={handleFormSubmit}
                 >
@@ -142,10 +145,10 @@ const Footer = ({ status, message, onValidated }) => {
                     width="30px"
                     className="flex flex-row justify-center item-center self-center"
                   />
-                  <IconButton className="bg-green-100">
-                  <i className="fas fa-arrow" />
-                  </IconButton>
                 </button>
+                </div>
+                  </div>
+                </div>
               </div>
             </div>
             <p className="text-xs">
