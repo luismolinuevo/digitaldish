@@ -98,6 +98,7 @@ export default function Home() {
                 type={"barter"}
                 img={robot}
                 price={`${firstBarter.price}`}
+                id={firstBarter.id}
               />
             </div>
             <div>
@@ -106,6 +107,7 @@ export default function Home() {
                 type={"negotiation"}
                 img={robot}
                 price={`${firstNeg.price}`}
+                id={firstNeg.id}
               />
             </div>
             <div>
@@ -114,6 +116,7 @@ export default function Home() {
                 type={"barter"}
                 img={robot}
                 price={`${secondBarter.price}`}
+                id={secondBarter.id}
               />
             </div>
           </div>
@@ -162,6 +165,7 @@ export default function Home() {
                 type={"negotiation"}
                 img={robot}
                 price={`${secondNeg.price}`}
+                id={secondNeg.id}
               />
             </div>
           </div>
@@ -187,6 +191,7 @@ export default function Home() {
                         type={"bid"}
                         img={robot}
                         price={item.price}
+                        id={item.id}
                       />
                     ))
                   ) : (
@@ -230,6 +235,7 @@ export default function Home() {
                         type={"barter"}
                         img={robot}
                         price={item.price}
+                        id={item.id}
                       />
                     ))
                   ) : (
@@ -251,6 +257,7 @@ export default function Home() {
                         type={"negotiation"}
                         img={robot}
                         price={item.price}
+                        id={item.id}
                       />
                     ))
                   ) : (
