@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <div className="fixed w-full h-[80px] bg-[#F1F0EB] flex justify-between items-center px-4 border z-10 border-black">
     <div className="flex items-center">
-      <img className="w-50 mr-4" src={Logo} alt="test" style={{ width: "250px" }} />
+      <Link to="/"><img className="w-50 mr-4" src={Logo} alt="test" style={{ width: "250px" }} /></Link>
       <ul className=" md:flex ">
         <li>
           <Link to="Devices" className="text-base md:text-lg ">
