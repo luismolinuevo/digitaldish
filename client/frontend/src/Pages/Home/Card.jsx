@@ -5,9 +5,9 @@ export default function Card({ type, title, img, price, id }) {
   const shortTitle = title.slice(0, 16) + "...";
   console.log(id)
 
-    const negoLink = `specneglisting/` + id
-    const bidLink = `specbarterlisting/` + id
-    const barterLink = `specbidlisting/` + id
+    const negoLink = `/specneglisting/` + id
+    const bidLink = `/specbarterlisting/` + id
+    const barterLink = `/specbidlisting/` + id
 
 
   return (

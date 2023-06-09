@@ -49,6 +49,7 @@ export default function CommunityAuction(props) {
                   <Card
                     title={item.title}
                     price={item.price}
+                    id={item.id}
                   />
                 </div>
               ))
