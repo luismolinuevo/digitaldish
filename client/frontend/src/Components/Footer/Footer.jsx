@@ -1,6 +1,7 @@
 import { useState } from "react";
 // import { sanitize } from '';
 import Loading from './Loading';
+import { Spinner, IconButton } from '@material-tailwind/react';
 import { Link } from "react-router-dom";
 import InstagramIcon from "../../assets/icons/Icon-InstagramLogo.png";
 import FacebookIcon from "../../assets/icons/Icon-FacebookLogo.png";
@@ -96,7 +97,7 @@ const Footer = ({ status, message, onValidated }) => {
             <div className="flex flex-col justify-center self-center">
               <div className="pb-2">
                 {"sending" === status ? (
-                  <Loading
+                  <Spinner
                     showSpinner
                     message="Sending..."
                     contentColorCLass="text-white"
@@ -131,7 +132,7 @@ const Footer = ({ status, message, onValidated }) => {
                   />
                 </div>
                 <button
-                  className="cursor-pointer hover:bg-indigo-100 focus:outline-none"
+                  className="cursor-pointer hover:bg-indigo-100 focus:outline-none z-50 object-left"
                   onClick={handleFormSubmit}
                 >
                   <input
@@ -141,6 +142,9 @@ const Footer = ({ status, message, onValidated }) => {
                     width="30px"
                     className="flex flex-row justify-center item-center self-center"
                   />
+                  <IconButton className="bg-green-100">
+                  <i className="fas fa-arrow" />
+                  </IconButton>
                 </button>
               </div>
             </div>

@@ -4,6 +4,7 @@ import CoverPic from "../../assets/photos/Coverpic.png";
 import ProfilePic from "../../assets/photos/profilepic.png";
 import Heart from "../../assets/photos/hearts.png";
 import Footer from "../../Components/Footer/Footer";
+import Upload from "./Upload"
 
 // const pH = "10000rem"
 const listings = 12;
@@ -63,7 +64,7 @@ export default function Profile() {
                 <p className="pl-8">{followingNum}</p>
               </p>
             </div>
-            <button className="bg-white border-[3px] border-gray-500 hover:border-yellow-700 hover text-black rounded-full h-[3rem] w-[10rem] flex justify-center pr-6 p-2"
+            <button className="bg-white border-[3px] border-gray-500 hover:border-yellow-700 hover text-black rounded-full h-[3rem] w-[10.5rem] flex justify-center pr-6 p-2"
             style={buttonSaves(1)} 
             >
               <img
@@ -105,7 +106,7 @@ export default function Profile() {
             </button>
           </div>
           <div className="flex flex-row justify-end ">
-            <button className="bg-[#DAB24E] border border-[#DAB24E] w-[9rem] h-8 rounded-sm font-normal font-[Inter]">
+            <button className="bg-[#DAB24E] border border-[#DAB24E] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519]">
               CONTACT
             </button>
           </div>
@@ -125,7 +126,8 @@ export default function Profile() {
           </div>
         </div>
       </div>
-
+    
+      <Upload />
       <Footer />
     </div>
   );
