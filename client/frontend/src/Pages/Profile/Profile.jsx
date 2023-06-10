@@ -3,8 +3,10 @@ import { } from "react-dom";
 import CoverPic from "../../assets/photos/Coverpic.png";
 import ProfilePic from "../../assets/photos/profilepic.png";
 import Heart from "../../assets/photos/hearts.png";
+import MagnifyingGlass from "../../assets/icons/Icon-MagnifyingGlass.png";
 import Footer from "../../Components/Footer/Footer";
-import Upload from "./Upload"
+import Upload from "./Upload";
+import "./Profile.css";
 
 // const pH = "10000rem"
 const listings = 12;
@@ -22,9 +24,11 @@ export default function Profile() {
 
     const buttonSaves = (buttonStyle) => {
         return {
-            border: isClicked ? '2px solid rgb(161 98 7)' : '2px solid rgb(107 114 128)'
-        }
-    }
+            border: isClicked
+                ? "2px solid rgb(161 98 7)"
+                : "2px solid rgb(107 114 128)",
+        };
+    };
 
     //USER-NAV BUTTONS function and style
     const handleClick = (buttonId) => {
@@ -37,63 +41,71 @@ export default function Profile() {
         };
     };
 
+
+    //CONTACT SELLER
+    const totalSales = 82
+    const userRating = "5/5"
+
+
     return (
         <div>
             <div className="h-[100rem] pt-20 border border-red-500">
                 <div className="w-full border border-red-500 flex flex-col">
                     <img src={CoverPic} />
                 </div>
-                
-                    <div className="main-pic border border-red-500 w-full pt-6 p-10 flex flex-row justify-center bg-[#F1F0EB] pr-80">
-                        <div className="profile-pic w-[15rem] h-[15rem]">
-                            <img src={ProfilePic} width={"250px"} />
-                        </div>
-                        <div className="flex flex-col pl-10 pt-10">
-                            <h1 className="text-4xl font-semibold font-[Inter]">
-                                {" "}
-                                Mouse King{" "}
-                            </h1>
 
-                            <div className="flex flex-row pb-2">
-                                <p className="flex flex-col p-2">
-                                    Followers
-                                    <p className="pl-8">{followerNum}</p>
-                                </p>
+                <div className="main-pic border border-red-500 w-full pt-6 p-10 flex flex-row justify-center bg-[#F1F0EB] pr-80">
+                    <div className="profile-pic w-[15rem] h-[15rem]">
+                        <img src={ProfilePic} width={"250px"} />
+                    </div>
+                    <div className="flex flex-col pl-10 pt-10">
+                        <h1 className="text-4xl font-semibold font-[Inter]">
+                            {" "}
+                            Mouse King{" "}
+                        </h1>
 
-                                <p className="flex flex-col p-2">
-                                    Following
-                                    <p className="pl-8">{followingNum}</p>
-                                </p>
-                            </div>
-                            <button 
-                                className="bg-white border-[3px] border-gray-500 hover:border-yellow-700 hover text-black rounded-full h-[3rem] w-[10.5rem] flex justify-center pr-6 p-2"
-                                strokeWidth={2}
-                                style={buttonSaves(1)}
-                            >
-                                <img
-                                    src={Heart}
-                                    className="focus:text-yellow-700 text-blue-500 px-2"
-                                />
-                                <p className="py-[2px]"
-                                    onClick={saveShopClicked}>
-                                    SAVE {isClicked ? null : <span>SHOP</span>}
-                                </p>
-                            </button>
-                        </div>
-                        <div className="bio-description px-10 pt-12 w-[30rem]">
-                            <p>
-                                I specialize in all things mice. If you are into computers, like
-                                myself, then you come to the right place.
+                        <div className="flex flex-row pb-2">
+                            <p className="flex flex-col p-2">
+                                Followers
+                                <p className="pl-8">{followerNum}</p>
+                            </p>
+
+                            <p className="flex flex-col p-2">
+                                Following
+                                <p className="pl-8">{followingNum}</p>
                             </p>
                         </div>
-                        <div className="horizontal-line border-b border-blue-500 pt-20"></div>
+                        <button
+                            className="bg-white border-[3px] border-gray-500 hover:border-yellow-700 hover text-black rounded-full h-[3rem] w-[10.5rem] flex justify-center pr-6 p-2"
+                            strokeWidth={2}
+                            style={buttonSaves(1)}
+                        >
+                            <img
+                                src={Heart}
+                                className="focus:text-yellow-700 text-blue-500 px-2"
+                            />
+                            <p className="py-[2px]" onClick={saveShopClicked}>
+                                SAVE {isClicked ? null : <span>SHOP</span>}
+                            </p>
+                        </button>
                     </div>
+                    <div className="bio-description px-10 pt-12 w-[30rem]">
+                        <p>
+                            I specialize in all things mice. If you are into computers, like
+                            myself, then you come to the right place.
+                        </p>
+                    </div>
+                    <div className="horizontal-line border-b border-blue-500 pt-20"></div>
+                </div>
 
-
-                    <body className="pt-4 mx-20">
+                <body className="pt-4 mx-20">
                     <div className="user-nav border-b-2 border-gray-500 h-[4rem] flex flex-row justify-center gap-12 font-bold text-xl">
                         <div className="listing">
-                            <button style={buttonHighlight(1)} onClick={() => handleClick(1)} strokeWidth={2}>
+                            <button
+                                style={buttonHighlight(1)}
+                                onClick={() => handleClick(1)}
+                                strokeWidth={2}
+                            >
                                 Listing
                                 <span className="text-gray-500 font-medium"> ({listings})</span>
                             </button>
@@ -117,27 +129,59 @@ export default function Profile() {
                         </div>
                     </div>
                     <div className="border-2 border-blue-500 h-[40rem] mt-10">
-                        <div className="search-bar border-2 border-gray-500 rounded-full w-[16rem] h-[3rem] p-3 m-5">
-                            <input 
-                                type='text'
-                                placeholder="Search here"
-                                onChange={""}
-                                value={"searchInput"}
-                                className="border border-red-500"
-                            />
+                        <form className="search-bar border-2 border-gray-500 rounded-full w-[16rem] h-[2.5rem] m-5 appearance-none bg-transparent text-black shadow-lg focus:outline-none">
+                            <div className="flex flex-row">
+                                <input
+                                    type="search"
+                                    placeholder=""
+                                    onChange={""}
+                                    className="appearance-none bg-transparent text-lg text-black p-2 leading-tight border-none w-[14rem]"
+                                />
+                                <div className="">
+                                    <button
+                                        className="cursor-pointer hover:bg-indigo-100 h-[2rem]"
+                                        onClick={"handleFormSubmit"}
+                                    >
+                                        <input
+                                            type="image"
+                                            src={MagnifyingGlass}
+                                            alt="Magnifying Glass"
+                                            width="18rem"
+                                            className="flex flex-row justify-end item-center self-center"
+                                        />
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div className="featured-listings flex flex-row flex-wrap justify-center text-2xl pl-5 border border-black">Featured listings</div>
+
+
+
+                        <div className="flex flex-col gap-10">
+                            <div className="pl-5 text-lg flex flex-col">
+                                <div className="flex flex-col font-bold gap-3">
+                                    <p>All</p>
+                                    <p>On Sale</p>
+                                    <p>Mice</p>
+                                    <p>Custom Mice</p>
+                                </div>
+                            </div>
+                            <div className="">
+                                <div>
+                                    <div className="border-2 border-gray-500 rounded-full w-[14rem] h-[2.5rem] flex justify-center p-1 m-5 text-xl font-bold">
+                                        Contact seller
+                                    </div>
+                                    <div className="flex flex-col font-semibold gap-3 pl-5 text-lg">
+                                        <p>Total sales <span>{totalSales}</span></p>
+                                        <p>User rating <span>{userRating}</span> stars</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="flex flex-col font-bold gap-4">
-                            <p>All</p>
-                            <p>On Sale</p>
-                            <p>Mice</p>
-                            <p>Custom Mice</p>
-                        </div>
-                        <div className="border border-green-500 w-[200px] h-[40px] flex justify-center p-2 m-5">Contact seller</div>
-                        <div className="flex flex-col font-bold gap-4">
-                            <p>Total sales 82</p>
-                            <p>User rating 5/5 stars</p>
-                        </div>
+                        <div className="featured-listings flex flex-row flex-wrap justify-center text-2xl pl-5 border border-black">Featured listings</div>
                     </div>
+                    <div className="bottom-gray-line my-5 border-b-2 border-gray-500"></div>
                 </body>
             </div>
 
