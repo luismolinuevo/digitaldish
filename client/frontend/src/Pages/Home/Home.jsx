@@ -163,9 +163,9 @@ export default function Home() {
               <Card
                 title={`${secondNeg.title}`}
                 type={"negotiation"}
-                img={robot}
                 price={`${secondNeg.price}`}
                 id={secondNeg.id}
+                // img={secondNeg.img != 0 ? secondNeg.img[0].url.toString() : ""}
               />
             </div>
           </div>
@@ -189,7 +189,7 @@ export default function Home() {
                       <Card
                         title={item.title}
                         type={"bid"}
-                        img={robot}
+                        img={item.img != 0 ? item.img[0].url.toString() : ""}
                         price={item.price}
                         id={item.id}
                       />
@@ -233,7 +233,7 @@ export default function Home() {
                       <Card
                         title={item.title}
                         type={"barter"}
-                        img={robot}
+                        img={item.img != 0 ? item.img[0].url.toString() : ""}
                         price={item.price}
                         id={item.id}
                       />
@@ -255,7 +255,7 @@ export default function Home() {
                       <Card
                         title={item.title}
                         type={"negotiation"}
-                        img={robot}
+                        img={item.img != 0 ? item.img[0].url.toString() : ""}
                         price={item.price}
                         id={item.id}
                       />
