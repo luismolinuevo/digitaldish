@@ -1,5 +1,4 @@
-import {} from "react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 import Sellerplaceholder from "../../assets/sellerplaceholder.jpeg";
 import Americanexpress from "../../assets/american-express.png";
@@ -7,6 +6,8 @@ import Visa from "../../assets/visa.png";
 import Mastercard from "../../assets/mastercard.png";
 import Paypal from "../../assets/paypal.png";
 import Applepay from "../../assets/applepay.png";
+
+import { useDropzone } from "react-dropzone";
 
 export default function BarterForm() {
   const [description, setDescription] = useState("");
@@ -23,6 +24,17 @@ export default function BarterForm() {
   const [shippingFees, setShippingFees] = useState("");
   const [userName, setUserName] = useState("");
   const [userRating, setUserRating] = useState("");
+
+  const [files, setFiles] = useState();
+
+  const onDrop = useCallback((acceptedFiles) => {
+    setFiles(acceptedFiles);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    maxFiles: 3,
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,12 +55,35 @@ export default function BarterForm() {
       shippingFees: shippingFees,
       userName: userName,
       userRating: userRating,
-      type: "barter"
+      type: "barter",
     };
 
-    const newPost = await axios.post(`http://localhost:8080/post`, postData, {
+    let newFormData = new FormData();
+    newFormData.append("description", description);
+    newFormData.append("price", price);
+    newFormData.append("category", category);
+    newFormData.append("title", title);
+    newFormData.append("location", location);
+    newFormData.append("startTime", startTime);
+    newFormData.append("endTime", endTime);
+    newFormData.append("condition", condition);
+    newFormData.append("color", color);
+    newFormData.append("size", size);
+    newFormData.append("carrier", carrier);
+    newFormData.append("shippingFees", shippingFees);
+    newFormData.append("userName", userName);
+    newFormData.append("userRating", userRating);
+    newFormData.append("type", "barter");
+    newFormData.append("status", "Active");
+    //Append each file to the right key. You CANNOT append all the files to the key. It will not work.
+    files.forEach((file) => {
+      newFormData.append("images[]", file);
+    });
+
+    const newPost = await axios.post(`http://localhost:8080/post`, newFormData, {
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
       },
     });
   };
@@ -74,6 +109,14 @@ export default function BarterForm() {
 
           <div className="text-[20px] mb-4">
             <h1>Add Photos</h1>
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              {isDragActive ? (
+                <p>Drop the files here ...</p>
+              ) : (
+                <p>Drag 'n' drop some files here, or click to select files</p>
+              )}
+            </div>
           </div>
 
           <div className="text-[20px] mb-4">

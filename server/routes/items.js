@@ -1,23 +1,31 @@
-import express from  "express"
-import prisma from "../db/index.js"
-import passport from "passport"
+import express from "express";
+import prisma from "../db/index.js";
+import passport from "passport";
+import multer from "multer";
+import cloudinary from "../utils/upload.js";
 
-const router = express.Router()
+const router = express.Router();
+
+const memStorage = multer.memoryStorage();
+const multerUpload = multer({ storage: memStorage }).array("images[]");
 
 //get by type of post
 router.get("/getType/:type", async (req, res) => {
-  const type = req.params.type
+  const type = req.params.type;
   const getPost = await prisma.post.findMany({
     where: {
-      type: type
+      type: type,
+    },
+    include: {
+      img: true
     }
   });
 
   res.status(200).json({
     success: true,
-    getPost
-  })
-})
+    getPost,
+  });
+});
 
 //get post by most recently created
 router.get("/getNew", async (req, res) => {
@@ -27,12 +35,15 @@ router.get("/getNew", async (req, res) => {
       orderBy: {
         createdAt: "desc", // Sort by createdAt field in descending order
       },
+      include: {
+        img: true
+      }
     });
 
     res.status(200).json({
       success: true,
-      getPost
-    })
+      getPost,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
@@ -40,84 +51,111 @@ router.get("/getNew", async (req, res) => {
 });
 
 // Create a post at /
-router.post("/", passport.authenticate("jwt", { session: false, }), async (req, res) => {
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  multerUpload,
+  async (req, res) => {
     try {
+      const uploadedFilesPromises = req.files.map(async (file) => {
+        //Need to convert the buffer (which is the acutal image) to a base64 str That is so cloudinary servers know the actual image's data.
+        const b64 = Buffer.from(file.buffer).toString("base64");
+        let dataURI = "data:" + file.mimetype + ";base64," + b64;
+
+        return await cloudinary.uploader.upload(dataURI);
+      });
+
+      const uploadedFiles = await Promise.all(uploadedFilesPromises);
+
       console.log(req.user);
-        const newPost = await prisma.post.create({
+      const newPost = await prisma.post.create({
+        data: {
+          userName: req.user.userName,
+          description: req.body.description,
+          price: req.body.price,
+          category: req.body.category,
+          userId: req.user.id,
+          title: req.body.title,
+          color: req.body.color,
+          subcategory: req.body.subcategory,
+          size: req.body.size,
+          location: req.body.location,
+          shippingFees: req.body.shippingFees,
+          carrier: req.body.carrier,
+          condition: req.body.condition,
+          endTime: req.body.endTime,
+          startTime: req.body.startTime,
+          type: req.body.type,
+          status: req.body.status,
+          img: {
+            createMany: {
+              data: uploadedFiles.map((img) => {
+                return {
+                  url: img.url,
+                };
+              }),
+            },
+          },
+        },
+      });
 
-            data: {
-                userName: req.user.userName,
-                description: req.body.description,
-                price: req.body.price,
-                category: req.body.category,
-                userId: req.user.id,
-                title: req.body.title,
-                color: req.body.color,
-                subcategory: req.body.subcategory,
-                size: req.body.size,
-                location: req.body.location,
-                shippingFees: req.body.shippingFees,
-                carrier: req.body.carrier,
-                condition: req.body.condition,
-                endTime: req.body.endTime,
-                startTime: req.body.startTime,
-                type: req.body.type
-            }
-        })
-
-        if (newPost) {
-            const postList = await prisma.post.findMany({
-              where: {
-                userId: req.user.id,
-              }
-            })
-            res.status(201).json({
-              success: true,
-              message: "Post created",
-              post: newPost,
-              postList
-            })
-          } else {
-            res.status(400).json({
-              success: false,
-              message: "Post was not created"
-            })
-          }
-        } catch (e) {
-          console.log(e)
-          res.status(400).json({
-            success: false,
-            message: "Something went wrong"
-          })
-    }
-})
-
-// Get all post
-router.get("/", async (req, res) => {
-    try {
-      const allPost = await prisma.post.findMany({
-      })
-  
-      if (allPost) {
-        res.status(200).json({
+      if (newPost) {
+        const postList = await prisma.post.findMany({
+          where: {
+            userId: req.user.id,
+          },
+        });
+        res.status(201).json({
           success: true,
-          message: "all post fetch!",
-          post: allPost
-        })
+          message: "Post created",
+          post: newPost,
+          postList,
+        });
       } else {
         res.status(400).json({
           success: false,
-          message: "Something went wrong!"
-        })
+          message: "Post was not created",
+        });
       }
-    } catch (error) {
-      console.log(error)
+    } catch (e) {
+      console.log(e);
       res.status(400).json({
         success: false,
-        message: "could not get any post!"
-      })
+        message: "Something went wrong",
+      });
     }
-  })
+  }
+);
+
+// Get all post
+router.get("/", async (req, res) => {
+  try {
+    const allPost = await prisma.post.findMany({
+      include: {
+        img: true
+      }
+    });
+
+    if (allPost) {
+      res.status(200).json({
+        success: true,
+        message: "all post fetch!",
+        post: allPost,
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "Something went wrong!",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: "could not get any post!",
+    });
+  }
+});
 
 //   Get post by id
 // router.get("/:postId", async (req, res) => {
@@ -128,7 +166,7 @@ router.get("/", async (req, res) => {
 //           id: parseInt(req.params.postId)
 //         }
 //       })
-  
+
 //       if (getPostbyId) {
 //         res.status(200).json({
 //           success: true,
@@ -203,18 +241,17 @@ router.get("/:postId", async (req, res) => {
   }
 });
 
-
 //   Get post by an user
 // router.get("/user/:userId", async function (req, res) {
 //     const userId = parseInt(req.params.userId);
 //     try {
-  
+
 //       const getPost = await prisma.post.findMany({
 //         where: {
 //           userId: userId,
 //         },
 //       });
-  
+
 //       res.status(200).json({
 //         success: true,
 //         getPost,
@@ -224,94 +261,99 @@ router.get("/:postId", async (req, res) => {
 //     }
 //   });
 
-
 // Delete a post
-router.delete("/:postId", passport.authenticate("jwt", { session: false }), async (req, res) => {
+router.delete(
+  "/:postId",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
     try {
       const deletePost = await prisma.post.deleteMany({
         where: {
           userId: req.user.id,
           id: parseInt(req.params.postId),
         },
-      })
+      });
       if (deletePost) {
         const newPost = await prisma.post.findMany({
           where: {
             userId: req.user.id,
           },
-        })
+        });
         res.status(200).json({
           success: true,
           message: "Post was successfully deleted!",
-          postList: newPost
-        })
+          postList: newPost,
+        });
       } else {
-        res.status(400), json({
-          message: "Something went wrong, post could not be deleted!"
-        })
+        res.status(400),
+          json({
+            message: "Something went wrong, post could not be deleted!",
+          });
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       res.status(400).json({
         success: false,
-        message: "Something went wrong!"
-      })
+        message: "Something went wrong!",
+      });
     }
-  })
-
+  }
+);
 
 // User can edit their post
-router.put("/:postId", passport.authenticate("jwt", { session: false, }), async (req, res) => {
+router.put(
+  "/:postId",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
     // console.log(req.params.id, typeof request.params.id, request.user.id, typeof request.user.id)
     try {
       const updatePost = await prisma.post.updateMany({
         where: {
           userId: req.user.id,
-          id: parseInt(req.params.postId)
+          id: parseInt(req.params.postId),
         },
         data: {
-            description: req.body.description,
-            price: req.body.price,
-            category: req.body.category,
-            color: req.body.color,
-            subcategory: req.body.subcategory,
-            size: req.body.size,
-            location: req.body.location,
-            shippingFees: req.body.shippingFees,
-            carrier: req.body.carrier,
-            condition: req.body.condition,
-            endTime: req.body.endTime,
-            startTime: req.body.startTime
+          description: req.body.description,
+          price: req.body.price,
+          category: req.body.category,
+          color: req.body.color,
+          subcategory: req.body.subcategory,
+          size: req.body.size,
+          location: req.body.location,
+          shippingFees: req.body.shippingFees,
+          carrier: req.body.carrier,
+          condition: req.body.condition,
+          endTime: req.body.endTime,
+          startTime: req.body.startTime,
+          status: req.body.status,
         },
-      })
-  
+      });
+
       if (updatePost) {
         const postList = await prisma.post.findMany({
           where: {
             userId: req.user.id,
-          }
-        })
+          },
+        });
         res.status(200).json({
           success: true,
           message: "Post information was updated",
-          postList
-        })
+          postList,
+        });
       } else {
         res.status(400).json({
           success: false,
-          message: "Post not updated. Something failed."
-        })
+          message: "Post not updated. Something failed.",
+        });
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
       res.status(400).json({
         success: false,
-        message: "Something went wrong"
-      })
+        message: "Something went wrong",
+      });
     }
-  })
+  }
+);
 
-
-export default router
-
-  
+export default router;

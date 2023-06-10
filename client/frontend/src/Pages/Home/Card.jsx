@@ -3,16 +3,18 @@ import { Link } from "react-router-dom";
 
 export default function Card({ type, title, img, price, id }) {
   const shortTitle = title.slice(0, 16) + "...";
-  console.log(id)
 
-    const negoLink = `/specneglisting/` + id
-    const bidLink = `/specbarterlisting/` + id
-    const barterLink = `/specbidlisting/` + id
-
+  const negoLink = `/specneglisting/` + id;
+  const bidLink = `/specbarterlisting/` + id;
+  const barterLink = `/specbidlisting/` + id;
 
   return (
     <div>
-      <Link to={`${type == "barter" ? barterLink : type == "bid" ? bidLink : negoLink}`}>
+      <Link
+        to={`${
+          type == "barter" ? barterLink : type == "bid" ? bidLink : negoLink
+        }`}
+      >
         <div className="w-[320px] h-[220px] px-[10px] mb-[20px]">
           <div
             className="w-[300px] h-[160px] bg-cover bg-no-repeat z-[-1] rounded-[4px]"

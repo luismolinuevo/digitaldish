@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ButtonsComponent from "./ButtonsComponent";
 import { HeaderComponent } from "./ListingComponent";
-import Card from "../Home/Card"
+import Card from "../Home/Card";
 import axios from "axios";
 import Footer from "../../Components/Footer/Footer";
 
@@ -27,8 +27,8 @@ export default function CommunityNew(props) {
     if (category.length <= 0) {
       setFilteredPost(post);
     } else {
-      const filtered = post.filter((item) => category.includes(item.category));      
-      console.log(filtered)
+      const filtered = post.filter((item) => category.includes(item.category));
+      console.log(filtered);
       setFilteredPost(filtered);
     }
   }, [category, post]);
@@ -45,11 +45,12 @@ export default function CommunityNew(props) {
           <div className="grid grid-cols-3 gap-10 max-w-screen-xl mx-auto">
             {filteredPost && filteredPost.length != 0 ? (
               filteredPost.map((item) => (
-                <div className="">
+                <div className="" key={item.id}>
                   <Card
                     title={item.title}
                     price={item.price}
                     id={item.id}
+                    img={item.img != 0 ? item.img[0].url.toString() : ""}
                   />
                 </div>
               ))
@@ -61,9 +62,8 @@ export default function CommunityNew(props) {
       </div>
 
       <div className="bg-[#F4EBDC]">
-      <Footer />
+        <Footer />
       </div>
-      
     </div>
   );
 }
