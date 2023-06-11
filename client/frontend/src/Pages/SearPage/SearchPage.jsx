@@ -33,7 +33,7 @@ export default function SearchPage() {
             className="peer h-full w-full rounded-full outline-none text-sm bg-[#F1F0EB] pr-2  placeholder-black"
             type="text"
             id="search"
-            placeholder="Search"
+            placeholder="Search by product title"
             onChange={(event) => dispatch(setSearch(event.target.value))}
           />
         </div>

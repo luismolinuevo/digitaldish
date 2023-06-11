@@ -7,12 +7,16 @@
 //     Option
 //   } from "@material-tailwind/react";
 import {useState, useEffect} from "react"
+import { useSelector } from "react-redux";
 import Card from "../Home/Card";
 import axios from "axios"
 
   export const SearchData = () => {
     // const { title, price, image, type } = props;
+    const query = useSelector((state) => state.filter.search);
+    const category = useSelector((state) => state.filter.category);
     const [post, setPost] = useState([])
+    const [filteredPost, setFilteredPost] = useState([]);
 
     useEffect(() => {
       async function fetchData() {
@@ -22,6 +26,26 @@ import axios from "axios"
       }
       fetchData();
     }, []);
+
+    useEffect(() => {
+      let filtered = post
+      // if (category.length <= 0) {
+      //   setFilteredPost(post);
+      // } else {
+      //   const filtered = post.filter((item) => category.includes(item.category));      
+      //   console.log(filtered)
+      //   setFilteredPost(filtered);
+      // }
+
+      if(query != null) {
+        // const filtered = post.filter((item) => query.includes(item.title))
+        filtered = post.filter((item) => item.title.toLowerCase().includes(query))  //this is the way to do it for non arrays
+        
+      } 
+
+      
+      setFilteredPost(filtered)
+    }, [category, post, query]);
     
     
     return (
@@ -48,8 +72,8 @@ import axios from "axios"
             </CardBody>
           </Card> */}
           
-            {post && post.length !== 0 ? (
-              post.map((item) => (
+            {filteredPost && filteredPost.length !== 0 ? (
+              filteredPost.map((item) => (
                 <div className="">
                   <Card
                     title={item.title}
