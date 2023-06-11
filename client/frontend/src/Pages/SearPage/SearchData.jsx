@@ -10,7 +10,7 @@ import {useState, useEffect} from "react"
 import { useSelector } from "react-redux";
 import Card from "../Home/Card";
 import axios from "axios"
-import filter from "../../Utils/filter";
+
 
   export const SearchData = () => {
     // const { title, price, image, type } = props;
@@ -18,6 +18,7 @@ import filter from "../../Utils/filter";
     const category = useSelector((state) => state.filter.category);
     const color = useSelector((state) => state.filter.color);
     const condition = useSelector((state) => state.filter.condition);
+    const type = useSelector((state) => state.filter.type)
 
     const [post, setPost] = useState([])
     const [filteredPost, setFilteredPost] = useState([]);
@@ -51,13 +52,17 @@ import filter from "../../Utils/filter";
         filtered = filtered.filter((item) => condition.includes(item.condition))
       }
 
+      if(type.length != 0) {
+        filtered = filtered.filter((item) => type.includes(item.type))
+      }
+
 
 
 
 
       
       setFilteredPost(filtered)
-    }, [query, category, post, color, condition]);
+    }, [query, category, post, color, condition, type]);
     
     
     return (

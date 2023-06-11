@@ -7,6 +7,8 @@ import {
   deleteColor,
   setCondition,
   deleteCondition,
+  setType,
+  deleteType,
 } from "../../Utils/filter";
 import { Input } from "@material-tailwind/react";
 
@@ -15,6 +17,7 @@ export default function FilterComponent() {
   const [categories, setCategories] = useState([]);
   const [colors, setColors] = useState([]);
   const [conditions, setConditions] = useState([]);
+  const [types, setTypes] = useState([]);
 
   //did it like this to have dryer code. Improved it from community pages
   const handleCategory = (category) => {
@@ -46,6 +49,16 @@ export default function FilterComponent() {
     } else {
         dispatch(deleteCondition(condition));
         setConditions(conditions.filter((item) => item !== condition))
+    }
+  }
+
+  const handleType = (type) => {
+    if(!types.includes(type)) {
+      dispatch(setType(type));
+      setTypes([...types, type])
+    } else {
+      dispatch(deleteType(type))
+      setTypes(types.filter((item) => item !== type))
     }
   }
 
@@ -221,13 +234,13 @@ export default function FilterComponent() {
 
       <div className="text-[28px] font-bold mt-5">Purchase Type</div>
       <div className="grid grid-cols gap-4 mt-5">
-        <button className=" hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button className={` hover:bg-[#F1F0EB] text-left text-[20px] ${types.includes("bid") ? "bg-gray-400" : ""}`} onClick={() => handleType("bid")}>
           Auction
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button className={` hover:bg-[#F1F0EB] text-left text-[20px] ${types.includes("negotiation") ? "bg-gray-400" : ""}`}  onClick={() => handleType("negotiation")}>
           Negotiation
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button className={` hover:bg-[#F1F0EB] text-left text-[20px] ${types.includes("barter") ? "bg-gray-400" : ""}`} onClick={() => handleType("barter")}>
           Barter
         </button>
       </div>
