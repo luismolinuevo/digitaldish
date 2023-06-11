@@ -1,10 +1,14 @@
-import React from "react";
-import { CardComponent } from "./CardComponent";
+import React, {useState} from "react";
+import { SearchData } from "./SearchData";
 import FilterComponent from "./FilterComponent";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
+import { useDispatch } from "react-redux";
+import { setSearch } from "../../Utils/filter";
 
 export default function SearchPage() {
+  const dispatch = useDispatch();
+
   return (
     <div className=" h-auto border w-screen ">
       <div className=" flex justify-center">
@@ -30,13 +34,14 @@ export default function SearchPage() {
             type="text"
             id="search"
             placeholder="Search"
+            onChange={(event) => dispatch(setSearch(event.target.value))}
           />
         </div>
       </div>
 
       <div className="mt-20 flex justify-between">
         <FilterComponent />
-        <CardComponent />
+        <SearchData />
       </div>
 
       <Footer />
