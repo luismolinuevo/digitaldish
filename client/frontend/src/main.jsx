@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, RouterProvider, } from "react-router-dom"
 import Home from './Pages/Home/Home'
 import Profile from './Pages/Profile/Profile'
 import Following from './Pages/Following/Following'
@@ -37,6 +37,7 @@ import UserAccount from './Pages/Profile/UserAccount'
 import SocialFollowers from './Pages/Profile/SocialFollowers'
 
 import { ThemeProvider } from "@material-tailwind/react";
+// import ScrollToTop from './Utils/ScrollToTop'
 
 
 
@@ -177,7 +178,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}>
+  
+      </RouterProvider>
     </Provider>
   </React.StrictMode >,
   

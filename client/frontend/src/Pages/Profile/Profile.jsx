@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { } from "react-dom";
+import { Link } from "react-router-dom"
 import MouseCoverPic from "../../assets/photos/mouse-coverpic.png";
 import MouseProfilePic from "../../assets/photos/mouse-profilepic.png";
 import Heart from "../../assets/photos/hearts.png";
@@ -7,6 +8,7 @@ import MagnifyingGlass from "../../assets/icons/Icon-MagnifyingGlass.png";
 import Footer from "../../Components/Footer/Footer";
 import Upload from "./Upload";
 import ReviewCard from './CustomerReview'
+import { Select, Option } from "@material-tailwind/react";
 import "./Profile.css";
 
 // const pH = "10000rem"
@@ -47,6 +49,13 @@ export default function Profile() {
     const totalSales = 82
     const userRating = "5/5"
 
+
+//LINK SCROLLlING
+const handleScroll = (event) => {
+    event.preventDefault();
+    const section = document.getElementById('bttm-gray-line');
+    section.scrollIntoView({ behavior: 'smooth' });
+}
 
     return (
         <div>
@@ -120,7 +129,9 @@ export default function Profile() {
                                     strokeWidth={2}
                                     className="hover:shadow-xl"
                                 >
+                                <Link to={"/socialfollowers"}>
                                     Friends
+                                    </Link>
                                     <span>{ }</span>
                                 </button>
                             </div>
@@ -131,7 +142,9 @@ export default function Profile() {
                                     strokeWidth={2}
                                     className="hover:shadow-xl"
                                 >
+                                <Link to={"#bttm-gray-line"} onClick={handleScroll} >
                                     Feedback
+                                    </Link>
                                     <span className="text-gray-500 font-medium"> ({feedback})</span>
                                 </button>
                             </div>
@@ -146,16 +159,21 @@ export default function Profile() {
 
 
                     {/**FEATURED LISTING */}
-                    <div>
-                        <p className="sort-by flex justify-end text-blue-500 pr-10 pt-8 gap-3 hover:text-blue-800">Sort by:
-                            <div className="pl-3">v</div>
-                        </p>
-                        <div className="pt-10 w-[30rem] ml-[20rem]">
-                            <div className="featured-listings flex flex-row flex-wrap justify-center text-2xl font-bold pl-5 border border-black">Featured listings
-
-                            </div>
-                        </div>
+                    <p className="sort-by flex justify-end text-blue-500 pr-10 pt-8 gap-3 hover:text-blue-800">
+                    <div className="w-[8rem] pr-[10rem]">
+                      <Select label="Sort by" className="border-none">
+                        <Option>Relevance</Option>
+                        <Option>Most recent</Option>
+                        <Option>Lowest price</Option>
+                        <Option>Highest price</Option>
+                      </Select>
                     </div>
+                  </p>
+                  <div className="pt-10 w-[30rem] ml-[20rem]">
+                    <div className="featured-listings flex flex-row flex-wrap justify-center text-2xl font-bold pl-5 border border-black">
+                      Featured listings
+                    </div>
+                  </div>
 
 
 
@@ -216,8 +234,8 @@ export default function Profile() {
                         </div>
                         <div className="featured-listings flex flex-row flex-wrap justify-center text-2xl pl-5 border border-black">Featured listings</div>
                     </div>
-                    <div className="bottom-gray-line my-5 border-b-2 border-gray-500"></div>
-                    <div className="ratings-section">
+                    <div id="bttm-gray-line" className="bottom-gray-line my-5 border-b-2 border-gray-500"></div>
+                    <div id="ratings-section" name="ratings-section">
                         <div className="flex flex-row justify-end my-6">
                             <button className="bg-[#DAB24E] border border-[#DAB24E] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl">
                                 ADD RATING

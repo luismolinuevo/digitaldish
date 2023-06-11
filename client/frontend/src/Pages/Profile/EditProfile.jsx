@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {} from "react-dom";
+import { Link } from "react-router-dom";
 import EliCoverPic from "../../assets/photos/eli-coverpic.png";
 import EliProfilePic from "../../assets/photos/eli-profilepic.png";
 import Heart from "../../assets/photos/hearts.png";
@@ -46,6 +47,13 @@ export default function EditProfile() {
   //CONTACT SELLER
   const totalSales = 10;
   const userRating = "4/5";
+
+  //LINK SCROLLlING
+  const handleScroll = (event) => {
+    event.preventDefault();
+    const section = document.getElementById("bttm-gray-line");
+    section.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div>
@@ -117,7 +125,7 @@ export default function EditProfile() {
                   strokeWidth={2}
                   className="hover:shadow-xl"
                 >
-                  Friends
+                  <Link to={"/socialfollowers"}>Friends</Link>
                   <span>{}</span>
                 </button>
               </div>
@@ -128,7 +136,9 @@ export default function EditProfile() {
                   strokeWidth={2}
                   className="hover:shadow-xl"
                 >
-                  Feedback
+                  <Link to={"#bttm-gray-line"} onClick={handleScroll}>
+                    Feedback
+                  </Link>
                   <span className="text-gray-500 font-medium">
                     {" "}
                     ({feedback})
@@ -138,10 +148,10 @@ export default function EditProfile() {
             </div>
             <div className="flex flex-row justify-end w-full gap-3">
               <button className="bg-[#000] border border-[#000] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-white">
-                EDIT PROFILE
+                <Link to={"/useraccount"}>EDIT PROFILE</Link>
               </button>
               <button className="bg-[#000] border border-[#000] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-white">
-                LOG OUT
+                <Link to={"/"}>LOG OUT</Link>
               </button>
               <button className="bg-[#DAB24E] border border-[#DAB24E] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl">
                 ADD LISTING
@@ -229,8 +239,11 @@ export default function EditProfile() {
               Featured listings
             </div>
           </div>
-          <div className="bottom-gray-line my-5 border-b-2 border-gray-500"></div>
-          <div className="ratings-section">
+          <div
+            id="bttm-gray-line"
+            className="bottom-gray-line my-5 border-b-2 border-gray-500"
+          ></div>
+          <div id="ratings-section" name="ratings-section">
             <div className="flex flex-row justify-end my-6">
               <button className="bg-[#DAB24E] border border-[#DAB24E] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl">
                 RATING
@@ -239,6 +252,28 @@ export default function EditProfile() {
             <div className="rating-card flex flex-col gap-10"></div>
             <ReviewCard />
             <ReviewCard />
+            <button
+              type="button"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="light"
+              class="inline-block p-3 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out bottom-5 right-5"
+              id="btn-back-to-top"
+            >
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fas"
+                class="w-4 h-4"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"
+                ></path>
+              </svg>
+            </button>
           </div>
         </body>
       </div>
