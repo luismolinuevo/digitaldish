@@ -37,6 +37,7 @@ import UserAccount from './Pages/Profile/UserAccount'
 import SocialFollowers from './Pages/Profile/SocialFollowers'
 
 import { ThemeProvider } from "@material-tailwind/react";
+import CheckoutPage from './Pages/Profile/Checkout'
 // import ScrollToTop from './Utils/ScrollToTop'
 
 
@@ -170,7 +171,11 @@ const router = createBrowserRouter([
       {
         path: "/socialfollowers",
         element: <SocialFollowers />
-      }
+      },
+      {
+        path:"/checkout",
+        element: <CheckoutPage />
+      },
     ]
   },
 ]);
