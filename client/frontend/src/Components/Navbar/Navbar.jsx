@@ -6,13 +6,14 @@ import Search from "../../assets/search.png"
 import Community from "../../assets/community.png"
 import Cart from "../../assets/cart.png"
 import Notification from "../../assets/notification.png"
+import Activity from "../../Pages/Activity/Activity";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
 
   return (
-    <div className="fixed w-full h-[80px] bg-[#F1F0EB] flex justify-between items-center px-4 border z-10 border-black">
+    <div className="fixed w-full h-[80px] bg-[#F1F0EB] flex justify-between items-center px-4 border z-10">
     <div className="flex items-center">
       <Link to="/"><img className="w-50 mr-4" src={Logo} alt="test" style={{ width: "250px" }} /></Link>
       <ul className=" md:flex ">
@@ -50,7 +51,7 @@ const Navbar = () => {
       </li>
   
       <li>
-        <Link to="/Notification">
+        <Link to="/activity">
           <img src={Notification} alt="" className="mr-5" />
         </Link>
       </li>
