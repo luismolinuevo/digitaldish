@@ -1,6 +1,8 @@
 import { useState } from "react";
 // import { sanitize } from '';
 import Loading from './Loading';
+import { Spinner, IconButton } from '@material-tailwind/react';
+import { BsArrowRight } from 'react-icons/bs'
 import { Link } from "react-router-dom";
 import InstagramIcon from "../../assets/icons/Icon-InstagramLogo.png";
 import FacebookIcon from "../../assets/icons/Icon-FacebookLogo.png";
@@ -67,20 +69,6 @@ const Footer = ({ status, message, onValidated }) => {
   return (
     <div>
       <div className="Footer-container flex justify-center flex-col pt-60">
-        <div className="p-5 w-full mt-8 border border-gray-200 bg-[#7F92B5] text-center">
-          {" "}
-          <span className="inline-flex">
-            <a className="text-gray-500 px-5">
-              <img src={InstagramIcon} alt="Instagram Icon" />
-            </a>
-            <a className="ml-4 text-gray-500 px-5">
-              <img src={FacebookIcon} alt="Facebook Icon" />
-            </a>
-            <a className="ml-4 text-gray-500 px-5">
-              <img src={TwitterIcon} alt="Twitter Icon" />
-            </a>
-          </span>
-        </div>
         <div className="p-2 bg-[#C3D5F5] h-[20vw] flex justify-center flex-col mt-auto text-center">
           <a className="text-black font-['Arial'] font-extrabold text-4xl py-10 ">
             Stay in Touch
@@ -96,7 +84,7 @@ const Footer = ({ status, message, onValidated }) => {
             <div className="flex flex-col justify-center self-center">
               <div className="pb-2">
                 {"sending" === status ? (
-                  <Loading
+                  <Spinner
                     showSpinner
                     message="Sending..."
                     contentColorCLass="text-white"
@@ -121,17 +109,19 @@ const Footer = ({ status, message, onValidated }) => {
 
               <div className="flex flex-row">
                 <div className="border-b border-[#7F92B5] w-[26rem] self-center text-left">
+                <div className="flex flex-row">
                   <input
-                    className="appearance-none bg-transparent border-none w-[24rem] text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-xl"
+                    className="appearance-none bg-transparent border-none w-[26rem] text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-xl"
                     onChange={(event) => setEmail(event?.target?.value ?? "")}
                     type="email"
                     onKeyUp={(event) => handleInputKeyEvent(event)}
                     placeholder="Enter your email"
                     aria-label="Email address"
+                    
                   />
-                </div>
-                <button
-                  className="cursor-pointer hover:bg-indigo-100 focus:outline-none"
+                  <div className="flex justify-end">
+                  <button
+                  className="cursor-pointer hover:bg-indigo-100 focus:outline-none z-50 object-left"
                   onClick={handleFormSubmit}
                 >
                   <input
@@ -142,6 +132,9 @@ const Footer = ({ status, message, onValidated }) => {
                     className="flex flex-row justify-center item-center self-center"
                   />
                 </button>
+                </div>
+                  </div>
+                </div>
               </div>
             </div>
             <p className="text-xs">
@@ -151,6 +144,20 @@ const Footer = ({ status, message, onValidated }) => {
           </form>
         </div>
       </div>
+      <div className="p-5 w-full bg-[#7F92B5] text-center">
+          {" "}
+          <span className="inline-flex">
+            <a className="text-gray-500 px-5">
+              <img src={InstagramIcon} alt="Instagram Icon" />
+            </a>
+            <a className="ml-4 text-gray-500 px-5">
+              <img src={FacebookIcon} alt="Facebook Icon" />
+            </a>
+            <a className="ml-4 text-gray-500 px-5">
+              <img src={TwitterIcon} alt="Twitter Icon" />
+            </a>
+          </span>
+        </div>
     </div>
   );
 };
