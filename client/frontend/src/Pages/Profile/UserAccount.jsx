@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import MouseProfilePic from "../../assets/photos/mouse-profilepic.png";
+import { Link } from "react-router-dom";
+import Placeholder from "../../assets/photos/profile-placeholder.png";
 import { Textarea } from "@material-tailwind/react";
 
 export default function UserAccount() {
@@ -19,7 +20,7 @@ export default function UserAccount() {
             </span>
           </p>
         </div>
-        <div className="border border-[#F1F0EB] bg-[#F1F0EB] w-full z-[-10]">
+        <div className="border border-[#F1F0EB] bg-[#F1F0EB] w-full">
           <p className="flex justify-end p-2">
             <span className="border-b hover:border-blue-500">
               Change Header Image
@@ -27,7 +28,7 @@ export default function UserAccount() {
           </p>
           <div className="px-4">
             <img
-              src={MouseProfilePic}
+              src={Placeholder}
               alt="edit photo placeholder"
               className="w-[4rem] z-[10]"
             />
@@ -44,7 +45,7 @@ export default function UserAccount() {
             variant="static"
             label=""
             placeholder="message"
-            className="border border-black p-2 "
+            className="border border-black p-2 text-xl"
           />
         </div>
         <div className="basic-info-section">
@@ -121,7 +122,8 @@ export default function UserAccount() {
               </div>
             <div className="flex justify-end w-full">
             <button className="bg-[#000] border border-[#000] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-white">
-            EDIT PROFILE
+           
+            <Link to={"/editprofile"} scrollBehavior="smooth">EDIT PROFILE</Link> 
           </button>
           </div>
           <div className="deactivate-account pt-4">
