@@ -9,6 +9,7 @@ import Footer from "../../Components/Footer/Footer";
 import Upload from "./Upload";
 import ReviewCard from './CustomerReview'
 import { Select, Option } from "@material-tailwind/react";
+import Modal from "../../Components/Modal"
 import "./Profile.css";
 
 // const pH = "10000rem"
@@ -177,7 +178,7 @@ const handleScroll = (event) => {
 
 
 
-
+<Modal />
 
 
                     <div className="border-2 border-blue-500 h-[40rem] mt-10">
