@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCategory, deleteCategory } from "../../Utils/filter";
+import {
+  setCategory,
+  deleteCategory,
+  setColor,
+  deleteColor,
+} from "../../Utils/filter";
 import { Input } from "@material-tailwind/react";
 
 export default function FilterComponent() {
   const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
-  const [colors, setColors] = useState([])
+  const [colors, setColors] = useState([]);
 
   //did it like this to have dryer code. Improved it from community pages
   const handleCategory = (category) => {
@@ -20,6 +25,17 @@ export default function FilterComponent() {
     }
   };
 
+  const handleColor = (color) => {
+    setColors(...colors, color);
+    if (!colors.includes(color)) {
+      dispatch(setColor(color));
+      setColors([...colors, color])
+    } else {
+      dispatch(deleteColor(color));
+      setColors(color.filter((item) => item !== color));
+    }
+  };
+
   return (
     <div className="ml-20 w-1/4 h-auto">
       <h1 className="font-bold text-[40px]">Filter By:</h1>
@@ -27,7 +43,7 @@ export default function FilterComponent() {
       <div className="grid grid-cols-2 gap-4 mt-5">
         <button
           className={`hover:bg-[#F1F0EB] text-left text-[20px] ${
-            categories.includes("pcs") ? "bg-gray-400" : ""
+            categories.includes("headphones") ? "bg-gray-400" : ""
           }`}
           onClick={() => handleCategory("headphones")}
         >
@@ -43,7 +59,7 @@ export default function FilterComponent() {
         </button>
         <button
           className={`hover:bg-[#F1F0EB] text-left text-[20px] ${
-            categories.includes("pcs") ? "bg-gray-400" : ""
+            categories.includes("mice") ? "bg-gray-400" : ""
           }`}
           onClick={() => handleCategory("mice")}
         >
@@ -51,7 +67,7 @@ export default function FilterComponent() {
         </button>
         <button
           className={`hover:bg-[#F1F0EB] text-left text-[20px] ${
-            categories.includes("pcs") ? "bg-gray-400" : ""
+            categories.includes("phone") ? "bg-gray-400" : ""
           }`}
           onClick={() => handleCategory("phone")}
         >
@@ -59,7 +75,7 @@ export default function FilterComponent() {
         </button>
         <button
           className={`hover:bg-[#F1F0EB] text-left text-[20px] ${
-            categories.includes("pcs") ? "bg-gray-400" : ""
+            categories.includes("monitor") ? "bg-gray-400" : ""
           }`}
           onClick={() => handleCategory("monitor")}
         >
@@ -67,7 +83,7 @@ export default function FilterComponent() {
         </button>
         <button
           className={`hover:bg-[#F1F0EB] text-left text-[20px] ${
-            categories.includes("pcs") ? "bg-gray-400" : ""
+            categories.includes("game system") ? "bg-gray-400" : ""
           }`}
           onClick={() => handleCategory("game system")}
         >
@@ -75,7 +91,7 @@ export default function FilterComponent() {
         </button>
         <button
           className={`hover:bg-[#F1F0EB] text-left text-[20px] ${
-            categories.includes("pcs") ? "bg-gray-400" : ""
+            categories.includes("controllers") ? "bg-gray-400" : ""
           }`}
           onClick={() => handleCategory("controllers")}
         >
@@ -83,7 +99,7 @@ export default function FilterComponent() {
         </button>
         <button
           className={`hover:bg-[#F1F0EB] text-left text-[20px] ${
-            categories.includes("pcs") ? "bg-gray-400" : ""
+            categories.includes("keyboards") ? "bg-gray-400" : ""
           }`}
           onClick={() => handleCategory("keyboards")}
         >
@@ -100,31 +116,76 @@ export default function FilterComponent() {
 
       <div className="text-[28px] font-bold mt-5">Color</div>
       <div className="grid grid-cols-2 gap-4 mt-5">
-        <button className=" hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button
+          className={` hover:bg-[#F1F0EB] text-left text-[20px] ${
+            colors.includes("Black") ? "bg-gray-400" : ""
+          }`}
+          onClick={() => handleColor("Black")}
+        >
           Black
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button
+          className={` hover:bg-[#F1F0EB] text-left text-[20px] ${
+            colors.includes("Yellow") ? "bg-gray-400" : ""
+          }`}
+          onClick={() => handleColor("Yellow")}
+        >
           Yellow
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button
+          className={` hover:bg-[#F1F0EB] text-left text-[20px] ${
+            colors.includes("White") ? "bg-gray-400" : ""
+          }`}
+          onClick={() => handleColor("White")}
+        >
           White
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button
+          className={` hover:bg-[#F1F0EB] text-left text-[20px] ${
+            colors.includes("Green") ? "bg-gray-400" : ""
+          }`}
+          onClick={() => handleColor("Green")}
+        >
           Green
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button
+          className={` hover:bg-[#F1F0EB] text-left text-[20px] ${
+            colors.includes("Gray") ? "bg-gray-400" : ""
+          }`}
+          onClick={() => handleColor("Gray")}
+        >
           Gray
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button
+          className={` hover:bg-[#F1F0EB] text-left text-[20px] ${
+            colors.includes("Purple") ? "bg-gray-400" : ""
+          }`}
+          onClick={() => handleColor("Purple")}
+        >
           Purple
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button
+          className={` hover:bg-[#F1F0EB] text-left text-[20px] ${
+            colors.includes("blue") ? "bg-gray-400" : ""
+          }`}
+          onClick={() => handleColor("Blue")}
+        >
           Blue
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button
+          className={` hover:bg-[#F1F0EB] text-left text-[20px] ${
+            colors.includes("Orange") ? "bg-gray-400" : ""
+          }`}
+          onClick={() => handleColor("Orange")}
+        >
           Orange
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button
+          className={` hover:bg-[#F1F0EB] text-left text-[20px] ${
+            colors.includes("Red") ? "bg-gray-400" : ""
+          }`}
+          onClick={() => handleColor("Red")}
+        >
           Red
         </button>
       </div>

@@ -24,11 +24,20 @@ export const slice = createSlice({
          setSearch: (state, action) => {
             state.search = action.payload;
             console.log(state.search)
+         },
+         setColor: (state, action) => {
+            const newItem = action.payload;
+            state.color = [...state.color, newItem]
+            console.log(state.color)
+         },
+         deleteColor: (state, action) => {
+            const colorToRemove = action.payload;
+            state.color = state.color.filter(item => item !== colorToRemove)
          }
           
     },
   });
   
-  export const { setCategory, deleteCategory, setSearch } = slice.actions;
+  export const { setCategory, deleteCategory, setSearch, setColor, deleteColor } = slice.actions;
 
   export default slice.reducer;

@@ -16,6 +16,8 @@ import filter from "../../Utils/filter";
     // const { title, price, image, type } = props;
     const query = useSelector((state) => state.filter.search);
     const category = useSelector((state) => state.filter.category);
+    const color = useSelector((state) => state.filter.color);
+
     const [post, setPost] = useState([])
     const [filteredPost, setFilteredPost] = useState([]);
 
@@ -33,16 +35,22 @@ import filter from "../../Utils/filter";
 
       if(query != null) {
         // const filtered = post.filter((item) => query.includes(item.title))
-        filtered = post.filter((item) => item.title.toLowerCase().includes(query))  //this is the way to do it for non arrays
+        filtered = filtered.filter((item) => item.title.toLowerCase().includes(query.toLowerCase()))  //this is the way to do it for non arrays
       } 
 
-      if(category.length != 0) {
-        filtered = post.filter((item) => category.includes(item.category.toLowerCase()));    
+      if (category.length != 0) {
+        filtered = filtered.filter((item) => category.includes(item.category.toLowerCase()));    
       }
+
+      if(color.length != 0) {
+        filtered = filtered.filter((item) => color.includes(item.color))
+      }
+
+
 
       
       setFilteredPost(filtered)
-    }, [category, post, query]);
+    }, [query, category, post, color]);
     
     
     return (
