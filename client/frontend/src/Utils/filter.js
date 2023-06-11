@@ -4,7 +4,12 @@ export const slice = createSlice({
     name: 'filter',
     initialState: {
         category: [],
-        search: null
+        search: null,
+        color: [],
+        condition: [],
+        type: null,
+        startPrice: 0,
+        endPrice: 0
     },
     reducers: {
          setCategory: (state, action) => {

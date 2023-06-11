@@ -10,6 +10,7 @@ import {useState, useEffect} from "react"
 import { useSelector } from "react-redux";
 import Card from "../Home/Card";
 import axios from "axios"
+import filter from "../../Utils/filter";
 
   export const SearchData = () => {
     // const { title, price, image, type } = props;
@@ -29,19 +30,15 @@ import axios from "axios"
 
     useEffect(() => {
       let filtered = post
-      // if (category.length <= 0) {
-      //   setFilteredPost(post);
-      // } else {
-      //   const filtered = post.filter((item) => category.includes(item.category));      
-      //   console.log(filtered)
-      //   setFilteredPost(filtered);
-      // }
 
       if(query != null) {
         // const filtered = post.filter((item) => query.includes(item.title))
         filtered = post.filter((item) => item.title.toLowerCase().includes(query))  //this is the way to do it for non arrays
-        
       } 
+
+      if(category.length != 0) {
+        filtered = post.filter((item) => category.includes(item.category.toLowerCase()));    
+      }
 
       
       setFilteredPost(filtered)
