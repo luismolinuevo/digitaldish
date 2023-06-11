@@ -208,7 +208,7 @@ export default function BarterForm() {
               <option value=""></option>
               <option value="White">White</option>
               <option value="Black">Black</option>
-              <option value="">Silver</option>
+              <option value="Silver">Silver</option>
               <option value="Blue">Blue</option>
               <option value="Green">Green</option>
               <option value="Red">Red</option>
