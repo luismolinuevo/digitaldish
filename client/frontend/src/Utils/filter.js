@@ -51,11 +51,17 @@ export const slice = createSlice({
          deleteType: (state, action) => {
             const typeToDelete = action.payload;
             state.type = state.type.filter(item => item !== typeToDelete)
+         },
+         setStartPrice: (state, action) => {
+            state.startPrice = action.payload
+         },
+         setEndPrice: (state, action) => {
+            state.endPrice = action.payload
          }
           
     },
   });
   
-  export const { setCategory, deleteCategory, setSearch, setColor, deleteColor, setCondition, deleteCondition, setType, deleteType } = slice.actions;
+  export const { setCategory, deleteCategory, setSearch, setColor, deleteColor, setCondition, deleteCondition, setType, deleteType, setStartPrice, setEndPrice } = slice.actions;
 
   export default slice.reducer;

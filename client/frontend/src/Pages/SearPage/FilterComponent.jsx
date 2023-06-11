@@ -9,6 +9,8 @@ import {
   deleteCondition,
   setType,
   deleteType,
+  setStartPrice,
+  setEndPrice,
 } from "../../Utils/filter";
 import { Input } from "@material-tailwind/react";
 
@@ -135,9 +137,9 @@ export default function FilterComponent() {
 
       <div className="text-[28px] font-bold mt-5">Price Range</div>
       <div className="mt-5 flex">
-        <input className=" bg-[#C2B8A3] w-20 h-12 mr-5"></input>{" "}
+        <input className=" bg-[#C2B8A3] w-20 h-12 mr-5" onChange={(event) => dispatch(setStartPrice(event.target.value))}/>
         <span className=" w-8 text-[20px] flex items-center mr-5">to</span>
-        <input className="bg-[#C2B8A3] w-20 h-12"></input>
+        <input className="bg-[#C2B8A3] w-20 h-12" onChange={(event) => dispatch(setEndPrice(event.target.value))}/>
       </div>
 
       <div className="text-[28px] font-bold mt-5">Color</div>
