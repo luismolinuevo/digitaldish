@@ -17,6 +17,7 @@ import filter from "../../Utils/filter";
     const query = useSelector((state) => state.filter.search);
     const category = useSelector((state) => state.filter.category);
     const color = useSelector((state) => state.filter.color);
+    const condition = useSelector((state) => state.filter.condition);
 
     const [post, setPost] = useState([])
     const [filteredPost, setFilteredPost] = useState([]);
@@ -46,11 +47,17 @@ import filter from "../../Utils/filter";
         filtered = filtered.filter((item) => color.includes(item.color))
       }
 
+      if(condition.length != 0) {
+        filtered = filtered.filter((item) => condition.includes(item.condition))
+      }
+
+
+
 
 
       
       setFilteredPost(filtered)
-    }, [query, category, post, color]);
+    }, [query, category, post, color, condition]);
     
     
     return (

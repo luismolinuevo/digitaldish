@@ -5,6 +5,8 @@ import {
   deleteCategory,
   setColor,
   deleteColor,
+  setCondition,
+  deleteCondition,
 } from "../../Utils/filter";
 import { Input } from "@material-tailwind/react";
 
@@ -12,6 +14,7 @@ export default function FilterComponent() {
   const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   const [colors, setColors] = useState([]);
+  const [conditions, setConditions] = useState([]);
 
   //did it like this to have dryer code. Improved it from community pages
   const handleCategory = (category) => {
@@ -35,6 +38,16 @@ export default function FilterComponent() {
       setColors(color.filter((item) => item !== color));
     }
   };
+
+  const handleCondition = (condition) => {
+    if(!conditions.includes(condition)) {
+      dispatch(setCondition(condition));
+      setConditions([...conditions, condition])
+    } else {
+        dispatch(deleteCondition(condition));
+        setConditions(conditions.filter((item) => item !== condition))
+    }
+  }
 
   return (
     <div className="ml-20 w-1/4 h-auto">
@@ -166,7 +179,7 @@ export default function FilterComponent() {
         </button>
         <button
           className={` hover:bg-[#F1F0EB] text-left text-[20px] ${
-            colors.includes("blue") ? "bg-gray-400" : ""
+            colors.includes("Blue") ? "bg-gray-400" : ""
           }`}
           onClick={() => handleColor("Blue")}
         >
@@ -192,16 +205,16 @@ export default function FilterComponent() {
 
       <div className="text-[28px] font-bold mt-5">Condition</div>
       <div className="grid grid-cols gap-4 mt-5">
-        <button className=" hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button className={`hover:bg-[#F1F0EB] text-left text-[20px] ${conditions.includes("New") ? "bg-gray-400" : ""}`} onClick={() => handleCondition("New")}>
           New
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button className={`hover:bg-[#F1F0EB] text-left text-[20px] ${conditions.includes("Used-Good") ? "bg-gray-400" : ""}`} onClick={() => handleCondition("Used-Good")}>
           Used - Good
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button className={`hover:bg-[#F1F0EB] text-left text-[20px] ${conditions.includes("Used-Like-New") ? "bg-gray-400" : ""}`} onClick={() => handleCondition("Used-Like-New")}>
           Used - Okay
         </button>
-        <button className="hover:bg-[#F1F0EB] text-left text-[20px]">
+        <button className={`hover:bg-[#F1F0EB] text-left text-[20px] ${conditions.includes("Used-Fair") ? "bg-gray-400" : ""}`} onClick={() => handleCondition("Used-Fair")}>
           Old
         </button>
       </div>

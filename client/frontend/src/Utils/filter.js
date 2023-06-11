@@ -33,11 +33,20 @@ export const slice = createSlice({
          deleteColor: (state, action) => {
             const colorToRemove = action.payload;
             state.color = state.color.filter(item => item !== colorToRemove)
+         },
+         setCondition: (state, action) => {
+            const newItem = action.payload;
+            state.condition = [...state.condition, newItem]
+            console.log(state.condition)
+         }, 
+         deleteCondition: (state, action) => {
+            const conditionToDelete = action.payload;
+            state.condition = state.condition.filter(item => item !== conditionToDelete);
          }
           
     },
   });
   
-  export const { setCategory, deleteCategory, setSearch, setColor, deleteColor } = slice.actions;
+  export const { setCategory, deleteCategory, setSearch, setColor, deleteColor, setCondition, deleteCondition } = slice.actions;
 
   export default slice.reducer;
