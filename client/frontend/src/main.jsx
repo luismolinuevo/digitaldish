@@ -32,8 +32,12 @@ import CommunityNegotiate from './Pages/Community/CommunityNegotiate'
 import CommunityAuction from './Pages/Community/CommunityAuction'
 import CommunityBarter from './Pages/Community/CommunityBarter'
 import SearchPage from './Pages/SearPage/SearchPage'
+import EditProfile from './Pages/Profile/EditProfile'
+import UserAccount from './Pages/Profile/UserAccount'
+import SocialFollowers from './Pages/Profile/SocialFollowers'
 
 import { ThemeProvider } from "@material-tailwind/react";
+
 
 
 
@@ -153,6 +157,18 @@ const router = createBrowserRouter([
       {
         path: "/searchpage",
         element: <SearchPage />
+      },
+      {
+        path: "/editprofile",
+        element: <EditProfile />
+      },
+      {
+        path: "/useraccount",
+        element: <UserAccount />
+      },
+      {
+        path: "/socialfollowers",
+        element: <SocialFollowers />
       }
     ]
   },
