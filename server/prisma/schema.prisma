@@ -56,7 +56,7 @@ model Post {
   carrier      String?
   color        String?
   condition    String?
-  quantity         String?
+  quantity     String
   subcategory  String?
   type         String?
   status       String?

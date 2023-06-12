@@ -78,7 +78,7 @@ router.post(
           title: req.body.title,
           color: req.body.color,
           subcategory: req.body.subcategory,
-          size: req.body.size,
+          quantity: req.body.quantity,
           location: req.body.location,
           shippingFees: req.body.shippingFees,
           carrier: req.body.carrier,
