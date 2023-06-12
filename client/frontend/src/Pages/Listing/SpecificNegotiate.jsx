@@ -9,9 +9,10 @@ import visa from "../../assets/payment/visa-Icon.png";
 import mastercard from "../../assets/payment/mastercard-Icon.png";
 import paypal from "../../assets/payment/paypal-Icon.png";
 import apple from "../../assets/payment/apple-pay-Icon.png";
+import Carousel  from "./ImgCarousel";
 
 export default function SpecificNegotiate() {
-  //TODO maybe start currnet price state at 
+  //TODO maybe start currnet price state at
   //TODO may have to edit post route to check if offer already exist, also check to make sure the post isnt yours
   //TODO make the buy now button work(figure out if I need two pages)
   const params = useParams();
@@ -24,9 +25,9 @@ export default function SpecificNegotiate() {
   const [offer, setOffer] = useState(post.price);
   const [message, setMessage] = useState("");
   const [offerSent, setOfferSent] = useState(false);
-  const fivePercentOff = post.price - (post.price * (0.05).toFixed(2))
-  const tenPercentOff= post.price - (post.price * (0.10).toFixed(2))
-  const fifteenPercentOff = post.price - (post.price * (0.15).toFixed(2))
+  const fivePercentOff = post.price - post.price * (0.05).toFixed(2);
+  const tenPercentOff = post.price - post.price * (0.1).toFixed(2);
+  const fifteenPercentOff = post.price - post.price * (0.15).toFixed(2);
 
   useEffect(() => {
     dispatch(checkLoginStatus());
@@ -62,7 +63,7 @@ export default function SpecificNegotiate() {
           status: "Active",
           userId: user,
           currentOffer: offer,
-          buyerAccept: true
+          buyerAccept: true,
         }
       );
       let offerId = create.data.chatroom.id;
@@ -78,7 +79,7 @@ export default function SpecificNegotiate() {
 
   const sendOffer = async (offerId) => {
     try {
-      let offerMessage = user + "has created a offer of $" + offer
+      let offerMessage = user + "has created a offer of $" + offer;
       const createMessage = await axios.post(
         `http://localhost:8080/offer/createmessage/${offerId}`,
         {
@@ -111,7 +112,7 @@ export default function SpecificNegotiate() {
 
   const handleSuggestButton = async (price) => {
     try {
-      console.log(price)
+      console.log(price);
       const create = await axios.post(
         `http://localhost:8080/offer/createroom/${params.id}`,
         {
@@ -119,7 +120,7 @@ export default function SpecificNegotiate() {
           status: "Active",
           userId: user,
           currentOffer: price,
-          buyerAccept: true
+          buyerAccept: true,
         }
       );
       let offerId = create.data.chatroom.id;
@@ -148,18 +149,27 @@ export default function SpecificNegotiate() {
             <div className=" flex-shrink-0 pr-[92px]">
               {" "}
               {/*adding this flex-shink stoped the image from shrinking when justify-between was used below */}
-              <img
+              {/* <img
                 src="https://placehold.jp/704x700.png"
                 alt="listingimage"
                 className="w-[704px] h-[700px]"
-              />
+              /> */}
+              {post && post.img.length != 0 ? (
+                post.img.map((item) => <Carousel url={item.url} />)
+              ) : (
+                <img
+                src="https://placehold.jp/704x700.png"
+                alt="listingimage"
+                className="w-[704px] h-[700px]"
+                />
+              )}
             </div>
             <div className="w-full">
               <div className="flex justify-between">
                 <div>
                   <h1 className="text-[37px] mb-[18px]">{post.title}</h1>
                   <div className="flex items-center mb-[18px]">
-                    <p className="text-[28px] pr-2">$00.00</p>
+                    <p className="text-[28px] pr-2">${post.price}</p>
                     <p className="text-[20px]">Listed Price</p>
                   </div>
                 </div>
@@ -181,11 +191,11 @@ export default function SpecificNegotiate() {
               <div className="flex pb-[36px]">
                 <div className="w-[300px]">
                   <p className="text-[20px]">Condition</p>
-                  <p className="text-[15px]">New/Used</p>
+                  <p className="text-[15px]">{post.condition}</p>
                 </div>
                 <div>
                   <p className="text-[20px]">Color</p>
-                  <p className="text-[15px]">Colors</p>
+                  <p className="text-[15px]">{post.color}</p>
                 </div>
               </div>
               <div className="flex pb-[16px]">
@@ -205,7 +215,7 @@ export default function SpecificNegotiate() {
               <div className="pb-[36px]">
                 <p className="text-[20px]">Shipping/Pick-up Info</p>
                 <p className="text-[15px]">
-                  Shiping info goes here. Rate, etc.
+                  {post.shippingFees}
                 </p>
               </div>
               <div className="pb-[36px]">
@@ -229,22 +239,37 @@ export default function SpecificNegotiate() {
         <div className="flex mt-10 mb-[137px]">
           <div className="w-[704px] flex justify-center mr-[92px]">
             <div className="w-[564px] h-[101px] flex items-center">
-              <p className="text-[35px]">&lt;</p>
-              {/*TODO map through other images here */}
-              <p className="text-[35px]">&gt;</p>
+            <p className="text-[35px] pr-4">&lt;</p>
+              <div>
+                {post && post.img.length != 0 ? (
+                  post.img.map((item) => (
+                    <div>
+                      <img
+                        src={item.url}
+                        alt={"Post img"}
+                        className=" flex w-[101px] h-[101px] gap-4"
+                        key={item.id}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <p></p>
+                )}
+              </div>
+              <p className="text-[35px] pl-4">&gt;</p>
             </div>
           </div>
           <div className="ml-[92px]">
             {/* <div className="w-[800px] h-[221px] bg-[#D9D9D9]">Description</div> */}
-            <div className="w-[600px] h-[221px] bg-[#D9D9D9] mb-[30px]">
-              <p>des</p>
+            <div className="w-[600px] h-[221px] bg-[#D9D9D9] mb-[30px] break-words">
+              <p>{post.description}</p>
             </div>
             <div className="flex justify-center">
               <div className="flex flex-col">
                 <h1 className="text-center">About the seller</h1>
                 <div className="flex">
                   <div>
-                    <p>Username</p>
+                    <p>{post.userName}</p>
                     <p>* * * * * (00 sales)</p>
                   </div>
                   <p>image</p>
@@ -279,15 +304,24 @@ export default function SpecificNegotiate() {
                 Sugguested Offers:
               </h3>
               <div className="flex gap-[40px] justify-center">
-                <button className="bg-[#F1F0EB] w-[86px] h-[70px]" onClick={() => handleSuggestButton(fivePercentOff)}>
+                <button
+                  className="bg-[#F1F0EB] w-[86px] h-[70px]"
+                  onClick={() => handleSuggestButton(fivePercentOff)}
+                >
                   <p>${fivePercentOff}</p>
                   <p>5% off</p>
                 </button>
-                <button className="bg-[#F1F0EB] w-[86px] h-[70px]" onClick={() => handleSuggestButton(tenPercentOff)}>
+                <button
+                  className="bg-[#F1F0EB] w-[86px] h-[70px]"
+                  onClick={() => handleSuggestButton(tenPercentOff)}
+                >
                   <p>${tenPercentOff}</p>
                   <p>10% off</p>
                 </button>
-                <button className="bg-[#F1F0EB] w-[86px] h-[70px]" onClick={() => handleSuggestButton(fifteenPercentOff)}>
+                <button
+                  className="bg-[#F1F0EB] w-[86px] h-[70px]"
+                  onClick={() => handleSuggestButton(fifteenPercentOff)}
+                >
                   <p>${fifteenPercentOff}</p>
                   <p>15% off</p>
                 </button>

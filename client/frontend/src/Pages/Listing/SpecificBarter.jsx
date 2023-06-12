@@ -5,18 +5,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
 import Modal from "../../Components/Modal";
 import Carousel from "./ImgCarousel";
+import Card from "../Home/Card";
 
 import ae from "../../assets/payment/ae.png";
 import visa from "../../assets/payment/visa-Icon.png";
 import mastercard from "../../assets/payment/mastercard-Icon.png";
 import paypal from "../../assets/payment/paypal-Icon.png";
 import apple from "../../assets/payment/apple-pay-Icon.png";
+import Footer from "../../Components/Footer/Footer";
 
 export default function SpecificBarter() {
   const [post, setPost] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
   const [message, setMessage] = useState("");
+  const [suggestedPost, setSuggestedPost] = useState([])
 
   const params = useParams();
   const dispatch = useDispatch();
@@ -47,6 +50,15 @@ export default function SpecificBarter() {
     return () => {};
     // }, []);
   }, [params]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(`http://localhost:8080/post/getType/barter`);
+      console.log(response.data.getPost);
+      setSuggestedPost(response.data.getPost.splice(0, 8));
+    }
+    fetchData();
+  }, []);
 
   const createOffer = async () => {
     try {
@@ -103,12 +115,13 @@ export default function SpecificBarter() {
                 alt="listingimage"
                 className="w-[704px] h-[700px]"
               /> */}
-              {
-                post && post.img.length != 0 ? 
+              {post && post.img.length != 0 ? (
                 post.img.map((item) => (
-                  <Carousel url={item.url}/>
-                )) : <p></p>
-              }
+                  <Carousel url={item.url} key={item.id} />
+                ))
+              ) : (
+                <p></p>
+              )}
             </div>
             <div className="w-full">
               <div className="flex justify-between pt-[20px]">
@@ -141,17 +154,17 @@ export default function SpecificBarter() {
               <div className="flex pb-[36px]">
                 <div className="w-[300px]">
                   <p className="text-[20px]">Condition</p>
-                  <p className="text-[15px]">New/Used</p>
+                  <p className="text-[15px]">{post.condition}</p>
                 </div>
                 <div>
                   <p className="text-[20px]">Color</p>
-                  <p className="text-[15px]">Colors</p>
+                  <p className="text-[15px]">{post.color}</p>
                 </div>
               </div>
               <div className="flex pb-[16px]">
                 <div className=" w-[300px]">
                   <p className="text-[20px]">Quantity Available</p>
-                  <p className="text-[15px]">00</p>
+                  <p className="text-[15px]">{post.quantity}</p>
                 </div>
                 <div>
                   <p className="text-[20px]">Materials</p>
@@ -165,7 +178,7 @@ export default function SpecificBarter() {
               <div className="pb-[36px]">
                 <p className="text-[20px]">Shipping/Pick-up Info</p>
                 <p className="text-[15px]">
-                  Shiping info goes here. Rate, etc.
+                  {post.shippingFees}
                 </p>
               </div>
               <div className="pb-[36px]">
@@ -188,10 +201,25 @@ export default function SpecificBarter() {
 
         <div className="flex mt-10 mb-[137px]">
           <div className="w-[704px] flex justify-center mr-[92px]">
-            <div className="w-[564px] h-[102px] flex">
-              <p className="text-[35px]">&lt;</p>
-              {/*TODO map through other images here */}
-              <p className="text-[35px]">&gt;</p>
+            <div className="w-[564px] h-[102px] flex items-center">
+              <p className="text-[35px] pr-4">&lt;</p>
+              <div>
+                {post && post.img.length != 0 ? (
+                  post.img.map((item) => (
+                    <div>
+                      <img
+                        src={item.url}
+                        alt={"Post img"}
+                        className=" flex w-[101px] h-[101px] gap-4"
+                        key={item.id}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <p></p>
+                )}
+              </div>
+              <p className="text-[35px] pl-4">&gt;</p>
             </div>
             <div className="flex">
               {/* <p className="w-[83px] h-[83px]">image</p>
@@ -208,7 +236,7 @@ export default function SpecificBarter() {
           <div className="ml-[92px]">
             {/* <div className="w-[800px] h-[221px] bg-[#D9D9D9]">Description</div> */}
             <div className="w-[600px] h-[221px] bg-[#D9D9D9] mb-[30px]">
-              <p>des</p>
+              <p>{post.description}</p>
             </div>
             <div className="flex justify-center">
               <div className="flex flex-col">
@@ -227,8 +255,26 @@ export default function SpecificBarter() {
 
         <div>
           <h1 className="text-[37px]">You might also like</h1>
+          <div className="flex flex-wrap">
+          {suggestedPost&& suggestedPost.length !== 0 ? (
+              suggestedPost.map((item) => (
+                <div className="">
+                  <Card
+                    title={item.title}
+                    price={item.price}
+                    id={item.id}
+                    img={item.img != 0 ? item.img[0].url.toString() : ""}
+                  />
+                </div>
+              ))
+            ) : (
+              <p></p>
+            )}
+          </div>
         </div>
+        
       </div>
+      <Footer/>
       <Modal isVisable={showModal} onClose={() => setShowModal(false)}>
         {!messageSent ? (
           <div>
@@ -246,7 +292,7 @@ export default function SpecificBarter() {
               </div>
             </div>
             <div className="mt-[25px]">
-              <p>Start a message thread with (username):</p>
+              <p>Start a message thread with ({post.userName}):</p>
               <textarea
                 className="w-[471px] h-[115px] bg-[#F1F0EB] flex items-start"
                 placeholder="Type message here"
@@ -278,7 +324,7 @@ export default function SpecificBarter() {
               </div>
             </div>
             <div className="mt-[25px]">
-              <p>Start a message thread with (username):</p>
+              <p>Start a message thread with ({post.userName}):</p>
               <textarea
                 className="w-[471px] h-[115px] bg-[#F1F0EB] flex items-start"
                 placeholder="Type message here"
