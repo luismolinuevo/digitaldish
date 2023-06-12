@@ -96,7 +96,7 @@ export default function Home() {
               <Card
                 title={`${firstBarter.title}`}
                 type={"barter"}
-                img={robot}
+                img={firstBarter.img && firstBarter.img.length > 0 ? firstBarter.img[0].url.toString() : ""}
                 price={`${firstBarter.price}`}
                 id={firstBarter.id}
               />
@@ -105,7 +105,7 @@ export default function Home() {
               <Card
                 title={`${firstNeg.title}`}
                 type={"negotiation"}
-                img={robot}
+                img={firstNeg.img && firstNeg.img.length > 0 ? firstNeg.img[0].url.toString() : ""}
                 price={`${firstNeg.price}`}
                 id={firstNeg.id}
               />
@@ -114,7 +114,7 @@ export default function Home() {
               <Card
                 title={`${secondBarter.title}`}
                 type={"barter"}
-                img={robot}
+                img={secondBarter.img && secondBarter.img.length > 0 ? secondBarter.img[0].url.toString() : ""}
                 price={`${secondBarter.price}`}
                 id={secondBarter.id}
               />
@@ -165,7 +165,7 @@ export default function Home() {
                 type={"negotiation"}
                 price={`${secondNeg.price}`}
                 id={secondNeg.id}
-                // img={secondNeg.img != 0 ? secondNeg.img[0].url.toString() : ""}
+                img={secondNeg.img && secondNeg.img.length > 0 ? secondNeg.img[0].url.toString() : ""}
               />
             </div>
           </div>
