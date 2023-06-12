@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Modal from "../../Components/Modal";
 import Countdown from "../../Components/Countdown";
 import Carousel  from "./ImgCarousel";
+import Card from "../Home/Card";
 
 import ae from "../../assets/payment/ae.png";
 import visa from "../../assets/payment/visa-Icon.png";
 import mastercard from "../../assets/payment/mastercard-Icon.png";
 import paypal from "../../assets/payment/paypal-Icon.png";
 import apple from "../../assets/payment/apple-pay-Icon.png";
+import Footer from "../../Components/Footer/Footer";
 
 export default function SpecificBid() {
   const [post, setPost] = useState("");
   const [bidInput, setBidInput] = useState(0);
   const params = useParams();
+  const [suggestedPost, setSuggestedPost] = useState([]);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -37,6 +39,15 @@ export default function SpecificBid() {
     return () => {};
     // }, []);
   }, [params.id]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(`http://localhost:8080/post/getType/bid`);
+      console.log(response.data.getPost);
+      setSuggestedPost(response.data.getPost.splice(0, 8));
+    }
+    fetchData();
+  }, []);
 
   const handleBid = async () => {
     try {
@@ -216,15 +227,26 @@ export default function SpecificBid() {
 
         <div>
           <h1 className="text-[37px]">You might also like</h1>
-          <div>
-            <img className="w-[300px] h-[160px]"></img>
-            <div>
+          <div className="flex flex-wrap">
+          {suggestedPost&& suggestedPost.length !== 0 ? (
+              suggestedPost.map((item) => (
+                <div className="">
+                  <Card
+                    title={item.title}
+                    price={item.price}
+                    id={item.id}
+                    img={item.img != 0 ? item.img[0].url.toString() : ""}
+                  />
+                </div>
+              ))
+            ) : (
               <p></p>
-              <p></p>
-            </div>
+            )}
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
+    
   );
 }

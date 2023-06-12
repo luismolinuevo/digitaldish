@@ -19,7 +19,7 @@ export default function SpecificBarter() {
   const [showModal, setShowModal] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
   const [message, setMessage] = useState("");
-  const [suggestedPost, setSuggestedPost] = useState([])
+  const [suggestedPost, setSuggestedPost] = useState([]);
 
   const params = useParams();
   const dispatch = useDispatch();
