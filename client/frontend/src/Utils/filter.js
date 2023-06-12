@@ -8,8 +8,8 @@ export const slice = createSlice({
         color: [],
         condition: [],
         type: [],
-        startPrice: 0,
-        endPrice: 0
+        startPrice: null,
+        endPrice: null
     },
     reducers: {
          setCategory: (state, action) => {
