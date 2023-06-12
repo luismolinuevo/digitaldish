@@ -10,6 +10,8 @@ import mastercard from "../../assets/payment/mastercard-Icon.png";
 import paypal from "../../assets/payment/paypal-Icon.png";
 import apple from "../../assets/payment/apple-pay-Icon.png";
 import Carousel  from "./ImgCarousel";
+import Card from "../Home/Card";
+import Footer from "../../Components/Footer/Footer";
 
 export default function SpecificNegotiate() {
   //TODO maybe start currnet price state at
@@ -28,6 +30,7 @@ export default function SpecificNegotiate() {
   const fivePercentOff = post.price - post.price * (0.05).toFixed(2);
   const tenPercentOff = post.price - post.price * (0.1).toFixed(2);
   const fifteenPercentOff = post.price - post.price * (0.15).toFixed(2);
+  const [suggestedPost, setSuggestedPost] = useState([]);
 
   useEffect(() => {
     dispatch(checkLoginStatus());
@@ -53,6 +56,15 @@ export default function SpecificNegotiate() {
     return () => {};
     // }, []);
   }, [params]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(`http://localhost:8080/post/getType/negotiation`);
+      console.log(response.data.getPost);
+      setSuggestedPost(response.data.getPost.splice(0, 8));
+    }
+    fetchData();
+  }, []);
 
   const createOffer = async () => {
     try {
@@ -184,7 +196,7 @@ export default function SpecificNegotiate() {
                 >
                   Make an Offer
                 </button>
-                <button className="p-4 w-[210px] rounded-[57px] border-2 border-[#C7A695] text-[25px]">
+                <button className="p-4 w-[210px] rounded-[57px] border-2 border-[#C7A695] text-[25px]" onClick={() => navigate(`/orderconformation/${post.id}`)}>
                   Buy Now
                 </button>
               </div>
@@ -281,8 +293,25 @@ export default function SpecificNegotiate() {
 
         <div>
           <h1 className="text-[37px]">You might also like</h1>
+          <div className="flex flex-wrap">
+          {suggestedPost&& suggestedPost.length !== 0 ? (
+              suggestedPost.map((item) => (
+                <div className="">
+                  <Card
+                    title={item.title}
+                    price={item.price}
+                    id={item.id}
+                    img={item.img != 0 ? item.img[0].url.toString() : ""}
+                  />
+                </div>
+              ))
+            ) : (
+              <p></p>
+            )}
+          </div>
         </div>
       </div>
+      <Footer/>
       <Modal isVisable={showModal} onClose={() => setShowModal(false)}>
         {!offerSent ? (
           <div>
