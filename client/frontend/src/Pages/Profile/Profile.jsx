@@ -9,6 +9,8 @@ import Footer from "../../Components/Footer/Footer";
 import Upload from "./Upload";
 import ReviewCard from './CustomerReview'
 import { Select, Option } from "@material-tailwind/react";
+import Modal from "../../Components/Modal"
+import { HeaderComponent, CardComponent} from "../Community/ListingComponent";
 import "./Profile.css";
 
 // const pH = "10000rem"
@@ -59,7 +61,7 @@ const handleScroll = (event) => {
 
     return (
         <div>
-            <div className="h-[140rem] pt-20">
+            <div className="h-[170rem] pt-20">
                 <div className="w-full flex flex-col">
                     <img src={MouseCoverPic} />
                 </div>
@@ -176,11 +178,13 @@ const handleScroll = (event) => {
                   </div>
 
 
+                <div className="flex flex-wrap justify-end w-full">  
+                  <div className="w-40 h-40 border border-black"></div>
+                  </div>
+<Modal />
 
 
-
-
-                    <div className="border-2 border-blue-500 h-[40rem] mt-10">
+                    <div className="border-2 border-blue-500 h-[40rem] mt-10 flex-wrap">
                         <form className="search-bar border-2 border-gray-500 rounded-full w-[16rem] h-[2.5rem] m-5 appearance-none bg-transparent text-black shadow-lg focus:outline-none">
                             <div className="flex flex-row">
                                 <input
@@ -209,7 +213,7 @@ const handleScroll = (event) => {
 
 
 
-                        <div className="flex flex-col gap-10">
+                        <div className="flex flex-col gap-10 flex-wrap">
                             <div className="pl-5 text-lg flex flex-col">
                                 <div className="flex flex-col font-bold gap-3">
                                     <p className="hover:text-blue-900">All</p>
