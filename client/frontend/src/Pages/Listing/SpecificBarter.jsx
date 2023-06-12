@@ -4,13 +4,13 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
 import Modal from "../../Components/Modal";
+import Carousel from "./ImgCarousel";
 
 import ae from "../../assets/payment/ae.png";
 import visa from "../../assets/payment/visa-Icon.png";
 import mastercard from "../../assets/payment/mastercard-Icon.png";
 import paypal from "../../assets/payment/paypal-Icon.png";
 import apple from "../../assets/payment/apple-pay-Icon.png";
-
 
 export default function SpecificBarter() {
   const [post, setPost] = useState("");
@@ -98,11 +98,17 @@ export default function SpecificBarter() {
             <div className=" flex-shrink-0 pr-[92px]">
               {" "}
               {/*adding this flex-shink stoped the image from shrinking when justify-between was used below */}
-              <img
+              {/* <img
                 src="https://placehold.jp/704x700.png"
                 alt="listingimage"
                 className="w-[704px] h-[700px]"
-              />
+              /> */}
+              {
+                post && post.img.length != 0 ? 
+                post.img.map((item) => (
+                  <Carousel url={item.url}/>
+                )) : <p></p>
+              }
             </div>
             <div className="w-full">
               <div className="flex justify-between pt-[20px]">
@@ -280,7 +286,7 @@ export default function SpecificBarter() {
               ></textarea>
               <div>
                 <div className="flex justify-center mt-[25px]">
-                <button
+                  <button
                     className="p-3 border-2 w-[200px] h-[55px] border-[#C7A695] rounded-[57px]"
                     onClick={() => setShowModal(false)}
                   >

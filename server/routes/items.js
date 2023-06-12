@@ -196,7 +196,9 @@ router.get("/:postId", async (req, res) => {
     const getPostById = await prisma.post.findFirst({
       where: {
         id: postId,
-      },
+      },include: {
+          img: true
+      }
     });
 
     if (getPostById) {
