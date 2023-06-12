@@ -9,10 +9,8 @@ import Paypal from "../../assets/paypal.png";
 import Applepay from "../../assets/applepay.png";
 import FooterNav from "../../Components/Footer/FooterNav";
 import { StarIcon } from "@heroicons/react/24/solid";
-
 import { useDropzone } from "react-dropzone";
 import { Button } from "@material-tailwind/react";
-
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
