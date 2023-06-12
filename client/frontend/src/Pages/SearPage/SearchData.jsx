@@ -19,6 +19,8 @@ import axios from "axios"
     const color = useSelector((state) => state.filter.color);
     const condition = useSelector((state) => state.filter.condition);
     const type = useSelector((state) => state.filter.type)
+    const startPrice = useSelector((state) => state.filter.startPrice)
+    const endPrice = useSelector((state) => state.filter.endPrice)
 
     const [post, setPost] = useState([])
     const [filteredPost, setFilteredPost] = useState([]);
@@ -56,13 +58,17 @@ import axios from "axios"
         filtered = filtered.filter((item) => type.includes(item.type))
       }
 
+      if (startPrice != null && endPrice != null) {
+        filtered = filtered.filter((item) => parseFloat(item.price) >= parseFloat(startPrice) && parseFloat(item.price) <= parseFloat(endPrice));
+      }
+
 
 
 
 
       
       setFilteredPost(filtered)
-    }, [query, category, post, color, condition, type]);
+    }, [query, category, post, color, condition, type, startPrice, endPrice]);
     
     
     return (
