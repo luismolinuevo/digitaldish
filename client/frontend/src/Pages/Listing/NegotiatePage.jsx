@@ -1,3 +1,4 @@
+import {} from "react";
 import { useState, useCallback } from "react";
 import axios from "axios";
 import Sellerplaceholder from "../../assets/sellerplaceholder.jpeg";
@@ -18,7 +19,7 @@ import { blue } from "@mui/material/colors";
 
 import "tailwindcss/tailwind.css";
 
-export default function BarterForm() {
+export default function NegotiateForm() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
@@ -45,6 +46,14 @@ export default function BarterForm() {
     maxFiles: 3,
   });
 
+
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const theme = createTheme({
+    palette: {
+      primary: blue,
+    },
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -64,7 +73,7 @@ export default function BarterForm() {
       shippingFees: shippingFees,
       userName: userName,
       userRating: userRating,
-      type: "barter",
+      type: "negotiate",
     };
 
     let newFormData = new FormData();
@@ -89,12 +98,16 @@ export default function BarterForm() {
       newFormData.append("images[]", file);
     });
 
-    const newPost = await axios.post(`http://localhost:8080/post`, newFormData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const newPost = await axios.post(
+      `http://localhost:8080/post`,
+      newFormData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
   };
 
   return (
@@ -112,7 +125,7 @@ export default function BarterForm() {
           <div className="flex font-bold ">
             <h2 className="text-[25px]">List an Item</h2>
             <div className="w-20 h-9 bg-[#faf8f8] sqaure-full flex items-center justify-center ml-2">
-              <span className="text-black text-[15px]">Barter</span>
+              <span className="text-black text-[15px]">Negotiate</span>
             </div>
           </div>
 
@@ -132,10 +145,46 @@ export default function BarterForm() {
             <h1 className="font-bold">Required</h1>
           </div>
 
+          <div className="flex items-center mb-4">
+            <div className="mr-4 flex flex-col ">
+              <label>Start Date:</label>
+              <input
+                className="h-10 rounded-md border border-black"
+                type="date"
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+              />
+            </div>
+
+            <div className="mr-4 flex flex-col ">
+              <label>End Date:</label>
+              <input
+                className="h-10 rounded-md border border-black"
+                type="date"
+                value={endTime}
+                onChange={(e) => setEndTime(e.target.value)}
+              />
+            </div>
+          </div>
+          <div>
+            <h1 className="text-[20px]">
+              {startTime && endTime
+                ? `${calculateTimeLeft()} - ${endTime}`
+                : "Time Left"}
+            </h1>
+          </div>
+
           <div className="flex flex-col mb-10 ">
-            <label className="relative"> Sale Price:</label>
+            <label className="relative">
+              Sale Price:
+              {/* <div className="bg-[#faf8f8] text-xs absolute top-0 right-10 w-[130px] h-20 square-full flex items-center">
+                <span className="text-black">
+                  To attract more buyers, we suggest starting with a low bid
+                </span>
+              </div> */}
+            </label>
             <input
-              className="w-20 h-[36px] rounded-md mr-2 border border-black"
+              className="w-20 h-[36px] rounded-md mr-2 border border-black "
               type="text"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
@@ -217,7 +266,7 @@ export default function BarterForm() {
               <option value=""></option>
               <option value="White">White</option>
               <option value="Black">Black</option>
-              <option value="Silver">Silver</option>
+              <option value="">Silver</option>
               <option value="Blue">Blue</option>
               <option value="Green">Green</option>
               <option value="Red">Red</option>
@@ -259,7 +308,7 @@ export default function BarterForm() {
           </div>
 
           <div className="flex flex-col  mb-4 ">
-            <h1 className="font-bold text-xl mb-4">Delivery Method</h1>
+            <h1 className="font-bold text-xl mb-4 ">Delivery Method</h1>
             {/* <label>Location:</label>
             <input
               className="h-10 mb-4"
@@ -273,10 +322,10 @@ export default function BarterForm() {
                   carrier ? "" : "translate-y-full text-base"
                 }`}
               >
-                Delivery Method
+                Courrier
               </label>
               <select
-                className=" block h-[56px] rounded-md border border-black"
+                className=" block h-[56px] rounded-md border border-black "
                 value={carrier}
                 onChange={(e) => setCarrier(e.target.value)}
               >
@@ -302,36 +351,62 @@ export default function BarterForm() {
               />
             </div>
           </div>
+
+          <div className="flex items-center mb-4">
+            <h1 className="mr-4 text-[20px] font-bold">Returns Accepted?</h1>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="primary"
+                  checked={isSwitchOn}
+                  onChange={() => setIsSwitchOn(!isSwitchOn)}
+                />
+              }
+              label={isSwitchOn ? "Y" : "N"}
+            />
+          </div>
         </form>
 
         {/* parent container */}
         <div className=" bg-[#C2B8A3] mt-60 ml-10 mr-20 w-full h-[800px]">
-          <div className="h-[30px] w-[70px]  text-lg ml-10 mt-4">
-            Preview
-          </div>
+          <div className="h-[30px] w-[70px]  text-lg ml-10 mt-4">Preview</div>
 
           {/* Photo & Description Preview window container */}
           <div className="flex ">
-            <div className="border border-black mt-4 ml-10  w-full h-[555px] ">
-              {/* {img ? img : ""} */}
-              <div className="bg-[#F1F0EB] mt-[403px] w-full h-[150px] flex">
+            <div className="border border-black mt-4 ml-10  w-full h-[555px]  ">
+              <div className=" bg-[#F1F0EB] mt-[403px] w-full h-[150px] flex">
                 <h1 className="text-[20px]">
                   {description ? description : "Description"}
                 </h1>
               </div>
             </div>
 
-            <form className="border mt-4 mr-10 ml-10 w-full h-[510px] ">
+            <form className="mt-4 mr-10 ml-10 w-full h-[510px] ">
               <div>
                 <h1 className="text-[35px] font-bold ">
                   {title ? title : "Title"}
                 </h1>
               </div>
-              <div className="mt-4 bg-white  rounded-full w-80 h-12">
-                    <h1 className="mt-4 text-[20px] text-center ">START BARTERING EXCHANGE</h1>
+
+              
+              <div className="flex ">
+                <h1 className="text-[30px] mt-3">{price}</h1>
+                <h1 className="ml-5 mt-5 text-[20px] font-bold">Listed Price</h1>
+                
+                </div>
+
+                <div className=" flex">
+                    <div className="mt-4 bg-white  rounded-full w-48 h-12">
+                    <h1 className="mt-3 text-[20px] text-center ">MAKE AN OFFER</h1>
                     </div>
 
-                    <div>
+                    <div className="mt-4 ml-10 bg-white  rounded-full w-48 h-12">
+                    <h1 className=" mt-3 text-[20px] text-center ">BUY NOW</h1>
+                    </div>
+                  
+                </div>
+
+              <div>
                 <h1 className="mt-4 font-bold text-[20px]">Category</h1>
                 <span className="text-[20px]">
                   {category ? category : "text"}
