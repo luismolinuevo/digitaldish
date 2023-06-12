@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Modal from "../../Components/Modal";
-import Countdown from "../../Components/Countdown"
+import Countdown from "../../Components/Countdown";
+import Carousel  from "./ImgCarousel";
+import Card from "../Home/Card";
 
 import ae from "../../assets/payment/ae.png";
 import visa from "../../assets/payment/visa-Icon.png";
 import mastercard from "../../assets/payment/mastercard-Icon.png";
 import paypal from "../../assets/payment/paypal-Icon.png";
 import apple from "../../assets/payment/apple-pay-Icon.png";
+import Footer from "../../Components/Footer/Footer";
 
 export default function SpecificBid() {
   const [post, setPost] = useState("");
   const [bidInput, setBidInput] = useState(0);
   const params = useParams();
+  const [suggestedPost, setSuggestedPost] = useState([]);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -36,6 +39,15 @@ export default function SpecificBid() {
     return () => {};
     // }, []);
   }, [params.id]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(`http://localhost:8080/post/getType/bid`);
+      console.log(response.data.getPost);
+      setSuggestedPost(response.data.getPost.splice(0, 8));
+    }
+    fetchData();
+  }, []);
 
   const handleBid = async () => {
     try {
@@ -74,11 +86,16 @@ export default function SpecificBid() {
             <div className=" flex-shrink-0 pr-[92px]">
               {" "}
               {/*adding this flex-shink stoped the image from shrinking when justify-between was used below */}
-              <img
+              {/* <img
                 src="https://placehold.jp/704x700.png"
                 alt="listingimage"
                 className="w-[704px] h-[700px]"
-              />
+              /> */}
+              {post && post.img.length != 0 ? (
+                post.img.map((item) => <Carousel url={item.url} />)
+              ) : (
+                <p></p>
+              )}
             </div>
             <div className="w-full">
               <div className="flex justify-between ">
@@ -90,7 +107,13 @@ export default function SpecificBid() {
                       <p className="text-[27px]">${post.highestBid}</p>
                     </div>
                     <div>
-                      <p className="text-[27px]">Time left: <Countdown startDate={post.startTime} endDate={post.endTime}/></p>
+                      <p className="text-[27px]">
+                        Time left:{" "}
+                        <Countdown
+                          startDate={post.startTime}
+                          endDate={post.endTime}
+                        />
+                      </p>
                       <p className="text-[22px]">Ends: {post.endTime}</p>
                     </div>
                   </div>
@@ -118,18 +141,18 @@ export default function SpecificBid() {
               <div className="flex pb-[36px]">
                 <div className="w-[300px]">
                   <p className="text-[20px]">Condition</p>
-                  <p className="text-[15px]">New/Used</p>
+                  <p className="text-[15px]">{post.condition}</p>
                 </div>
                 <div>
                   <p className="text-[20px]">Color</p>
-                  <p className="text-[15px]">Colors</p>
+                  <p className="text-[15px]">{post.color}</p>
                 </div>
               </div>
               <div className="flex pb-[16px]">
                 <div className=" w-[300px]">
                   <p className="text-[20px]">Shipping/Pick-up Info</p>
                   <p className="text-[15px]">
-                    Shiping info goes here. Rate, etc.
+                    {post.shippingFees}
                   </p>
                 </div>
                 <div>
@@ -162,14 +185,29 @@ export default function SpecificBid() {
         <div className="flex mt-10 mb-[137px]">
           <div className="w-[704px] flex justify-center mr-[92px]">
             <div className="w-[564px] h-[102px] flex">
-              <p className="text-[35px]">&lt;</p>
-              {/*TODO map through other images here */}
-              <p className="text-[35px]">&gt;</p>
+            <p className="text-[35px] pr-4">&lt;</p>
+              <div>
+                {post && post.img.length != 0 ? (
+                  post.img.map((item) => (
+                    <div>
+                      <img
+                        src={item.url}
+                        alt={"Post img"}
+                        className=" flex w-[101px] h-[101px] gap-4"
+                        key={item.id}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <p></p>
+                )}
+              </div>
+              <p className="text-[35px] pl-4">&gt;</p>
             </div>
             <div className="flex"></div>
           </div>
           <div className="">
-          <div className="w-[600px] h-[221px] bg-[#D9D9D9] mb-[30px]">
+            <div className="w-[600px] h-[221px] bg-[#D9D9D9] mb-[30px]">
               <p>des</p>
             </div>
             <div className="flex justify-center">
@@ -189,15 +227,26 @@ export default function SpecificBid() {
 
         <div>
           <h1 className="text-[37px]">You might also like</h1>
-          <div>
-            <img className="w-[300px] h-[160px]"></img>
-            <div>
+          <div className="flex flex-wrap">
+          {suggestedPost&& suggestedPost.length !== 0 ? (
+              suggestedPost.map((item) => (
+                <div className="">
+                  <Card
+                    title={item.title}
+                    price={item.price}
+                    id={item.id}
+                    img={item.img != 0 ? item.img[0].url.toString() : ""}
+                  />
+                </div>
+              ))
+            ) : (
               <p></p>
-              <p></p>
-            </div>
+            )}
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
+    
   );
 }

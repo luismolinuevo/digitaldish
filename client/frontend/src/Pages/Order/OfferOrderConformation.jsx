@@ -47,7 +47,7 @@ export default function OrderConformation() {
                 Order Summary
               </h1>
               <div className="flex mb-[74px]">
-                <img className="w-[198px] h-[183px]"/>
+                <img className="w-[198px] h-[183px]" src={post.img && post.img.length > 0 ? post.img[0].url.toString() : ""}/>
                 <div className="ml-[26px]">
                   <p className="text[22px]">{post.title}</p>
                   <p className="text[18px]">{post.userName}</p>
