@@ -9,14 +9,13 @@ import Paypal from "../../assets/paypal.png";
 import Applepay from "../../assets/applepay.png";
 import FooterNav from "../../Components/Footer/FooterNav";
 import { StarIcon } from "@heroicons/react/24/solid";
-
 import { useDropzone } from "react-dropzone";
-
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { blue } from "@mui/material/colors";
-
+import Modal from "../../Pages/Listing/PublishModal";
+import { useNavigate } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 
 export default function NegotiateForm() {
@@ -34,6 +33,7 @@ export default function NegotiateForm() {
   const [shippingFees, setShippingFees] = useState("");
   const [userName, setUserName] = useState("");
   const [userRating, setUserRating] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const [files, setFiles] = useState();
 
@@ -54,27 +54,11 @@ export default function NegotiateForm() {
     },
   });
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-
-    const postData = {
-      description: description,
-      price: price,
-      category: category,
-      title: title,
-      location: location,
-      startTime: startTime,
-      endTime: endTime,
-      condition: condition,
-      color: color,
-      quantity: quantity,
-      carrier: carrier,
-      shippingFees: shippingFees,
-      userName: userName,
-      userRating: userRating,
-      type: "negotiate",
-    };
 
     let newFormData = new FormData();
     newFormData.append("description", description);
@@ -98,16 +82,17 @@ export default function NegotiateForm() {
       newFormData.append("images[]", file);
     });
 
-    const newPost = await axios.post(
-      `http://localhost:8080/post`,
-      newFormData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    try {
+        await axios.post(`http://localhost:8080/post`, newFormData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        navigate("/")
+    } catch (error) {
+        console.log(error);
+    }
   };
 
   return (
@@ -116,10 +101,37 @@ export default function NegotiateForm() {
         <button
           className="bg-[#EDEBEB] hover:bg-[#eed083] w-48 h-14 text-xl absolute mt-[160px] right-[120px] font-bold py-2 px-10 "
           type="submit"
-          onClick={handleSubmit}
+          onSubmit={handleSubmit}
+          onClick={() => setShowModal(true)}
         >
           Publish
         </button>
+        <Modal isVisable={showModal} onClose={() => setShowModal(false)}>
+          <div>
+            <h1 className="text-center text-bold text-[30px] mb-[30px]">
+              Are you sure you'd like to publish?
+            </h1>
+          </div>
+
+          <div>
+            <div>
+              <div className="flex justify-center mt-[25px]">
+                <button
+                  className=" border-2 w-[100px] h-[55px] border-[#DAB24E] text-[22px]"
+                  onClick={() => setShowModal(false)}
+                >
+                  EDIT
+                </button>
+                <button
+                  className=" border-2 w-[100px] h-[55px] bg-[#DAB24E] text-[22px] mr-[25px] ml-10 text-center"
+                  onClick={() => navigate("/")}
+                >
+                  Publish
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal>
 
         <form className=" bg-[#d8cfb9] mt-20 w-[435px] justify-start items-start py-10 px-2 ">
           <div className="flex font-bold ">
