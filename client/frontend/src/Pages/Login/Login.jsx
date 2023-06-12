@@ -17,7 +17,7 @@ export default function Login() {
 
   return (
     <div>
-      <div className="pt-[125px] flex justify-center">
+      <div className="pt-[125px] pb-40 flex justify-center">
         <div className="w-[520px] h-[683px] border-[1px] border-black ">
           <h1 className="text-[37px] px-[132px] pt-[94px] pb-[107px] leading-[45px]">
             Welcome Back

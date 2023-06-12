@@ -68,7 +68,7 @@ const Footer = ({ status, message, onValidated }) => {
 
   return (
     <div>
-      <div className="Footer-container flex justify-center flex-col pt-60">
+      <div className="Footer-container flex justify-center flex-col">
         <div className="p-2 bg-[#C3D5F5] h-[20vw] flex justify-center flex-col mt-auto text-center">
           <a className="text-black font-['Arial'] font-extrabold text-4xl py-10 ">
             Stay in Touch
@@ -108,7 +108,7 @@ const Footer = ({ status, message, onValidated }) => {
               </div>
 
               <div className="flex flex-row">
-                <div className="border-b border-[#7F92B5] w-[26rem] self-center text-left">
+                <div className="border-b-2 border-[#7F92B5] w-[26rem] self-center text-left">
                 <div className="flex flex-row">
                   <input
                     className="appearance-none bg-transparent border-none w-[26rem] text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-xl"
@@ -137,7 +137,7 @@ const Footer = ({ status, message, onValidated }) => {
                 </div>
               </div>
             </div>
-            <p className="text-xs">
+            <p className="text-xs pt-2">
               By entering my email I accept the terms and conditions and the
               privacy policy.
             </p>
