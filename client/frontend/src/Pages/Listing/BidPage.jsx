@@ -41,23 +41,24 @@ export default function BidForm() {
     e.preventDefault();
     const token = localStorage.getItem("token");
 
-    // const postData = {
-    //   description: description,
-    //   price: price,
-    //   category: category,
-    //   title: title,
-    //   location: location,
-    //   startTime: startTime,
-    //   endTime: endTime,
-    //   condition: condition,
-    //   color: color,
-    //   size: size,
-    //   carrier: carrier,
-    //   shippingFees: shippingFees,
-    //   userName: userName,
-    //   userRating: userRating,
-    //   type: "bid"
-    // };
+    const postData = {
+      description: description,
+      price: price,
+      category: category,
+      title: title,
+      location: location,
+      startTime: startTime,
+      endTime: endTime,
+      condition: condition,
+      color: color,
+      size: size,
+      carrier: carrier,
+      shippingFees: shippingFees,
+      userName: userName,
+      userRating: userRating,
+      type: "bid"
+    };
+    
 
     let newFormData = new FormData();
     newFormData.append("description", description);
@@ -418,9 +419,9 @@ export default function BidForm() {
                   alt=""
                   className="rounded-full h-[70px] w-[60px] my-2"
                 />
-
-                <h1 className="ml-10 -mt-10">{userName}Username</h1>
-                <h1 className="ml-12 -mt-10">Successful Sales</h1>
+                                              
+                <h1 className="ml-10 -mt-10">{(e) => setUserName(e.target.value)}Username</h1>
+                <h1 className="ml-12 -mt-10">Successful Sales{userRating}</h1>
                 <h1 className="-ml-[245px] mt-[30px]">
                   {userRating}Seller Rating
                 </h1>
@@ -432,6 +433,7 @@ export default function BidForm() {
           </div>
         </div>
       </div>
+      <FooterNav />
     </div>
   );
 }
