@@ -58,9 +58,13 @@ import axios from "axios"
         filtered = filtered.filter((item) => type.includes(item.type))
       }
 
-      if (startPrice != null && endPrice != null) {
-        filtered = filtered.filter((item) => parseFloat(item.price) >= parseFloat(startPrice) && parseFloat(item.price) <= parseFloat(endPrice));
+      if (startPrice !== null && endPrice !== null) {
+        filtered = filtered.filter((item) => {
+          const price = parseFloat(item.price);
+          return price > parseFloat(startPrice) && price < parseFloat(endPrice);
+        });
       }
+      
 
 
 
