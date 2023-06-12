@@ -39,6 +39,7 @@ import SocialFollowers from './Pages/Profile/SocialFollowers'
 
 import { ThemeProvider } from "@material-tailwind/react";
 import CheckoutPage from './Pages/Profile/Checkout'
+import PrivateRouteRequiresAuth from './Components/ProtectedRoutes'
 // import ScrollToTop from './Utils/ScrollToTop'
 
 
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: <PrivateRouteRequiresAuth><Profile /></PrivateRouteRequiresAuth>,
       },
       {
         path: "/following",
@@ -79,7 +80,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/activity",
-        element: <Activity />,
+        element: <PrivateRouteRequiresAuth><Activity/></PrivateRouteRequiresAuth>
       },
       {
         path: "/specneglisting/:id",
@@ -95,7 +96,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/orderconformation/:id",
-        element: <OrderConformation />
+        element: <PrivateRouteRequiresAuth><OrderConformation /></PrivateRouteRequiresAuth>
 
       },
 
@@ -112,12 +113,12 @@ const router = createBrowserRouter([
 
       {
         path: "/listing/bidpage",
-        element: <BidPage />,
+        element: <PrivateRouteRequiresAuth><BidPage /></PrivateRouteRequiresAuth>,
       },
 
       {
         path: "/listing/barterpage",
-        element: <BarterPage />
+        element: <PrivateRouteRequiresAuth><BarterPage /></PrivateRouteRequiresAuth>
       },
 
 
@@ -134,7 +135,7 @@ const router = createBrowserRouter([
 
       {
         path: "/upload",
-        element: <UploadPage />,
+        element: <PrivateRouteRequiresAuth><UploadPage /></PrivateRouteRequiresAuth>,
 
       },
 
@@ -163,15 +164,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/editprofile",
-        element: <EditProfile />
+        element: <PrivateRouteRequiresAuth><EditProfile /></PrivateRouteRequiresAuth>
       },
       {
         path: "/useraccount",
-        element: <UserAccount />
+        element: <PrivateRouteRequiresAuth><UserAccount /></PrivateRouteRequiresAuth>
       },
       {
         path: "/socialfollowers",
-        element: <SocialFollowers />
+        element: <PrivateRouteRequiresAuth><SocialFollowers /></PrivateRouteRequiresAuth>
       },
       {
         path:"/checkout",
