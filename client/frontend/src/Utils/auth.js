@@ -45,6 +45,8 @@ export const loginUser = (username, password) => async (dispatch) => {
       password: password,
     });
     dispatch(loginSuccess(response.data));
+    console.log(response.data)
+
   } catch (error) {
     dispatch(error(error));
   }
