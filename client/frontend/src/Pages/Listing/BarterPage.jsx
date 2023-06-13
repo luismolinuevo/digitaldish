@@ -120,7 +120,7 @@ export default function BarterForm() {
                 </button>
                 <button
                   className=" border-2 w-[100px] h-[55px] bg-[#DAB24E] text-[22px] mr-[25px] ml-10 text-center"
-                  onClick={() => navigate("/")}
+                  onClick={handleSubmit}
                 >
                   Publish
                 </button>
@@ -354,7 +354,7 @@ export default function BarterForm() {
               </div>
             </div>
 
-            <form className="border mt-4 mr-10 ml-10 w-full h-[510px] ">
+            <form className=" mt-4 mr-10 ml-10 w-full h-[510px] ">
               <div>
                 <h1 className="text-[35px] font-bold ">
                   {title ? title : "Title"}

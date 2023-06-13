@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Countdown from "../../Components/Countdown";
-import Carousel  from "./ImgCarousel";
+import Carousel from "./ImgCarousel";
 import Card from "../Home/Card";
 
 import ae from "../../assets/payment/ae.png";
@@ -42,7 +42,9 @@ export default function SpecificBid() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`http://localhost:8080/post/getType/bid`);
+      const response = await axios.get(
+        `http://localhost:8080/post/getType/bid`
+      );
       console.log(response.data.getPost);
       setSuggestedPost(response.data.getPost.splice(0, 8));
     }
@@ -94,7 +96,11 @@ export default function SpecificBid() {
               {post && post.img.length != 0 ? (
                 post.img.map((item) => <Carousel url={item.url} />)
               ) : (
-                <p></p>
+                <img
+                  src="https://placehold.jp/704x700.png"
+                  alt="listingimage"
+                  className="w-[704px] h-[700px]"
+                />
               )}
             </div>
             <div className="w-full">
@@ -151,9 +157,7 @@ export default function SpecificBid() {
               <div className="flex pb-[16px]">
                 <div className=" w-[300px]">
                   <p className="text-[20px]">Shipping/Pick-up Info</p>
-                  <p className="text-[15px]">
-                    {post.shippingFees}
-                  </p>
+                  <p className="text-[15px]">{post.shippingFees}</p>
                 </div>
                 <div>
                   <p className="text-[20px]">Materials</p>
@@ -185,7 +189,7 @@ export default function SpecificBid() {
         <div className="flex mt-10 mb-[137px]">
           <div className="w-[704px] flex justify-center mr-[92px]">
             <div className="w-[564px] h-[102px] flex">
-            <p className="text-[35px] pr-4">&lt;</p>
+              <p className="text-[35px] pr-4">&lt;</p>
               <div>
                 {post && post.img.length != 0 ? (
                   post.img.map((item) => (
@@ -228,7 +232,7 @@ export default function SpecificBid() {
         <div>
           <h1 className="text-[37px]">You might also like</h1>
           <div className="flex flex-wrap">
-          {suggestedPost&& suggestedPost.length !== 0 ? (
+            {suggestedPost && suggestedPost.length !== 0 ? (
               suggestedPost.map((item) => (
                 <div className="">
                   <Card
@@ -245,8 +249,7 @@ export default function SpecificBid() {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
-    
   );
 }

@@ -1,18 +1,24 @@
 import React from "react";
 import "./Login.css";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Utils/auth";
 import FooterNav from "../../Components/Footer/FooterNav";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const isAuthed = useSelector((state) => state.auth.isLoggedIn)
 
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch(loginUser(username, password));
+    if(isAuthed) {
+      navigate("/")
+    }
   };
 
   return (

@@ -120,7 +120,11 @@ export default function SpecificBarter() {
                   <Carousel url={item.url} key={item.id} />
                 ))
               ) : (
-                <p></p>
+                <img
+                src="https://placehold.jp/704x700.png"
+                alt="listingimage"
+                className="w-[704px] h-[700px]"
+              />
               )}
             </div>
             <div className="w-full">

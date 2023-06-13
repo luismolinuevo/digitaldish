@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/NavLogo.png";
 import Search from "../../assets/search.png"
@@ -7,10 +7,19 @@ import Community from "../../assets/community.png"
 import Cart from "../../assets/cart.png"
 import Notification from "../../assets/notification.png"
 import Activity from "../../Pages/Activity/Activity";
+import { useSelector, useDispatch } from "react-redux";
+import { checkLoginStatus } from "../../Utils/auth";
+import profileIcon from "../../assets/profileIcon.png"
 
 const Navbar = () => {
+  const dispatch = useDispatch()
   const [nav, setNav] = useState(false);
+  const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
   const handleClick = () => setNav(!nav);
+
+  useEffect(() => {
+    dispatch(checkLoginStatus());
+  }, []);
 
   return (
     <div className="fixed w-full h-[80px] bg-[#F1F0EB] flex justify-between items-center px-4 border z-10">
@@ -57,9 +66,10 @@ const Navbar = () => {
       </li>
   
       <li>
-        <Link to="Login" className="text-base md:text-lg mr-5">
-          Login
-        </Link>
+        {
+          !isAuthenticated ? <Link to="/login" className="text-base md:text-lg mr-5">Login</Link> : <Link to="/profile" className="flex items-center w-[30px]"><img src={profileIcon} /></Link>
+        }
+        
       </li>
     </ul>
   </div>
