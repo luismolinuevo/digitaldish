@@ -8,6 +8,21 @@ import { IoStarSharp } from "react-icons/io5";
 export default function Followers() {
   const [title, setTitle] = useState("Eli Gamer");
   const [mutualFriends, setMutualFriends] = useState("2 mutual friends");
+  const [unfollow, setUnfollow] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  
+  const handleClick = (buttonId) => {
+    setIsClicked(buttonId === isClicked ? null : buttonId); 
+  }
+
+
+  const followButton = (buttonStyle) => {
+    return {
+        border: isClicked
+            ? "Unfollow"
+            : "Follow",
+    };
+};
 
   return (
     <div className="comp-start py-3">
@@ -25,7 +40,11 @@ export default function Followers() {
               </div>
               <div className="flex flex-row justify-end w-full p-2 h-[3rem]">
               <div className="w-[5rem] hover:bg-blue-200">
-                <p className="border-2 border-black font-bold py-[.2rem] flex justify-center">Unfollow</p>
+                <p 
+                    className="border-2 border-black font-bold py-[.2rem] flex justify-center"
+                    onClick={followButton}
+                    >
+                    Unfollow</p>
                 </div>
               </div>
             </div>
