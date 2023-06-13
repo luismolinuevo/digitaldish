@@ -127,6 +127,11 @@ const router = createBrowserRouter([
         element: <NegotiatePage />
       },
 
+      {
+        path: "/listing/negotiatepage",
+        element: <NegotiatePage />
+      },
+
 
       {
         path: "/communitynew",
