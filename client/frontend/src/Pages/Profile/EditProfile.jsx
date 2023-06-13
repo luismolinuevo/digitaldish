@@ -168,9 +168,9 @@ export default function EditProfile() {
               <button className="bg-[#000] border border-[#000] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-white" onClick={handleLogout}>
                 <Link to={"/"}>LOG OUT</Link>
               </button>
-              <button className="bg-[#DAB24E] border border-[#DAB24E] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl">
+              <Link to={"/listing"} className="bg-[#DAB24E] border border-[#DAB24E] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-center">
                 ADD LISTING
-              </button>
+              </Link>
             </div>
           </div>
 

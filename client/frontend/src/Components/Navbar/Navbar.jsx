@@ -42,7 +42,7 @@ const Navbar = () => {
   
     <ul className="hidden md:flex">
       <li>
-        <Link to="/Seach">
+        <Link to="/searchpage">
           <img src={Search} alt="" className="mr-5"/>
         </Link>
       </li>
