@@ -63,7 +63,7 @@ export default function EditProfile() {
 
   return (
     <div>
-      <div className="h-[130rem] pt-20">
+      <div className="h-[148rem] pt-20">
         <div name="move-to-top" id="move-to-top" onClick={handleScroll2}>
           <div className="w-full flex flex-col">
             <img src={EliCoverPic} />
@@ -171,7 +171,7 @@ export default function EditProfile() {
                 className="pl-3">v</div>
             */}
           <div>
-            <p className="sort-by flex justify-end text-blue-500 pr-10 pt-8 gap-3 hover:text-blue-800">
+            <p className="sort-by flex justify-end text-blue-500 pr-10 py-8 gap-3 hover:text-blue-800">
               <div className="w-[8rem] pr-[10rem]">
                 <Select label="Sort by" className="border-none">
                   <Option>Relevance</Option>
@@ -181,11 +181,6 @@ export default function EditProfile() {
                 </Select>
               </div>
             </p>
-            <div className="pt-10 w-[30rem] ml-[20rem]">
-              <div className="featured-listings flex flex-row flex-wrap justify-center text-2xl font-bold pl-5 border border-black">
-                <p className="font-bold text-2xl">Featured listings</p>
-              </div>
-            </div>
           </div>
 
           {/**MAIN BAR */}
@@ -232,7 +227,7 @@ export default function EditProfile() {
                     <p className="hover:text-blue-900">Custom Mice</p>
                   </div>
                 </div>
-                <div className="">
+                <div className="pt-20">
                   <div>
                     <button
                       onClick={"handleClick"}
@@ -266,14 +261,22 @@ export default function EditProfile() {
               <div name="LISTINGS" className="flex gap-5">
                 <div
                   name="main1-1"
-                  className="flex flex-col border border-purple-500 w-80 h-80"
+                  className="flex flex-col w-80 h-80"
                 >
                   <div className="">
                     <img src={EliProfilePic} />
                   </div>
                   <div
-                    name="main1-1"
-                    className="flex flex-col border border-purple-500 w-80 h-80"
+                    name="main1-2"
+                    className="flex flex-col w-80 h-80"
+                  >
+                    <div className="">
+                      <img src={EliProfilePic} />
+                    </div>
+                  </div>
+                  <div
+                    name="main1-3"
+                    className="flex flex-col w-80 h-80"
                   >
                     <div className="">
                       <img src={EliProfilePic} />
@@ -281,14 +284,22 @@ export default function EditProfile() {
                   </div>
                 </div>
 
-                <div name="main2" className="">
+                <div name="main2-1" className="">
                   <div className="">
                     <img src={EliProfilePic} />
                   </div>
 
                   <div
                     name="main2-1"
-                    className="flex flex-col border border-purple-500 w-80 h-80"
+                    className="flex flex-col w-80 h-80"
+                  >
+                    <div className="">
+                      <img src={EliProfilePic} />
+                    </div>
+                  </div>
+                  <div
+                    name="main2-3"
+                    className="flex flex-col w-80 h-80"
                   >
                     <div className="">
                       <img src={EliProfilePic} />
@@ -296,21 +307,29 @@ export default function EditProfile() {
                   </div>
                 </div>
                 <div
-                  name="main3"
-                  className="flex flex-col border border-purple-500 w-80 h-80"
+                  name="main3-1"
+                  className="flex flex-col w-80 h-80"
                 >
                   <div className="">
                     <img src={EliProfilePic} />
                   </div>
 
                   <div
-                    name="main3-1"
-                    className="flex flex-col border border-purple-500 w-80 h-80"
+                    name="main3-2"
+                    className="flex flex-col w-80 h-80"
                   >
                     <div className="">
                       <img src={EliProfilePic} />
                     </div>
                   </div>
+                  <div
+                  name="main3-3"
+                  className="flex flex-col w-80 h-80"
+                >
+                  <div className="">
+                    <img src={EliProfilePic} />
+                  </div>
+                </div>
                 </div>
               </div>
             </div>

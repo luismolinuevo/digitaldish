@@ -160,85 +160,178 @@ const handleScroll = (event) => {
 
 
 
-                    {/**FEATURED LISTING */}
-                    <p className="sort-by flex justify-end text-blue-500 pr-10 pt-8 gap-3 hover:text-blue-800">
-                    <div className="w-[8rem] pr-[10rem]">
-                      <Select label="Sort by" className="border-none">
-                        <Option>Relevance</Option>
-                        <Option>Most recent</Option>
-                        <Option>Lowest price</Option>
-                        <Option>Highest price</Option>
-                      </Select>
-                    </div>
-                  </p>
-                  <div className="pt-10 w-[30rem] ml-[20rem]">
-                    <div className="featured-listings flex flex-row flex-wrap justify-center text-2xl font-bold pl-5 border border-black">
-                      Featured listings
-                    </div>
+                    {/**FEATURED LISTING 
+                
+                className="pl-3">v</div>
+            */}
+          <div>
+          <p className="sort-by flex justify-end text-blue-500 pr-10 py-8 gap-3 hover:text-blue-800">
+            <div className="w-[8rem] pr-[10rem]">
+              <Select label="Sort by" className="border-none">
+                <Option>Relevance</Option>
+                <Option>Most recent</Option>
+                <Option>Lowest price</Option>
+                <Option>Highest price</Option>
+              </Select>
+            </div>
+          </p>
+        </div>
+
+        {/**MAIN BAR */}
+
+        {/**SIDEBAR COLUMN           
+  
+  
+  
+  */}
+
+        <div name="sidebar" className="flex flex-wrap">
+          <div className=" h-[40rem] mt-10">
+            <form className="search-bar border-2 border-gray-500 rounded-full w-[16rem] h-[2.5rem] m-5 appearance-none bg-transparent text-black shadow-lg focus:outline-none">
+              <div className="flex flex-row">
+                <input
+                  type="search"
+                  placeholder=""
+                  onChange={""}
+                  className="appearance-none bg-transparent text-lg text-black p-2 leading-tight border-none w-[14rem] focus:outline-none"
+                />
+                <div className="">
+                  <button
+                    className="cursor-pointer hover:bg-indigo-100 h-[2rem]"
+                    onClick={"handleFormSubmit"}
+                  >
+                    <input
+                      type="image"
+                      src={MagnifyingGlass}
+                      alt="Magnifying Glass"
+                      width="18rem"
+                      className="flex flex-row justify-end item-center self-center"
+                    />
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <div className="flex flex-col gap-10">
+              <div className="pl-5 text-lg flex flex-col">
+                <div className="flex flex-col font-bold gap-3">
+                  <p className="hover:text-blue-900">All</p>
+                  <p className="hover:text-blue-900">On Sale</p>
+                  <p className="hover:text-blue-900">Mice</p>
+                  <p className="hover:text-blue-900">Custom Mice</p>
+                </div>
+              </div>
+              <div className="pt-20">
+                <div>
+                  <button
+                    onClick={"handleClick"}
+                    className="border-2 border-gray-500 rounded-full w-[14rem] h-[2.5rem] flex justify-center p-1 m-5 text-xl font-bold hover:bg-gray-100 hover:shadow-2xl"
+                  >
+                    Contact seller
+                  </button>
+                  <div className="flex flex-col font-semibold gap-3 pl-5 text-lg">
+                    <p className="hover:text-blue-900">
+                      Total sales <span>{totalSales}</span>
+                    </p>
+                    <p className="hover:text-blue-900">
+                      User rating <span>{userRating}</span> stars
+                    </p>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-
-                <div className="flex flex-wrap justify-end w-full">  
-                  <div className="w-40 h-40 border border-black"></div>
+          <div
+            id="MAIN-COLUMN"
+            className="border border-green-500 w-[61.1rem] flex-wrap"
+          >
+            <div
+              name="featured-listing"
+              className="featured-listings flex flex-row flex-wrap justify-center text-2xl pl-5 border border-black font-bold"
+            >
+              Featured listings
+            </div>
+            <div name="LISTINGS" className="flex gap-5">
+              <div
+                name="main1-1"
+                className="flex flex-col w-80 h-80"
+              >
+                <div className="">
+                  <img src={MouseProfilePic} />
+                </div>
+                <div
+                  name="main1-2"
+                  className="flex flex-col w-80 h-80"
+                >
+                  <div className="">
+                    <img src={MouseProfilePic} />
                   </div>
-<Modal />
+                </div>
+                <div
+                  name="main1-3"
+                  className="flex flex-col w-80 h-80"
+                >
+                  <div className="">
+                    <img src={MouseProfilePic} />
+                  </div>
+                </div>
+              </div>
 
+              <div name="main2-1" className="">
+                <div className="">
+                  <img src={MouseProfilePic} />
+                </div>
 
-                    <div className="border-2 border-blue-500 h-[40rem] mt-10 flex-wrap">
-                        <form className="search-bar border-2 border-gray-500 rounded-full w-[16rem] h-[2.5rem] m-5 appearance-none bg-transparent text-black shadow-lg focus:outline-none">
-                            <div className="flex flex-row">
-                                <input
-                                    type="search"
-                                    placeholder=""
-                                    onChange={""}
-                                    className="appearance-none bg-transparent text-lg text-black p-2 leading-tight border-none w-[14rem] focus:outline-none"
-                                />
-                                <div className="">
-                                    <button
-                                        className="cursor-pointer hover:bg-indigo-100 h-[2rem]"
-                                        onClick={"handleFormSubmit"}
-                                    >
-                                        <input
-                                            type="image"
-                                            src={MagnifyingGlass}
-                                            alt="Magnifying Glass"
-                                            width="18rem"
-                                            className="flex flex-row justify-end item-center self-center"
-                                        />
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                <div
+                  name="main2-1"
+                  className="flex flex-col w-80 h-80"
+                >
+                  <div className="">
+                    <img src={MouseProfilePic} />
+                  </div>
+                </div>
+                <div
+                  name="main2-3"
+                  className="flex flex-col w-80 h-80"
+                >
+                  <div className="">
+                    <img src={MouseProfilePic} />
+                  </div>
+                </div>
+              </div>
+              <div
+                name="main3-1"
+                className="flex flex-col w-80 h-80"
+              >
+                <div className="">
+                  <img src={MouseProfilePic} />
+                </div>
 
-
-
-
-                        <div className="flex flex-col gap-10 flex-wrap">
-                            <div className="pl-5 text-lg flex flex-col">
-                                <div className="flex flex-col font-bold gap-3">
-                                    <p className="hover:text-blue-900">All</p>
-                                    <p className="hover:text-blue-900">On Sale</p>
-                                    <p className="hover:text-blue-900">Mice</p>
-                                    <p className="hover:text-blue-900">Custom Mice</p>
-                                </div>
-                            </div>
-                            <div className="">
-                                <div>
-                                    <button
-                                        onClick={"handleClick"}
-                                        className="border-2 border-gray-500 rounded-full w-[14rem] h-[2.5rem] flex justify-center p-1 m-5 text-xl font-bold hover:bg-gray-100 hover:shadow-2xl">
-                                        Contact seller
-                                    </button>
-                                    <div className="flex flex-col font-semibold gap-3 pl-5 text-lg">
-                                        <p className="hover:text-blue-900">Total sales <span>{totalSales}</span></p>
-                                        <p className="hover:text-blue-900">User rating <span>{userRating}</span> stars</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="featured-listings flex flex-row flex-wrap justify-center text-2xl pl-5 border border-black">Featured listings</div>
-                    </div>
-                    <div id="bttm-gray-line" className="bottom-gray-line my-5 border-b-2 border-gray-500"></div>
+                <div
+                  name="main3-2"
+                  className="flex flex-col w-80 h-80"
+                >
+                  <div className="">
+                    <img src={MouseProfilePic} />
+                  </div>
+                </div>
+                <div
+                name="main3-3"
+                className="flex flex-col w-80 h-80"
+              >
+                <div className="">
+                  <img src={MouseProfilePic} />
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+                    <div
+                      id="bttm-gray-line"
+                      className="bottom-gray-line my-5 border-b-2 border-gray-500"
+                    ></div>
                     <div id="ratings-section" name="ratings-section">
                         <div className="flex flex-row justify-end my-6">
                             <button className="bg-[#DAB24E] border border-[#DAB24E] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl">
