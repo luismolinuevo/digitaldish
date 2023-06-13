@@ -9,7 +9,7 @@ import visa from "../../assets/payment/visa-Icon.png";
 import mastercard from "../../assets/payment/mastercard-Icon.png";
 import paypal from "../../assets/payment/paypal-Icon.png";
 import apple from "../../assets/payment/apple-pay-Icon.png";
-import Carousel  from "./ImgCarousel";
+import Carousel from "./ImgCarousel";
 import Card from "../Home/Card";
 import Footer from "../../Components/Footer/Footer";
 
@@ -21,13 +21,14 @@ export default function SpecificNegotiate() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.userInfo);
+  const userName = useSelector((state) => state.auth.userName)
 
   const [post, setPost] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [offer, setOffer] = useState(post.price);
   const [message, setMessage] = useState("");
   const [offerSent, setOfferSent] = useState(false);
-  const fivePercentOff = post.price - post.price * (0.05).toFixed(2);
+  const fivePercentOff = parseFloat(post.price) - parseFloat(post.price) * (0.05).toFixed(2);
   const tenPercentOff = post.price - post.price * (0.1).toFixed(2);
   const fifteenPercentOff = post.price - post.price * (0.15).toFixed(2);
   const [suggestedPost, setSuggestedPost] = useState([]);
@@ -59,7 +60,9 @@ export default function SpecificNegotiate() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`http://localhost:8080/post/getType/negotiation`);
+      const response = await axios.get(
+        `http://localhost:8080/post/getType/negotiation`
+      );
       console.log(response.data.getPost);
       setSuggestedPost(response.data.getPost.splice(0, 8));
     }
@@ -91,7 +94,7 @@ export default function SpecificNegotiate() {
 
   const sendOffer = async (offerId) => {
     try {
-      let offerMessage = user + "has created a offer of $" + offer;
+      let offerMessage = userName + " has created a offer of $" + offer;
       const createMessage = await axios.post(
         `http://localhost:8080/offer/createmessage/${offerId}`,
         {
@@ -108,13 +111,15 @@ export default function SpecificNegotiate() {
 
   const sendMessage = async (offerId) => {
     try {
-      const createMessage = await axios.post(
-        `http://localhost:8080/offer/createmessage/${offerId}`,
-        {
-          content: message,
-          userId: user,
-        }
-      );
+      if (message) {
+        const createMessage = await axios.post(
+          `http://localhost:8080/offer/createmessage/${offerId}`,
+          {
+            content: message,
+            userId: user,
+          }
+        );
+      }
 
       console.log("offer message created");
     } catch (err) {
@@ -136,8 +141,9 @@ export default function SpecificNegotiate() {
         }
       );
       let offerId = create.data.chatroom.id;
-      sendMessage(offerId);
+      setOffer(price)
       sendOffer(offerId);
+      sendMessage(offerId);
       console.log("offercreated");
 
       setOfferSent(!offerSent);
@@ -170,9 +176,9 @@ export default function SpecificNegotiate() {
                 post.img.map((item) => <Carousel url={item.url} />)
               ) : (
                 <img
-                src="https://placehold.jp/704x700.png"
-                alt="listingimage"
-                className="w-[704px] h-[700px]"
+                  src="https://placehold.jp/704x700.png"
+                  alt="listingimage"
+                  className="w-[704px] h-[700px]"
                 />
               )}
             </div>
@@ -196,7 +202,10 @@ export default function SpecificNegotiate() {
                 >
                   Make an Offer
                 </button>
-                <button className="p-4 w-[210px] rounded-[57px] border-2 border-[#C7A695] text-[25px]" onClick={() => navigate(`/orderconformation/${post.id}`)}>
+                <button
+                  className="p-4 w-[210px] rounded-[57px] border-2 border-[#C7A695] text-[25px]"
+                  onClick={() => navigate(`/orderconformation/${post.id}`)}
+                >
                   Buy Now
                 </button>
               </div>
@@ -226,9 +235,7 @@ export default function SpecificNegotiate() {
               </div>
               <div className="pb-[36px]">
                 <p className="text-[20px]">Shipping/Pick-up Info</p>
-                <p className="text-[15px]">
-                  {post.shippingFees}
-                </p>
+                <p className="text-[15px]">{post.shippingFees}</p>
               </div>
               <div className="pb-[36px]">
                 <p className="text-[20px]">Returns</p>
@@ -251,7 +258,7 @@ export default function SpecificNegotiate() {
         <div className="flex mt-10 mb-[137px]">
           <div className="w-[704px] flex justify-center mr-[92px]">
             <div className="w-[564px] h-[101px] flex items-center">
-            <p className="text-[35px] pr-4">&lt;</p>
+              <p className="text-[35px] pr-4">&lt;</p>
               <div>
                 {post && post.img.length != 0 ? (
                   post.img.map((item) => (
@@ -294,7 +301,7 @@ export default function SpecificNegotiate() {
         <div>
           <h1 className="text-[37px]">You might also like</h1>
           <div className="flex flex-wrap">
-          {suggestedPost&& suggestedPost.length !== 0 ? (
+            {suggestedPost && suggestedPost.length !== 0 ? (
               suggestedPost.map((item) => (
                 <div className="">
                   <Card
@@ -311,7 +318,7 @@ export default function SpecificNegotiate() {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
       <Modal isVisable={showModal} onClose={() => setShowModal(false)}>
         {!offerSent ? (
           <div>

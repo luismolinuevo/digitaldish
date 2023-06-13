@@ -231,12 +231,12 @@ export default function Chat() {
         <div className="h-[84px] border-[#C7A695] border-b-2 flex justify-between items-center p-4">
           <div>
             <p className="text-[22px]">{postInfo.title}</p>
-            <p className="text-[12px]">Username</p>
+            <p className="text-[12px]">{postInfo.userName}</p>
           </div>
           <div className="flex">
             <img
               className="w-[52px] h-[52px] pr-1"
-              src="https://placehold.jp/52x52.png"
+              src={postInfo.img && postInfo.img.length > 0 ? postInfo.img[0].url.toString() : "https://placehold.jp/52x52.png"}
             ></img>
             <button className="">
               <img src={ChatAction} />
