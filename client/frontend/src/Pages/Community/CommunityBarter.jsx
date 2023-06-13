@@ -51,6 +51,7 @@ export default function CommunityBarter(props) {
                     price={item.price}
                     id={item.id}
                     img={item.img != 0 ? item.img[0].url.toString() : ""}
+                    type={"barter"}
                   />
                 </div>
               ))

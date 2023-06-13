@@ -309,6 +309,7 @@ export default function SpecificNegotiate() {
                     price={item.price}
                     id={item.id}
                     img={item.img != 0 ? item.img[0].url.toString() : ""}
+                    type={"negotiation"}
                   />
                 </div>
               ))
