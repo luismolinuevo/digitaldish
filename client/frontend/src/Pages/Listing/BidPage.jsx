@@ -137,7 +137,7 @@ export default function BidForm() {
                 </button>
                 <button
                   className=" border-2 w-[100px] h-[55px] bg-[#DAB24E] text-[22px] mr-[25px] ml-10 text-center"
-                  onClick={() => navigate("/")}
+                  onClick={handleSubmit}
                 >
                   Publish
                 </button>

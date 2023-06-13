@@ -74,7 +74,7 @@ export default function NegotiateForm() {
     newFormData.append("shippingFees", shippingFees);
     newFormData.append("userName", userName);
     newFormData.append("userRating", userRating);
-    newFormData.append("type", "barter");
+    newFormData.append("type", "negotiation");
     newFormData.append("status", "Active");
     //Append each file to the right key. You CANNOT append all the files to the key. It will not work.
     files.forEach((file) => {
@@ -123,7 +123,7 @@ export default function NegotiateForm() {
                 </button>
                 <button
                   className=" border-2 w-[100px] h-[55px] bg-[#DAB24E] text-[22px] mr-[25px] ml-10 text-center"
-                  onClick={() => navigate("/")}
+                  onClick={handleSubmit}
                 >
                   Publish
                 </button>
