@@ -10,12 +10,15 @@ import Upload from "./Upload";
 import ReviewCard from "./CustomerReview";
 import { Select, Option } from "@material-tailwind/react";
 import "./Profile.css";
+import { logoutUser } from "../../Utils/auth";
+import { useDispatch } from "react-redux";
 
 // const pH = "10000rem"
 const listings = 9;
 const feedback = 2;
 
 export default function EditProfile() {
+  const dispatch = useDispatch()
   const [followerNum, setFollerNum] = useState(201);
   const [followingNum, setFollowingNum] = useState(35);
   const [isClicked, setIsClicked] = useState(false);
@@ -60,6 +63,11 @@ export default function EditProfile() {
     const top = document.getElementById("move-to-top");
     top.scrollIntoView({ behavior: "smooth" });
   };
+
+  const handleLogout = (e) => {
+    event.preventDefault();
+    dispatch(logoutUser())
+  }
 
   return (
     <div>
@@ -157,7 +165,7 @@ export default function EditProfile() {
               <button className="bg-[#000] border border-[#000] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-white">
                 <Link to={"/useraccount"}>EDIT PROFILE</Link>
               </button>
-              <button className="bg-[#000] border border-[#000] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-white">
+              <button className="bg-[#000] border border-[#000] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-white" onClick={handleLogout}>
                 <Link to={"/"}>LOG OUT</Link>
               </button>
               <button className="bg-[#DAB24E] border border-[#DAB24E] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl">
