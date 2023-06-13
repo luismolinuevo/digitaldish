@@ -216,6 +216,7 @@ export default function SpecificBarter() {
                         alt={"Post img"}
                         className=" flex w-[101px] h-[101px] gap-4"
                         key={item.id}
+                        type={"barter"}
                       />
                     </div>
                   ))

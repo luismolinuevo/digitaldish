@@ -42,7 +42,7 @@ const Navbar = () => {
   
     <ul className="hidden md:flex">
       <li>
-        <Link to="/Seach">
+        <Link to="/searchpage">
           <img src={Search} alt="" className="mr-5"/>
         </Link>
       </li>
@@ -67,7 +67,7 @@ const Navbar = () => {
   
       <li>
         {
-          !isAuthenticated ? <Link to="/login" className="text-base md:text-lg mr-5">Login</Link> : <Link to="/profile" className="flex items-center w-[30px]"><img src={profileIcon} /></Link>
+          !isAuthenticated ? <Link to="/login" className="text-base md:text-lg mr-5">Login</Link> : <Link to="/useraccount" className="flex items-center w-[30px]"><img src={profileIcon} /></Link>
         }
         
       </li>

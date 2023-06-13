@@ -96,7 +96,7 @@ export default function Home() {
               <Card
                 title={`${firstBarter.title}`}
                 type={"barter"}
-                img={robot}
+                img={firstBarter.img && firstBarter.img.length > 0 ? firstBarter.img[0].url.toString() : ""}
                 price={`${firstBarter.price}`}
                 id={firstBarter.id}
               />
@@ -105,7 +105,7 @@ export default function Home() {
               <Card
                 title={`${firstNeg.title}`}
                 type={"negotiation"}
-                img={robot}
+                img={firstNeg.img && firstNeg.img.length > 0 ? firstNeg.img[0].url.toString() : ""}
                 price={`${firstNeg.price}`}
                 id={firstNeg.id}
               />
@@ -114,7 +114,7 @@ export default function Home() {
               <Card
                 title={`${secondBarter.title}`}
                 type={"barter"}
-                img={robot}
+                img={secondBarter.img && secondBarter.img.length > 0 ? secondBarter.img[0].url.toString() : ""}
                 price={`${secondBarter.price}`}
                 id={secondBarter.id}
               />
@@ -125,13 +125,13 @@ export default function Home() {
               {!isAuthenticated ? (
                 <div className="flex flex-col items-center justify-center h-full">
                   <h1 className="text-[27px] mb-[26px]">Welcome,</h1>
-                  <button className="bg-black text-white px-[70px] py-4 rounded-[4px]">
+                  <Link to={"/login"} className="bg-black text-white px-[70px] py-4 rounded-[4px]">
                     Login
-                  </button>
+                  </Link>
                   <h1 className="text-[27px] my-4">or</h1>
-                  <button className="bg-black text-white px-[70px] py-4 rounded-[4px]">
+                  <Link to={"/signup"} className="bg-black text-white px-[70px] py-4 rounded-[4px]">
                     Signup
-                  </button>
+                  </Link>
                 </div>
               ) : (
                 <div className="flex flex-col justify-center p-4">
@@ -165,7 +165,7 @@ export default function Home() {
                 type={"negotiation"}
                 price={`${secondNeg.price}`}
                 id={secondNeg.id}
-                // img={secondNeg.img != 0 ? secondNeg.img[0].url.toString() : ""}
+                img={secondNeg.img && secondNeg.img.length > 0 ? secondNeg.img[0].url.toString() : ""}
               />
             </div>
           </div>

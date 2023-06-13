@@ -65,7 +65,7 @@ const ButtonsComponent = ({ greeting1, auction, neg, barter}) => {
               </svg>
             </div>
 
-            <input
+            <Link to = {"/searchpage"}
               class="peer h-full w-full rounded-full outline-none text-sm bg-[#F1F0EB] text-gray-700 pr-2"
               type="text"
               id="search"

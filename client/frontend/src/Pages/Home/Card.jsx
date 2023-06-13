@@ -12,7 +12,11 @@ export default function Card({ type, title, img, price, id }) {
     <div>
       <Link
         to={`${
-          type == "barter" ? barterLink : type == "bid" ? bidLink : negoLink
+          type === "barter"
+            ? "/specbarterlisting/" + id
+            : type === "bid"
+            ? "/specbidlisting/" + id
+            : "/specneglisting/" + id
         }`}
       >
         <div className="w-[320px] h-[220px] px-[10px] mb-[20px]">

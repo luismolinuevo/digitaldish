@@ -91,7 +91,13 @@ export default function PrevOrders() {
               onClick={() => handleClick(item.id)}
             >
               <div className="flex items-center mr-[33px] w-[148px]">
-                <img className="w-[148px] h-full border-2 border-black" />
+                <img className="w-[148px] h-full border-2 border-black" 
+                src={
+                  item.post.img && item.post.img.length > 0
+                    ? postInfo.img[0].url.toString()
+                    : "https://placehold.jp.png"
+                }
+                />
               </div>
               <div className="w-[180px] flex items-center">
                 <div className="flex flex-col text-center">

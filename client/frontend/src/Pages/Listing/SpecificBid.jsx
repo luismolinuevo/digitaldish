@@ -240,6 +240,7 @@ export default function SpecificBid() {
                     price={item.price}
                     id={item.id}
                     img={item.img != 0 ? item.img[0].url.toString() : ""}
+                    type={"bid"}
                   />
                 </div>
               ))

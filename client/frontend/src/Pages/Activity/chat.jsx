@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
@@ -61,7 +61,7 @@ export default function Chat() {
   }, [offerId]); //putting offerId here made it so that this runs whenever offerId has changed
 
   useEffect(() => {
-    scrollToBottom();  //this causes the bug that moves the page down when a new message is created
+    scrollToBottom(); //this causes the bug that moves the page down when a new message is created
   }, [messages]);
 
   const fetchMessages = async () => {
@@ -81,7 +81,7 @@ export default function Chat() {
       if (getChat.buyerAccept === true && getChat.sellerAccept == true) {
         setBothAccept(true);
       } else {
-        setBothAccept(false)
+        setBothAccept(false);
       }
     } catch (error) {
       console.log("Error fetching messages:", error);
@@ -230,14 +230,24 @@ export default function Chat() {
       <div className="w-[520px] h-[820px] border-[#C2B8A3] border-[2px] relative rounded-[8px]">
         <div className="h-[84px] border-[#C7A695] border-b-2 flex justify-between items-center p-4">
           <div>
-            <p className="text-[22px]">{postInfo.title}</p>
-            <p className="text-[12px]">Username</p>
+            <p className="text-[22px]">
+              <Link to={`/specneglisting/${postInfo.id}`}>
+                {postInfo.title}
+              </Link>
+            </p>
+            <p className="text-[12px]">{postInfo.userName}</p>
           </div>
           <div className="flex">
-            <img
-              className="w-[52px] h-[52px] pr-1"
-              src="https://placehold.jp/52x52.png"
-            ></img>
+            <Link to={`/specneglisting/${postInfo.id}`}>
+              <img
+                className="w-[52px] h-[52px] pr-1"
+                src={
+                  postInfo.img && postInfo.img.length > 0
+                    ? postInfo.img[0].url.toString()
+                    : "https://placehold.jp/52x52.png"
+                }
+              ></img>
+            </Link>
             <button className="">
               <img src={ChatAction} />
             </button>
@@ -362,19 +372,19 @@ export default function Chat() {
             <h3 className="text-[20px] text-center mb-4">Suggested Offers:</h3>
             <div className="flex gap-[40px] justify-center mb-[30px]">
               <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
-              <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
+                <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
                   <p>${postInfo.price - (postInfo.price * 0.05).toFixed(2)}</p>
                   <p>5% off</p>
                 </button>
               </div>
               <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
-              <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
+                <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
                   <p>${postInfo.price - (postInfo.price * 0.1).toFixed(2)}</p>
                   <p>10% off</p>
                 </button>
               </div>
               <div className="w-[90px] h-[73px] bg-[#F0EEEE] flex flex-col justify-center items-center">
-              <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
+                <button className="bg-[#F1F0EB] w-[86px] h-[70px]">
                   <p>${postInfo.price - (postInfo.price * 0.15).toFixed(2)}</p>
                   <p>15% off</p>
                 </button>
