@@ -8,15 +8,14 @@ import Paypal from "../../assets/paypal.png";
 import Applepay from "../../assets/applepay.png";
 import FooterNav from "../../Components/Footer/FooterNav";
 import { StarIcon } from "@heroicons/react/24/solid";
-
 import { useDropzone } from "react-dropzone";
-
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { blue } from "@mui/material/colors";
-
 import "tailwindcss/tailwind.css";
+import Modal from "../../Pages/Listing/PublishModal";
+import { useNavigate } from "react-router-dom";
 
 export default function BarterForm() {
   const [description, setDescription] = useState("");
@@ -33,6 +32,7 @@ export default function BarterForm() {
   const [shippingFees, setShippingFees] = useState("");
   const [userName, setUserName] = useState("");
   const [userRating, setUserRating] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const [files, setFiles] = useState();
 
@@ -45,27 +45,17 @@ export default function BarterForm() {
     maxFiles: 3,
   });
 
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const theme = createTheme({
+    palette: {
+      primary: blue,
+    },
+  });
+
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-
-    const postData = {
-      description: description,
-      price: price,
-      category: category,
-      title: title,
-      location: location,
-      startTime: startTime,
-      endTime: endTime,
-      condition: condition,
-      color: color,
-      quantity: quantity,
-      carrier: carrier,
-      shippingFees: shippingFees,
-      userName: userName,
-      userRating: userRating,
-      type: "barter",
-    };
 
     let newFormData = new FormData();
     newFormData.append("description", description);
@@ -89,12 +79,17 @@ export default function BarterForm() {
       newFormData.append("images[]", file);
     });
 
-    const newPost = await axios.post(`http://localhost:8080/post`, newFormData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    try {
+      await axios.post(`http://localhost:8080/post`, newFormData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -103,10 +98,36 @@ export default function BarterForm() {
         <button
           className="bg-[#EDEBEB] hover:bg-[#eed083] w-48 h-14 text-xl absolute mt-[160px] right-[120px] font-bold py-2 px-10 "
           type="submit"
-          onClick={handleSubmit}
+          onClick={() => setShowModal(true)}
         >
           Publish
         </button>
+        <Modal isVisable={showModal} onClose={() => setShowModal(false)}>
+          <div>
+            <h1 className="text-center text-bold text-[30px] mb-[30px]">
+              Are you sure you'd like to publish?
+            </h1>
+          </div>
+
+          <div>
+            <div>
+              <div className="flex justify-center mt-[25px]">
+                <button
+                  className=" border-2 w-[100px] h-[55px] border-[#DAB24E] text-[22px]"
+                  onClick={() => setShowModal(false)}
+                >
+                  EDIT
+                </button>
+                <button
+                  className=" border-2 w-[100px] h-[55px] bg-[#DAB24E] text-[22px] mr-[25px] ml-10 text-center"
+                  onClick={() => navigate("/")}
+                >
+                  Publish
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal>
 
         <form className=" bg-[#d8cfb9] mt-20 w-[435px] justify-start items-start py-10 px-2 ">
           <div className="flex font-bold ">
@@ -302,13 +323,25 @@ export default function BarterForm() {
               />
             </div>
           </div>
+
+          <div className="flex items-center mb-4">
+            <h1 className="mr-4 text-[20px] font-bold">Returns Accepted?</h1>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="primary"
+                  checked={isSwitchOn}
+                  onChange={() => setIsSwitchOn(!isSwitchOn)}
+                />
+              }
+              label={isSwitchOn ? "Y" : "N"}
+            />
+          </div>
         </form>
 
         {/* parent container */}
         <div className=" bg-[#C2B8A3] mt-60 ml-10 mr-20 w-full h-[800px]">
-          <div className="h-[30px] w-[70px]  text-lg ml-10 mt-4">
-            Preview
-          </div>
+          <div className="h-[30px] w-[70px]  text-lg ml-10 mt-4">Preview</div>
 
           {/* Photo & Description Preview window container */}
           <div className="flex ">
@@ -327,11 +360,21 @@ export default function BarterForm() {
                   {title ? title : "Title"}
                 </h1>
               </div>
-              <div className="mt-4 bg-white  rounded-full w-80 h-12">
-                    <h1 className="mt-4 text-[20px] text-center ">START BARTERING EXCHANGE</h1>
-                    </div>
 
-                    <div>
+              <div className="flex ">
+                <h1 className="text-[30px] mt-3">{price}</h1>
+                <h1 className="ml-5 mt-5 text-[20px] font-bold">
+                  Listed Price
+                </h1>
+              </div>
+
+              <div className=" bg-white  rounded-full w-80 h-12">
+                <h1 className="mt-4 text-[20px] text-center ">
+                  START BARTERING EXCHANGE
+                </h1>
+              </div>
+
+              <div>
                 <h1 className="mt-4 font-bold text-[20px]">Category</h1>
                 <span className="text-[20px]">
                   {category ? category : "text"}

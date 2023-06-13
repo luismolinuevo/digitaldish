@@ -20,8 +20,6 @@ import { useNavigate } from "react-router-dom";
 
 import "tailwindcss/tailwind.css";
 
-import { useDropzone } from "react-dropzone";
-
 export default function BidForm() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -72,29 +70,9 @@ export default function BidForm() {
     },
   });
 
-
   const handleSubmit = async (e) => {
-
     e.preventDefault();
     const token = localStorage.getItem("token");
-
-    const postData = {
-      description: description,
-      price: price,
-      category: category,
-      title: title,
-      location: location,
-      startTime: startTime,
-      endTime: endTime,
-      condition: condition,
-      color: color,
-      quantity: quantity,
-      carrier: carrier,
-      shippingFees: shippingFees,
-      userName: userName,
-      userRating: userRating,
-      type: "bid",
-    };
 
     let newFormData = new FormData();
     newFormData.append("description", description);
@@ -118,16 +96,17 @@ export default function BidForm() {
       newFormData.append("images[]", file);
     });
 
-    const newPost = await axios.post(
-      `http://localhost:8080/post`,
-      newFormData,
-      {
+    try {
+      await axios.post(`http://localhost:8080/post`, newFormData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
-      }
-    );
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -522,9 +501,7 @@ export default function BidForm() {
                 <div className="flex flex-col w-[600px]">
                   <div className="mt-5">
                     <h1 className="ml-10 ">{userName} joshuapl317</h1>
-                    <h1 className="ml-60 -mt-7">
-                      34 Successful Sales 
-                    </h1>
+                    <h1 className="ml-60 -mt-7">34 Successful Sales</h1>
                   </div>
 
                   <div className="flex ml-10  h-12 w-32 text-yellow-600 ">
