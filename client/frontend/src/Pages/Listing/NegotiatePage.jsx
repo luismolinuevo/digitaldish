@@ -46,7 +46,6 @@ export default function NegotiateForm() {
     maxFiles: 3,
   });
 
-
   const [isSwitchOn, setIsSwitchOn] = useState(false);
   const theme = createTheme({
     palette: {
@@ -83,15 +82,15 @@ export default function NegotiateForm() {
     });
 
     try {
-        await axios.post(`http://localhost:8080/post`, newFormData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        });
-        navigate("/")
+      await axios.post(`http://localhost:8080/post`, newFormData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      navigate("/");
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   };
 
@@ -400,23 +399,24 @@ export default function NegotiateForm() {
                 </h1>
               </div>
 
-              
               <div className="flex ">
                 <h1 className="text-[30px] mt-3">{price}</h1>
-                <h1 className="ml-5 mt-5 text-[20px] font-bold">Listed Price</h1>
-                
+                <h1 className="ml-5 mt-5 text-[20px] font-bold">
+                  Listed Price
+                </h1>
+              </div>
+
+              <div className=" flex">
+                <div className="mt-4 bg-white  rounded-full w-48 h-12">
+                  <h1 className="mt-3 text-[20px] text-center ">
+                    MAKE AN OFFER
+                  </h1>
                 </div>
 
-                <div className=" flex">
-                    <div className="mt-4 bg-white  rounded-full w-48 h-12">
-                    <h1 className="mt-3 text-[20px] text-center ">MAKE AN OFFER</h1>
-                    </div>
-
-                    <div className="mt-4 ml-10 bg-white  rounded-full w-48 h-12">
-                    <h1 className=" mt-3 text-[20px] text-center ">BUY NOW</h1>
-                    </div>
-                  
+                <div className="mt-4 ml-10 bg-white  rounded-full w-48 h-12">
+                  <h1 className=" mt-3 text-[20px] text-center ">BUY NOW</h1>
                 </div>
+              </div>
 
               <div>
                 <h1 className="mt-4 font-bold text-[20px]">Category</h1>
