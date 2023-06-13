@@ -90,4 +90,13 @@ export const signupUser = (email, username, password) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const logoutUser = () => (dispatch) => {
+  localStorage.removeItem("token");
+  dispatch(setLoggedInStatus(false));
+  dispatch(user(null));
+  dispatch(setUserName(null));
+};
+
+
 export default slice.reducer;
