@@ -6,8 +6,16 @@ import Visa from "../../assets/visa.png";
 import Mastercard from "../../assets/mastercard.png";
 import Paypal from "../../assets/paypal.png";
 import Applepay from "../../assets/applepay.png";
-
+import FooterNav from "../../Components/Footer/FooterNav";
+import { StarIcon } from "@heroicons/react/24/solid";
 import { useDropzone } from "react-dropzone";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { blue } from "@mui/material/colors";
+import "tailwindcss/tailwind.css";
+import Modal from "../../Pages/Listing/PublishModal";
+import { useNavigate } from "react-router-dom";
 
 export default function BarterForm() {
   const [description, setDescription] = useState("");
@@ -19,11 +27,12 @@ export default function BarterForm() {
   const [endTime, setEndTime] = useState("");
   const [condition, setCondition] = useState("");
   const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [carrier, setCarrier] = useState("");
   const [shippingFees, setShippingFees] = useState("");
   const [userName, setUserName] = useState("");
   const [userRating, setUserRating] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const [files, setFiles] = useState();
 
@@ -36,27 +45,17 @@ export default function BarterForm() {
     maxFiles: 3,
   });
 
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const theme = createTheme({
+    palette: {
+      primary: blue,
+    },
+  });
+
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-
-    const postData = {
-      description: description,
-      price: price,
-      category: category,
-      title: title,
-      location: location,
-      startTime: startTime,
-      endTime: endTime,
-      condition: condition,
-      color: color,
-      size: size,
-      carrier: carrier,
-      shippingFees: shippingFees,
-      userName: userName,
-      userRating: userRating,
-      type: "barter",
-    };
 
     let newFormData = new FormData();
     newFormData.append("description", description);
@@ -68,7 +67,7 @@ export default function BarterForm() {
     newFormData.append("endTime", endTime);
     newFormData.append("condition", condition);
     newFormData.append("color", color);
-    newFormData.append("size", size);
+    newFormData.append("quantity", quantity);
     newFormData.append("carrier", carrier);
     newFormData.append("shippingFees", shippingFees);
     newFormData.append("userName", userName);
@@ -80,30 +79,61 @@ export default function BarterForm() {
       newFormData.append("images[]", file);
     });
 
-    const newPost = await axios.post(`http://localhost:8080/post`, newFormData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    try {
+      await axios.post(`http://localhost:8080/post`, newFormData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
-    <div className="border border-black ">
-      <div className="border border-red-500 flixed mt-[85px] mb-[85px] flex mx-10 ">
+    <div className=" ">
+      <div className=" mb-[85px] flex mx-10 ">
         <button
-          className="bg-[#DAB24E] hover:bg-[#eed083] font-bold py-2 px-10 absolute mt-[20px] right-[120px]"
+          className="bg-[#EDEBEB] hover:bg-[#eed083] w-48 h-14 text-xl absolute mt-[160px] right-[120px] font-bold py-2 px-10 "
           type="submit"
-          onClick={handleSubmit}
+          onClick={() => setShowModal(true)}
         >
           Publish
         </button>
+        <Modal isVisable={showModal} onClose={() => setShowModal(false)}>
+          <div>
+            <h1 className="text-center text-bold text-[30px] mb-[30px]">
+              Are you sure you'd like to publish?
+            </h1>
+          </div>
 
-        <form className="border border-black bg-[#ededee] w-[435px] justify-start items-start py-10 px-2 ">
+          <div>
+            <div>
+              <div className="flex justify-center mt-[25px]">
+                <button
+                  className=" border-2 w-[100px] h-[55px] border-[#DAB24E] text-[22px]"
+                  onClick={() => setShowModal(false)}
+                >
+                  EDIT
+                </button>
+                <button
+                  className=" border-2 w-[100px] h-[55px] bg-[#DAB24E] text-[22px] mr-[25px] ml-10 text-center"
+                  onClick={() => navigate("/")}
+                >
+                  Publish
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+
+        <form className=" bg-[#d8cfb9] mt-20 w-[435px] justify-start items-start py-10 px-2 ">
           <div className="flex font-bold ">
             <h2 className="text-[25px]">List an Item</h2>
-            <div className="w-7 h-7 bg-[#faf8f8] sqaure-full flex items-center justify-center ml-2">
-              <span className="text-black text-[10px]">Barter</span>
+            <div className="w-20 h-9 bg-[#faf8f8] sqaure-full flex items-center justify-center ml-2">
+              <span className="text-black text-[15px]">Barter</span>
             </div>
           </div>
 
@@ -124,9 +154,9 @@ export default function BarterForm() {
           </div>
 
           <div className="flex flex-col mb-10 ">
-            <label className="relative">Specific:</label>
+            <label className="relative"> Sale Price:</label>
             <input
-              className="w-20 h-[36px] rounded-md mr-2 "
+              className="w-20 h-[36px] rounded-md mr-2 border border-black"
               type="text"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
@@ -138,7 +168,7 @@ export default function BarterForm() {
               Title
             </label>
             <input
-              className="h-[56px] rounded-md"
+              className="h-[56px] rounded-md border border-black"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -155,7 +185,7 @@ export default function BarterForm() {
             </label>
 
             <select
-              className="block h-[56px] rounded-md"
+              className="block h-[56px] rounded-md border border-black"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
@@ -180,7 +210,7 @@ export default function BarterForm() {
               Condition
             </label>
             <select
-              className="block h-[56px] rounded-md"
+              className="block h-[56px] rounded-md border border-black"
               value={condition}
               onChange={(e) => setCondition(e.target.value)}
             >
@@ -201,7 +231,7 @@ export default function BarterForm() {
               Color
             </label>
             <select
-              className=" block h-[56px] rounded-md"
+              className=" block h-[56px] rounded-md border border-black"
               value={color}
               onChange={(e) => setColor(e.target.value)}
             >
@@ -222,14 +252,14 @@ export default function BarterForm() {
           </div>
 
           <div className="flex flex-col mb-10 relative">
-            <label className={`absolute top-4 ${size && "mt-[-15px]"}`}>
-              Size
+            <label className={`absolute top-4 ${quantity && "mt-[-15px]"}`}>
+              Quantity
             </label>
             <input
-              className="h-[56px] rounded-md"
+              className="h-[56px] rounded-md border border-black"
               type="text"
-              value={size}
-              onChange={(e) => setSize(e.target.value)}
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
             />
           </div>
 
@@ -242,7 +272,7 @@ export default function BarterForm() {
               Description
             </label>
             <input
-              className="h-20 rounded-md"
+              className="h-20 rounded-md border border-black"
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -267,7 +297,7 @@ export default function BarterForm() {
                 Delivery Method
               </label>
               <select
-                className=" block h-[56px] rounded-md "
+                className=" block h-[56px] rounded-md border border-black"
                 value={carrier}
                 onChange={(e) => setCarrier(e.target.value)}
               >
@@ -286,25 +316,38 @@ export default function BarterForm() {
                 Fee
               </label>
               <input
-                className="h-[56px] rounded-md"
+                className="h-[56px] rounded-md border border-black"
                 type="text"
                 value={shippingFees}
                 onChange={(e) => setShippingFees(e.target.value)}
               />
             </div>
           </div>
+
+          <div className="flex items-center mb-4">
+            <h1 className="mr-4 text-[20px] font-bold">Returns Accepted?</h1>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="primary"
+                  checked={isSwitchOn}
+                  onChange={() => setIsSwitchOn(!isSwitchOn)}
+                />
+              }
+              label={isSwitchOn ? "Y" : "N"}
+            />
+          </div>
         </form>
 
         {/* parent container */}
-        <div className=" border border-blue-500 bg-[#C2B8A3] mt-20 ml-10 mr-20 w-full h-[800px]">
-          <div className=" border h-[30px] w-[70px]  text-lg ml-10 mt-4">
-            Preview
-          </div>
+        <div className=" bg-[#C2B8A3] mt-60 ml-10 mr-20 w-full h-[800px]">
+          <div className="h-[30px] w-[70px]  text-lg ml-10 mt-4">Preview</div>
 
           {/* Photo & Description Preview window container */}
           <div className="flex ">
-            <div className="border border-black mt-4 ml-10  w-full h-[555px]  ">
-              <div className="border border-black bg-[#F1F0EB] mt-[403px] w-full h-[150px] flex">
+            <div className="border border-black mt-4 ml-10  w-full h-[555px] ">
+              {/* {img ? img : ""} */}
+              <div className="bg-[#F1F0EB] mt-[403px] w-full h-[150px] flex">
                 <h1 className="text-[20px]">
                   {description ? description : "Description"}
                 </h1>
@@ -318,51 +361,55 @@ export default function BarterForm() {
                 </h1>
               </div>
 
-              <div>
-                <h1 className="text-[20px]">
-                  {price ? price : "Starting Bid"}
+              <div className="flex ">
+                <h1 className="text-[30px] mt-3">{price}</h1>
+                <h1 className="ml-5 mt-5 text-[20px] font-bold">
+                  Listed Price
+                </h1>
+              </div>
+
+              <div className=" bg-white  rounded-full w-80 h-12">
+                <h1 className="mt-4 text-[20px] text-center ">
+                  START BARTERING EXCHANGE
                 </h1>
               </div>
 
               <div>
-                <h1 className="text-[16px]">
-                  {" "}
-                  {startTime && endTime
-                    ? `${startTime} - ${endTime}`
-                    : "Time Left"}
-                </h1>
+                <h1 className="mt-4 font-bold text-[20px]">Category</h1>
+                <span className="text-[20px]">
+                  {category ? category : "text"}
+                </span>
               </div>
 
               <div>
-                <h1 className="mt-3 font-bold">Category</h1>
-                <span>{category ? category : "text"}</span>
+                <h1 className="mt-4 font-bold text-[20px]">Condition</h1>
+                <span className="text-[20px]">
+                  {condition ? condition : "Text"}
+                </span>
               </div>
 
               <div>
-                <h1 className="mt-4 font-bold">Condition</h1>
-                <span>{condition ? condition : "Text"}</span>
+                <h1 className="mt-4 font-bold text-[20px]">Color</h1>
+                <span className="text-[20px]">{color ? color : "Text"}</span>
               </div>
 
               <div>
-                <h1 className="mt-4 font-bold">Color</h1>
-                <span>{color ? color : "Text"}</span>
+                <h1 className="mt-4 font-bold text-[20px]">Quantity</h1>
+                <span className="text-[20px]">
+                  {quantity ? quantity : "Text"}
+                </span>
               </div>
 
               <div>
-                <h1 className="mt-4 font-bold">Size</h1>
-                <span>{size ? size : "Text"}</span>
-              </div>
-
-              <div>
-                <h1 className="mt-4 font-bold">Shipping</h1>
-                <span>
+                <h1 className="mt-4 font-bold text-[20px]">Shipping</h1>
+                <span className="text-[20px]">
                   {carrier && shippingFees
                     ? `${carrier} - ${shippingFees}`
                     : "Shipping info goes here, rate, etc."}
                 </span>
               </div>
 
-              <div className=" border w-full mt-5">
+              <div className=" font-bold w-full mt-5 text-[20px]">
                 <h1>Payment Accepted</h1>
                 <div className="flex">
                   <img
@@ -379,8 +426,8 @@ export default function BarterForm() {
           </div>
 
           {/* About Seller info Conatainer */}
-          <div className="flex">
-            <div className="border border-green-600 mt-[30px] mr-[420px] ml-10 w-[495px] h-[110px]">
+          <div className="flex ">
+            <div className=" mt-[25px] ml-10 w-[595px] h-[110px] text-[20px]">
               <h1>About the seller</h1>
               <div className="flex items-center">
                 <img
@@ -388,20 +435,31 @@ export default function BarterForm() {
                   alt=""
                   className="rounded-full h-[70px] w-[60px] my-2"
                 />
+                <div className="flex flex-col w-[600px]">
+                  <div className="mt-5">
+                    <h1 className="ml-10 ">{userName} Username</h1>
+                    <h1 className="ml-60 -mt-7">
+                      Successful Sales: {userRating}
+                    </h1>
+                  </div>
 
-                <h1 className="ml-10 -mt-10">{userName}Username</h1>
-                <h1 className="ml-12 -mt-10">Successful Sales</h1>
-                <h1 className="-ml-[245px] mt-[30px]">
-                  {userRating}Seller Rating
-                </h1>
-                <h1 className="ml-[30px] mt-[30px]">
-                  {userName}Username's other listings
-                </h1>
+                  <div className="flex ml-10  h-12 w-32 text-yellow-600 ">
+                    {Array(5)
+                      .fill()
+                      .map((_, index) => (
+                        <StarIcon key={index} className="mr-1" />
+                      ))}
+                  </div>
+                  <button className=" -mt-10">
+                    {userName}'s other listings
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <FooterNav />
     </div>
   );
 }

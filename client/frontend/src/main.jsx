@@ -13,6 +13,7 @@ import './index.css'
 import Layout from './Components/Layout'
 import BidPage from "./Pages/Listing/BidPage"
 import BarterPage from './Pages/Listing/BarterPage'
+import NegotiatePage from './Pages/Listing/NegotiatePage'
 import UploadPage from "./Pages/upload";
 
 import { Provider } from 'react-redux'
@@ -118,6 +119,11 @@ const router = createBrowserRouter([
       {
         path: "/listing/barterpage",
         element: <BarterPage />
+      },
+
+      {
+        path: "/listing/negotiatepage",
+        element: <NegotiatePage />
       },
 
 
