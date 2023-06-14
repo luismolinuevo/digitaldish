@@ -38,7 +38,7 @@ export default function Signup() {
 
   return (
     <>
-      <section className="text-gray-600 body-font self-center h-[54rem]">
+      <section className="text-gray-600 body-font self-center h-[55rem]">
         {" "}
         {/*h-300 */}
         {/*Toggle Button */}
@@ -48,7 +48,7 @@ export default function Signup() {
             <div className="flex justify-between mb-4">
               <button
                 onClick={handleToggle}
-                className="px-4 py-2 text-md font-bold text-gray-600 bg-white rounded-sm focus:outline-none w-22 border border-[]"
+                className="px-4 py-2 text-md font-bold text-gray-600 bg-white rounded-sm focus:outline-none w-22 border-2 border-[#C7A695]"
               >
                 Log in
               </button>
@@ -63,15 +63,16 @@ export default function Signup() {
         </div>
         {/*Sign up Form */}
         <div className="SignUp-Container py-2 flex justify-center">
-          <div className="box lg:w-[30rem] md:w-[30rem] sm:w-[30rem] xs:w-[30rem] bg-gray-100 p-8 flex flex-col w-full mt-10 md:mt-0">
-            <h2 className="text-gray-900 text-lg font-medium title-font mb-20 text-center font-[Inter]">
-              be a part of our community.
+          <div className="box lg:w-[30rem] lg:h-[38rem] md:h-[38rem] md:w-[30rem] sm:w-[30rem] xs:w-[30rem] bg-gray-100 p-8 flex flex-col w-full mt-10 md:mt-0">
+            <h2 className="text-gray-900 text-2xl font-medium title-font mb-20 text-center font-[Inter] pt-20">
+              become a part of our community.
             </h2>
+            <div className="flex justify-center">
             <form onSubmit={handleSignup} className="flex flex-col justify-center">
               <div className="relative mb-4">
                 <label
                   for="email"
-                  className="leading-7 text-sm text-gray-600 pl-10"
+                  className="leading-7 text-sm text-gray-600"
                 ></label>
                 <input
                   type="text"
@@ -86,7 +87,7 @@ export default function Signup() {
               <div className="relative mb-4">
                 <label
                   for="username"
-                  className="leading-7 text-sm text-gray-600 pl-10"
+                  className="leading-7 text-sm text-gray-600"
                 ></label>
                 <input
                   type="username"
@@ -101,7 +102,7 @@ export default function Signup() {
               <div className="relative mb-4">
                 <label
                   for="password"
-                  className="leading-7 text-sm text-gray-600 pl-10"
+                  className="leading-7 text-sm text-gray-600"
                 ></label>
                 <input
                   type="password"
@@ -116,7 +117,7 @@ export default function Signup() {
               <div className="relative mb-4">
                 <label
                   for="confirmed-password"
-                  className="leading-7 text-sm text-gray-600 pl-10"
+                  className="leading-7 text-sm text-gray-600"
                 ></label>
                 <input
                   type="password"
@@ -132,6 +133,7 @@ export default function Signup() {
                 Sign Up {/*Needs correct font*/}
               </button>
             </form>
+            </div>
           </div>
         </div>
       </section>
