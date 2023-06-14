@@ -13,18 +13,21 @@ datasource db {
 
 // firstName & lastName being optional "?" | userRating with a default of 0.0
 model User {
-  id         Int         @id @unique @default(autoincrement())
-  firstName  String?     @db.VarChar(255)
-  lastName   String?     @db.VarChar(255)
-  userName   String      @db.VarChar(255)
-  email      String      @unique @db.VarChar(255)
-  password   String      @db.VarChar(255)
-  imageUrl   String?
-  userRating Float       @default(0.0) //avg out somewhere(maybe front end). Use toFixed(2) to keep decimal small
-  post       Post[]
-  follower   Followers[]
-  chatrooms  Chatroom[]
-  bid        Bid[]
+  id           Int            @id @unique @default(autoincrement())
+  firstName    String?        @db.VarChar(255)
+  lastName     String?        @db.VarChar(255)
+  userName     String         @db.VarChar(255)
+  email        String         @unique @db.VarChar(255)
+  password     String         @db.VarChar(255)
+  imageUrl     String?
+  userRating   Float          @default(0.0) //avg out somewhere(maybe front end). Use toFixed(2) to keep decimal small
+  post         Post[]
+  follower     Followers[]
+  chatrooms    Chatroom[]
+  bid          Bid[]
+  offer        Offer[]
+  offerMessage OfferMessage[]
+  prevorder    PrevOrder[]
 }
 
 model Followers {
@@ -37,24 +40,47 @@ model Followers {
 }
 
 model Post {
-  id          Int       @unique @default(autoincrement())
-  userName    String
-  title       String
-  imageURL    String?
-  description String
-  price       String
-  category    String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  startTime   DateTime? @default(now())
-  endTime     DateTime?
+  id           Int      @unique @default(autoincrement())
+  userName     String
+  title        String
+  imageURL     String?
+  description  String   @db.VarChar(10000)
+  price        String
+  category     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  startTime    String?
+  endTime      String?
+  location     String?
+  shippingFees String?
+  carrier      String?
+  color        String?
+  condition    String?
+  quantity     String?
+  subcategory  String?
+  type         String?
+  status       String?
+  size  String?
 
-  userId  Int
-  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  comment Comment[]
-  bid Bid[]
+  userId    Int
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment   Comment[]
+  bid       Bid[]
+  offer     Offer[]
+  prevorder PrevOrder[]
+  img       Img[]
 
   @@index([userId])
+}
+
+model Img {
+  id Int @unique @default(autoincrement())
+
+  url    String
+  postId Int
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([postId])
 }
 
 model Comment {
@@ -91,13 +117,63 @@ model Message {
   @@index([chatId])
 }
 
-model Bid {
+model Offer {
   id Int @id @unique @default(autoincrement())
 
-  price Float
+  // userId Int
+  // user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  users        User[]
+  currentOffer Decimal?
+  status       String?
+  buyerAccept  Boolean? @default(false)
+  sellerAccept Boolean? @default(false)
+  user1Accept  Boolean? @default(false)
+  user2Accept  Boolean? @default(false)
+  postId       Int
+  post         Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  offermessages OfferMessage[]
+
+  // @@index([userId])
+  @@index([postId])
+}
+
+model OfferMessage {
+  id       Int      @id @unique @default(autoincrement())
+  content  String
+  createAt DateTime
+  offerId  Int
+  offer    Offer    @relation(fields: [offerId], references: [id], onDelete: Cascade)
 
   userId Int
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([offerId])
+  @@index([userId])
+}
+
+model Bid {
+  id Int @id @unique @default(autoincrement())
+
+  price  Float
+  status String?
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  postId Int
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([postId])
+}
+
+model PrevOrder {
+  id         Int     @id @unique @default(autoincrement())
+  finalPrice String?
+  status     String?
+  userId     Int
+  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   postId Int
   post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)

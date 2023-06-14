@@ -136,6 +136,21 @@ router.get(
   }
 );
 
+// //checks if user is logged in 
+// router.get("/login", (req, res) => {
+//   if (req.session.user) {   
+//     res.json(req.session.user);
+//     console.log(req.session.user);
+//     res.status(401).json({
+//       success: true,
+//     });
+//   } else {
+//     res.status(401).json({
+//       success: false 
+//     });
+//   }
+// });
+
 
 
 // // Post | create logout route | LOGOUT MAY NOT BE NEEDED
