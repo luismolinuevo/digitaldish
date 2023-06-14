@@ -255,7 +255,7 @@ export default function EditProfile() {
                 </div>
               </div>
             </div>
-
+{/**GRID LISTINGS */}
             <div
               id="MAIN-COLUMN"
               className="border border-green-500 w-[61.1rem] flex-wrap"

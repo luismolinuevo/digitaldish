@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Utils/auth";
 import FooterNav from "../../Components/Footer/FooterNav";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -21,23 +21,59 @@ export default function Login() {
     }
   };
 
+
+  //Toggle Page
+  const [showLogin, setShowLogin] = useState(true);
+
+  const handleToggle = () => {
+    setShowLogin(!showLogin);
+    Navigate("/signup");
+  };
+
+const Navigate = useNavigate();
+
   return (
     <div>
-      <div className="pt-[125px] pb-40 flex justify-center">
-        <div className="w-[520px] h-[683px] border-[1px] border-black ">
+
+
+    {/*Toggle Button */}
+    <div className="border border-black w-10 mt-0 flex justify-center"></div>
+    <div className="toggle-button flex justify-center items-center mt-28">
+      <div className="">
+        <div className="flex justify-between mb-4">
+          <button
+            onClick={handleToggle}
+            className="px-4 py-2 text-md font-bold text-gray-600 bg-blue-100 rounded-sm focus:outline-none w-22 border border-[]"
+          >
+            Log in
+          </button>
+          <button
+            onClick={handleToggle}
+            className="px-2 py-2 text-md font-bold text-gray-600 bg-white focus:outline-none border-2 border-blue-100 w-22"
+          >
+            Sign up
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+
+      <div className="pt-[10px] pb-[6rem] flex justify-center">
+        <div className="w-[520px] h-[683px] bg-gray-100">
           <h1 className="text-[37px] px-[132px] pt-[94px] pb-[107px] leading-[45px]">
             Welcome Back
           </h1>
           <form onSubmit={handleLogin} className="flex flex-col ">
             <input
-              className="p-3 h-12 w-[360px] m-auto text-[18px] flex mb-5 bg-[#D9D9D9]"
+              className="p-3 h-12 w-[360px] m-auto text-[18px] flex mb-5 bg-white"
               placeholder="Username"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             <input
-              className="p-3 h-12 w-[360px] m-auto text-[18px] flex mb-[45px] bg-[#D9D9D9]"
+              className="p-3 h-12 w-[360px] m-auto text-[18px] flex mb-[45px] bg-white]"
               placeholder="Password"
               type="password"
               value={password}
