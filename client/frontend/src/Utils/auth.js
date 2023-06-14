@@ -40,7 +40,7 @@ export const { loginSuccess, user, setUserName, setLoggedInStatus } = slice.acti
 // Thunk action to log in a user
 export const loginUser = (username, password) => async (dispatch) => {
   try {
-    const response = await axios.post("http://localhost:8080/auth/login", {
+    const response = await axios.post(`${import.meta.env.VITE_HOSTED_API}/auth/login`, {
       userName: username,
       password: password,
     });
@@ -57,7 +57,7 @@ export const checkLoginStatus = () => async (dispatch) => {
   // console.log("In")
   try {
     const token = localStorage.getItem("token");
-    const getUser = await axios.get("http://localhost:8080/auth/", {
+    const getUser = await axios.get(`${import.meta.env.VITE_HOSTED_API}/auth/`, {
       headers: {
         Authorization: `Bearer ${token}`, // Include the token in the Authorization header
       },

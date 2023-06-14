@@ -40,7 +40,7 @@ export default function Chat() {
 
   useEffect(() => {
     dispatch(checkLoginStatus());
-    // const socket = io.connect("http://localhost:8080/");
+    // const socket = io.connect("${import.meta.env.VITE_HOSTED_API}/");
     // Join the offer room
     socket.emit("connection", "Hi there");
     socket.emit("joinOfferRoom", offerId);
@@ -67,7 +67,7 @@ export default function Chat() {
   const fetchMessages = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/offer/${offerId}`
+        `${import.meta.env.VITE_HOSTED_API}/offer/${offerId}`
       );
       const { success, getChat } = response.data;
 
@@ -121,13 +121,13 @@ export default function Chat() {
       // Send the message to the server
       socket.emit("sendOfferMessage", message, offerId);
 
-      // const editOffer = await axios.put(`http://localhost:8080/offer/editoffer/${(offerId)}`, {
+      // const editOffer = await axios.put(`${import.meta.env.VITE_HOSTED_API}/offer/editoffer/${(offerId)}`, {
       //   currentOffer: currentOffer,
       // });
 
       if (postInfo.userId === user) {
         const editOffer = await axios.put(
-          `http://localhost:8080/offer/editoffer/${offerId}`,
+          `${import.meta.env.VITE_HOSTED_API}/offer/editoffer/${offerId}`,
           {
             buyerAccept: false,
             sellerAccept: true,
@@ -136,7 +136,7 @@ export default function Chat() {
         );
       } else {
         const editOffer = await axios.put(
-          `http://localhost:8080/offer/editoffer/${offerId}`,
+          `${import.meta.env.VITE_HOSTED_API}/offer/editoffer/${offerId}`,
           {
             sellerAccept: false,
             buyerAccept: true,
@@ -152,7 +152,7 @@ export default function Chat() {
   const handleDecline = async () => {
     try {
       const decline = await axios.put(
-        `http://localhost:8080/offer/editoffer/${offerId}`,
+        `${import.meta.env.VITE_HOSTED_API}/offer/editoffer/${offerId}`,
         {
           sellerAccept: false,
           buyerAccept: false,
@@ -175,7 +175,7 @@ export default function Chat() {
     try {
       if (user === postInfo.userId) {
         const accept = await axios.put(
-          `http://localhost:8080/offer/editoffer/${offerId}`,
+          `${import.meta.env.VITE_HOSTED_API}/offer/editoffer/${offerId}`,
           {
             sellerAccept: true,
           }
@@ -196,7 +196,7 @@ export default function Chat() {
         }
       } else {
         const accept = await axios.put(
-          `http://localhost:8080/offer/editoffer/${offerId}`,
+          `${import.meta.env.VITE_HOSTED_API}/offer/editoffer/${offerId}`,
           {
             buyerAccept: true,
           }
