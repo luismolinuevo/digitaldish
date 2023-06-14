@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
-import ae from "../../assets/payment/ae.png"
-import visa from "../../assets/payment/visa-Icon.png"
-import mastercard from "../../assets/payment/mastercard-Icon.png"
-import paypal from "../../assets/payment/paypal-Icon.png"
-import apple from "../../assets/payment/apple-pay-Icon.png"
+// import ae from "../../assets/payment/ae.png"
+// import visa from "../../assets/payment/visa-Icon.png"
+// import mastercard from "../../assets/payment/mastercard-Icon.png"
+// import paypal from "../../assets/payment/paypal-Icon.png"
+// import apple from "../../assets/payment/apple-pay-Icon.png"
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -158,11 +158,11 @@ export default function OrderConformation() {
               </div>
             </div>
             <div className="flex justify-center gap-[30px] mt-[30px]">
-                <img src={ae} className="w-[44px] h-[44px]" />
-                <img src={visa} className="w-[44px] h-[44px]"/>
-                <img src={mastercard} className="w-[44px] h-[44px]"/>
-                <img src={paypal} className="w-[44px] h-[44px]"/>
-                <img src={apple} className="w-[44px] h-[44px]"/>
+                  <img src={"/assets/payment/ae.png"} className="w-[44px] h-[44px]" />
+                  <img src={"/assets/payment/visa-Icon.png"} className="w-[44px] h-[44px]" />
+                  <img src={"/assets/payment/mastercard-Icon.png"} className="w-[44px] h-[44px]" />
+                  <img src={"/assets/payment/paypal-Icon.png"} className="w-[44px] h-[44px]" />
+                  <img src={"/assets/payment/apple-pay-Icon.png"} className="w-[44px] h-[44px]" />
             </div>
             <div className="flex justify-center">
                 <button className="py-[10px] px-4 w-[265px] h-[47px] rounded-[57px] bg-[#EDEBEB] mt-6">confirm</button>

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import {} from "react-dom";
 import { Link } from "react-router-dom";
-import EliCoverPic from "../../assets/photos/eli-coverpic.png";
-import EliProfilePic from "../../assets/photos/eli-profilepic.png";
-import Heart from "../../assets/photos/hearts.png";
-import MagnifyingGlass from "../../assets/icons/Icon-MagnifyingGlass.png";
+// import EliCoverPic from "../../assets/photos/eli-coverpic.png";
+// import EliProfilePic from "../../assets/photos/eli-profilepic.png";
+// import Heart from "../../assets/photos/hearts.png";
+// import MagnifyingGlass from "../../assets/icons/Icon-MagnifyingGlass.png";
 import Footer from "../../Components/Footer/Footer";
 import Upload from "./Upload";
 import ReviewCard from "./CustomerReview";
@@ -74,12 +74,12 @@ export default function EditProfile() {
       <div className="h-[148rem] pt-20">
         <div name="move-to-top" id="move-to-top" onClick={handleScroll2}>
           <div className="w-full flex flex-col">
-            <img src={EliCoverPic} />
+            <img src={"/assets/photos/eli-coverpic.png"} />
           </div>
         </div>
         <div className="main-pic w-full pt-6 p-10 flex flex-row justify-center bg-[#F1F0EB]">
           <div className="profile-pic">
-            <img src={EliProfilePic} />
+            <img src={"/assets/photos/eli-profilepic.png"} />
           </div>
           <div className="flex flex-col pl-10 pt-4 w-[18rem]">
             <h1 className="text-4xl font-semibold font-[Inter]"> Eli Gamer </h1>
@@ -100,7 +100,7 @@ export default function EditProfile() {
               strokeWidth={2}
               style={buttonSaves(1)}
             >
-              <img src={Heart} className="focus:text-yellow-700 px-2" />
+              <img src={"/assets/photos/hearts.png"} className="focus:text-yellow-700 px-2" />
               <p className="py-[2px]" onClick={saveShopClicked}>
                 SAVE {isClicked ? null : <span>SHOP</span>}
               </p>
@@ -216,7 +216,7 @@ export default function EditProfile() {
                     >
                       <input
                         type="image"
-                        src={MagnifyingGlass}
+                        src={"/assets/icons/Icon-MagnifyingGlass.png"}
                         alt="Magnifying Glass"
                         width="18rem"
                         className="flex flex-row justify-end item-center self-center"
@@ -272,14 +272,14 @@ export default function EditProfile() {
                   className="flex flex-col w-80 h-80"
                 >
                   <div className="">
-                    <img src={EliProfilePic} />
+                    <img src={"/assets/photos/eli-profilepic.png"} />
                   </div>
                   <div
                     name="main1-2"
                     className="flex flex-col w-80 h-80"
                   >
                     <div className="">
-                      <img src={EliProfilePic} />
+                      <img src={"/assets/photos/eli-profilepic.png"} />
                     </div>
                   </div>
                   <div
@@ -287,14 +287,14 @@ export default function EditProfile() {
                     className="flex flex-col w-80 h-80"
                   >
                     <div className="">
-                      <img src={EliProfilePic} />
+                      <img src={"/assets/photos/eli-profilepic.png"} />
                     </div>
                   </div>
                 </div>
 
                 <div name="main2-1" className="">
                   <div className="">
-                    <img src={EliProfilePic} />
+                    <img src={"/assets/photos/eli-profilepic.png"} />
                   </div>
 
                   <div
@@ -302,7 +302,7 @@ export default function EditProfile() {
                     className="flex flex-col w-80 h-80"
                   >
                     <div className="">
-                      <img src={EliProfilePic} />
+                      <img src={"/assets/photos/eli-profilepic.png"} />
                     </div>
                   </div>
                   <div
@@ -310,7 +310,7 @@ export default function EditProfile() {
                     className="flex flex-col w-80 h-80"
                   >
                     <div className="">
-                      <img src={EliProfilePic} />
+                      <img src={"/assets/photos/eli-profilepic.png"} />
                     </div>
                   </div>
                 </div>
@@ -319,7 +319,7 @@ export default function EditProfile() {
                   className="flex flex-col w-80 h-80"
                 >
                   <div className="">
-                    <img src={EliProfilePic} />
+                    <img src={"/assets/photos/eli-profilepic.png"} />
                   </div>
 
                   <div
@@ -327,7 +327,7 @@ export default function EditProfile() {
                     className="flex flex-col w-80 h-80"
                   >
                     <div className="">
-                      <img src={EliProfilePic} />
+                      <img src={"/assets/photos/eli-profilepic.png"} />
                     </div>
                   </div>
                   <div
@@ -335,7 +335,7 @@ export default function EditProfile() {
                   className="flex flex-col w-80 h-80"
                 >
                   <div className="">
-                    <img src={EliProfilePic} />
+                    <img src={"/assets/photos/eli-profilepic.png"} />
                   </div>
                 </div>
                 </div>

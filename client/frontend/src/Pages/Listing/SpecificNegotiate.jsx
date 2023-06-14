@@ -4,11 +4,11 @@ import axios from "axios";
 import Modal from "../../Components/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
-import ae from "../../assets/payment/ae.png";
-import visa from "../../assets/payment/visa-Icon.png";
-import mastercard from "../../assets/payment/mastercard-Icon.png";
-import paypal from "../../assets/payment/paypal-Icon.png";
-import apple from "../../assets/payment/apple-pay-Icon.png";
+// import ae from "../../assets/payment/ae.png";
+// import visa from "../../assets/payment/visa-Icon.png";
+// import mastercard from "../../assets/payment/mastercard-Icon.png";
+// import paypal from "../../assets/payment/paypal-Icon.png";
+// import apple from "../../assets/payment/apple-pay-Icon.png";
 import Carousel from "./ImgCarousel";
 import Card from "../Home/Card";
 import Footer from "../../Components/Footer/Footer";
@@ -244,11 +244,11 @@ export default function SpecificNegotiate() {
               <div>
                 <p className="text-[20px]">Payment Accepted</p>
                 <div className="flex gap-[30px] mt-[30px]">
-                  <img src={ae} className="w-[44px] h-[44px]" />
-                  <img src={visa} className="w-[44px] h-[44px]" />
-                  <img src={mastercard} className="w-[44px] h-[44px]" />
-                  <img src={paypal} className="w-[44px] h-[44px]" />
-                  <img src={apple} className="w-[44px] h-[44px]" />
+                  <img src={"/assets/payment/ae.png"} className="w-[44px] h-[44px]" />
+                  <img src={"/assets/payment/visa-Icon.png"} className="w-[44px] h-[44px]" />
+                  <img src={"/assets/payment/mastercard-Icon.png"} className="w-[44px] h-[44px]" />
+                  <img src={"/assets/payment/paypal-Icon.png"} className="w-[44px] h-[44px]" />
+                  <img src={"/assets/payment/apple-pay-Icon.png"} className="w-[44px] h-[44px]" />
                 </div>
               </div>
             </div>

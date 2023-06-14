@@ -7,7 +7,7 @@ import {
   Select,
   Option
 } from "@material-tailwind/react";
-import Googleimg from "../../assets/googleimg.png";
+// import Googleimg from "../../assets/googleimg.png";
 import { Link } from "react-router-dom"
 
 export const HeaderComponent = (props) => {
@@ -30,7 +30,7 @@ export const HeaderComponent = (props) => {
 
       {showGoogleimg && (
         <div className=" w-1/4 ml-40 mt-5 border border-black">
-          <img src={Googleimg} alt="Google Image" />
+          <img src={"/assets/googleimg.png"} alt="Google Image" />
         </div>
       )}
     </div>

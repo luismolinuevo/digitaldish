@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { } from "react-dom";
 import { Link } from "react-router-dom"
-import MouseCoverPic from "../../assets/photos/mouse-coverpic.png";
-import MouseProfilePic from "../../assets/photos/mouse-profilepic.png";
-import Heart from "../../assets/photos/hearts.png";
-import MagnifyingGlass from "../../assets/icons/Icon-MagnifyingGlass.png";
+// import MouseCoverPic from "../../assets/photos/mouse-coverpic.png";
+// import MouseProfilePic from "../../assets/photos/mouse-profilepic.png";
+// import Heart from "../../assets/photos/hearts.png";
+// import MagnifyingGlass from "../../assets/icons/Icon-MagnifyingGlass.png";
 import Footer from "../../Components/Footer/Footer";
 import Upload from "./Upload";
 import ReviewCard from './CustomerReview'
@@ -63,12 +63,12 @@ const handleScroll = (event) => {
         <div>
             <div className="h-[170rem] pt-20">
                 <div className="w-full flex flex-col">
-                    <img src={MouseCoverPic} />
+                    <img src={"/assets/photos/mouse-coverpic.png"} />
                 </div>
 
                 <div className="main-pic w-full pt-6 p-10 flex flex-row justify-center bg-[#F1F0EB]">
                     <div className="profile-pic">
-                        <img src={MouseProfilePic} />
+                        <img src={"/assets/photos/mouse-profilepic.png"} />
                     </div>
                     <div className="flex flex-col pl-10 pt-4 w-[18rem]">
                         <h1 className="text-4xl font-semibold font-[Inter]">
@@ -93,7 +93,7 @@ const handleScroll = (event) => {
                             style={buttonSaves(1)}
                         >
                             <img
-                                src={Heart}
+                                src={"/assets/photos/hearts.png"}
                                 className="focus:text-yellow-700 px-2"
                             />
                             <p className="py-[2px]" onClick={saveShopClicked}>
@@ -202,7 +202,7 @@ const handleScroll = (event) => {
                   >
                     <input
                       type="image"
-                      src={MagnifyingGlass}
+                      src={"/assets/icons/Icon-MagnifyingGlass.png"}
                       alt="Magnifying Glass"
                       width="18rem"
                       className="flex flex-row justify-end item-center self-center"
@@ -258,14 +258,14 @@ const handleScroll = (event) => {
                 className="flex flex-col w-80 h-80"
               >
                 <div className="">
-                  <img src={MouseProfilePic} />
+                  <img src={"/assets/photos/mouse-profilepic.png"} />
                 </div>
                 <div
                   name="main1-2"
                   className="flex flex-col w-80 h-80"
                 >
                   <div className="">
-                    <img src={MouseProfilePic} />
+                    <img src={"/assets/photos/mouse-profilepic.png"} />
                   </div>
                 </div>
                 <div
@@ -273,14 +273,14 @@ const handleScroll = (event) => {
                   className="flex flex-col w-80 h-80"
                 >
                   <div className="">
-                    <img src={MouseProfilePic} />
+                    <img src={"/assets/photos/mouse-profilepic.png"} />
                   </div>
                 </div>
               </div>
 
               <div name="main2-1" className="">
                 <div className="">
-                  <img src={MouseProfilePic} />
+                  <img src={"/assets/photos/mouse-profilepic.png"} />
                 </div>
 
                 <div
@@ -288,7 +288,7 @@ const handleScroll = (event) => {
                   className="flex flex-col w-80 h-80"
                 >
                   <div className="">
-                    <img src={MouseProfilePic} />
+                    <img src={"/assets/photos/mouse-profilepic.png"} />
                   </div>
                 </div>
                 <div
@@ -296,7 +296,7 @@ const handleScroll = (event) => {
                   className="flex flex-col w-80 h-80"
                 >
                   <div className="">
-                    <img src={MouseProfilePic} />
+                    <img src={"/assets/photos/mouse-profilepic.png"} />
                   </div>
                 </div>
               </div>
@@ -305,7 +305,7 @@ const handleScroll = (event) => {
                 className="flex flex-col w-80 h-80"
               >
                 <div className="">
-                  <img src={MouseProfilePic} />
+                  <img src={"/assets/photos/mouse-profilepic.png"} />
                 </div>
 
                 <div
@@ -313,7 +313,7 @@ const handleScroll = (event) => {
                   className="flex flex-col w-80 h-80"
                 >
                   <div className="">
-                    <img src={MouseProfilePic} />
+                    <img src={"/assets/photos/mouse-profilepic.png"} />
                   </div>
                 </div>
                 <div
@@ -321,7 +321,7 @@ const handleScroll = (event) => {
                 className="flex flex-col w-80 h-80"
               >
                 <div className="">
-                  <img src={MouseProfilePic} />
+                  <img src={"/assets/photos/mouse-profilepic.png"} />
                 </div>
               </div>
               </div>

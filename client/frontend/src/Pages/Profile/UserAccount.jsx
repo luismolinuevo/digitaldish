@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
-import Placeholder from "../../assets/photos/profile-placeholder.png";
+// import Placeholder from "../../assets/photos/profile-placeholder.png";
 import { Textarea } from "@material-tailwind/react";
 
 export default function UserAccount() {
@@ -28,7 +28,7 @@ export default function UserAccount() {
           </p>
           <div className="px-4">
             <img
-              src={Placeholder}
+              src={"/assets/photos/profile-placeholder.png"}
               alt="edit photo placeholder"
               className="w-[4rem] z-[10]"
             />

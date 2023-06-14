@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import robot from "../../assets/HomePage/robot2.jpg";
-import monitor from "../../assets/HomePage/Monitors.jpg";
-import headphones from "../../assets/HomePage/Headphones.jpg";
-import keyboard from "../../assets/HomePage/Keyboard.jpg";
-import keycaps from "../../assets/Homepage/Keycaps.jpg";
-import computer from "../../assets/Homepage/Computer.png";
-import controller from "../../assets/Homepage/controller.png";
-import game from "../../assets/Homepage/Game.png";
-import phone from "../../assets/Homepage/Phone.png";
-import logo from "../../assets/HomePage/logo.png";
-import robotHand from "../../assets/HomePage/robotHand.png";
-import logoIcon from "../../assets/HomePage/logoIcon.png";
+// import robot from "../../assets/HomePage/robot2.jpg";
+// import monitor from "../../assets/HomePage/Monitors.jpg";
+// import headphones from "../../assets/HomePage/Headphones.jpg";
+// import keyboard from "../../assets/HomePage/Keyboard.jpg";
+// import keycaps from "../../assets/Homepage/Keycaps.jpg";
+// import computer from "../../assets/Homepage/Computer.png";
+// import controller from "../../assets/Homepage/controller.png";
+// import game from "../../assets/Homepage/Game.png";
+// import phone from "../../assets/Homepage/Phone.png";
+// import logo from "../../assets/HomePage/logo.png";
+// import robotHand from "../../assets/HomePage/robotHand.png";
+// import logoIcon from "../../assets/HomePage/logoIcon.png";
 import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
 import Card from "./Card";
@@ -80,7 +80,7 @@ export default function Home() {
         <div className="flex justify-between">
           <div
             className="w-[770px] h-[680px] bg-cover bg-no-repeat z-[1] rounded-[4px]"
-            style={{ backgroundImage: `url(${robot})` }}
+            style={{ backgroundImage: `url(/assets/HomePage/robot2.jpg)` }}
           >
             <div className="h-full flex items-end p-[40px] justify-between">
               <button className="bg-white rounded-[57px] border-2 border-[#DAB24E] text-[32px] px-4 py-2">
@@ -172,10 +172,10 @@ export default function Home() {
         </div>
       </div>
       <div className="h-[581px] flex items-center px-4 gap-[58px]">
-        <BiggerCard title={"Keyboards"} img={keyboard} />
-        <BiggerCard title={"Headphones"} img={headphones} />
-        <BiggerCard title={"Monitor"} img={monitor} />
-        <BiggerCard title={"Keycaps"} img={keycaps} />
+        <BiggerCard title={"Keyboards"} img={"/assets/HomePage/Keyboard.jpg"} />
+        <BiggerCard title={"Headphones"} img={"/assets/HomePage/Headphones.jpg"} />
+        <BiggerCard title={"Monitor"} img={"/assets/HomePage/Monitors.jpg"} />
+        <BiggerCard title={"Keycaps"} img={"/assets/HomePage/Keycaps.jpg"} />
       </div>
       <div className=" bg-[#F1F0EB]">
         <div className="px-4 py-[150px]">
@@ -210,10 +210,10 @@ export default function Home() {
         </div>
       </div>
       <div className="h-[581px] flex items-center px-4 gap-[58px]">
-        <BiggerCard title={"Computers"} img={computer} />
-        <BiggerCard title={"Game Systems"} img={game} />
-        <BiggerCard title={"Controllers"} img={controller} />
-        <BiggerCard title={"Phones"} img={phone} />
+        <BiggerCard title={"Computers"} img={"/assets/HomePage/Computer.png"} />
+        <BiggerCard title={"Game Systems"} img={"/assets/HomePage/Game.png"} />
+        <BiggerCard title={"Controllers"} img={"/assets/HomePage/controller.png"} />
+        <BiggerCard title={"Phones"} img={"/assets/HomePage/Phone.png"} />
       </div>
       <div className=" bg-[#F1F0EB]">
         <div className="px-4 py-[150px]">
@@ -280,7 +280,7 @@ export default function Home() {
       <div className="h-[840px] flex">
         <div className="h-full bg-[#3E3E3E] w-1/2">
           <div className="py-[55px] px-[49px] ">
-            <img src={logo} alt="" className="w-[160px] h-[51px]" />
+            <img src={"/assets/HomePage/logo.png"} alt="" className="w-[160px] h-[51px]" />
             <h1 className="text-[44px] text-white">Who we are</h1>
             <p className="text-white text-[28px] pb-[100px]">
               born to connect hobbyists within
@@ -301,7 +301,7 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <img src={robotHand} alt="" className="h-full " />
+          <img src={"/assets/HomePage/robotHand.png"} alt="" className="h-full " />
         </div>
       </div>
       <FooterNav />

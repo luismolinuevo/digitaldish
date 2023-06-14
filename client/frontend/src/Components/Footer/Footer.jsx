@@ -4,10 +4,10 @@ import Loading from './Loading';
 import { Spinner, IconButton } from '@material-tailwind/react';
 import { BsArrowRight } from 'react-icons/bs'
 import { Link } from "react-router-dom";
-import InstagramIcon from "../../assets/icons/Icon-InstagramLogo.png";
-import FacebookIcon from "../../assets/icons/Icon-FacebookLogo.png";
-import TwitterIcon from "../../assets/icons/Icon-TwitterLogo.png";
-import ArrowIcon from "../../assets/Icon-ArrowUp.png";
+// import InstagramIcon from "../../assets/icons/Icon-InstagramLogo.png";
+// import FacebookIcon from "../../assets/icons/Icon-FacebookLogo.png";
+// import TwitterIcon from "../../assets/icons/Icon-TwitterLogo.png";
+// import ArrowIcon from "../../assets/Icon-ArrowUp.png";
 
 const Footer = ({ status, message, onValidated }) => {
   const [error, setError] = useState(null);
@@ -126,7 +126,7 @@ const Footer = ({ status, message, onValidated }) => {
                 >
                   <input
                     type="image"
-                    src={ArrowIcon}
+                    src={"/assets/Icon-ArrowUp.png"}
                     alt="Arrow Icon"
                     width="30px"
                     className="flex flex-row justify-center item-center self-center"
@@ -148,13 +148,13 @@ const Footer = ({ status, message, onValidated }) => {
           {" "}
           <span className="inline-flex">
             <a className="text-gray-500 px-5">
-              <img src={InstagramIcon} alt="Instagram Icon" />
+              <img src={"/assets/icons/Icon-InstagramLogo.png"} alt="Instagram Icon" />
             </a>
             <a className="ml-4 text-gray-500 px-5">
-              <img src={FacebookIcon} alt="Facebook Icon" />
+              <img src={"/assets/icons/Icon-FacebookLogo.png"} alt="Facebook Icon" />
             </a>
             <a className="ml-4 text-gray-500 px-5">
-              <img src={TwitterIcon} alt="Twitter Icon" />
+              <img src={"/assets/icons/Icon-TwitterLogo.png"} alt="Twitter Icon" />
             </a>
           </span>
         </div>

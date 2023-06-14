@@ -1,16 +1,16 @@
 import { useState } from "react";
 // import { sanitize } from "../../../utils/";
 import { Link } from "react-router-dom";
-import InstagramIcon from "../../assets/icons/Icon-InstagramLogo.png";
-import FacebookIcon from "../../assets/icons/Icon-FacebookLogo.png";
-import TwitterIcon from "../../assets/icons/Icon-TwitterLogo.png";
-import ArrowIcon from "../../assets/Icon-ArrowUp.png";
-import AmexIcon from "../../assets/payment/american-express-icon.png";
-import VisaIcon from "../../assets/payment/visa-icon.png";
-import MasterIcon from "../../assets/payment/mastercard-icon.png";
-import PaypalIcon from "../../assets/payment/paypal-icon.png";
-import ApplePayIcon from "../../assets/payment/apple-pay-icon.png";
-import MainLogo from "../../assets/LogoMain.png";
+// import InstagramIcon from "../../assets/icons/Icon-InstagramLogo.png";
+// import FacebookIcon from "../../assets/icons/Icon-FacebookLogo.png";
+// import TwitterIcon from "../../assets/icons/Icon-TwitterLogo.png";
+// import ArrowIcon from "../../assets/Icon-ArrowUp.png";
+// import AmexIcon from "../../assets/payment/american-express-icon.png";
+// import VisaIcon from "../../assets/payment/visa-icon.png";
+// import MasterIcon from "../../assets/payment/mastercard-icon.png";
+// import PaypalIcon from "../../assets/payment/paypal-icon.png";
+// import ApplePayIcon from "../../assets/payment/apple-pay-icon.png";
+// import MainLogo from "../../assets/LogoMain.png";
 
 export default function FooterNav({ status, message, onValidated }) {
   const [error, setError] = useState(null);
@@ -76,7 +76,7 @@ export default function FooterNav({ status, message, onValidated }) {
           <div className="flex-col">
             <div className="logo-container p-5 w-[40rem] text-4xl ">
               <div className="flex text-gray-800">
-                <img src={MainLogo} className="w-[3rem]" />
+                <img src={"/assets/LogoMain.png"} className="w-[3rem]" />
                 <p className="pt-2 px-4 text-3xl">TECH NICHE</p>
               </div>
             </div>
@@ -108,7 +108,7 @@ export default function FooterNav({ status, message, onValidated }) {
             >
               <input
                 type="image"
-                src={ArrowIcon}
+                src={"/assets/Icon-ArrowUp.png"}
                 alt="Arrow Icon"
                 width="30px"
                 className="flex flex-row justify-center item-center self-center"
@@ -183,22 +183,22 @@ export default function FooterNav({ status, message, onValidated }) {
               <span className="inline-flex">
                 <Link to="#" className="px-3">
                   <img
-                    src={AmexIcon}
+                    src={"/assets/payment/american-express-icon.png"}
                     alt="American Express Icon"
                     width="50vw"
                   />
                 </Link>
                 <Link to="#" className="ml-4 px-3">
-                  <img src={VisaIcon} alt="Visa Icon" width="50vw" />
+                  <img src={"/assets/payment/visa-icon.png"} alt="Visa Icon" width="50vw" />
                 </Link>
                 <Link to="#" className="ml-4 px-3">
-                  <img src={MasterIcon} alt="Mastercard Icon" width="50vw" />
+                  <img src={"/assets/payment/mastercard-icon.png"} alt="Mastercard Icon" width="50vw" />
                 </Link>
                 <Link to="#" className="ml-4 px-3">
-                  <img src={PaypalIcon} alt="Paypal Icon" width="50vw" />
+                  <img src={"/assets/payment/paypal-icon.png"} alt="Paypal Icon" width="50vw" />
                 </Link>
                 <Link to="#" className="ml-4 px-3">
-                  <img src={ApplePayIcon} alt="Apple Pay Icon" width="50vw" />
+                  <img src={"/assets/payment/apple-pay-icon.png"} alt="Apple Pay Icon" width="50vw" />
                 </Link>
               </span>
             </div>
@@ -208,13 +208,13 @@ export default function FooterNav({ status, message, onValidated }) {
             <div className="text-center">
               <span className="inline-flex">
                 <Link to="#" className="text-gray-500 px-3">
-                  <img src={InstagramIcon} alt="Instagram Icon" width="50vw" />
+                  <img src={"/assets/icons/Icon-InstagramLogo.png"} alt="Instagram Icon" width="50vw" />
                 </Link>
                 <Link to="#" className="ml-4 text-gray-500 px-3">
-                  <img src={TwitterIcon} alt="Twitter Icon" width="50vw" />
+                  <img src={"/assets/icons/Icon-TwitterLogo.png"} alt="Twitter Icon" width="50vw" />
                 </Link>
                 <Link to="#" className="ml-4 text-gray-500 px-3">
-                  <img src={FacebookIcon} alt="Facebook Icon" width="50vw" />
+                  <img src={"/assets/icons/Icon-FacebookLogo.png"} alt="Facebook Icon" width="50vw" />
                 </Link>
               </span>
             </div>

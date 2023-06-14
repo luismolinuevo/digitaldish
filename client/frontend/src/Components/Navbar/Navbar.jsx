@@ -1,15 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../assets/NavLogo.png";
-import Search from "../../assets/search.png"
-import Community from "../../assets/community.png"
-import Cart from "../../assets/cart.png"
-import Notification from "../../assets/notification.png"
+// import Logo from "../../assets/NavLogo.png";
+// import Search from "../../assets/search.png"
+// import Community from "../../assets/community.png"
+// import Cart from "../../assets/cart.png"
+// import Notification from "../../assets/notification.png"
 import Activity from "../../Pages/Activity/Activity";
 import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
-import profileIcon from "../../assets/profileIcon.png"
+// import profileIcon from "../../assets/profileIcon.png"
 
 const Navbar = () => {
   const dispatch = useDispatch()
@@ -24,7 +24,7 @@ const Navbar = () => {
   return (
     <div className="fixed w-full h-[80px] bg-[#F1F0EB] flex justify-between items-center px-4 border z-10">
     <div className="flex items-center">
-      <Link to="/"><img className="w-50 mr-4" src={Logo} alt="test" style={{ width: "250px" }} /></Link>
+      <Link to="/"><img className="w-50 mr-4" src={"/assets/NavLogo.png"} alt="test" style={{ width: "250px" }} /></Link>
       <ul className=" md:flex ">
         <li>
           <Link to="Devices" className="text-base md:text-lg ">
@@ -43,31 +43,31 @@ const Navbar = () => {
     <ul className="hidden md:flex">
       <li>
         <Link to="/searchpage">
-          <img src={Search} alt="" className="mr-5"/>
+          <img src={"/assets/search.png"} alt="" className="mr-5"/>
         </Link>
       </li>
   
       <li>
         <Link to="/communitynew">
-          <img src={Community} alt="" style={{ width: "30px" }} className="mr-5" />
+          <img src={"/assets/community.png"} alt="" style={{ width: "30px" }} className="mr-5" />
         </Link>
       </li>
   
       <li>
         <Link to="/Cart">
-          <img src={Cart} alt="" className="mr-5"/>
+          <img src={"/assets/cart.png"} alt="" className="mr-5"/>
         </Link>
       </li>
   
       <li>
         <Link to="/activity">
-          <img src={Notification} alt="" className="mr-5" />
+          <img src={"/assets/notification.png"} alt="" className="mr-5" />
         </Link>
       </li>
   
       <li>
         {
-          !isAuthenticated ? <Link to="/login" className="text-base md:text-lg mr-5">Login</Link> : <Link to="/useraccount" className="flex items-center w-[30px]"><img src={profileIcon} /></Link>
+          !isAuthenticated ? <Link to="/login" className="text-base md:text-lg mr-5">Login</Link> : <Link to="/useraccount" className="flex items-center w-[30px]"><img src={"/assets/profileIcon.png"} /></Link>
         }
         
       </li>

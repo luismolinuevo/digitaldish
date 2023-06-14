@@ -4,8 +4,8 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../Utils/auth";
-import ChatAction from "../../assets/chataction.png";
-import ChatSend from "../../assets/chatsend.png";
+// import ChatAction from "../../assets/chataction.png";
+// import ChatSend from "../../assets/chatsend.png";
 import Modal from "../../Components/Modal";
 
 const socket = io(":8080", {
@@ -249,7 +249,7 @@ export default function Chat() {
               ></img>
             </Link>
             <button className="">
-              <img src={ChatAction} />
+              <img src={"/assets/chataction.png"} />
             </button>
           </div>
         </div>
@@ -295,7 +295,7 @@ export default function Chat() {
                   onChange={(e) => setInputMessage(e.target.value)}
                 />
                 <button className="" onClick={sendMessage}>
-                  <img src={ChatSend} />
+                  <img src={"/assets/chatsend.png"} />
                 </button>
               </div>
             </div>

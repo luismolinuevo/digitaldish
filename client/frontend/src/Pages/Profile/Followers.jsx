@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ReactDOM from "react-dom";
-import MouseProfilePic from "../../assets/photos/mouse-profilepic.png";
-import ProductImg from "../../assets/photos/mouse105.png";
+// import MouseProfilePic from "../../assets/photos/mouse-profilepic.png";
+// import ProductImg from "../../assets/photos/mouse105.png";
 import { IoStarSharp } from "react-icons/io5";
 // import Mouse105 from
 
@@ -31,7 +31,7 @@ export default function Followers() {
           <div>
             <div className="flex flex-row p-4 pt-2">
               <div className="img">
-                <img src={MouseProfilePic} width="200rem" />
+                <img src={"/assets/photos/mouse-profilepic.png"} width="200rem" />
               </div>
               <div className="title flex flex-col text-2xl pt-2 pl-6">
                 {title}

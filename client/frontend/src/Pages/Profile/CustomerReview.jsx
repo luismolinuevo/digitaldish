@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import MouseProfilePic from "../../assets/photos/mouse-profilepic.png";
-import ProductImg from "../../assets/photos/mouse105.png";
+// import MouseProfilePic from "../../assets/photos/mouse-profilepic.png";
+// import ProductImg from "../../assets/photos/mouse105.png";
 import { IoStarSharp } from "react-icons/io5";
 // import Mouse105 from 
 
@@ -14,7 +14,7 @@ export default function ReviewCards() {
         <div className="border-2 border-gray-500 w-full h-[9rem] ">
           <div className="flex flex-row p-4 pt-2">
             <div className="img">
-              <img src={MouseProfilePic} width="140rem" />
+              <img src={"/assets/photos/mouse-profilepic.png"} width="140rem" />
             </div>
             <div className="title flex flex-col text-2xl pt-2 px-1">
               Floyd
@@ -32,7 +32,7 @@ export default function ReviewCards() {
               </div>
             </div>
             <div className="flex flex-row justify-end w-full">
-              <img src={ProductImg} width={"110rem"} className="py-2" />
+              <img src={"/assets/photos/mouse105.png"} width={"110rem"} className="py-2" />
             </div>
           </div>
         </div>

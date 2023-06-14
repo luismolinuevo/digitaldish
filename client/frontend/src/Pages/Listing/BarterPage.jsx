@@ -1,11 +1,11 @@
 import { useState, useCallback } from "react";
 import axios from "axios";
-import Sellerplaceholder from "../../assets/sellerplaceholder.jpeg";
-import Americanexpress from "../../assets/american-express.png";
-import Visa from "../../assets/visa.png";
-import Mastercard from "../../assets/mastercard.png";
-import Paypal from "../../assets/paypal.png";
-import Applepay from "../../assets/applepay.png";
+// import Sellerplaceholder from "../../assets/sellerplaceholder.jpeg";
+// import Americanexpress from "../../assets/american-express.png";
+// import Visa from "../../assets/visa.png";
+// import Mastercard from "../../assets/mastercard.png";
+// import Paypal from "../../assets/paypal.png";
+// import Applepay from "../../assets/applepay.png";
 import FooterNav from "../../Components/Footer/FooterNav";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { useDropzone } from "react-dropzone";
@@ -413,13 +413,13 @@ export default function BarterForm() {
                 <h1>Payment Accepted</h1>
                 <div className="flex">
                   <img
-                    src={Americanexpress}
+                    src={"/assets/american-express.png"}
                     className="h-[40px] w-[40px] mr-5"
                   />
-                  <img src={Visa} className="h-[40px] w-[40px] mr-5 " />
-                  <img src={Mastercard} className="h-[40px] w-[40px] mr-5 " />
-                  <img src={Paypal} className="h-[40px] w-[40px] mr-5" />
-                  <img src={Applepay} className="h-[40px] w-[40px] mr-5" />
+                  <img src={"/assets/visa.png"} className="h-[40px] w-[40px] mr-5 " />
+                  <img src={"/assets/mastercard.png"} className="h-[40px] w-[40px] mr-5 " />
+                  <img src={"/assets/paypal.png"} className="h-[40px] w-[40px] mr-5" />
+                  <img src={"/assets/applepay.png"} className="h-[40px] w-[40px] mr-5" />
                 </div>
               </div>
             </form>
@@ -431,7 +431,7 @@ export default function BarterForm() {
               <h1>About the seller</h1>
               <div className="flex items-center">
                 <img
-                  src={Sellerplaceholder}
+                  src={"/assets/sellerplaceholder.jpeg"}
                   alt=""
                   className="rounded-full h-[70px] w-[60px] my-2"
                 />
