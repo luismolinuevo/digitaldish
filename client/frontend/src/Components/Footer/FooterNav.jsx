@@ -183,22 +183,22 @@ export default function FooterNav({ status, message, onValidated }) {
               <span className="inline-flex">
                 <Link to="#" className="px-3">
                   <img
-                    src={"/assets/payment/american-express-icon.png"}
+                    src={"/assets/payment/american-express-Icon.png"}
                     alt="American Express Icon"
                     width="50vw"
                   />
                 </Link>
                 <Link to="#" className="ml-4 px-3">
-                  <img src={"/assets/payment/visa-icon.png"} alt="Visa Icon" width="50vw" />
+                  <img src={"/assets/payment/visa-Icon.png"} alt="Visa Icon" width="50vw" />
                 </Link>
                 <Link to="#" className="ml-4 px-3">
-                  <img src={"/assets/payment/mastercard-icon.png"} alt="Mastercard Icon" width="50vw" />
+                  <img src={"/assets/payment/mastercard-Icon.png"} alt="Mastercard Icon" width="50vw" />
                 </Link>
                 <Link to="#" className="ml-4 px-3">
-                  <img src={"/assets/payment/paypal-icon.png"} alt="Paypal Icon" width="50vw" />
+                  <img src={"/assets/payment/paypal-Icon.png"} alt="Paypal Icon" width="50vw" />
                 </Link>
                 <Link to="#" className="ml-4 px-3">
-                  <img src={"/assets/payment/apple-pay-icon.png"} alt="Apple Pay Icon" width="50vw" />
+                  <img src={"/assets/payment/apple-pay-Icon.png"} alt="Apple Pay Icon" width="50vw" />
                 </Link>
               </span>
             </div>
