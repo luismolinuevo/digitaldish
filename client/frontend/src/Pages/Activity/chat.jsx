@@ -8,7 +8,7 @@ import { checkLoginStatus } from "../../Utils/auth";
 // import ChatSend from "../../assets/chatsend.png";
 import Modal from "../../Components/Modal";
 
-const socket = io(":8080", {
+const socket = io(`${import.meta.env.VITE_HOSTED_API}`, {
   reconnectionDelay: 1000,
   reconnection: true,
   reconnectionAttemps: 10,
