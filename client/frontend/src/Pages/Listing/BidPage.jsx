@@ -97,7 +97,7 @@ export default function BidForm() {
     });
 
     try {
-      await axios.post(`http://localhost:8080/post`, newFormData, {
+      await axios.post(`${import.meta.env.VITE_HOSTED_API}/post`, newFormData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",

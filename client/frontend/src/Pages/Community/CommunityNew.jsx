@@ -16,7 +16,7 @@ export default function CommunityNew(props) {
 
   useEffect(() => {
     async function fetchData() {
-      const fetch = await axios.get("http://localhost:8080/post/getNew");
+      const fetch = await axios.get(`${import.meta.env.VITE_HOSTED_API}/post/getNew`);
       console.log(fetch.data.getPost);
       setPost(fetch.data.getPost);
     }

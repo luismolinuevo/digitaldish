@@ -24,7 +24,7 @@ export default function Auctions() {
   const fetchAuctions = async () => {
     try {
       const token = localStorage.getItem("token");
-      const allAuctions = await axios.get("http://localhost:8080/bid", {
+      const allAuctions = await axios.get(`${import.meta.env.VITE_HOSTED_API}/bid`, {
         headers: {
           Authorization: `Bearer ${token}`, // Include the token in the Authorization header
         },

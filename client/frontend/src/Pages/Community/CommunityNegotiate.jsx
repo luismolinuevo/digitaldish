@@ -16,7 +16,7 @@ export default function communitynegotiate() {
 
     useEffect(() => {
       async function fetchData() {
-        const response = await axios.get(`http://localhost:8080/post/getType/negotiation`);
+        const response = await axios.get(`${import.meta.env.VITE_HOSTED_API}/post/getType/negotiation`);
         console.log(response.data.getPost);
         setPost(response.data.getPost);
       }

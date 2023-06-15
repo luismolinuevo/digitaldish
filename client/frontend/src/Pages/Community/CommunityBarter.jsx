@@ -17,7 +17,7 @@ export default function CommunityBarter(props) {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`http://localhost:8080/post/getType/barter`);
+      const response = await axios.get(`${import.meta.env.VITE_HOSTED_API}/post/getType/barter`);
       console.log(response.data.getPost);
       setPost(response.data.getPost);
     }

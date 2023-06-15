@@ -30,7 +30,7 @@ export default function SpecificBarter() {
     dispatch(checkLoginStatus());
     const fetchPost = async () => {
       try {
-        const post = await axios.get(`http://localhost:8080/post/${params.id}`);
+        const post = await axios.get(`${import.meta.env.VITE_HOSTED_API}/post/${params.id}`);
 
         if (post.status == 200) {
           setPost(post.data.post);
@@ -53,7 +53,7 @@ export default function SpecificBarter() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`http://localhost:8080/post/getType/barter`);
+      const response = await axios.get(`${import.meta.env.VITE_HOSTED_API}/post/getType/barter`);
       console.log(response.data.getPost);
       setSuggestedPost(response.data.getPost.splice(0, 8));
     }
@@ -63,7 +63,7 @@ export default function SpecificBarter() {
   const createOffer = async () => {
     try {
       const create = await axios.post(
-        `http://localhost:8080/offer/createroom/${params.id}`,
+        `${import.meta.env.VITE_HOSTED_API}/offer/createroom/${params.id}`,
         {
           userTwoId: post.userId,
           userId: user,
@@ -82,7 +82,7 @@ export default function SpecificBarter() {
   const sendMessage = async (offerId) => {
     try {
       const createMessage = await axios.post(
-        `http://localhost:8080/offer/createmessage/${offerId}`,
+        `${import.meta.env.VITE_HOSTED_API}/offer/createmessage/${offerId}`,
         {
           content: message,
           userId: user,

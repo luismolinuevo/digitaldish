@@ -15,7 +15,7 @@ export default function OffersRecieved() {
       try {
         const token = localStorage.getItem("token");
         const allOffers = await axios.get(
-          "http://localhost:8080/offer/useroffers",
+          `${import.meta.env.VITE_HOSTED_API}/offer/useroffers`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Include the token in the Authorization header

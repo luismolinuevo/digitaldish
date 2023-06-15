@@ -40,7 +40,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        `http://localhost:8080/post/getType/barter`
+        `${import.meta.env.VITE_HOSTED_API}/post/getType/barter`
       );
       setFirstBarter(response.data.getPost[0]);
       setSecondBarter(response.data.getPost[1]);
@@ -52,7 +52,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        `http://localhost:8080/post/getType/bid`
+        `${import.meta.env.VITE_HOSTED_API}/post/getType/bid`
       );
       console.log(response.data.getPost);
       setBidPost(response.data.getPost.splice(0, 6));
@@ -63,7 +63,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        `http://localhost:8080/post/getType/negotiation`
+        `${import.meta.env.VITE_HOSTED_API}/post/getType/negotiation`
       );
       setFirstNeg(response.data.getPost[0]);
       setSecondNeg(response.data.getPost[1]);

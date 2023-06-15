@@ -11,7 +11,7 @@ export default function PrevOrders() {
   const fetchPrevOrders = async () => {
     try {
       const token = localStorage.getItem("token");
-      const fetchData = await axios.get(`http://localhost:8080/prevorder`, {
+      const fetchData = await axios.get(`${import.meta.env.VITE_HOSTED_API}/prevorder`, {
         headers: {
           Authorization: `Bearer ${token}`, // Include the token in the Authorization header
         },

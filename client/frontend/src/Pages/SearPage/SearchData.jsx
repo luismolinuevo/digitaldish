@@ -27,7 +27,7 @@ import axios from "axios"
 
     useEffect(() => {
       async function fetchData() {
-        const fetch = await axios.get("http://localhost:8080/post/");
+        const fetch = await axios.get(`${import.meta.env.VITE_HOSTED_API}/post/`);
         console.log(fetch.data.post);
         setPost(fetch.data.post);
       }

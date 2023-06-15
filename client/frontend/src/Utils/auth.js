@@ -80,7 +80,7 @@ export const checkLoginStatus = () => async (dispatch) => {
 
 export const signupUser = (email, username, password) => async (dispatch) => {
   try {
-    const response = await axios.post("http://localhost:8080/auth/signup", {
+    const response = await axios.post(`${import.meta.env.VITE_HOSTED_API}/auth/signup`, {
       email: email,
       userName: username,
       password: password,

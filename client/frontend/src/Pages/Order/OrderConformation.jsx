@@ -16,7 +16,7 @@ export default function OrderConformation() {
   useEffect(() => {
       const fetchOffer = async () => {
           try {
-              const post = await axios.get(`http://localhost:8080/post/${id}`);
+              const post = await axios.get(`${import.meta.env.VITE_HOSTED_API}/post/${id}`);
               setPost(post.data.post)
               console.log(post.data.post)
           } catch(err) {

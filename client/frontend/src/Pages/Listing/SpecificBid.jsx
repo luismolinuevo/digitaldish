@@ -21,7 +21,7 @@ export default function SpecificBid() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const post = await axios.get(`http://localhost:8080/post/${params.id}`);
+        const post = await axios.get(`${import.meta.env.VITE_HOSTED_API}/post/${params.id}`);
         console.log(post.data);
         if (post.status == 200) {
           setPost(post.data.post);
@@ -43,7 +43,7 @@ export default function SpecificBid() {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        `http://localhost:8080/post/getType/bid`
+        `${import.meta.env.VITE_HOSTED_API}/post/getType/bid`
       );
       console.log(response.data.getPost);
       setSuggestedPost(response.data.getPost.splice(0, 8));
@@ -55,7 +55,7 @@ export default function SpecificBid() {
     try {
       const token = localStorage.getItem("token");
       const createBid = await axios.post(
-        `http://localhost:8080/bid/${params.id}`,
+        `${import.meta.env.VITE_HOSTED_API}/bid/${params.id}`,
         {
           price: parseFloat(bidInput),
           status: "Active",
