@@ -14,7 +14,8 @@ router.get("/userPost", passport.authenticate("jwt", { session: false }), async 
   const getPost = await prisma.post.findMany({
     where: {
       userId: req.user.id
-    }
+    }, 
+    include: {img: true}
   });
 
   res.status(200).json({
