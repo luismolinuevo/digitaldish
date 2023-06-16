@@ -9,6 +9,20 @@ const router = express.Router();
 const memStorage = multer.memoryStorage();
 const multerUpload = multer({ storage: memStorage }).array("images[]");
 
+//get user Post 
+router.get("/userPost", passport.authenticate("jwt", { session: false }), async (req, res) => {
+  const getPost = await prisma.post.findMany({
+    where: {
+      userId: req.user.id
+    }
+  });
+
+  res.status(200).json({
+    success: true,
+    getPost
+  });
+});
+
 //get by type of post
 router.get("/getType/:type", async (req, res) => {
   const type = req.params.type;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {} from "react-dom";
 import { Link } from "react-router-dom";
 // import EliCoverPic from "../../assets/photos/eli-coverpic.png";
@@ -12,7 +12,7 @@ import { Select, Option } from "@material-tailwind/react";
 import "./Profile.css";
 import { logoutUser } from "../../Utils/auth";
 import { useDispatch } from "react-redux";
-
+import axios from "axios";
 // const pH = "10000rem"
 const listings = 9;
 const feedback = 2;
@@ -22,6 +22,24 @@ export default function EditProfile() {
   const [followerNum, setFollerNum] = useState(201);
   const [followingNum, setFollowingNum] = useState(35);
   const [isClicked, setIsClicked] = useState(false);
+  const [userListing, setUserListing] = useState([]);
+
+  useEffect(() => {
+    const fetchUserListing = async () => {
+      try {
+        const fetchData = await axios.post(
+          `${import.meta.env.VITE_HOSTED_API}/offer/createroom/${params.id}`,
+          {
+            userTwoId: post.userId,
+            userId: user,
+          }
+        );
+        
+      } catch (err) {
+        console.log("There is a error" + err);
+      }
+    }
+  }, [])
 
   //SAVE-SHOP BUTTON
   const saveShopClicked = () => {
