@@ -301,17 +301,32 @@ export default function EditProfile() {
               >
                 Featured listings
               </div>
-              <div name="LISTINGS" className="flex flex-wrap gap-5 overflow-y-scroll h-[1120px]">
+              <div
+                name="LISTINGS"
+                className="flex flex-wrap gap-5 overflow-y-scroll h-[1120px] justify-center"
+              >
                 {userListing && userListing.length != 0 ? (
                   userListing.map((item) => (
-                    <UserListingCard
-                      title={item.title}
-                      price={item.price}
-                      id={item.id}
-                      img={item.img != 0 ? item.img[0].url.toString() : ""}
-                      type={item.type}
-                      isHovered={isHovered}
-                    />
+                    <div>
+                      {!isHovered ? (
+
+                      
+
+                      <UserListingCard
+                        title={item.title}
+                        price={item.price}
+                        id={item.id}
+                        img={item.img != 0 ? item.img[0].url.toString() : ""}
+                        type={item.type}
+                        
+                      />
+                      ):(
+                        <div className="w-[275px] h-[220px] px-[10px] mb-[20px]">
+                          test
+                        </div>
+                      )
+                      }
+                    </div>
                   ))
                 ) : (
                   <p>No listing</p>
