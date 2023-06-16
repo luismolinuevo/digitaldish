@@ -46,6 +46,20 @@ export default function NegotiateForm() {
     maxFiles: 3,
   });
 
+  const calculateTimeLeft = () => {
+    const start = new Date(startTime);
+    const end = new Date(endTime);
+    const difference = end - start;
+    const hours = Math.floor(difference / 1000 / 60 / 60);
+    return `${hours} hours`;
+  };
+
+  const formatEndTime = (endTime) => {
+    const date = new Date(endTime);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString(undefined, options);
+  };
+
   const [isSwitchOn, setIsSwitchOn] = useState(false);
   const theme = createTheme({
     palette: {
@@ -164,7 +178,7 @@ export default function NegotiateForm() {
               <input
                 className="h-10 rounded-md border border-black"
                 type="date"
-                value={startTime}
+                // value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
               />
             </div>
@@ -179,13 +193,7 @@ export default function NegotiateForm() {
               />
             </div>
           </div>
-          <div>
-            <h1 className="text-[20px]">
-              {startTime && endTime
-                ? `${calculateTimeLeft()} - ${endTime}`
-                : "Time Left"}
-            </h1>
-          </div>
+        
 
           <div className="flex flex-col mb-10 ">
             <label className="relative">
@@ -398,6 +406,26 @@ export default function NegotiateForm() {
               <div>
                 <h1 className="text-[35px] font-bold ">
                   {title ? title : "Title"}
+                </h1>
+              </div>
+
+              <div className="flex">
+                <h1 className="text-[20px]">
+                  Time Left:
+                  {startTime && endTime && (
+                    <>
+                      <span className="ml-2"> {calculateTimeLeft()}</span>
+                    </>
+                  )}
+                </h1>
+              </div>
+
+              <div className="flex">
+                <h1 className="text-[20px]">
+                  Ends:
+                  <>
+                    <span className="ml-3">{formatEndTime(endTime)} </span>
+                  </>
                 </h1>
               </div>
 

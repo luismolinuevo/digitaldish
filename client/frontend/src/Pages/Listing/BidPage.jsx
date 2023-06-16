@@ -192,13 +192,6 @@ export default function BidForm() {
               />
             </div>
           </div>
-          <div>
-            <h1 className="text-[20px]">
-              {startTime && endTime
-                ? `${calculateTimeLeft()} - ${endTime}`
-                : "Time Left"}
-            </h1>
-          </div>
 
           <div className="flex flex-col mb-10 ">
             <label className="relative">
