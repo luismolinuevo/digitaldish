@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {} from "react-dom";
 import { Link } from "react-router-dom";
 // import EliCoverPic from "../../assets/photos/eli-coverpic.png";
@@ -12,16 +12,42 @@ import { Select, Option } from "@material-tailwind/react";
 import "./Profile.css";
 import { logoutUser } from "../../Utils/auth";
 import { useDispatch } from "react-redux";
-
+import axios from "axios";
+import UserListingCard from "../../Components/UserListingCard";
 // const pH = "10000rem"
 const listings = 9;
 const feedback = 2;
 
 export default function EditProfile() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [followerNum, setFollerNum] = useState(201);
   const [followingNum, setFollowingNum] = useState(35);
   const [isClicked, setIsClicked] = useState(false);
+  const [userListing, setUserListing] = useState([]);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    const fetchUserListing = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const fetchPost = await axios.get(
+          `${import.meta.env.VITE_HOSTED_API}/post/userPost`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+            },
+          }
+        );
+
+        setUserListing(fetchPost.data.getPost);
+        console.log(fetchPost.data.getPost);
+      } catch (err) {
+        console.log("There is a error" + err);
+      }
+    };
+
+    fetchUserListing();
+  }, []);
 
   //SAVE-SHOP BUTTON
   const saveShopClicked = () => {
@@ -66,8 +92,8 @@ export default function EditProfile() {
 
   const handleLogout = (e) => {
     event.preventDefault();
-    dispatch(logoutUser())
-  }
+    dispatch(logoutUser());
+  };
 
   return (
     <div>
@@ -100,7 +126,10 @@ export default function EditProfile() {
               strokeWidth={2}
               style={buttonSaves(1)}
             >
-              <img src={"/assets/photos/hearts.png"} className="focus:text-yellow-700 px-2" />
+              <img
+                src={"/assets/photos/hearts.png"}
+                className="focus:text-yellow-700 px-2"
+              />
               <p className="py-[2px]" onClick={saveShopClicked}>
                 SAVE {isClicked ? null : <span>SHOP</span>}
               </p>
@@ -165,10 +194,16 @@ export default function EditProfile() {
               <button className="bg-[#000] border border-[#000] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-white">
                 <Link to={"/useraccount"}>EDIT PROFILE</Link>
               </button>
-              <button className="bg-[#000] border border-[#000] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-white" onClick={handleLogout}>
+              <button
+                className="bg-[#000] border border-[#000] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-white"
+                onClick={handleLogout}
+              >
                 <Link to={"/"}>LOG OUT</Link>
               </button>
-              <Link to={"/listing"} className="bg-[#DAB24E] border border-[#DAB24E] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-center">
+              <Link
+                to={"/listing"}
+                className="bg-[#DAB24E] border border-[#DAB24E] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-center"
+              >
                 ADD LISTING
               </Link>
             </div>
@@ -255,7 +290,7 @@ export default function EditProfile() {
                 </div>
               </div>
             </div>
-{/**GRID LISTINGS */}
+            {/**GRID LISTINGS */}
             <div
               id="MAIN-COLUMN"
               className="border border-green-500 w-[61.1rem] flex-wrap"
@@ -266,8 +301,37 @@ export default function EditProfile() {
               >
                 Featured listings
               </div>
-              <div name="LISTINGS" className="flex gap-5">
-                <div
+              <div
+                name="LISTINGS"
+                className="flex flex-wrap gap-5 overflow-y-scroll h-[1120px] justify-center"
+              >
+                {userListing && userListing.length != 0 ? (
+                  userListing.map((item) => (
+                    <div>
+                      {!isHovered ? (
+
+                      
+
+                      <UserListingCard
+                        title={item.title}
+                        price={item.price}
+                        id={item.id}
+                        img={item.img != 0 ? item.img[0].url.toString() : ""}
+                        type={item.type}
+                        
+                      />
+                      ):(
+                        <div className="w-[275px] h-[220px] px-[10px] mb-[20px]">
+                          test
+                        </div>
+                      )
+                      }
+                    </div>
+                  ))
+                ) : (
+                  <p>No listing</p>
+                )}
+                {/* <div
                   name="main1-1"
                   className="flex flex-col w-80 h-80"
                 >
@@ -338,7 +402,7 @@ export default function EditProfile() {
                     <img src={"/assets/photos/eli-profilepic.png"} />
                   </div>
                 </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
