@@ -278,7 +278,7 @@ export default function Home() {
         </div>
       </div>
       <div className="h-[840px] flex">
-        <div className="h-full bg-[#3E3E3E] w-1/2">
+        <div className="h-full bg-[#3E3E3E] w-[60%]">
           <div className="py-[55px] px-[49px] ">
             <img src={"/assets/HomePage/logo.png"} alt="" className="w-[160px] h-[51px]" />
             <h1 className="text-[44px] text-white">Who we are</h1>
@@ -300,7 +300,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div>
+        <div className="w-[40%]">
           <img src={"/assets/HomePage/robotHand.png"} alt="" className="h-full " />
         </div>
       </div>
