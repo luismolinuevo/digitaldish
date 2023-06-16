@@ -89,7 +89,7 @@ export default function BidForm() {
     newFormData.append("shippingFees", shippingFees);
     newFormData.append("userName", userName);
     newFormData.append("userRating", userRating);
-    newFormData.append("type", "barter");
+    newFormData.append("type", "bid");
     newFormData.append("status", "Active");
     //Append each file to the right key. You CANNOT append all the files to the key. It will not work.
     files.forEach((file) => {
