@@ -171,7 +171,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="h-[581px] flex items-center px-4 gap-[58px]">
+      <div className="h-[581px] flex items-center px-4 gap-[58px] justify-center">
         <BiggerCard title={"Keyboards"} img={"/assets/HomePage/Keyboard.jpg"} />
         <BiggerCard title={"Headphones"} img={"/assets/HomePage/Headphones.jpg"} />
         <BiggerCard title={"Monitor"} img={"/assets/HomePage/Monitors.jpg"} />
@@ -209,7 +209,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="h-[581px] flex items-center px-4 gap-[58px]">
+      <div className="h-[581px] flex items-center px-4 gap-[58px] justify-center">
         <BiggerCard title={"Computers"} img={"/assets/HomePage/Computer.png"} />
         <BiggerCard title={"Game Systems"} img={"/assets/HomePage/Game.png"} />
         <BiggerCard title={"Controllers"} img={"/assets/HomePage/controller.png"} />
