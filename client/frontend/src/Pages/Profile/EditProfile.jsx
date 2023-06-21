@@ -417,8 +417,8 @@ export default function EditProfile() {
               </button>
             </div>
             <div className="rating-card flex flex-col gap-10"></div>
-            <ReviewCard />
-            <ReviewCard />
+            <Link to={"/profile"}> <ReviewCard /> </Link>
+            <Link to={"/profile"}> <ReviewCard /> </Link>
             <div className="flex justify-end w-full">
               <Link to={"#move-to-top"} onClick={handleScroll2}>
                 <button
