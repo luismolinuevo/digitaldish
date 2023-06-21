@@ -59,7 +59,7 @@ export default function SocialFollowers() {
       </div>
       <div className="flex flew-row p-10 pt-5 mx-20">
         <div className="flex flex-col p-5 pt-0">
-          <Followers />
+          <Link to={"/profile"}> <Followers /> </Link>
           <Followers />
           <Followers />
           <Followers />

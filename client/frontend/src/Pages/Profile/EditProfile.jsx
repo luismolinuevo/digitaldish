@@ -97,7 +97,7 @@ export default function EditProfile() {
 
   return (
     <div>
-      <div className="h-[148rem] pt-20">
+      <div className="h-[160rem] pt-20">
         <div name="move-to-top" id="move-to-top" onClick={handleScroll2}>
           <div className="w-full flex flex-col">
             <img src={"/assets/photos/eli-coverpic.png"} />
@@ -417,8 +417,8 @@ export default function EditProfile() {
               </button>
             </div>
             <div className="rating-card flex flex-col gap-10"></div>
-            <ReviewCard />
-            <ReviewCard />
+            <Link to={"/profile"}> <ReviewCard /> </Link>
+            <Link to={"/profile"}> <ReviewCard /> </Link>
             <div className="flex justify-end w-full">
               <Link to={"#move-to-top"} onClick={handleScroll2}>
                 <button
