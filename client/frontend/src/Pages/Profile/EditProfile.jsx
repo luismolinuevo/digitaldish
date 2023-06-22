@@ -305,7 +305,7 @@ export default function EditProfile() {
               
                 {userListing && userListing.length != 0 ? (
                   userListing.map((item) => (
-                    <div className="border mb-20 ">
+                    <div className="mb-20 ">
                       {!isHovered ? (
 
                       <UserListingCard
@@ -314,7 +314,6 @@ export default function EditProfile() {
                         id={item.id}
                         img={item.img != 0 ? item.img[0].url.toString() : ""}
                         type={item.type}
-                      
                         
                       />
                       ):(
