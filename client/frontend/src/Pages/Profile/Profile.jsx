@@ -253,7 +253,7 @@ export default function Profile() {
               >
                 Featured listings
               </div>
-              <div name="LISTINGS" className="flex flex-row flex-wrap">
+              <div name="LISTINGS" className="flex flex-row flex-wrap ">
                 <div name="main1-1" className="flex flex-row h-80 gap-5 pl-10">
                   <div className="w-[18rem]">
                     <img src={"/assets/photos/product-title1.png"} />

@@ -97,7 +97,7 @@ export default function EditProfile() {
 
   return (
     <div>
-      <div className="h-[160rem] pt-20">
+      <div className="h-[136rem] pt-20">
         <div name="move-to-top" id="move-to-top" onClick={handleScroll2}>
           <div className="w-full flex flex-col">
             <img src={"/assets/photos/eli-coverpic.png"} />
@@ -297,18 +297,16 @@ export default function EditProfile() {
             >
               <div
                 name="featured-listing"
-                className="featured-listings flex flex-row flex-wrap text-2xl pl-5 font-bold pb-[6rem"
+                className="featured-listings flex flex-row flex-wrap text-2xl pl-5 font-bold pb-[6rem]"
               >
                 Featured listings
               </div>
-              <div name="LISTINGS" className="flex flex-row flex-wrap"
-              >
+              <div name="LISTINGS" className="flex flex-wrap pl-10 w-[1000px] justify-between ">
+              
                 {userListing && userListing.length != 0 ? (
                   userListing.map((item) => (
-                    <div>
+                    <div className="border mb-20 ">
                       {!isHovered ? (
-
-                      
 
                       <UserListingCard
                         title={item.title}
@@ -316,6 +314,7 @@ export default function EditProfile() {
                         id={item.id}
                         img={item.img != 0 ? item.img[0].url.toString() : ""}
                         type={item.type}
+                      
                         
                       />
                       ):(
@@ -401,6 +400,7 @@ export default function EditProfile() {
                   </div>
                 </div>
                 </div> */}
+              
               </div>
             </div>
           </div>
