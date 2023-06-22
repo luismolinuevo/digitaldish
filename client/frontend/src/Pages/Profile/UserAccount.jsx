@@ -11,7 +11,7 @@ export default function UserAccount() {
         <div className="border border-[#F1F0EB] bg-[#F1F0EB] w-[16rem] h-[10rem]">
           <p className="text-2xl flex p-4">
             <span className="hover:shadow-lg hover:text-blue-700">
-             <Link to={"/useraccount"}> Edit Profile </Link>
+             <Link to={"/editprofile"}> Edit Profile </Link>
             </span>
           </p>
           <p className="text-2xl px-4 ">
@@ -123,7 +123,7 @@ export default function UserAccount() {
             <div className="flex justify-end w-full">
             <button className="bg-[#000] border border-[#000] w-[9rem] h-8 rounded-sm font-normal font-[Inter] hover:bg-[#f2b519] hover:shadow-2xl text-white">
            
-            <Link to={"/useraccount"} scrollBehavior="smooth">EDIT PROFILE</Link> 
+            <Link to={"/editprofile"} scrollBehavior="smooth">SAVE PROFILE</Link> 
           </button>
           </div>
           <div className="deactivate-account pt-4">

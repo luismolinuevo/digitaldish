@@ -67,7 +67,7 @@ const Navbar = () => {
   
       <li>
         {
-          !isAuthenticated ? <Link to="/login" className="text-base md:text-lg mr-5">Login</Link> : <Link to="/useraccount" className="flex items-center w-[30px]"><img src={"/assets/profileIcon.png"} /></Link>
+          !isAuthenticated ? <Link to="/login" className="text-base md:text-lg mr-5">Login</Link> : <Link to="/editprofile" className="flex items-center w-[30px]"><img src={"/assets/profileIcon.png"} /></Link>
         }
         
       </li>
