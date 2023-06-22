@@ -297,7 +297,7 @@ export default function EditProfile() {
             >
               <div
                 name="featured-listing"
-                className="featured-listings flex flex-row flex-wrap text-2xl pl-5 font-bold pb-[6rem]"
+                className="featured-listings flex flex-row flex-wrap text-2xl pl-5 font-bold "
               >
                 Featured listings
               </div>
