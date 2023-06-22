@@ -31,6 +31,9 @@ router.get("/getType/:type", async (req, res) => {
     where: {
       type: type,
     },
+    orderBy: {
+      createdAt: "desc", 
+    },
     include: {
       img: true
     }
