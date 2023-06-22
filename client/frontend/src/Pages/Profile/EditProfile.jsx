@@ -301,7 +301,7 @@ export default function EditProfile() {
               >
                 Featured listings
               </div>
-              <div name="LISTINGS" className="flex flex-wrap pl-10 w-[1000px] justify-between ">
+              <div name="LISTINGS" className="flex flex-wrap pl-10 justify-between ">
               
                 {userListing && userListing.length != 0 ? (
                   userListing.map((item) => (
