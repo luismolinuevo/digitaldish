@@ -119,7 +119,7 @@ export default function Auctions() {
             </div>
           ))
         ) : (
-          <p>No auctions</p>
+          <p></p>
         )}
       </div>
     </div>

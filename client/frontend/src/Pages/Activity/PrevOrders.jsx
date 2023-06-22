@@ -125,7 +125,7 @@ export default function PrevOrders() {
             </div>
           ))
         ) : (
-          <p>No previous orders</p>
+          <p></p>
         )}
       </div>
     </div>

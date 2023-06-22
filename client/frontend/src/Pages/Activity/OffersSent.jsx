@@ -87,7 +87,7 @@ export default function OffersRecieved() {
                 </div>
               </div>
             ) : (
-              <p>No offers sent</p>
+              <p></p>
             )
           )
         ) : (

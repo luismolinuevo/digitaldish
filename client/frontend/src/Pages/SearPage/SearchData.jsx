@@ -27,9 +27,9 @@ import axios from "axios"
 
     useEffect(() => {
       async function fetchData() {
-        const fetch = await axios.get(`${import.meta.env.VITE_HOSTED_API}/post/`);
+        const fetch = await axios.get(`${import.meta.env.VITE_HOSTED_API}/post/getNew/`);
         console.log(fetch.data.post);
-        setPost(fetch.data.post);
+        setPost(fetch.data.getPost);
       }
       fetchData();
     }, []);
