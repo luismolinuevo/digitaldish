@@ -136,6 +136,26 @@ router.get(
   }
 );
 
+router.put("/editUser", passport.authenticate("jwt", { session: false }), async (req, res) => {
+  const editUser = await prisma.user.updateMany({
+    where: {
+      id: req.user.id
+    },
+    data: {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      userName: req.body.userName,
+      email: req.body.email,
+      password: req.body.password
+    }
+  });
+
+  res.status(200).json({
+    success: true,
+    editUser
+  });
+});
+
 // //checks if user is logged in 
 // router.get("/login", (req, res) => {
 //   if (req.session.user) {   
