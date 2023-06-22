@@ -293,17 +293,15 @@ export default function EditProfile() {
             {/**GRID LISTINGS */}
             <div
               id="MAIN-COLUMN"
-              className="border border-green-500 w-[61.1rem] flex-wrap"
+              className="w-[61.1rem] flex-wrap"
             >
               <div
                 name="featured-listing"
-                className="featured-listings flex flex-row flex-wrap justify-center text-2xl pl-5 border border-black font-bold"
+                className="featured-listings flex flex-row flex-wrap text-2xl pl-5 font-bold pb-[6rem"
               >
                 Featured listings
               </div>
-              <div
-                name="LISTINGS"
-                className="flex flex-wrap gap-5 overflow-y-scroll h-[1120px] justify-center"
+              <div name="LISTINGS" className="flex flex-row flex-wrap"
               >
                 {userListing && userListing.length != 0 ? (
                   userListing.map((item) => (

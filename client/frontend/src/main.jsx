@@ -175,11 +175,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/editprofile",
-        element: <PrivateRouteRequiresAuth><UserAccount /></PrivateRouteRequiresAuth>
+        element: <PrivateRouteRequiresAuth><EditProfile /></PrivateRouteRequiresAuth>
       },
       {
         path: "/useraccount",
-        element: <PrivateRouteRequiresAuth><EditProfile /></PrivateRouteRequiresAuth>
+        element: <PrivateRouteRequiresAuth><UserAccount /></PrivateRouteRequiresAuth>
       },
       {
         path: "/socialfollowers",
